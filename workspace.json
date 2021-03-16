@@ -66,6 +66,25 @@
           }
         }
       }
+    },
+    "decorate-docs": {
+      "projectType": "application",
+      "root": "apps/decorate-docs",
+      "sourceRoot": "apps/decorate-docs/src",
+      "architect": {
+        "build": {
+          "builder": "@nx-plus/docusaurus:browser",
+          "options": {
+            "outputPath": "dist/apps/decorate-docs"
+          }
+        },
+        "serve": {
+          "builder": "@nx-plus/docusaurus:dev-server",
+          "options": {
+            "port": 3000
+          }
+        }
+      }
     }
   },
   "cli": {
