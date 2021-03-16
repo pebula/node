@@ -64,6 +64,15 @@
             "assets": ["libs/tom/*.md"],
             "srcRootForCompilationRoot": "libs/decorate"
           }
+        },
+        "benchmark": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+              "commands": [
+                "./node_modules/.bin/ts-node -r tsconfig-paths/register -P ./tsconfig.base.json -O \"{ \\\"module\\\": \\\"commonjs\\\", \\\"resolveJsonModule\\\": true }\" libs/tom/benchmarks/index.ts"
+              ],
+              "parallel": false
+          }
         }
       }
     },

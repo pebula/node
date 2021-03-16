@@ -1,1 +1,1 @@
-export * from './lib/tom';
+export * from './lib/index';
