@@ -1,6 +1,7 @@
 module.exports = {
   displayName: 'decorate',
   preset: '../../jest.preset.js',
+  setupFiles: ['./jest-setup.ts'],
   globals: {
     'ts-jest': {
       tsConfig: '<rootDir>/tsconfig.spec.json',

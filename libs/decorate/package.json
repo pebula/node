@@ -1,4 +1,7 @@
 {
   "name": "@pebula/decorate",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "dependencies": {
+    "to-fast-properties": "~3.0.1"
+  }
 }
