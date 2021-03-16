@@ -1,14 +1,14 @@
 {
-  "npmScope": "node",
+  "npmScope": "pebula",
   "implicitDependencies": {
     "workspace.json": "*",
     "package.json": {
       "dependencies": "*",
       "devDependencies": "*"
     },
-    "tsconfig.json": "*",
     "tslint.json": "*",
-    "nx.json": "*"
+    "nx.json": "*",
+    "tsconfig.base.json": "*"
   },
   "tasksRunnerOptions": {
     "default": {
@@ -18,5 +18,8 @@
       }
     }
   },
-  "projects": {}
+  "projects": {},
+  "affected": {
+    "defaultBase": "main"
+  }
 }
