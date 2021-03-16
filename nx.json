@@ -2,10 +2,7 @@
   "npmScope": "pebula",
   "implicitDependencies": {
     "workspace.json": "*",
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
     "tslint.json": "*",
     "nx.json": "*",
     "tsconfig.base.json": "*"
@@ -13,38 +10,23 @@
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
+      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
     }
   },
   "projects": {
-    "decorate": {
-      "tags": []
-    },
-    "tom": {
-      "tags": []
-    },
-    "decorate-docs": {
-      "tags": []
-    },
-    "tom-docs": {
-      "tags": []
-    },
-    "touchstone": {
-      "tags": []
-    },
-    "goosetyped": {
-      "tags": []
-    },
-    "nesbus": {
-      "tags": []
-    },
-    "touchstone-docs": {
-      "tags": []
+    "decorate": { "tags": [] },
+    "tom": { "tags": [] },
+    "decorate-docs": { "tags": [] },
+    "tom-docs": { "tags": [] },
+    "touchstone": { "tags": [] },
+    "goosetyped": { "tags": [] },
+    "nesbus": { "tags": [] },
+    "touchstone-docs": { "tags": [] },
+    "nx-api-extractor": { "tags": [] },
+    "nx-api-extractor-e2e": {
+      "tags": [],
+      "implicitDependencies": ["nx-api-extractor"]
     }
   },
-  "affected": {
-    "defaultBase": "main"
-  }
+  "affected": { "defaultBase": "main" }
 }

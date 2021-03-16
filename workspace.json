@@ -85,6 +85,46 @@
           "options": {
             "syncVersions": false
           }
+        },
+        "apiExtractor": {
+          "builder": "./dist/libs/nx-api-extractor:build",
+          "options": {
+            "extractorConfig": {
+              "docModel": {
+                "enabled": false
+              },
+              "apiReport": {
+                "enabled": true,
+                "reportFileName": "public-api.md",
+                "reportFolder": "./",
+                "reportTempFolder": "./temp"
+              },
+              "dtsRollup": {
+                "enabled": true,
+                "untrimmedFilePath": "",
+                "betaTrimmedFilePath": "",
+                "publicTrimmedFilePath": "./src/index-public.d.ts"
+              },
+              "tsdocMetadata": {
+                "enabled": false
+              },
+              "messages": {
+                "tsdocMessageReporting": {
+                  "default": {
+                    "logLevel": "none"
+                  }
+                },
+                "extractorMessageReporting": {
+                  "ae-missing-release-tag": {
+                    "logLevel": "none"
+                  },
+                  "ae-unresolved-link": {
+                    "logLevel": "none"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -258,6 +298,66 @@
           "builder": "@nx-plus/docusaurus:dev-server",
           "options": {
             "port": 3000
+          }
+        }
+      }
+    },
+    "nx-api-extractor": {
+      "root": "libs/nx-api-extractor",
+      "sourceRoot": "libs/nx-api-extractor/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nx-api-extractor/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/nx-api-extractor"],
+          "options": {
+            "jestConfig": "libs/nx-api-extractor/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/nx-api-extractor",
+            "tsConfig": "libs/nx-api-extractor/tsconfig.lib.json",
+            "packageJson": "libs/nx-api-extractor/package.json",
+            "main": "libs/nx-api-extractor/src/index.ts",
+            "assets": [
+              "libs/nx-api-extractor/*.md",
+              {
+                "input": "./libs/nx-api-extractor/src",
+                "glob": "**/*.!(ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./libs/nx-api-extractor",
+                "glob": "executors.json",
+                "output": "."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "nx-api-extractor-e2e": {
+      "projectType": "application",
+      "root": "apps/nx-api-extractor-e2e",
+      "sourceRoot": "apps/nx-api-extractor-e2e/src",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/nx-plugin:e2e",
+          "options": {
+            "target": "nx-api-extractor:build",
+            "npmPackageName": "@pebula/nx-api-extractor",
+            "pluginOutputPath": "dist/libs/nx-api-extractor",
+            "jestConfig": "apps/nx-api-extractor-e2e/jest.config.js"
           }
         }
       }

@@ -1,0 +1,7 @@
+{
+  "name": "@pebula/nx-api-extractor",
+  "version": "0.0.1",
+  "main": "src/index.js",
+  "schematics": "./generators.json",
+  "builders": "./executors.json"
+}

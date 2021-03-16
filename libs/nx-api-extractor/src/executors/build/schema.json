@@ -1,0 +1,220 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "title": "Api ExtractorExecutor",
+  "description": "For detailed description of the configuration see https://github.com/microsoft/rushstack/blob/51e568825902d285edf9f43f9954c38ea0b04527/apps/api-extractor/src/api/IConfigFile.ts#L286",
+  "type": "object",
+  "properties": {
+    "buildTargetName": {
+      "type": "string",
+      "description": "The name of the build target. Defaults to 'build'",
+      "default": "build"
+    },
+    "extractorConfig": {
+      "$ref": "#/definitions/configApiExtractor"
+    }
+  },
+  "required": [
+    "extractorConfig"
+  ],
+  "definitions": {
+    "configApiExtractor": {
+      "type": "object",
+      "properties": {
+        "extends": {
+          "type": "string",
+          "description": "Optionally specifies another JSON config file that this file extends from.  This provides a way for \nstandard settings to be shared across multiple projects. \nIf the path starts with `./` or `../`, the path is resolved relative to the folder of the file that contains \nthe `extends` field.  Otherwise, the first path segment is interpreted as an NPM package name, and will be \nresolved using NodeJS `require()`."
+        },
+        "bundledPackages": {
+          "type": "array",
+          "description": "A list of NPM package names whose exports should be treated as part of this package.",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
+        "compiler": {
+          "$ref": "#/definitions/configCompiler"
+        },
+        "apiReport": {
+          "$ref": "#/definitions/configApiReport"
+        },
+        "docModel": {
+          "$ref": "#/definitions/configDocModel"
+        },
+        "dtsRollup": {
+          "$ref": "#/definitions/configDtsRollup"
+        },
+        "tsdocMetadata": {
+          "$ref": "#/definitions/configTsdocMetadata"
+        },
+        "newlineKind": {
+          "type": "string",
+          "enum": ["crlf", "lf", "os"],
+          "description": "Specifies what type of newlines API Extractor should use when writing output files. \nBy default, the output files will be written with Windows-style newlines. \nTo use POSIX-style newlines, specify 'lf' instead. \nTo use the OS's default newline kind, specify 'os'."
+        },
+        "messages": {
+          "$ref": "#/definitions/extractorMessagesConfig"
+        },
+        "testMode": {
+          "type": "boolean",
+          "description": "Set to true when invoking API Extractor's test harness. \nWhen `testMode` is true, the `toolVersion` field in the .api.json file is assigned an empty string \nto prevent spurious diffs in output files tracked for tests."
+        }
+      }
+    },
+    "configCompiler": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "tsconfigFilePath": {
+          "type": "string",
+          "description": "Specifies the path to the tsconfig.json file to be used by API Extractor when analyzing the project. \nThe path is resolved relative to the folder of the config file that contains the setting; to change this, \nprepend a folder token such as `<projectFolder>`."
+        },
+        "overrideTsconfig": {
+          "type": "object",
+          "description": "Provides a compiler configuration that will be used instead of reading the tsconfig.json file from disk.",
+          "additionalProperties": true
+        },
+        "skipLibCheck": {
+          "type": "boolean",
+          "description": "This option causes the compiler to be invoked with the `--skipLibCheck` option."
+        }
+      }
+    },
+    "configApiReport": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to generate an API report."
+        },
+        "reportFileName": {
+          "type": "string",
+          "description": "The filename for the API report files. \nIt will be combined with `reportFolder` or `reportTempFolder` to produce a full output filename. \nThe file extension should be '.api.md', and the string should not contain a path separator such as '\\' or `/`. \nThe path is resolved relative to the folder of the config file that contains the setting; to change this, \nprepend a folder token such as `<projectFolder>`."
+        },
+        "reportFolder": {
+          "type": "string",
+          "description": "Specifies the folder where the API report file is written. \nThe file name portion is determined by the `reportFileName` setting. The API report file is normally tracked by Git. Changes to it can be used to trigger a branch policy, e.g. for an API review. \nThe path is resolved relative to the folder of the config file that contains the setting; to change this, \nprepend a folder token such as `<projectFolder>`."
+        },
+        "reportTempFolder": {
+          "type": "string",
+          "description": "Specifies the folder where the temporary report file is written.  The file name portion is determined by the `reportFileName` setting. \nAfter the temporary file is written to disk, it is compared with the file in the `reportFolder`. \nIf they are different, a production build will fail. \nThe path is resolved relative to the folder of the config file that contains the setting; to change this, \nprepend a folder token such as `<projectFolder>`."
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "configDocModel": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to generate a doc model file."
+        },
+        "apiJsonFilePath": {
+          "type": "string",
+          "description": "The output path for the doc model file.  The file extension should be '.api.json'. \nThe path is resolved relative to the folder of the config file that contains the setting; to change this, \nprepend a folder token such as `<projectFolder>`."
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "configDtsRollup": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to generate the .d.ts rollup file."
+        },
+        "untrimmedFilePath": {
+          "type": "string",
+          "description": "Specifies the output path for a .d.ts rollup file to be generated without any trimming. \nThis file will include all declarations that are exported by the main entry point. \nIf the path is an empty string, then this file will not be written. \nThe path is resolved relative to the folder of the config file that contains the setting; to change this, \nprepend a folder token such as `<projectFolder>`."
+        },
+        "betaTrimmedFilePath": {
+          "type": "string",
+          "description": "Specifies the output path for a .d.ts rollup file to be generated with trimming for a 'beta' release. \nThis file will include only declarations that are marked as `@public` or `@beta`. \nThe path is resolved relative to the folder of the config file that contains the setting; to change this, \nprepend a folder token such as `<projectFolder>`."
+        },
+        "publicTrimmedFilePath": {
+          "type": "string",
+          "description": "Specifies the output path for a .d.ts rollup file to be generated with trimming for a 'public' release. \nThis file will include only declarations that are marked as `@public`. \nIf the path is an empty string, then this file will not be written. \nThe path is resolved relative to the folder of the config file that contains the setting; to change this, \nprepend a folder token such as `<projectFolder>`."
+        },
+        "omitTrimmingComments": {
+          "type": "boolean",
+          "description": "When a declaration is trimmed, by default it will be replaced by a code comment such as 'Excluded from this release type: exampleMember'. \nSet 'omitTrimmingComments' to true to remove the declaration completely."
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "configTsdocMetadata": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to generate the tsdoc-metadata.json file."
+        },
+        "tsdocMetadataFilePath": {
+          "type": "string",
+          "description": "Specifies where the TSDoc metadata file should be written. \nThe path is resolved relative to the folder of the config file that contains the setting; to change this, \nprepend a folder token such as `<projectFolder>`. \nThe default value is `<lookup>`, which causes the path to be automatically inferred from the `tsdocMetadata`, \n`typings` or `main` fields of the project's package.json.  If none of these fields are set, the lookup \nfalls back to `tsdoc-metadata.json` in the package folder."
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "extractorMessagesConfig": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "compilerMessageReporting": {
+          "description": "Configures handling of diagnostic messages generating the TypeScript compiler while analyzing the input .d.ts files.",
+          "$ref": "#/definitions/configMessageReportingTable"
+        },
+        "extractorMessageReporting": {
+          "description": "Configures handling of messages reported by API Extractor during its analysis.",
+          "$ref": "#/definitions/configMessageReportingTable"
+        },
+        "tsdocMessageReporting": {
+          "description": "Configures handling of messages reported by the TSDoc parser when analyzing code comments.",
+          "$ref": "#/definitions/configMessageReportingTable"
+        }
+      },
+      "required": []
+    },
+    "configMessageReportingTable": {
+      "description": "",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/configMessageReportingRule"
+      }
+    },
+    "configMessageReportingRule": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "logLevel": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "info",
+            "verbose",
+            "none"
+          ],
+          "description": "Specifies whether the message should be written to the the tool's output log. \nNote that the `addToApiReportFile` property may supersede this option."
+        },
+        "addToApiReportFile": {
+          "type": "boolean",
+          "description": "When `addToApiReportFile` is true:  If API Extractor is configured to write an API report file (.api.md), \nthen the message will be written inside that file; otherwise, the message is instead logged according to \nthe `logLevel` option."
+        }
+      }
+    }
+  }
+}
