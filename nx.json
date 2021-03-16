@@ -2,10 +2,7 @@
   "npmScope": "pebula",
   "implicitDependencies": {
     "workspace.json": "*",
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
     "tslint.json": "*",
     "nx.json": "*",
     "tsconfig.base.json": "*"
@@ -13,13 +10,9 @@
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
+      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
     }
   },
-  "projects": {},
-  "affected": {
-    "defaultBase": "main"
-  }
+  "projects": { "decorate": { "tags": [] }, "tom": { "tags": [] } },
+  "affected": { "defaultBase": "main" }
 }

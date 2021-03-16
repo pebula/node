@@ -15,7 +15,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@pebula/decorate": ["libs/decorate/src/index.ts"],
+      "@pebula/tom": ["libs/tom/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

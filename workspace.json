@@ -1,6 +1,73 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "decorate": {
+      "root": "libs/decorate",
+      "sourceRoot": "libs/decorate/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/decorate/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/decorate"],
+          "options": {
+            "jestConfig": "libs/decorate/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/decorate",
+            "tsConfig": "libs/decorate/tsconfig.lib.json",
+            "packageJson": "libs/decorate/package.json",
+            "main": "libs/decorate/src/index.ts",
+            "assets": ["libs/decorate/*.md"],
+            "srcRootForCompilationRoot": "libs/decorate"
+          }
+        }
+      }
+    },
+    "tom": {
+      "root": "libs/tom",
+      "sourceRoot": "libs/tom/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/tom/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/tom"],
+          "options": {
+            "jestConfig": "libs/tom/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/tom",
+            "tsConfig": "libs/tom/tsconfig.lib.json",
+            "packageJson": "libs/tom/package.json",
+            "main": "libs/tom/src/index.ts",
+            "assets": ["libs/tom/*.md"],
+            "srcRootForCompilationRoot": "libs/decorate"
+          }
+        }
+      }
+    }
+  },
   "cli": {
     "defaultCollection": "@nrwl/workspace"
   },
