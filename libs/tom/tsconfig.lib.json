@@ -4,8 +4,11 @@
     "module": "commonjs",
     "outDir": "../../dist/out-tsc",
     "declaration": true,
-    "types": ["node"]
+    "types": ["node"],
+    "paths": {
+      "@pebula/*": ["dist/libs/*"]
+    }
   },
-  "exclude": ["**/*.spec.ts"],
+  "exclude": ["**/*.spec.ts", "jest-setup.ts", "tests/**/*.*", "benchmarks/**/*.*"],
   "include": ["**/*.ts"]
 }

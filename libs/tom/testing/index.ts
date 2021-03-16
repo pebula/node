@@ -1,6 +1,6 @@
 // import { describe } from '@jest/globals';
 import { Type } from '@pebula/decorate';
-import { Serializer } from '@pebula/tom';
+import { Serializer } from '../src/index';
 import { ClassMappingSchema, ClassMappingSchemaFactoryOptions, mapRegistry } from '../src/lib/class-mapping';
 
 export { clearMap } from '../src/lib/class-mapping';

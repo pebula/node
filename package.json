@@ -39,6 +39,7 @@
   "devDependencies": {
     "@deepkit/core": "^1.0.1-alpha.25",
     "@deepkit/type": "^1.0.1-alpha.25",
+    "@jscutlery/semver": "^1.3.2",
     "@nrwl/cli": "11.5.1",
     "@nrwl/eslint-plugin-nx": "11.5.1",
     "@nrwl/jest": "11.5.1",
