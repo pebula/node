@@ -68,10 +68,10 @@
         "benchmark": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-              "commands": [
-                "./node_modules/.bin/ts-node -r tsconfig-paths/register -P ./tsconfig.base.json -O \"{ \\\"module\\\": \\\"commonjs\\\", \\\"resolveJsonModule\\\": true }\" libs/tom/benchmarks/index.ts"
-              ],
-              "parallel": false
+            "commands": [
+              "./node_modules/.bin/ts-node -r tsconfig-paths/register -P ./tsconfig.base.json -O \"{ \\\"module\\\": \\\"commonjs\\\", \\\"resolveJsonModule\\\": true }\" libs/tom/benchmarks/index.ts"
+            ],
+            "parallel": false
           }
         }
       }
@@ -85,6 +85,25 @@
           "builder": "@nx-plus/docusaurus:browser",
           "options": {
             "outputPath": "dist/apps/decorate-docs"
+          }
+        },
+        "serve": {
+          "builder": "@nx-plus/docusaurus:dev-server",
+          "options": {
+            "port": 3000
+          }
+        }
+      }
+    },
+    "tom-docs": {
+      "projectType": "application",
+      "root": "apps/tom-docs",
+      "sourceRoot": "apps/tom-docs/src",
+      "architect": {
+        "build": {
+          "builder": "@nx-plus/docusaurus:browser",
+          "options": {
+            "outputPath": "dist/apps/tom-docs"
           }
         },
         "serve": {
