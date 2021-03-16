@@ -2291,16 +2291,6 @@
     rxjs "6.5.5"
     typescript "4.0.3"
 
-"@pebula/touchstone@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@pebula/touchstone/-/touchstone-0.0.1.tgz#8999046954ebabf952c5560765f7713bf1d43686"
-  integrity sha512-KFBeT4hose/bGizgVljq4zucgjftDRmkR5ACjYB6SVsX6c/2hoIFUsU5T3jfuxDa1IMbn7ZrbJmX0rCkUGjocA==
-  dependencies:
-    benchmark "^2.1.4"
-    reflect-metadata "^0.1.13"
-    vega "^5.12.0"
-    vega-lite "^4.12.1"
-
 "@polka/url@^1.0.0-next.9":
   version "1.0.0-next.11"
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.11.tgz#aeb16f50649a91af79dbe36574b66d0f9e4d9f71"
@@ -2489,6 +2479,11 @@
   integrity sha512-Vs0hm0vPahPMYi9tDjtP66llufgO3ST16WXaSTtDGEl9cewAl3AibmxWw6TINOqHPT9z0uABKAYjT9jNSg4npw==
   dependencies:
     "@babel/types" "^7.3.0"
+
+"@types/benchmark@^1.0.32":
+  version "1.0.33"
+  resolved "https://registry.yarnpkg.com/@types/benchmark/-/benchmark-1.0.33.tgz#437641cb977db0267b8146f963763aafd0f02fef"
+  integrity sha512-rG7Ieasa9UfZJnL72qiFvY9ivhEIYjCGgfcLLb5tJ/EL9+Mcxernj6W3HVCv/cOfJYuwNUwvVVhnrKl8iT8aqA==
 
 "@types/clone@~2.1.0":
   version "2.1.0"

@@ -19,6 +19,9 @@
     "paths": {
       "@pebula/decorate": ["libs/decorate/src/index.ts"],
       "@pebula/tom": ["libs/tom/src/index.ts"],
+      "@pebula/touchstone": ["libs/touchstone/src/index.ts"],
+      "@pebula/goosetyped": ["libs/goosetyped/src/index.ts"],
+      "@pebula/nesbus": ["libs/nesbus/src/index.ts"],
       "@pebula/*": ["libs/*"]
     }
   },

@@ -125,6 +125,142 @@
           }
         }
       }
+    },
+    "touchstone": {
+      "root": "libs/touchstone",
+      "sourceRoot": "libs/touchstone/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/touchstone/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/touchstone"],
+          "options": {
+            "jestConfig": "libs/touchstone/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/touchstone",
+            "tsConfig": "libs/touchstone/tsconfig.lib.json",
+            "packageJson": "libs/touchstone/package.json",
+            "main": "libs/touchstone/src/index.ts",
+            "assets": ["libs/touchstone/*.md"],
+            "srcRootForCompilationRoot": "libs/touchstone"
+          }
+        },
+        "version": {
+          "builder": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "goosetyped": {
+      "root": "libs/goosetyped",
+      "sourceRoot": "libs/goosetyped/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/goosetyped/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/goosetyped"],
+          "options": {
+            "jestConfig": "libs/goosetyped/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/goosetyped",
+            "tsConfig": "libs/goosetyped/tsconfig.lib.json",
+            "packageJson": "libs/goosetyped/package.json",
+            "main": "libs/goosetyped/src/index.ts",
+            "assets": ["libs/goosetyped/*.md"],
+            "srcRootForCompilationRoot": "libs/goosetyped"
+          }
+        },
+        "version": {
+          "builder": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "nesbus": {
+      "root": "libs/nesbus",
+      "sourceRoot": "libs/nesbus/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nesbus/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/nesbus"],
+          "options": {
+            "jestConfig": "libs/nesbus/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/nesbus",
+            "tsConfig": "libs/nesbus/tsconfig.lib.json",
+            "packageJson": "libs/nesbus/package.json",
+            "main": "libs/nesbus/src/index.ts",
+            "assets": ["libs/nesbus/*.md"],
+            "srcRootForCompilationRoot": "libs/nesbus"
+          }
+        },
+        "version": {
+          "builder": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "touchstone-docs": {
+      "projectType": "application",
+      "root": "apps/touchstone-docs",
+      "sourceRoot": "apps/touchstone-docs/src",
+      "architect": {
+        "build": {
+          "builder": "@nx-plus/docusaurus:browser",
+          "options": {
+            "outputPath": "dist/apps/touchstone-docs"
+          }
+        },
+        "serve": {
+          "builder": "@nx-plus/docusaurus:dev-server",
+          "options": {
+            "port": 3000
+          }
+        }
+      }
     }
   },
   "cli": {
