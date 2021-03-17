@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "title": "Build executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "task": {
+      "$ref": "#/definitions/buildPipeTask"
+    }
+  },
+  "definitions": {
+    "buildPipeTask": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/buildPipeExecutionGroup"
+        },
+        {
+          "$ref": "#/definitions/buildPipeTargetTask"
+        },
+        {
+          "$ref": "#/definitions/buildPipeRunCommandTask"
+        }
+      ]
+    },
+    "buildPipeExecutionGroup": {
+      "type": "object",
+      "properties": {
+        "composition": {
+          "type": "string",
+          "enum": ["parallel", "sequential"],
+          "default": "sequential"
+        },
+        "pipe": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/buildPipeTask"
+          }
+        }
+      },
+      "required": ["type", "pipe"]
+    },
+    "buildPipeTargetTask": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["target"]
+        },
+        "target": {
+          "type": "string"
+        },
+        "options": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "required": ["type", "target"]
+    },
+    "buildPipeRunCommandTask": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["runCommand"]
+        },
+        "options": {
+          "type": "object",
+          "$comment": "../../../../../../node_modules/@nrwl/workspace/src/executors/run-commands/schema.json",
+          "additionalProperties": true
+        }
+      },
+      "required": ["type", "options"]
+    }
+  }
+}

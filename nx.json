@@ -26,6 +26,11 @@
     "nx-api-extractor-e2e": {
       "tags": [],
       "implicitDependencies": ["nx-api-extractor"]
+    },
+    "nx-build-pipe": { "tags": [] },
+    "nx-build-pipe-e2e": {
+      "tags": [],
+      "implicitDependencies": ["nx-build-pipe"]
     }
   },
   "affected": { "defaultBase": "main" }

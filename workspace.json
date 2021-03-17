@@ -186,6 +186,25 @@
           }
         },
         "build": {
+          "builder": "./dist/libs/nx-build-pipe:build",
+          "options": {
+            "task": {
+              "type": "group",
+              "composition": "sequential",
+              "pipe": [
+                {
+                  "type": "target",
+                  "target": "touchstone:package"
+                },
+                {
+                  "type": "target",
+                  "target": "touchstone:apiExtractor"
+                }
+              ]
+            }
+          }
+        },
+        "package": {
           "builder": "@nrwl/node:package",
           "outputs": ["{options.outputPath}"],
           "options": {
@@ -206,16 +225,8 @@
         "apiExtractor": {
           "builder": "./dist/libs/nx-api-extractor:build",
           "options": {
+            "buildTargetName": "package",
             "baseConfigFile": "./api-extractor.base.json"
-          }
-        },
-        "apiDoc": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              "./node_modules/.bin/api-documenter markdown -i ./dist/libs/touchstone  -o ./dist/libs/touchstone/api-doc"
-            ],
-            "parallel": false
           }
         }
       }
@@ -303,6 +314,34 @@
       "root": "apps/touchstone-docs",
       "sourceRoot": "apps/touchstone-docs/src",
       "architect": {
+        "srv": {
+          "builder": "./dist/libs/nx-build-pipe:build",
+          "options": {
+            "task": {
+              "type": "group",
+              "composition": "sequential",
+              "pipe": [
+                {
+                  "type": "target",
+                  "target": "touchstone:build"
+                },
+                {
+                  "type": "runCommand",
+                  "options": {
+                    "commands": [
+                      "./node_modules/.bin/api-documenter markdown -i ./dist/libs/touchstone  -o ./apps/touchstone-docs/docs/api"
+                    ],
+                    "parallel": false
+                  }
+                },
+                {
+                  "type": "target",
+                  "target": "touchstone-docs:serve"
+                }
+              ]
+            }
+          }
+        },
         "build": {
           "builder": "@nx-plus/docusaurus:browser",
           "options": {
@@ -373,6 +412,71 @@
             "npmPackageName": "@pebula/nx-api-extractor",
             "pluginOutputPath": "dist/libs/nx-api-extractor",
             "jestConfig": "apps/nx-api-extractor-e2e/jest.config.js"
+          }
+        }
+      }
+    },
+    "nx-build-pipe": {
+      "root": "libs/nx-build-pipe",
+      "sourceRoot": "libs/nx-build-pipe/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nx-build-pipe/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/nx-build-pipe"],
+          "options": {
+            "jestConfig": "libs/nx-build-pipe/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/nx-build-pipe",
+            "tsConfig": "libs/nx-build-pipe/tsconfig.lib.json",
+            "packageJson": "libs/nx-build-pipe/package.json",
+            "main": "libs/nx-build-pipe/src/index.ts",
+            "assets": [
+              "libs/nx-build-pipe/*.md",
+              {
+                "input": "./libs/nx-build-pipe/src",
+                "glob": "**/*.!(ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./libs/nx-build-pipe",
+                "glob": "generators.json",
+                "output": "."
+              },
+              {
+                "input": "./libs/nx-build-pipe",
+                "glob": "executors.json",
+                "output": "."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "nx-build-pipe-e2e": {
+      "projectType": "application",
+      "root": "apps/nx-build-pipe-e2e",
+      "sourceRoot": "apps/nx-build-pipe-e2e/src",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/nx-plugin:e2e",
+          "options": {
+            "target": "nx-build-pipe:build",
+            "npmPackageName": "@pebula/nx-build-pipe",
+            "pluginOutputPath": "dist/libs/nx-build-pipe",
+            "jestConfig": "apps/nx-build-pipe-e2e/jest.config.js"
           }
         }
       }
