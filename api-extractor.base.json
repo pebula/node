@@ -1,18 +1,19 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
-  "mainEntryPointFilePath": "<projectFolder>/cjs/index.d.ts",
   "docModel": {
-    "enabled": false
+    "enabled": true,
+    "apiJsonFilePath": "./<unscopedPackageName>.api.json"
   },
   "apiReport": {
     "enabled": true,
-    "reportFolder": "<lernaFolder>/reviews/api",
-    "reportTempFolder": "<lernaFolder>/reviews/api/temp"
+    "reportFileName": "public-api-contract.md",
+    "reportFolder": "<sourceRoot>",
+    "reportTempFolder": "<sourceRoot>/../../tmp"
   },
   "dtsRollup": {
     "enabled": true,
     "untrimmedFilePath": "",
-    "publicTrimmedFilePath": "<projectFolder>/cjs/index-public.d.ts"
+    "betaTrimmedFilePath": "",
+    "publicTrimmedFilePath": "./src/index-public.d.ts"
   },
   "tsdocMetadata": {
     "enabled": false

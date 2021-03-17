@@ -23,11 +23,11 @@ module.exports = {
           label: 'Docs',
           position: 'left',
         },
-        // {to: 'blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://pebula.github.io/node/touchstone/api-docs/index.html',
-          label: 'API Docs',
-          position: 'right',
+          to: 'docs/api/index',
+          activeBasePath: 'docs/api',
+          label: 'API',
+          position: 'left',
         },
         {
           href: 'https://github.com/pebula/node/tree/master/packages/touchstone',
@@ -42,27 +42,8 @@ module.exports = {
         {
           title: 'Docs',
           items: [
-            // { label: 'Style Guide', to: 'docs/doc1' },
-            // { label: 'Second Doc', to: 'docs/doc2' },
           ],
         },
-        // {
-        //   title: 'Community',
-        //   items: [
-        //     {
-        //       label: 'Stack Overflow',
-        //       href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-        //     },
-        //     {
-        //       label: 'Discord',
-        //       href: 'https://discordapp.com/invite/docusaurus',
-        //     },
-        //     {
-        //       label: 'Twitter',
-        //       href: 'https://twitter.com/docusaurus',
-        //     },
-        //   ],
-        // },
         {
           title: 'More',
           items: [
@@ -92,14 +73,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl:
-            'https://github.com/pebula/node/tree/master/packages/touchstone/website/',
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/pebula/node/tree/master/packages/touchstone/website/blog/',
+          editUrl: 'https://github.com/pebula/node/tree/master/packages/touchstone/website/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

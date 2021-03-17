@@ -1,33 +1,13 @@
 import * as Path from 'path';
 import * as FS from 'fs';
-import { ExecutorContext, TargetConfiguration, logger } from '@nrwl/devkit';
+import { ExecutorContext, logger } from '@nrwl/devkit';
 import { IConfigFile, Extractor, ExtractorConfig } from '@microsoft/api-extractor';
 import { ApiExtractorExecutorSchema } from './schema';
+import { loadJson, getOutputFolder, updateTokens, cleanConfig } from './utils';
 
 try {
   require('dotenv').config();
 } catch (e) {}
-
-function loadJson(p: string): any {
-  return JSON.parse(FS.readFileSync(p, { encoding: 'utf-8'}));
-}
-
-function getOutputFolder(targetConfig: TargetConfiguration, configurationName?: string) {
-  const output = targetConfig.configurations?.[configurationName || '']?.outputPath || targetConfig.options?.outputPath;
-
-  if (!output) {
-    throw new Error('Could not locate output folder destination.');
-  }
-  return output;
-  // TODO: Find out to interpolate the configuration and use "outputs"
-
-  // if (!targetConfig.outputs) {
-  //   throw new Error('Could not locate output folder destination.');
-  // } else if (targetConfig.outputs.length > 1) {
-  //   throw new Error('Multiple output folders are not supported.');
-  // }
-  // return targetConfig.outputs[0];
-}
 
 export default async function runExecutor(options: ApiExtractorExecutorSchema, context: ExecutorContext) {
   const project = context.workspace.projects[context.projectName];
@@ -43,11 +23,40 @@ export default async function runExecutor(options: ApiExtractorExecutorSchema, c
   const packageJsonFullPath = Path.join(outputFolder, 'package.json');
   const packageJson = loadJson(packageJsonFullPath);
 
+  if (!options.baseConfigFile && !options.extractorConfig) {
+    throw new Error('Configuration not set, please set a base config and/or direct extract configuration.');
+  }
+
+  let baseConfig: IConfigFile = {} as any;
+  if (options.baseConfigFile) {
+    const extendsPath = Path.isAbsolute(options.baseConfigFile)
+      ? options.baseConfigFile
+      : Path.join(context.root, options.baseConfigFile)
+    ;
+    baseConfig = loadJson(extendsPath);
+  }
+
+  const rawExtractorConfig = options.extractorConfig || {}
+  cleanConfig(rawExtractorConfig);
+
   const configObject: IConfigFile = {
+    ...baseConfig,
+    ...rawExtractorConfig,
     projectFolder: outputFolder,
     mainEntryPointFilePath: Path.join(outputFolder, packageJson.typings),
-    ...options.extractorConfig,
   };
+
+  if (!configObject.compiler) {
+    configObject.compiler = {
+      tsconfigFilePath: '<sourceRoot>/tsconfig.json',
+      skipLibCheck: false,
+    };
+  }
+
+  updateTokens(configObject, {
+    sourceRoot: Path.join(context.root, project.root),
+    sourceSourceRoot: Path.join(context.root, project.sourceRoot),
+  });
 
   const extractorConfig: ExtractorConfig = ExtractorConfig.prepare({
     configObject,
@@ -60,6 +69,10 @@ export default async function runExecutor(options: ApiExtractorExecutorSchema, c
     localBuild: true,
     showVerboseMessages: true,
   });
+
+  if (FS.existsSync(extractorConfig.reportTempFilePath)) {
+    FS.unlinkSync(extractorConfig.reportTempFilePath);
+  }
 
   if (extractorResult.succeeded) {
     logger.info(`API Extractor completed successfully`);

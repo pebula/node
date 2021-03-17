@@ -5,30 +5,29 @@
   "description": "For detailed description of the configuration see https://github.com/microsoft/rushstack/blob/51e568825902d285edf9f43f9954c38ea0b04527/apps/api-extractor/src/api/IConfigFile.ts#L286",
   "type": "object",
   "properties": {
+    "baseConfigFile": {
+      "type": "string",
+      "description": "Optionally specifies the path (relative to workspace root) for an Api Extractor Configuration JSON file to be used as a base configuration. \nNote that this is not part of the extractor configuration, hence no token interpolation is performed on this value."
+    },
     "buildTargetName": {
       "type": "string",
       "description": "The name of the build target. Defaults to 'build'",
       "default": "build"
     },
     "extractorConfig": {
-      "$ref": "#/definitions/configApiExtractor"
+      "description": "The configuration for Api Extractor. \nAll relative folder references will be relative to the dist folder, to reference the source code root folder use the token . \nAll native Api Extractor tokens are also present and can be used. ",
+      "$ref": "#/definitions/configApiExtractor",
+      "default": null
     }
   },
-  "required": [
-    "extractorConfig"
-  ],
+  "required": [ ],
   "definitions": {
     "configApiExtractor": {
       "type": "object",
       "properties": {
-        "extends": {
-          "type": "string",
-          "description": "Optionally specifies another JSON config file that this file extends from.  This provides a way for \nstandard settings to be shared across multiple projects. \nIf the path starts with `./` or `../`, the path is resolved relative to the folder of the file that contains \nthe `extends` field.  Otherwise, the first path segment is interpreted as an NPM package name, and will be \nresolved using NodeJS `require()`."
-        },
         "bundledPackages": {
           "type": "array",
           "description": "A list of NPM package names whose exports should be treated as part of this package.",
-          "default": [],
           "items": {
             "type": "string"
           }
@@ -60,7 +59,9 @@
           "type": "boolean",
           "description": "Set to true when invoking API Extractor's test harness. \nWhen `testMode` is true, the `toolVersion` field in the .api.json file is assigned an empty string \nto prevent spurious diffs in output files tracked for tests."
         }
-      }
+      },
+      "additionalProperties": false,
+      "required": []
     },
     "configCompiler": {
       "description": "",
@@ -79,7 +80,8 @@
           "type": "boolean",
           "description": "This option causes the compiler to be invoked with the `--skipLibCheck` option."
         }
-      }
+      },
+      "required": []
     },
     "configApiReport": {
       "description": "",
@@ -103,7 +105,6 @@
         }
       },
       "required": [
-        "enabled"
       ]
     },
     "configDocModel": {
@@ -120,7 +121,6 @@
         }
       },
       "required": [
-        "enabled"
       ]
     },
     "configDtsRollup": {
@@ -149,7 +149,6 @@
         }
       },
       "required": [
-        "enabled"
       ]
     },
     "configTsdocMetadata": {
@@ -166,7 +165,6 @@
         }
       },
       "required": [
-        "enabled"
       ]
     },
     "extractorMessagesConfig": {
@@ -214,7 +212,8 @@
           "type": "boolean",
           "description": "When `addToApiReportFile` is true:  If API Extractor is configured to write an API report file (.api.md), \nthen the message will be written inside that file; otherwise, the message is instead logged according to \nthe `logLevel` option."
         }
-      }
+      },
+      "required": []
     }
   }
 }
