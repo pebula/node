@@ -16,12 +16,12 @@
   "projects": {
     "decorate": { "tags": [] },
     "tom": { "tags": [] },
-    "decorate-docs": { "tags": [] },
-    "tom-docs": { "tags": [] },
+    "docs-decorate": { "tags": [] },
+    "docs-tom": { "tags": [] },
     "touchstone": { "tags": [] },
     "goosetyped": { "tags": [] },
     "nesbus": { "tags": [] },
-    "touchstone-docs": { "tags": [] },
+    "docs-touchstone": { "tags": [] },
     "nx-api-extractor": { "tags": [] },
     "nx-api-extractor-e2e": {
       "tags": [],

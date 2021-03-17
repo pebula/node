@@ -1,6 +1,91 @@
 {
   "version": 1,
   "projects": {
+    "docs-decorate": {
+      "projectType": "application",
+      "root": "apps/docs/decorate",
+      "sourceRoot": "apps/docs/decorate/src",
+      "architect": {
+        "build": {
+          "builder": "@nx-plus/docusaurus:browser",
+          "options": {
+            "outputPath": "dist/apps/docs/decorate"
+          }
+        },
+        "serve": {
+          "builder": "@nx-plus/docusaurus:dev-server",
+          "options": {
+            "port": 3000
+          }
+        }
+      }
+    },
+    "docs-tom": {
+      "projectType": "application",
+      "root": "apps/docs/tom",
+      "sourceRoot": "apps/docs/tom/src",
+      "architect": {
+        "build": {
+          "builder": "@nx-plus/docusaurus:browser",
+          "options": {
+            "outputPath": "dist/apps/docs/tom"
+          }
+        },
+        "serve": {
+          "builder": "@nx-plus/docusaurus:dev-server",
+          "options": {
+            "port": 3000
+          }
+        }
+      }
+    },
+    "docs-touchstone": {
+      "projectType": "application",
+      "root": "apps/docs/touchstone",
+      "sourceRoot": "apps/docs/touchstone/src",
+      "architect": {
+        "srv": {
+          "builder": "./dist/libs/nx-build-pipe:build",
+          "options": {
+            "task": {
+              "type": "group",
+              "composition": "sequential",
+              "pipe": [
+                {
+                  "type": "target",
+                  "target": "touchstone:build"
+                },
+                {
+                  "type": "runCommand",
+                  "options": {
+                    "commands": [
+                      "./node_modules/.bin/api-documenter markdown -i ./dist/libs/touchstone  -o ./apps/docs/touchstone/docs/api"
+                    ],
+                    "parallel": false
+                  }
+                },
+                {
+                  "type": "target",
+                  "target": "docs-touchstone:serve"
+                }
+              ]
+            }
+          }
+        },
+        "build": {
+          "builder": "@nx-plus/docusaurus:browser",
+          "options": {
+            "outputPath": "dist/apps/docs/touchstone"
+          }
+        },
+        "serve": {
+          "builder": "@nx-plus/docusaurus:dev-server",
+          "options": {
+            "port": 3000
+          }
+        }
+      }
+    },
     "decorate": {
       "root": "libs/decorate",
       "sourceRoot": "libs/decorate/src",
@@ -84,84 +169,6 @@
           "builder": "@jscutlery/semver:version",
           "options": {
             "syncVersions": false
-          }
-        },
-        "apiExtractor": {
-          "builder": "./dist/libs/nx-api-extractor:build",
-          "options": {
-            "extractorConfig": {
-              "docModel": {
-                "enabled": false
-              },
-              "apiReport": {
-                "enabled": true,
-                "reportFileName": "public-api.md",
-                "reportFolder": "./",
-                "reportTempFolder": "./temp"
-              },
-              "dtsRollup": {
-                "enabled": true,
-                "untrimmedFilePath": "",
-                "betaTrimmedFilePath": "",
-                "publicTrimmedFilePath": "./src/index-public.d.ts"
-              },
-              "tsdocMetadata": {
-                "enabled": false
-              },
-              "messages": {
-                "tsdocMessageReporting": {
-                  "default": {
-                    "logLevel": "none"
-                  }
-                },
-                "extractorMessageReporting": {
-                  "ae-missing-release-tag": {
-                    "logLevel": "none"
-                  },
-                  "ae-unresolved-link": {
-                    "logLevel": "none"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "decorate-docs": {
-      "projectType": "application",
-      "root": "apps/decorate-docs",
-      "sourceRoot": "apps/decorate-docs/src",
-      "architect": {
-        "build": {
-          "builder": "@nx-plus/docusaurus:browser",
-          "options": {
-            "outputPath": "dist/apps/decorate-docs"
-          }
-        },
-        "serve": {
-          "builder": "@nx-plus/docusaurus:dev-server",
-          "options": {
-            "port": 3000
-          }
-        }
-      }
-    },
-    "tom-docs": {
-      "projectType": "application",
-      "root": "apps/tom-docs",
-      "sourceRoot": "apps/tom-docs/src",
-      "architect": {
-        "build": {
-          "builder": "@nx-plus/docusaurus:browser",
-          "options": {
-            "outputPath": "dist/apps/tom-docs"
-          }
-        },
-        "serve": {
-          "builder": "@nx-plus/docusaurus:dev-server",
-          "options": {
-            "port": 3000
           }
         }
       }
@@ -305,53 +312,6 @@
           "builder": "@jscutlery/semver:version",
           "options": {
             "syncVersions": false
-          }
-        }
-      }
-    },
-    "touchstone-docs": {
-      "projectType": "application",
-      "root": "apps/touchstone-docs",
-      "sourceRoot": "apps/touchstone-docs/src",
-      "architect": {
-        "srv": {
-          "builder": "./dist/libs/nx-build-pipe:build",
-          "options": {
-            "task": {
-              "type": "group",
-              "composition": "sequential",
-              "pipe": [
-                {
-                  "type": "target",
-                  "target": "touchstone:build"
-                },
-                {
-                  "type": "runCommand",
-                  "options": {
-                    "commands": [
-                      "./node_modules/.bin/api-documenter markdown -i ./dist/libs/touchstone  -o ./apps/touchstone-docs/docs/api"
-                    ],
-                    "parallel": false
-                  }
-                },
-                {
-                  "type": "target",
-                  "target": "touchstone-docs:serve"
-                }
-              ]
-            }
-          }
-        },
-        "build": {
-          "builder": "@nx-plus/docusaurus:browser",
-          "options": {
-            "outputPath": "dist/apps/touchstone-docs"
-          }
-        },
-        "serve": {
-          "builder": "@nx-plus/docusaurus:dev-server",
-          "options": {
-            "port": 3000
           }
         }
       }

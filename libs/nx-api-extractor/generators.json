@@ -3,7 +3,7 @@
   "version": "0.1",
   "schematics": {
     "init": {
-      "factory": "./src/generators/init/generator#initSchematic",
+      "factory": "./src/generators/init/init#nxApiExtractorInitSchematic",
       "schema": "./src/generators/init/schema.json",
       "description": "Add Api Extractor configuration to the workspace",
       "aliases": ["ng-add"],
@@ -12,7 +12,7 @@
   },
   "generators": {
     "init": {
-      "factory": "./src/generators/init/generator",
+      "factory": "./src/generators/init/init",
       "schema": "./src/generators/init/schema.json",
       "description": "Add Api Extractor configuration to the workspace",
       "aliases": ["ng-add"],
