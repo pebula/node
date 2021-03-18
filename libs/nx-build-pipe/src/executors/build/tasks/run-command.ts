@@ -1,8 +1,7 @@
 import * as Path from 'path';
-import { ExecutorContext, logger } from '@nrwl/devkit';
 import runCommandImp from '@nrwl/workspace/src/executors/run-commands/run-commands.impl';
 import { validateOptsAgainstSchema } from '@nrwl/tao/src/shared/params';
-import { loadJson, saveJson } from '../../utils';
+import { loadJson, saveJson, ExecutorContext, getTaskGlobalOptions } from '../../utils';
 import { BuildPipeExecutorSchema, BuildPipeRunCommandTask } from '../schema';
 import { Task } from './task.type';
 
@@ -34,7 +33,7 @@ function verifySchema(options: BuildPipeExecutorSchema, context: ExecutorContext
 export const runCommand: Task<'runCommand'> & { verifySchema(options: BuildPipeExecutorSchema, context: ExecutorContext): void; } = {
   type: 'runCommand',
   async execute(task: BuildPipeRunCommandTask, context: ExecutorContext): Promise<{ success: boolean }> {
-    return runCommandImp(task.options);
+    return runCommandImp({ ...getTaskGlobalOptions(task, context), ...task.options});
   },
   verifySchema,
 };

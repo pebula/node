@@ -1,19 +1,24 @@
+
+const org = 'pebula';
+const repo = 'node';
+const package = 'touchstone';
+
 module.exports = {
   title: 'touchstone',
   tagline: '',
-  url: 'https://pebula.github.io/node/touchstone',
-  baseUrl: process.env.GH_PAGES_BUILD ? '/node/touchstone/' : '/',
+  url: `https://${org}.github.io/${repo}/${package}`,
+  baseUrl: process.env.GH_PAGES_BUILD ? `/${repo}/${package}/` : '/',
   favicon: 'img/favicon.ico',
-  organizationName: 'pebula',
-  projectName: 'touchstone',
+  organizationName: org,
+  projectName: package,
   customFields: {
-    apiDocsUrl: 'https://pebula.github.io/node/touchstone/api-docs',
+    apiDocsUrl: `https://${org}.github.io/${repo}/${package}/docs/api/index`,
   },
   themeConfig: {
     navbar: {
-      title: '@pebula/touchstone',
+      title: `@${org}/${package}`,
       logo: {
-        alt: '@pebula/touchstone',
+        alt: `@${org}/${package}`,
         src: 'img/logo.svg',
       },
       items: [
@@ -30,7 +35,7 @@ module.exports = {
           position: 'left',
         },
         {
-          href: 'https://github.com/pebula/node/tree/master/packages/touchstone',
+          href: `https://github.com/${org}/${repo}/tree/master/libs/${package}`,
           label: 'GitHub',
           position: 'right',
         },
@@ -47,10 +52,9 @@ module.exports = {
         {
           title: 'More',
           items: [
-            // { label: 'Blog', to: 'blog' },
             {
               label: 'GitHub',
-              href: 'https://github.com/pebula/node/tree/master/packages/touchstone',
+              href: `https://github.com/${org}/${repo}/tree/master/libs/${package}`,
             },
           ],
         },
@@ -63,17 +67,14 @@ module.exports = {
       anonymizeIP: true, // Should IPs be anonymized?
     },
   },
-  plugins: [
-    '@docusaurus/plugin-google-analytics',
-  ],
+  plugins: [ ],
   presets: [
     [
       '@docusaurus/preset-classic',
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl: 'https://github.com/pebula/node/tree/master/packages/touchstone/website/',
+          editUrl: `https://github.com/${org}/${repo}/tree/master/apps/dpcs/touchstone/docs`,
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

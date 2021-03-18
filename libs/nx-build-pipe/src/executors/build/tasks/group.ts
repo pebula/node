@@ -1,4 +1,4 @@
-import { ExecutorContext, logger } from '@nrwl/devkit';
+import { ExecutorContext } from '../../utils';
 import { BuildPipeGroupTask } from '../schema';
 import { runTask } from './task.run';
 import { Task } from './task.type';
@@ -16,7 +16,7 @@ export const group: Task<'group'> = {
               : { success: true }
             ;
           });
-      case 'sequential':
+      case 'sequence':
         for (const subTask of task.pipe) {
           const result = await runTask(subTask, context);
           if (result.success === false) {

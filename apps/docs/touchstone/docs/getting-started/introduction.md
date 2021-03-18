@@ -123,5 +123,5 @@ will automatically execute.
 
 ## Demo
 
-The following is the output of the a demo benchmark application: <ExtRelativeLink to="demo/benchmark-chart.html">benchmark-chart</ExtRelativeLink>
+The following is the output of the a demo benchmark application: <ExtRelativeLink to="benchmarks/benchmark-chart.html">benchmark-chart</ExtRelativeLink>
 

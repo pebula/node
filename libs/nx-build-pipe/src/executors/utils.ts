@@ -1,5 +1,19 @@
 import * as FS from 'fs';
-import { logger as _logger } from '@nrwl/devkit';
+import { logger as _logger, ExecutorContext as _ExecutorContext } from '@nrwl/devkit';
+import { BuildPipeExecutorSchema, BuildPipeTasks } from './build/schema';
+
+export interface ExecutorContext extends _ExecutorContext {
+  rootOptions: BuildPipeExecutorSchema;
+}
+
+/**
+ * Returns an object with global options set for a task, based on the task name.
+ * The global options are set on the build-pipe executor config in the `taskOptions` property.
+ * If there is a key there matching the take.name, it will return the value of the key otherwise returns an empty object.
+ */
+export function getTaskGlobalOptions(task: BuildPipeTasks, context: ExecutorContext) {
+  return task.name && context.rootOptions.taskOptions?.[task.name] || {};
+}
 
 export function loadJson(p: string): any {
   return JSON.parse(FS.readFileSync(p, { encoding: 'utf-8'}));

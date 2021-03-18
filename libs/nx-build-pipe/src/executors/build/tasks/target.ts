@@ -1,6 +1,13 @@
-import { ExecutorContext, logger, parseTargetString, readTargetOptions, runExecutor } from '@nrwl/devkit';
+import { parseTargetString, readTargetOptions, runExecutor } from '@nrwl/devkit';
+import { ExecutorContext, getTaskGlobalOptions, logger } from '../../utils';
 import { BuildPipeTargetTask } from '../schema';
 import { Task } from './task.type';
+
+function isNxBuildPipeTarget(project: string, target: string, context: ExecutorContext) {
+  const targetConfig = context.workspace.projects[project]?.targets[target];
+  return targetConfig?.executor === context.target.executor
+    || targetConfig?.executor === '@pebula/nx-build-pipe:build';
+}
 
 export const target: Task<'target'> = {
   type: 'target',
@@ -8,11 +15,15 @@ export const target: Task<'target'> = {
     const targetDescription = parseTargetString(task.target);
     const targetOptions = readTargetOptions(targetDescription, context);
 
-    if (task.options) {
-      Object.assign(targetOptions, task.options);
+    const baseOptions = getTaskGlobalOptions(task, context);
+    Object.assign(targetOptions, {...baseOptions, ...(task.options || {})});
+
+    if (isNxBuildPipeTarget(targetDescription.project, targetDescription.target, context)) {
+      targetOptions.taskOptions = {...context.rootOptions.taskOptions, ...(targetOptions.taskOptions || {})};
     }
 
     const executing = await runExecutor(targetDescription, targetOptions, context);
+
     // Run in sequence, as intended by Nx, this will usually be one executor but it depends on the executor implementation!
     for await (const s of executing) {
       if (!s.success) {

@@ -44,12 +44,12 @@
       "root": "apps/docs/touchstone",
       "sourceRoot": "apps/docs/touchstone/src",
       "architect": {
-        "srv": {
+        "gh-pages": {
           "builder": "./dist/libs/nx-build-pipe:build",
           "options": {
             "task": {
               "type": "group",
-              "composition": "sequential",
+              "composition": "sequence",
               "pipe": [
                 {
                   "type": "target",
@@ -66,9 +66,26 @@
                 },
                 {
                   "type": "target",
-                  "target": "docs-touchstone:serve"
+                  "target": "touchstone:benchmark",
+                  "options": {
+                    "taskOptions": {
+                      "runBenchmark": {
+                        "args": "--vegaDestFile apps/docs/touchstone/static/benchmarks/benchmark-chart"
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "target",
+                  "target": "docs-touchstone:build",
+                  "options": {
+                    "outputPath": "dist/gh-pages/touchstone"
+                  }
                 }
               ]
+            },
+            "env": {
+              "GH_PAGES_BUILD": true
             }
           }
         },
@@ -197,7 +214,7 @@
           "options": {
             "task": {
               "type": "group",
-              "composition": "sequential",
+              "composition": "sequence",
               "pipe": [
                 {
                   "type": "target",
@@ -206,6 +223,38 @@
                 {
                   "type": "target",
                   "target": "touchstone:apiExtractor"
+                }
+              ]
+            }
+          }
+        },
+        "benchmark": {
+          "builder": "./dist/libs/nx-build-pipe:build",
+          "options": {
+            "task": {
+              "type": "group",
+              "composition": "sequence",
+              "pipe": [
+                {
+                  "name": "installPackages",
+                  "type": "runCommand",
+                  "options": {
+                    "cwd": "./libs/touchstone/benchmarks",
+                    "commands": [
+                      "yarn"
+                    ],
+                    "parallel": false
+                  }
+                },
+                {
+                  "name": "runBenchmark",
+                  "type": "runCommand",
+                  "options": {
+                    "commands": [
+                      "./node_modules/.bin/ts-node -r tsconfig-paths/register -P ./tsconfig.base.json -O \"{ \\\"module\\\": \\\"commonjs\\\", \\\"resolveJsonModule\\\": true }\" libs/touchstone/benchmarks/src/index.ts"
+                    ],
+                    "parallel": false
+                  }
                 }
               ]
             }

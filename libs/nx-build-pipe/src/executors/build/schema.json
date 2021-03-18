@@ -7,8 +7,26 @@
   "properties": {
     "task": {
       "$ref": "#/definitions/buildPipeTask"
+    },
+    "taskOptions": {
+      "type": "object",
+      "description": "A dictionary with keys corresponding to task names, when a match is found the value is merged to the options of the matched task",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "envFile": {
+      "type": "string",
+      "description": "You may specify a custom .env file path"
+    },
+    "env": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Object added to the env manually, note that this is loaded for every pipe. If you have child pipe executors either set each one or set a single setup at the root."
     }
   },
+  "required": ["task"],
   "definitions": {
     "buildPipeTask": {
       "oneOf": [
@@ -26,10 +44,18 @@
     "buildPipeExecutionGroup": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "A unique name which identify this task which allows targeting options to it when executing the pipe"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["group"]
+        },
         "composition": {
           "type": "string",
-          "enum": ["parallel", "sequential"],
-          "default": "sequential"
+          "enum": ["parallel", "sequence"],
+          "default": "sequence"
         },
         "pipe": {
           "type": "array",
@@ -43,6 +69,10 @@
     "buildPipeTargetTask": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "A unique name which identify this task which allows targeting options to it when executing the pipe"
+        },
         "type": {
           "type": "string",
           "enum": ["target"]
@@ -60,6 +90,10 @@
     "buildPipeRunCommandTask": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "A unique name which identify this task which allows targeting options to it when executing the pipe"
+        },
         "type": {
           "type": "string",
           "enum": ["runCommand"]

@@ -2,12 +2,13 @@ import type { RunCommandsBuilderOptions } from '@nrwl/workspace/src/executors/ru
 
 /* Define Tasks */
 export interface BuildPipeTask<T extends string, TOptions> {
+  name?: string;
   type: T;
   options?: TOptions;
 }
 
 export interface BuildPipeGroupTask extends BuildPipeTask<'group', never> {
-  composition?: 'parallel' | 'sequential';
+  composition?: 'parallel' | 'sequence';
   pipe: Array<BuildPipeTasks>;
 }
 
@@ -28,4 +29,7 @@ export type BuildPipeTasks =
 
 export interface BuildPipeExecutorSchema {
   task: BuildPipeTasks;
+  taskOptions?: Record<string, Record<string, any>>;
+  envFile?: string;
+  env?: any;
 }

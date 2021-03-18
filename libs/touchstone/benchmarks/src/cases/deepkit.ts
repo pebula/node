@@ -1,5 +1,5 @@
 import { Case } from '@pebula/touchstone';
-import { f, PropertyValidator, PropertyValidatorError, validate } from '@marcj/marshal';
+import { f, PropertyValidator, PropertyValidatorError, validate } from '@deepkit/type';
 import { PackageCase, RuntimeValidatorPackageSuite } from './case';
 import { Data } from '../data';
 
@@ -65,9 +65,9 @@ class DataType implements Data {
 }
 
 @RuntimeValidatorPackageSuite()
-export class MarshalPkg extends PackageCase {
+export class DeepKitPkg extends PackageCase {
 
-  @Case({ name: 'marshal' }) 
+  @Case({ name: '@deepkit/type' })
   validate() {
     validate(DataType, this.data);
     return this.data;
