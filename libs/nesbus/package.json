@@ -1,6 +1,14 @@
 {
   "name": "@pebula/nesbus",
   "version": "0.0.1",
+  "keywords": [
+    "azure",
+    "cloud",
+    "service bus",
+    "AMQP",
+    "nestjs",
+    "microservice"
+  ],
   "peerDependencies": {
     "@azure/ms-rest-nodeauth": "^3.0.3",
     "@azure/arm-servicebus": "^3.2.0",
@@ -13,12 +21,14 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.0.0"
   },
-  "keywords": [
-    "azure",
-    "cloud",
-    "service bus",
-    "AMQP",
-    "nestjs",
-    "microservice"
-  ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pebula/node.git"
+  },
+  "author": "Shlomi Assaf",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pebula/node/issues"
+  },
+  "homepage": "https://pebula.github.io/node/nesbus"
 }

@@ -1,6 +1,23 @@
 {
   "name": "@pebula/nx-build-pipe",
   "version": "0.0.1",
-  "main": "src/index.js",
-  "executors": "./executors.json"
+  "keywords": [
+    "nx",
+    "nrwl",
+    "plugin",
+    "build",
+    "pipe",
+    "chain"
+  ],
+  "executors": "./executors.json",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pebula/node.git"
+  },
+  "author": "Shlomi Assaf",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pebula/node/issues"
+  },
+  "homepage": "https://pebula.github.io/node/nx-build-pipe"
 }

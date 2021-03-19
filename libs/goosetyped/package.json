@@ -4,5 +4,20 @@
     "peerDependencies": {
     "mongodb": "^3.3.5",
     "mongoose": "~5.12.0"
-  }
+  },
+  "keywords": [
+    "typescript",
+    "mongoose",
+    "types"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pebula/node.git"
+  },
+  "author": "Shlomi Assaf",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pebula/node/issues"
+  },
+  "homepage": "https://pebula.github.io/node/goosetyped"
 }

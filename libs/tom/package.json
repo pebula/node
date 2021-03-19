@@ -1,10 +1,27 @@
 {
   "name": "@pebula/tom",
   "version": "0.0.1",
+  "keywords": [
+    "typescript",
+    "mapper",
+    "serializer",
+    "type-map",
+    "object-map"
+  ],
   "dependencies": {
     "dot-prop": "^6.0.1"
   },
   "devDependencies": {
     "@types/dot-prop": "^5.0.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pebula/node.git"
+  },
+  "author": "Shlomi Assaf",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pebula/node/issues"
+  },
+  "homepage": "https://pebula.github.io/node/tom"
 }

@@ -1,6 +1,13 @@
 {
   "name": "@pebula/touchstone",
   "version": "0.0.1",
+  "keywords": [
+    "benchmark",
+    "benchmark.js",
+    "performance",
+    "framework",
+    "typescript"
+  ],
   "devDependencies": {
     "@types/benchmark": "^1.0.32",
     "@types/jest": "^25.2.1",
@@ -27,12 +34,5 @@
   "bugs": {
     "url": "https://github.com/pebula/node/issues"
   },
-  "homepage": "https://github.com/pebula/node/tree/master/packages/touchstone",
-  "keywords": [
-    "benchmark",
-    "benchmark.js",
-    "performance",
-    "framework",
-    "typescript"
-  ]
+  "homepage": "https://pebula.github.io/node/touchstone"
 }
