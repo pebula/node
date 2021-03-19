@@ -1,6 +1,6 @@
 # `@pebula/goosetyped`
 
-[![Documentation](https://img.shields.io/badge/Documentation-9cf?style=for-the-badge)](https://shlomiassaf.github.io/pebula-node/goosetyped/)   ![npm (scoped)](https://img.shields.io/npm/v/@pebula/goosetyped?color=green&style=for-the-badge)
+[![Documentation](https://img.shields.io/badge/Documentation-9cf?style=for-the-badge)](https://pebula.github.io/node/goosetyped/)   ![npm (scoped)](https://img.shields.io/npm/v/@pebula/goosetyped?color=green&style=for-the-badge)  [![GitHub](https://img.shields.io/badge/Source_Code-green?style=for-the-badge&logo=github)](https://github.com/pebula/node/tree/master/libs/goosetyped)
 
 
 **GooseTyped** allows you to focus on building your models more clearly. Simplifying most of the domain
