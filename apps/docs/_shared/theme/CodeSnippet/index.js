@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
 
-import styles from './styles.module.css';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useThemeContext from '@theme/hooks/useThemeContext';
-
 import Highlight, { defaultProps } from "prism-react-renderer";
-
-import monokai from "@site/src/plugins/prism_themes/monokai";
+import monokai from "@site-shared/plugins/prism_themes/monokai";
+import styles from './styles.module.css';
 
 function CodeSnippet(props) {
   const {

@@ -3,7 +3,7 @@ id: mixins
 title: Mixins
 sidebar_label: 4. Mixins
 ---
-import MongooseDocsLink from '@site/src/theme/MongooseDocsLink';
+import MongooseDocsLink from '@site-shared/theme/MongooseDocsLink';
 
 Mixins are the perfect tools to apply functionality and are very similar to mongoose plugins.
 

@@ -3,7 +3,7 @@ id: local-column
 title: Local Columns
 sidebar_label: 5. Local Columns
 ---
-import MongooseDocsLink from '@site/src/theme/MongooseDocsLink';
+import MongooseDocsLink from '@site-shared/theme/MongooseDocsLink';
 
 Up to this point we've only used class properties which we're decorated with `@GtColumn`.
 

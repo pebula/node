@@ -50,6 +50,7 @@
     "vega-lite": "^4.12.1"
   },
   "devDependencies": {
+    "@couds/docusaurus-resolve-plugin": "^0.1.0",
     "@deepkit/core": "^1.0.1-alpha.25",
     "@deepkit/type": "^1.0.1-alpha.25",
     "@docusaurus/plugin-google-analytics": "^2.0.0-alpha.72",

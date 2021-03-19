@@ -1597,6 +1597,11 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@couds/docusaurus-resolve-plugin@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@couds/docusaurus-resolve-plugin/-/docusaurus-resolve-plugin-0.1.0.tgz#eaff61ddc9d6738c1baf634f7fd227af2c0995be"
+  integrity sha512-z62pm9a4whegCIv9oTbRj5lqVO7OQBfgI6nHXocnZIhEOIbMCtSe1XPvluQa8mCKX7cvMnUnTW05AnzvRE/whA==
+
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"

@@ -68,7 +68,17 @@ module.exports = {
       anonymizeIP: true,
     },
   },
-  plugins: [ ],
+  plugins: [
+    [
+      '@couds/docusaurus-resolve-plugin',
+      {
+        modules: [],
+        alias: {
+          '@site-shared': require('path').resolve(__dirname, '../_shared'),
+        },
+      }
+    ]
+  ],
   presets: [
     [
       '@docusaurus/preset-classic',

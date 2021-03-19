@@ -3,7 +3,7 @@ id: columns
 title: Columns
 sidebar_label: 2. Columns
 ---
-import ApiDocsLink from '@site/src/theme/ApiDocsLink';
+import ApiDocsLink from '@site-shared/theme/ApiDocsLink';
 
 Columns are the building blocks of every model.
 

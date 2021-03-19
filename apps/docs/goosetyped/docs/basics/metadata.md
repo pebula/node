@@ -3,7 +3,7 @@ id: metadata
 title: Metadata
 sidebar_label: 1. Metadata
 ---
-import MongooseDocsLink from '@site/src/theme/MongooseDocsLink';
+import MongooseDocsLink from '@site-shared/theme/MongooseDocsLink';
 
 Metadata is the information required to define a model and we can divide it to 2 parts:
 

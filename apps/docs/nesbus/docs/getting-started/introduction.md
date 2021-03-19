@@ -3,7 +3,7 @@ id: introduction
 title: Introduction
 sidebar_label: 1. Introduction
 ---
-import DocLink from '@site/src/theme/DocLink';
+import DocLink from '@site-shared/theme/DocLink';
 
 **NesBus** (Nest / Service Bus) is a microservice extension for **NestJS** that adds support for Azure Service Bus within **NestJS** in a
 simple and intuitive way.

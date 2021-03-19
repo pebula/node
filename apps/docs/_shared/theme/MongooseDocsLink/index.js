@@ -1,7 +1,6 @@
 import React from 'react';
-
-import styles from './styles.module.css';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import styles from './styles.module.css';
 
 function typeToSegment(type) {
   switch (type) {

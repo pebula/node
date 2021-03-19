@@ -3,9 +3,9 @@ id: documents-and-sub-documents
 title: Documents And SubDocuments
 sidebar_label: 3. Documents & SubDocuments
 ---
-import DocLink from '@site/src/theme/DocLink';
-import ApiDocsLink from '@site/src/theme/ApiDocsLink';
-import MongooseDocsLink from '@site/src/theme/MongooseDocsLink';
+import DocLink from '@site-shared/theme/DocLink';
+import ApiDocsLink from '@site-shared/theme/ApiDocsLink';
+import MongooseDocsLink from '@site-shared/theme/MongooseDocsLink';
 
 **GooseType** provide support for mongoose's <MongooseDocsLink type="document">Document</MongooseDocsLink> & <MongooseDocsLink type="subDocument">Sub Document</MongooseDocsLink>
 

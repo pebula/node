@@ -3,7 +3,7 @@ id: async-model-compilation
 title: Async Model Compilation
 sidebar_label: 7. Async Model Compilation
 ---
-import ApiDocsLink from '@site/src/theme/ApiDocsLink';
+import ApiDocsLink from '@site-shared/theme/ApiDocsLink';
 
 **GooseTyped** works in 2 modes:
 
