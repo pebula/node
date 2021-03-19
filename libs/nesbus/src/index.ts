@@ -1,1 +1,1 @@
-export * from './lib/nesbus';
+export * from './lib';

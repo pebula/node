@@ -1,15 +1,20 @@
 module.exports = {
   displayName: 'nesbus',
+  setupFiles: ['./jest-setup.ts'],
   preset: '../../jest.preset.js',
   globals: {
     'ts-jest': {
       tsConfig: '<rootDir>/tsconfig.spec.json',
     },
   },
-  testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/libs/nesbus',
+  testEnvironment: '<rootDir>/tests/utils/service-bus-env-setup/jest-service-bus-test-environment',
+  testEnvironmentOptions: {
+    envSetup: false,
+    envTeardown: false,
+  },
 };
