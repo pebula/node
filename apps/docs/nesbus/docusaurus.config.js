@@ -11,6 +11,7 @@ module.exports = {
   favicon: 'img/favicon.ico',
   organizationName: org,
   projectName: package,
+  onBrokenLinks: 'warn',
   customFields: {
     apiDocPrefix: `docs/api/${package}.`,
     azureDocsUrl: 'https://docs.microsoft.com/en-us/javascript/api/@azure',
