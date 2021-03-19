@@ -1,1 +1,1 @@
-export * from './lib/goosetyped';
+export * from './lib/index';

@@ -1,7 +1,3 @@
-# touchstone
+# `@pebula/touchstone`
 
-This library was generated with [Nx](https://nx.dev).
-
-## Running unit tests
-
-Run `nx test touchstone` to execute the unit tests via [Jest](https://jestjs.io).
+[![Documentation](https://img.shields.io/badge/Documentation-9cf?style=for-the-badge)](https://shlomiassaf.github.io/pebula-node/touchstone/)   ![npm (scoped)](https://img.shields.io/npm/v/@pebula/touchstone?color=green&style=for-the-badge)
