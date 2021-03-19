@@ -4,7 +4,7 @@ const repo = 'node';
 const package = 'touchstone';
 
 module.exports = {
-  title: 'touchstone',
+  title: 'TouchStone',
   tagline: '',
   url: `https://${org}.github.io/${repo}/${package}`,
   baseUrl: process.env.GH_PAGES_BUILD ? `/${repo}/${package}/` : '/',
@@ -12,7 +12,7 @@ module.exports = {
   organizationName: org,
   projectName: package,
   customFields: {
-    apiDocsUrl: `https://${org}.github.io/${repo}/${package}/docs/api/index`,
+    apiDocPrefix: `docs/api/${package}.`,
   },
   themeConfig: {
     navbar: {

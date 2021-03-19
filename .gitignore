@@ -1,5 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# dotenv environment variables file
+.env
+
+
 # compiled output
 /dist
 /tmp
@@ -30,7 +34,8 @@ node_modules
 /coverage
 /libpeerconnection.log
 npm-debug.log
-yarn-error.log
+yarn-debug.log*
+yarn-error.log*
 testem.log
 /typings
 

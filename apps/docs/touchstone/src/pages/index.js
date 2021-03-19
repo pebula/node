@@ -7,12 +7,29 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import CodeSnippet from "@site/src/theme/CodeSnippet";
 import styles from './styles.module.css';
 
+const exampleCode = `import { Suite, Case } from '@pebula/touchstone';
+
+@Suite({ name: 'My First Benchmark Suite' })
+class MyFirstBenchmarkSuite {
+ @Case({ name: 'my-first-benchmark' })
+  firstBenchmark() {
+    /* Benchmarking... */
+  }
+
+  @Case()
+  async secondBenchmark() {
+     // Will automatically detect that it's async. Name is taken from method name.
+    /* Benchmarking... */
+  }
+}`;
+
 const features = [
   {
     title: <>Easy to Use</>,
     imageUrl: 'img/undraw_docusaurus_mountain.svg',
     description: (
       <>
+
       </>
     ),
   },
@@ -21,6 +38,7 @@ const features = [
     imageUrl: 'img/undraw_docusaurus_tree.svg',
     description: (
       <>
+
       </>
     ),
   },
@@ -29,6 +47,7 @@ const features = [
     imageUrl: 'img/undraw_docusaurus_react.svg',
     description: (
       <>
+
       </>
     ),
   },
@@ -60,6 +79,7 @@ function Home() {
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
+          <p>Metadata-driven benchmarking framework, built on top of benchmark.js</p>
           <div className={styles.buttons}>
             <Link
               className={classnames(
@@ -73,6 +93,15 @@ function Home() {
         </div>
       </header>
       <main>
+        <section className={styles.features}>
+          <div className="container">
+            <div className="row">
+              <div className={classnames('col')}>
+                <CodeSnippet snippet={exampleCode} lang="typescript"></CodeSnippet>
+              </div>
+            </div>
+          </div>
+        </section>
         {features && features.length && (
           <section className={styles.features}>
             <div className="container">
