@@ -1,11 +1,11 @@
 
 const org = 'pebula';
 const repo = 'node';
-const package = 'touchstone';
+const package = 'nesbus';
 
 module.exports = {
-  title: 'TouchStone',
-  tagline: 'Metadata-driven benchmarking framework, built on top of benchmark.js',
+  title: 'NesBus',
+  tagline: 'CQRS style ServiceBus extension for NestJS',
   url: `https://${org}.github.io/${repo}/${package}`,
   baseUrl: process.env.GH_PAGES_BUILD ? `/${repo}/${package}/` : '/',
   favicon: 'img/favicon.ico',
@@ -13,6 +13,7 @@ module.exports = {
   projectName: package,
   customFields: {
     apiDocPrefix: `docs/api/${package}.`,
+    azureDocsUrl: 'https://docs.microsoft.com/en-us/javascript/api/@azure',
   },
   themeConfig: {
     navbar: {
@@ -75,6 +76,19 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: `https://github.com/${org}/${repo}/tree/master/apps/dpcs/touchstone/docs`,
+          beforeDefaultRemarkPlugins: [
+            function() {
+              const visit = require('unist-util-visit');
+              const transformer = (root) => {
+                visit(root, 'jsx', (node, _index, parent) => {
+                  if (typeof node.value === 'string') {
+                    node.value = node.value.replace(/<!--\s-->/, '');
+                  }
+                });
+              };
+              return transformer;
+            }
+          ],
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

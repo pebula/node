@@ -4,24 +4,7 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import CodeSnippet from "@site/src/theme/CodeSnippet";
 import styles from './styles.module.css';
-
-const exampleCode = `import { Suite, Case } from '@pebula/touchstone';
-
-@Suite({ name: 'My First Benchmark Suite' })
-class MyFirstBenchmarkSuite {
- @Case({ name: 'my-first-benchmark' })
-  firstBenchmark() {
-    /* Benchmarking... */
-  }
-
-  @Case()
-  async secondBenchmark() {
-     // Will automatically detect that it's async. Name is taken from method name.
-    /* Benchmarking... */
-  }
-}`;
 
 const features = [
   {
@@ -29,7 +12,8 @@ const features = [
     imageUrl: 'img/undraw_docusaurus_mountain.svg',
     description: (
       <>
-
+        Docusaurus was designed from the ground up to be easily installed and
+        used to get your website up and running quickly.
       </>
     ),
   },
@@ -38,16 +22,18 @@ const features = [
     imageUrl: 'img/undraw_docusaurus_tree.svg',
     description: (
       <>
-
+        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
+        ahead and move your docs into the <code>docs</code> directory.
       </>
     ),
   },
   {
-    title: <>Code Reuse</>,
+    title: <>Powered by React</>,
     imageUrl: 'img/undraw_docusaurus_react.svg',
     description: (
       <>
-
+        Extend or customize your website layout by reusing React. Docusaurus can
+        be extended while reusing the same header and footer.
       </>
     ),
   },
@@ -92,15 +78,6 @@ function Home() {
         </div>
       </header>
       <main>
-        <section className={styles.features}>
-          <div className="container">
-            <div className="row">
-              <div className={classnames('col')}>
-                <CodeSnippet snippet={exampleCode} lang="typescript"></CodeSnippet>
-              </div>
-            </div>
-          </div>
-        </section>
         {features && features.length && (
           <section className={styles.features}>
             <div className="container">
