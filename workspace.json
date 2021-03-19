@@ -119,6 +119,15 @@
                 },
                 {
                   "type": "target",
+                  "target": "touchstone:benchmark",
+                  "options": {
+                    "env": {
+                      "vegaDestFile": "apps/docs/touchstone/static/benchmarks/benchmark-chart"
+                    }
+                  }
+                },
+                {
+                  "type": "target",
                   "target": "docs-touchstone:build",
                   "options": {
                     "outputPath": "dist/gh-pages/touchstone"
@@ -135,6 +144,59 @@
           "builder": "@nx-plus/docusaurus:browser",
           "options": {
             "outputPath": "dist/apps/docs/touchstone"
+          }
+        },
+        "serve": {
+          "builder": "@nx-plus/docusaurus:dev-server",
+          "options": {
+            "port": 3000
+          }
+        }
+      }
+    },
+    "docs-nesbus": {
+      "projectType": "application",
+      "root": "apps/docs/nesbus",
+      "sourceRoot": "apps/docs/nesbus/src",
+      "architect": {
+        "gh-pages": {
+          "builder": "./dist/libs/nx-build-pipe:build",
+          "options": {
+            "task": {
+              "type": "group",
+              "composition": "sequence",
+              "pipe": [
+                {
+                  "type": "target",
+                  "target": "nesbus:build"
+                },
+                {
+                  "type": "runCommand",
+                  "options": {
+                    "commands": [
+                      "./node_modules/.bin/api-documenter markdown -i ./dist/libs/nesbus  -o ./apps/docs/nesbus/docs/api"
+                    ],
+                    "parallel": false
+                  }
+                },
+                {
+                  "type": "target",
+                  "target": "docs-nesbus:build",
+                  "options": {
+                    "outputPath": "dist/gh-pages/nesbus"
+                  }
+                }
+              ]
+            },
+            "env": {
+              "GH_PAGES_BUILD": true
+            }
+          }
+        },
+        "build": {
+          "builder": "@nx-plus/docusaurus:browser",
+          "options": {
+            "outputPath": "dist/apps/docs/nesbus"
           }
         },
         "serve": {
@@ -451,6 +513,13 @@
           "builder": "@jscutlery/semver:version",
           "options": {
             "syncVersions": false
+          }
+        },
+        "apiExtractor": {
+          "builder": "./dist/libs/nx-api-extractor:build",
+          "options": {
+            "buildTargetName": "package",
+            "baseConfigFile": "./api-extractor.base.json"
           }
         }
       }

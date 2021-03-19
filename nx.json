@@ -14,7 +14,7 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": ["gh-pages", "build", "lint", "test", "e2e"]
       }
     }
   },
@@ -26,10 +26,12 @@
       "tags": []
     },
     "docs-decorate": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["decorate"]
     },
     "docs-tom": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["decorate", "tom"]
     },
     "touchstone": {
       "tags": []
@@ -41,7 +43,8 @@
       "tags": []
     },
     "docs-touchstone": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["touchstone"]
     },
     "nx-api-extractor": {
       "tags": []
@@ -58,7 +61,12 @@
       "implicitDependencies": ["nx-build-pipe"]
     },
     "docs-goosetyped": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["goosetyped"]
+    },
+    "docs-nesbus": {
+      "tags": [],
+      "implicitDependencies": ["nesbus"]
     }
   },
   "affected": {

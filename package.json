@@ -23,7 +23,7 @@
     "update": "nx migrate latest",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "postinstall": "node ./decorate-angular-cli.js",
+    "postinstall": "node ./decorate-angular-cli.js && yarn nx build nx-build-pipe && yarn nx build nx-api-extractor",
     "workspace-generator": "nx workspace-generator"
   },
   "private": true,
