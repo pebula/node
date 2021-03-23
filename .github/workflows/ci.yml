@@ -16,7 +16,7 @@ jobs:
   vars:
     runs-on: ubuntu-latest
     outputs:
-      GITHUB_HEAD_REF: ${{ steps.GITHUB_HEAD_REF.outputs.value }}
+      GITHUB_HEAD_REF: ${{ github.event.pull_request.head.sha }}
       GITHUB_BASE_REF: ${{ steps.GITHUB_BASE_REF.outputs.value }}
     steps:
       - id: GITHUB_HEAD_REF
