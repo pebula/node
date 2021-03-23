@@ -1,4 +1,4 @@
-name: Nx Distributed Tasks
+name: Nx Distributed Tasks [PUSH]
 
 on:
   workflow_dispatch:
