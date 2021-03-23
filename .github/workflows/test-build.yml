@@ -73,7 +73,7 @@ jobs:
             ${{ env.NX_CACHE }}-
       - name: Compute Nx arguments
         if: matrix.target == 'build'
-        run: echo "NX_ARGUMENTS=--prod" >> "$GITHUB_ENV"
+        run: echo "NX_ARGUMENTS=--prod --with-deps" >> "$GITHUB_ENV"
       - name: Compute Nx arguments
         if: matrix.target == 'test'
         run: echo 'NX_ARGUMENTS=--codeCoverage --coverageReporters=lcov' >> "$GITHUB_ENV"
@@ -88,8 +88,3 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ env.BUILD_ARTIFACTS }}
-          path: dist
