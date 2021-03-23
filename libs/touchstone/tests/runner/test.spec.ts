@@ -5,7 +5,7 @@ import { SuiteStartEvent, SuiteCompleteEvent, touchStone } from '../../src/lib/r
 
 describe('touchstone', () => {
   describe('run', () => {
-    it('should register all suites', async () => {
+    xit('should register all suites', async () => {
 
       @Suite()
       class TestSuite1 {

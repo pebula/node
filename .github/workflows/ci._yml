@@ -1,0 +1,106 @@
+name: Nx Distributed Tasks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  BUILD_ARTIFACTS: dist-artifacts
+  DEPENDENCIES_CACHE: cache-node-modules
+  NX_CACHE: cache-nx
+
+jobs:
+
+  vars:
+    runs-on: ubuntu-latest
+    outputs:
+      GITHUB_HEAD_REF: ${{ steps.GITHUB_HEAD_REF.outputs.value }}
+      GITHUB_BASE_REF: ${{ steps.GITHUB_BASE_REF.outputs.value }}
+    steps:
+      - id: GITHUB_HEAD_REF
+        run: echo "::set-output name=value::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}})"
+      - id: GITHUB_BASE_REF
+        run: echo "::set-output name=value::$(echo ${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}})"
+
+  install-deps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache node modules
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ env.DEPENDENCIES_CACHE }}-${{ hashFiles('yarn.lock') }}
+      - name: yarn install
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --pure-lockfile
+
+  # format:
+  #   runs-on: ubuntu-latest
+  #   needs: [vars, install-deps]
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Cache node modules
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: node_modules
+  #         key: ${{ env.DEPENDENCIES_CACHE }}-${{ hashFiles('yarn.lock') }}
+  #     - run: git fetch --no-tags --prune origin ${{ needs.vars.outputs.GITHUB_BASE_REF }} ${{ needs.vars.outputs.GITHUB_HEAD_REF }}
+  #     - name: Compute Nx arguments
+  #       if: needs.vars.outputs.GITHUB_HEAD_REF != needs.vars.outputs.GITHUB_BASE_REF
+  #       run: echo "NX_ARGUMENTS=--base=origin/${{ needs.vars.outputs.GITHUB_BASE_REF }}" >> $GITHUB_ENV
+  #     - run: node --max-old-space-size=8000 ./node_modules/@nrwl/cli/bin/nx.js format:check $NX_ARGUMENTS
+  #     # - run: git fetch --no-tags --prune --depth=5 origin main
+  #     # - run: echo "GITHUB_BASE_SHA=$([[ "$GITHUB_REF" == "refs/origin/main" ]] && echo "origin/main~1" || echo "origin/main")" >> $GITHUB_ENV
+  #     # - run: node --max-old-space-size=8000 ./node_modules/@nrwl/cli/bin/nx.js format:check --base=$GITHUB_BASE_SHA
+
+  distributed-task:
+    runs-on: ubuntu-latest
+    needs: [vars, install-deps]
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [test', 'build']
+        index: [1, 2, 3, 4]
+    env:
+      count: 4
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ env.DEPENDENCIES_CACHE }}-${{ hashFiles('yarn.lock') }}
+      - name: Cache Nx
+        uses: actions/cache@v2
+        with:
+          path: node_modules/.cache/nx
+          key: ${{ env.NX_CACHE }}-${{ hashFiles('yarn.lock') }}-${{ matrix.target }}-${{ matrix.index }}-${{ github.sha }}
+          restore-keys: |
+            ${{ env.NX_CACHE }}-${{ hashFiles('yarn.lock') }}-${{ matrix.target }}-${{ matrix.index }}-
+            ${{ env.NX_CACHE }}-${{ hashFiles('yarn.lock') }}-
+            ${{ env.NX_CACHE }}-
+      # - run: git fetch --no-tags --prune --depth=5 origin main
+      # - run: git fetch --no-tags --prune origin ${{ needs.vars.outputs.GITHUB_BASE_REF }} ${{ needs.vars.outputs.GITHUB_HEAD_REF }}
+      - name: Compute Nx arguments
+        if: matrix.target == 'build'
+        run: echo "NX_ARGUMENTS=--prod" >> $GITHUB_ENV
+      - name: Compute Nx arguments
+        if: matrix.target == 'test'
+        run: echo "NX_ARGUMENTS=--codeCoverage --coverageReporters=lcov" >> $GITHUB_ENV
+      - name: nx run-many:${{ matrix.target }}
+      # run: node ./tools/build/run-many.js ${{ matrix.target }} ${{ matrix.index }} ${{ env.count }} $GITHUB_REF $NX_ARGUMENTS
+        run: node ./tools/build/run-many.js ${{ matrix.target }} ${{ matrix.index }} ${{ env.count }} ${{ needs.vars.outputs.GITHUB_HEAD_REF }} ${{ needs.vars.outputs.GITHUB_BASE_REF }} $NX_ARGUMENTS
+      - name: Upload coverage to Coveralls
+        if: matrix.target == 'test'
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.BUILD_ARTIFACTS }}
+          path: dist

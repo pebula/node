@@ -3,6 +3,8 @@
 # dotenv environment variables file
 .env
 
+# secrets file for GitHub actions sim (act)
+.act-secrets
 
 # compiled output
 /dist
