@@ -62,6 +62,9 @@ jobs:
         run: echo 'NX_ARGUMENTS=--codeCoverage --coverageReporters=lcov' >> "$GITHUB_ENV"
       - name: nx run-many:${{ matrix.target }}
         run: node ./tools/build/run-many.js ${{ matrix.target }} ${{ matrix.index }} ${{ env.count }} refs/heads/main refs/heads/main $NX_ARGUMENTS
+      - name: Merge Coverage Reports
+        if: matrix.target == 'test'
+        run: node ./tools/build/coverageMerger.js
       - name: Upload coverage to Coveralls
         if: matrix.target == 'test'
         continue-on-error: true
