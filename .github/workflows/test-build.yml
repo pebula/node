@@ -1,0 +1,89 @@
+name: Nx Distributed Tasks [PUSH]
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+env:
+  BUILD_ARTIFACTS: dist-artifacts
+  DEPENDENCIES_CACHE: cache-node-modules
+  NX_CACHE: cache-nx
+  SERVICEBUS_CONNECTION_STRING: ${{ secrets.SERVICEBUS_CONNECTION_STRING }}
+
+jobs:
+
+  install-deps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache node modules
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ env.DEPENDENCIES_CACHE }}-${{ hashFiles('yarn.lock') }}
+      - name: yarn install
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --pure-lockfile
+      - name: Build local nx plugins
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: |
+          yarn nx build nx-build-pipe
+          yarn nx build nx-api-extractor
+      - name: Cache dist (for nx-build-pipe, etc...)
+        id: cache-build
+        uses: actions/cache@v2
+        with:
+          path: dist
+          key: ${{ runner.os }}-dist-${{ github.sha }}
+
+  distributed-task:
+    runs-on: ubuntu-latest
+    needs: [install-deps]
+    strategy:
+      fail-fast: false
+      matrix:
+        target: ['test', 'build']
+        index: [1, 2, 3, 4]
+    env:
+      count: 4
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ env.DEPENDENCIES_CACHE }}-${{ hashFiles('yarn.lock') }}
+      - name: Cache dist (for nx-build-pipe, etc...)
+        uses: actions/cache@v2
+        with:
+          path: dist
+          key: ${{ runner.os }}-dist-${{ github.sha }}
+      - name: Cache Nx
+        uses: actions/cache@v2
+        with:
+          path: node_modules/.cache/nx
+          key: ${{ env.NX_CACHE }}-${{ hashFiles('yarn.lock') }}-${{ matrix.target }}-${{ matrix.index }}-${{ github.sha }}
+          restore-keys: |
+            ${{ env.NX_CACHE }}-${{ hashFiles('yarn.lock') }}-${{ matrix.target }}-${{ matrix.index }}-
+            ${{ env.NX_CACHE }}-${{ hashFiles('yarn.lock') }}-
+            ${{ env.NX_CACHE }}-
+      - name: Compute Nx arguments
+        if: matrix.target == 'build'
+        run: echo "NX_ARGUMENTS=--prod --with-deps" >> "$GITHUB_ENV"
+      - name: Compute Nx arguments
+        if: matrix.target == 'test'
+        run: echo 'NX_ARGUMENTS=--codeCoverage --coverageReporters=lcov' >> "$GITHUB_ENV"
+      - name: nx run-many:${{ matrix.target }}
+        run: node ./tools/build/run-many.js ${{ matrix.target }} ${{ matrix.index }} ${{ env.count }} refs/heads/main refs/heads/main $NX_ARGUMENTS
+      - name: Merge Coverage Reports
+        if: matrix.target == 'test'
+        run: node ./tools/build/coverageMerger.js
+      - name: Upload coverage to Coveralls
+        if: matrix.target == 'test'
+        continue-on-error: true
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
