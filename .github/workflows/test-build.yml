@@ -2,6 +2,10 @@ name: Nx Distributed Tasks
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
 
 env:
   BUILD_ARTIFACTS: dist-artifacts
@@ -52,12 +56,12 @@ jobs:
             ${{ env.NX_CACHE }}-
       - name: Compute Nx arguments
         if: matrix.target == 'build'
-        run: echo "NX_ARGUMENTS=--prod" >> $GITHUB_ENV
+        run: echo "NX_ARGUMENTS=--prod" >> "$GITHUB_ENV"
       - name: Compute Nx arguments
         if: matrix.target == 'test'
-        run: echo 'NX_ARGUMENTS="--codeCoverage --coverageReporters=lcov"' >> $GITHUB_ENV
+        run: echo 'NX_ARGUMENTS="--codeCoverage --coverageReporters=lcov"' >> "$GITHUB_ENV"
       - name: nx run-many:${{ matrix.target }}
-        run: node ./node/tools/build/run-many.js ${{ matrix.target }} ${{ matrix.index }} ${{ env.count }} refs/heads/main refs/heads/main $NX_ARGUMENTS
+        run: node ./tools/build/run-many.js ${{ matrix.target }} ${{ matrix.index }} ${{ env.count }} refs/heads/main refs/heads/main $NX_ARGUMENTS
       - name: Upload coverage to Coveralls
         if: matrix.target == 'test'
         uses: coverallsapp/github-action@master
