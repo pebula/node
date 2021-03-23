@@ -4,4 +4,4 @@ export const SERVICE_BUS_SERVER_SUBSCRIBER_CONFIGURATION_METADATA = 'microservic
 export const SB_CLIENT_OPTIONS = 'sb_client_options_di_token';
 export const SB_SERVER_OPTIONS = 'sb_server_options_di_token';
 
-export const SB_META_HELPER_FACTORY_TOKEN = 'sb_decorator_metadata_helper_injection_tokenTEST';
+export const SB_META_HELPER_FACTORY_TOKEN = 'sb_decorator_metadata_helper_injection_tokenTEST!';
