@@ -422,10 +422,6 @@
               "pipe": [
                 {
                   "type": "target",
-                  "target": "nx-build-pipe:build"
-                },
-                {
-                  "type": "target",
                   "target": "goosetyped:package"
                 },
                 {
@@ -489,10 +485,6 @@
               "type": "group",
               "composition": "sequence",
               "pipe": [
-                {
-                  "type": "target",
-                  "target": "nx-build-pipe:build"
-                },
                 {
                   "type": "target",
                   "target": "nesbus:package"

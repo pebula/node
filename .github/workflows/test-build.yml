@@ -11,6 +11,7 @@ env:
   BUILD_ARTIFACTS: dist-artifacts
   DEPENDENCIES_CACHE: cache-node-modules
   NX_CACHE: cache-nx
+  SERVICEBUS_CONNECTION_STRING: ${{ secrets.SERVICEBUS_CONNECTION_STRING }}
 
 jobs:
 
