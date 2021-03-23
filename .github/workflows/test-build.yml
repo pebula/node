@@ -59,7 +59,7 @@ jobs:
         run: echo "NX_ARGUMENTS=--prod" >> "$GITHUB_ENV"
       - name: Compute Nx arguments
         if: matrix.target == 'test'
-        run: echo 'NX_ARGUMENTS="--codeCoverage --coverageReporters=lcov"' >> "$GITHUB_ENV"
+        run: echo 'NX_ARGUMENTS=--codeCoverage --coverageReporters=lcov' >> "$GITHUB_ENV"
       - name: nx run-many:${{ matrix.target }}
         run: node ./tools/build/run-many.js ${{ matrix.target }} ${{ matrix.index }} ${{ env.count }} refs/heads/main refs/heads/main $NX_ARGUMENTS
       - name: Upload coverage to Coveralls
