@@ -1,15 +1,15 @@
 name: Nx Distributed Tasks
 
-# on:
-#   push:
-#     branches:
-#       - main
-#   pull_request:
+on:
+  pull_request:
+    branches:
+      - main
 
 env:
   BUILD_ARTIFACTS: dist-artifacts
   DEPENDENCIES_CACHE: cache-node-modules
   NX_CACHE: cache-nx
+  SERVICEBUS_CONNECTION_STRING: ${{ secrets.SERVICEBUS_CONNECTION_STRING }}
 
 jobs:
 
@@ -37,6 +37,17 @@ jobs:
       - name: yarn install
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --pure-lockfile
+      - name: Build local nx plugins
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: |
+          yarn nx build nx-build-pipe
+          yarn nx build nx-api-extractor
+      - name: Cache dist (for nx-build-pipe, etc...)
+        id: cache-build
+        uses: actions/cache@v2
+        with:
+          path: dist
+          key: ${{ runner.os }}-dist-${{ github.sha }}
 
   # format:
   #   runs-on: ubuntu-latest
@@ -74,6 +85,11 @@ jobs:
         with:
           path: node_modules
           key: ${{ env.DEPENDENCIES_CACHE }}-${{ hashFiles('yarn.lock') }}
+      - name: Cache dist (for nx-build-pipe, etc...)
+        uses: actions/cache@v2
+        with:
+          path: dist
+          key: ${{ runner.os }}-dist-${{ github.sha }}
       - name: Cache Nx
         uses: actions/cache@v2
         with:
@@ -83,24 +99,21 @@ jobs:
             ${{ env.NX_CACHE }}-${{ hashFiles('yarn.lock') }}-${{ matrix.target }}-${{ matrix.index }}-
             ${{ env.NX_CACHE }}-${{ hashFiles('yarn.lock') }}-
             ${{ env.NX_CACHE }}-
-      # - run: git fetch --no-tags --prune --depth=5 origin main
-      # - run: git fetch --no-tags --prune origin ${{ needs.vars.outputs.GITHUB_BASE_REF }} ${{ needs.vars.outputs.GITHUB_HEAD_REF }}
+      - run: git fetch --no-tags --prune origin ${{ needs.vars.outputs.GITHUB_BASE_REF }} ${{ needs.vars.outputs.GITHUB_HEAD_REF }}
       - name: Compute Nx arguments
         if: matrix.target == 'build'
-        run: echo "NX_ARGUMENTS=--prod" >> $GITHUB_ENV
+        run: echo "NX_ARGUMENTS=--base=origin/${{ needs.vars.outputs.GITHUB_BASE_REF }} --prod --with-deps" >> "$GITHUB_ENV"
       - name: Compute Nx arguments
         if: matrix.target == 'test'
-        run: echo "NX_ARGUMENTS=--codeCoverage --coverageReporters=lcov" >> $GITHUB_ENV
+        run: echo 'NX_ARGUMENTS=--codeCoverage --coverageReporters=lcov' >> "$GITHUB_ENV"
       - name: nx run-many:${{ matrix.target }}
-      # run: node ./tools/build/run-many.js ${{ matrix.target }} ${{ matrix.index }} ${{ env.count }} $GITHUB_REF $NX_ARGUMENTS
         run: node ./tools/build/run-many.js ${{ matrix.target }} ${{ matrix.index }} ${{ env.count }} ${{ needs.vars.outputs.GITHUB_HEAD_REF }} ${{ needs.vars.outputs.GITHUB_BASE_REF }} $NX_ARGUMENTS
+      - name: Merge Coverage Reports
+        if: matrix.target == 'test'
+        run: node ./tools/build/coverageMerger.js
       - name: Upload coverage to Coveralls
         if: matrix.target == 'test'
+        continue-on-error: true
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ env.BUILD_ARTIFACTS }}
-          path: dist
