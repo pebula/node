@@ -1,10 +1,10 @@
 name: Nx Distributed Tasks
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
 
 env:
   BUILD_ARTIFACTS: dist-artifacts

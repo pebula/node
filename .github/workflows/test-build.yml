@@ -64,6 +64,7 @@ jobs:
         run: node ./tools/build/run-many.js ${{ matrix.target }} ${{ matrix.index }} ${{ env.count }} refs/heads/main refs/heads/main $NX_ARGUMENTS
       - name: Upload coverage to Coveralls
         if: matrix.target == 'test'
+        continue-on-error: true
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
