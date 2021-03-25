@@ -7,7 +7,7 @@ export function schemaNotFoundError(source: Type<any>, target: Type<any>) {
 }
 
 export function typeUnrecognizedForMapperError(type: Type<any>) {
-  const error = new Error(`Can not create a mapper because the type "${stringify(type)}" is not recognized.`);
+  const error = new Error(`Can not create a mapper because the type "${stringify(type)}" is not recognized TEST.`);
   error.name = 'TypeUnrecognizedForMapper';
   return error;
 }
