@@ -99,7 +99,9 @@ jobs:
             ${{ env.NX_CACHE }}-${{ hashFiles('yarn.lock') }}-${{ matrix.target }}-${{ matrix.index }}-
             ${{ env.NX_CACHE }}-${{ hashFiles('yarn.lock') }}-
             ${{ env.NX_CACHE }}-
-      - run: git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules origin ${GITHUB_SHA}:${GITHUB_REF}
+      - run: |
+          echo "git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules origin ${GITHUB_SHA}:${GITHUB_REF}"
+          git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules origin ${GITHUB_SHA}:${GITHUB_REF}
       - name: Compute Nx arguments
         if: matrix.target == 'build'
         run: echo "NX_ARGUMENTS=--prod --with-deps" >> "$GITHUB_ENV"
@@ -107,7 +109,9 @@ jobs:
         if: matrix.target == 'test'
         run: echo 'NX_ARGUMENTS=--codeCoverage --coverageReporters=lcov' >> "$GITHUB_ENV"
       - name: nx run-many:${{ matrix.target }}
-        run: node ./tools/build/run-many.js ${{ matrix.target }} ${{ matrix.index }} ${{ env.count }} refs/${GITHUB_REF#refs/remotes/} main $NX_ARGUMENTS
+        run: |
+          echo "node ./tools/build/run-many.js ${{ matrix.target }} ${{ matrix.index }} ${{ env.count }} ${GITHUB_REF#refs/remotes/} main $NX_ARGUMENTS"
+          node ./tools/build/run-many.js ${{ matrix.target }} ${{ matrix.index }} ${{ env.count }} ${GITHUB_REF#refs/remotes/} main $NX_ARGUMENTS
       - name: Merge Coverage Reports
         if: matrix.target == 'test'
         run: node ./tools/build/coverageMerger.js
