@@ -102,6 +102,8 @@ jobs:
       - run: |
           echo "git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules origin ${GITHUB_SHA}:${GITHUB_REF}"
           git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules origin ${GITHUB_SHA}:${GITHUB_REF}
+          echo "git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules origin main"
+          git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules origin main
       - name: Compute Nx arguments
         if: matrix.target == 'build'
         run: echo "NX_ARGUMENTS=--prod --with-deps" >> "$GITHUB_ENV"
