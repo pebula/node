@@ -7,13 +7,23 @@ const jobIndex = Number(process.argv[3]);
 const jobCount = Number(process.argv[4]);
 const headRef = process.argv[5];
 const baseRef = process.argv[6];
-const nxArgs =
-  headRef !== baseRef
-    ? ` --head=origin/${headRef} --base=origin/${baseRef}`
-    : '--all';
+const nxArgs = [];
+
+function normalizeRef(ref) {
+  return ref.startsWith('refs/')
+    ? ref
+    : `origin/${ref}`
+  ;
+}
+if (headRef !== baseRef) {
+  nxArgs.push(`--head=${normalizeRef(headRef)}`);
+  nxArgs.push(`--base=${normalizeRef(baseRef)}`);
+} else {
+  nxArgs.push('--all');
+}
 
 const affected = execSync(
-  `npx nx print-affected --target=${target} ${nxArgs}`
+  `npx nx print-affected --target=${target} ${nxArgs.join(' ')}`
 ).toString('utf-8');
 const array = JSON.parse(affected)
   .tasks.map((t) => t.target.project)
