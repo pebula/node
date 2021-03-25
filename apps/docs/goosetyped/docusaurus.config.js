@@ -85,7 +85,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: `https://github.com/${org}/${repo}/tree/master/apps/dpcs/touchstone/docs`,
+          editUrl: `https://github.com/${org}/${repo}/tree/master/apps/docs/${package}/docs`,
           beforeDefaultRemarkPlugins: [
             function() {
               const visit = require('unist-util-visit');

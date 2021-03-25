@@ -1,29 +1,42 @@
+
+const org = 'pebula';
+const repo = 'node';
+const package = 'decorate';
+
 module.exports = {
-  title: 'My Site',
-  tagline: 'The tagline of my site',
-  url: 'https://your-docusaurus-test-site.com',
-  baseUrl: '/',
-  onBrokenLinks: 'throw',
+  title: 'Decorate',
+  tagline: 'Strictly typed decorator factory',
+  url: `https://${org}.github.io/${repo}/${package}`,
+  baseUrl: process.env.GH_PAGES_BUILD ? `/${repo}/${package}/` : '/',
   favicon: 'img/favicon.ico',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: org,
+  projectName: package,
+  onBrokenLinks: 'warn',
+  customFields: {
+    apiDocPrefix: `docs/api/${package}.`,
+  },
   themeConfig: {
     navbar: {
-      title: 'My Site',
+      title: `@${org}/${package}`,
       logo: {
-        alt: 'My Site Logo',
+        alt: `@${org}/${package}`,
         src: 'img/logo.svg',
       },
       items: [
         {
-          to: 'docs/doc1',
+          to: 'docs/getting-started/introduction',
           activeBasePath: 'docs',
           label: 'Docs',
           position: 'left',
         },
-        { to: 'blog', label: 'Blog', position: 'left' },
         {
-          href: 'https://github.com/facebook/docusaurus',
+          to: 'docs/api/index',
+          activeBasePath: 'docs/api',
+          label: 'API',
+          position: 'left',
+        },
+        {
+          href: `https://github.com/${org}/${repo}/tree/master/libs/${package}`,
           label: 'GitHub',
           position: 'right',
         },
@@ -35,65 +48,57 @@ module.exports = {
         {
           title: 'Docs',
           items: [
-            {
-              label: 'Style Guide',
-              to: 'docs/doc1/',
-            },
-            {
-              label: 'Second Doc',
-              to: 'docs/doc2/',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
-            },
           ],
         },
         {
           title: 'More',
           items: [
             {
-              label: 'Blog',
-              to: 'blog',
-            },
-            {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: `https://github.com/${org}/${repo}/tree/master/libs/${package}`,
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Shlomi Assaf. Built with Docusaurus.`,
+    },
+    googleAnalytics: {
+      trackingID: 'UA-11687894-9',
+      // Optional fields.
+      anonymizeIP: true,
     },
   },
+  plugins: [
+    [
+      '@couds/docusaurus-resolve-plugin',
+      {
+        modules: [],
+        alias: {
+          '@site-shared': require('path').resolve(__dirname, '../_shared'),
+        },
+      }
+    ]
+  ],
   presets: [
     [
       '@docusaurus/preset-classic',
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
+          editUrl: `https://github.com/${org}/${repo}/tree/master/apps/docs/${package}/docs`,
+          beforeDefaultRemarkPlugins: [
+            function() {
+              const visit = require('unist-util-visit');
+              const transformer = (root) => {
+                visit(root, 'jsx', (node, _index, parent) => {
+                  if (typeof node.value === 'string') {
+                    node.value = node.value.replace(/<!--\s-->/, '');
+                  }
+                });
+              };
+              return transformer;
+            }
+          ],
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
