@@ -15,9 +15,14 @@ const getLcovFiles = function (src) {
 
 (async function(){
   const files = await getLcovFiles('coverage');
-  const mergedReport = files.reduce((mergedReport, currFile) => mergedReport += fs.readFileSync(currFile), '');
-  await fs.writeFile(path.resolve('./coverage/lcov.info'), mergedReport, (err) => {
-    if (err) throw err;
-    console.log('The file has been saved!');
-  });
+  if (files.length > 0) {
+    const mergedReport = files.reduce((mergedReport, currFile) => mergedReport += fs.readFileSync(currFile), '');
+    await fs.writeFile(path.resolve('./coverage/lcov.info'), mergedReport, (err) => {
+      if (err) throw err;
+      console.log('The file has been saved!');
+    });
+  } else {
+    console.info('No files found.');
+  }
+
 })();

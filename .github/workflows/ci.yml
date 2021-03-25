@@ -13,17 +13,6 @@ env:
 
 jobs:
 
-  vars:
-    runs-on: ubuntu-latest
-    outputs:
-      GITHUB_HEAD_REF: ${{ github.event.pull_request.head.sha }}
-      GITHUB_BASE_REF: ${{ steps.GITHUB_BASE_REF.outputs.value }}
-    steps:
-      - id: GITHUB_HEAD_REF
-        run: echo "::set-output name=value::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}})"
-      - id: GITHUB_BASE_REF
-        run: echo "::set-output name=value::$(echo ${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}})"
-
   install-deps:
     runs-on: ubuntu-latest
     steps:
@@ -49,28 +38,9 @@ jobs:
           path: dist
           key: ${{ runner.os }}-dist-${{ github.sha }}
 
-  # format:
-  #   runs-on: ubuntu-latest
-  #   needs: [vars, install-deps]
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Cache node modules
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: node_modules
-  #         key: ${{ env.DEPENDENCIES_CACHE }}-${{ hashFiles('yarn.lock') }}
-  #     - run: git fetch --no-tags --prune origin ${{ needs.vars.outputs.GITHUB_BASE_REF }} ${{ needs.vars.outputs.GITHUB_HEAD_REF }}
-  #     - name: Compute Nx arguments
-  #       if: needs.vars.outputs.GITHUB_HEAD_REF != needs.vars.outputs.GITHUB_BASE_REF
-  #       run: echo "NX_ARGUMENTS=--base=origin/${{ needs.vars.outputs.GITHUB_BASE_REF }}" >> $GITHUB_ENV
-  #     - run: node --max-old-space-size=8000 ./node_modules/@nrwl/cli/bin/nx.js format:check $NX_ARGUMENTS
-  #     # - run: git fetch --no-tags --prune --depth=5 origin main
-  #     # - run: echo "GITHUB_BASE_SHA=$([[ "$GITHUB_REF" == "refs/origin/main" ]] && echo "origin/main~1" || echo "origin/main")" >> $GITHUB_ENV
-  #     # - run: node --max-old-space-size=8000 ./node_modules/@nrwl/cli/bin/nx.js format:check --base=$GITHUB_BASE_SHA
-
   distributed-task:
     runs-on: ubuntu-latest
-    needs: [vars, install-deps]
+    needs: [install-deps]
     strategy:
       fail-fast: false
       matrix:
@@ -113,8 +83,8 @@ jobs:
         run: echo 'NX_ARGUMENTS=--codeCoverage --coverageReporters=lcov' >> "$GITHUB_ENV"
       - name: nx run-many:${{ matrix.target }}
         run: |
-          echo "node ./tools/build/run-many.js ${{ matrix.target }} ${{ matrix.index }} ${{ env.count }} ${GITHUB_REF#refs/remotes/} main $NX_ARGUMENTS"
-          node ./tools/build/run-many.js ${{ matrix.target }} ${{ matrix.index }} ${{ env.count }} ${GITHUB_REF#refs/remotes/} main $NX_ARGUMENTS
+          echo "node ./tools/build/run-many.js ${{ matrix.target }} ${{ matrix.index }} ${{ env.count }} ${GITHUB_REF} main $NX_ARGUMENTS"
+          node ./tools/build/run-many.js ${{ matrix.target }} ${{ matrix.index }} ${{ env.count }} ${GITHUB_REF} main $NX_ARGUMENTS
       - name: Merge Coverage Reports
         if: matrix.target == 'test'
         run: node ./tools/build/coverageMerger.js
