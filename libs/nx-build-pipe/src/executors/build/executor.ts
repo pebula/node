@@ -6,6 +6,7 @@ import {
   group,
   target,
   runCommand,
+  fromFile,
 } from './tasks';
 
 function loadEnvVars(path?: string) {
@@ -24,6 +25,7 @@ function loadEnvVars(path?: string) {
 registerTask(group);
 registerTask(target);
 registerTask(runCommand);
+registerTask(fromFile);
 
 function normalize(options: BuildPipeExecutorSchema) {
   if (!options.taskOptions) {

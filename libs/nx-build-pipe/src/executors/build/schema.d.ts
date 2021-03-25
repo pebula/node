@@ -19,12 +19,27 @@ export interface BuildPipeTargetTask<TOptions = any> extends BuildPipeTask<'targ
   target: string;
 }
 
+export interface BuildPipeFromFileTask<TOptions = any> extends BuildPipeTask<'fromFile', TOptions> {
+  /**
+   * Path to the file to load, relative to the workspace root.
+   *
+   * There are 2 supported file formats:
+   *
+   * 1) ".js" - The file is treated as javascript file. The default export is expected to be valid `BuildPipeTask`.
+   * 2) ".json" - The file is treated as JSON file. The parsed JSON object is expected to be valid `BuildPipeTask`.
+   */
+  path: string;
+
+  args?: string[];
+}
+
 export interface BuildPipeRunCommandTask<TOptions = any> extends BuildPipeTask<'runCommand', RunCommandsBuilderOptions> {
 }
 
 export type BuildPipeTasks =
   | BuildPipeGroupTask
   | BuildPipeTargetTask
+  | BuildPipeFromFileTask
   | BuildPipeRunCommandTask;
 
 export interface BuildPipeExecutorSchema {

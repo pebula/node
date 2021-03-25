@@ -38,6 +38,9 @@
         },
         {
           "$ref": "#/definitions/buildPipeRunCommandTask"
+        },
+        {
+          "$ref": "#/definitions/buildPipeFromFileTask"
         }
       ]
     },
@@ -86,6 +89,35 @@
         }
       },
       "required": ["type", "target"]
+    },
+    "buildPipeFromFileTask": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A unique name which identify this task which allows targeting options to it when executing the pipe"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["fromFile"]
+        },
+        "path": {
+          "description": " Path to the file to load, relative to the workspace root.",
+          "type": "string"
+        },
+        "args": {
+          "type": "array",
+          "description": "Extra arguments.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "options": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "required": ["type", "path"]
     },
     "buildPipeRunCommandTask": {
       "type": "object",

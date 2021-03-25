@@ -6,6 +6,19 @@
       "root": "apps/docs/decorate",
       "sourceRoot": "apps/docs/decorate/src",
       "architect": {
+        "gh-pages": {
+          "builder": "./dist/libs/nx-build-pipe:build",
+          "options": {
+            "task": {
+              "type": "fromFile",
+              "path": "apps/docs/gh-pages.js",
+              "args": [ "decorate" ]
+            },
+            "env": {
+              "GH_PAGES_BUILD": true
+            }
+          }
+        },
         "build": {
           "builder": "@nx-plus/docusaurus:browser",
           "options": {
@@ -25,6 +38,19 @@
       "root": "apps/docs/tom",
       "sourceRoot": "apps/docs/tom/src",
       "architect": {
+        "gh-pages": {
+          "builder": "./dist/libs/nx-build-pipe:build",
+          "options": {
+            "task": {
+              "type": "fromFile",
+              "path": "apps/docs/gh-pages.js",
+              "args": [ "tom" ]
+            },
+            "env": {
+              "GH_PAGES_BUILD": true
+            }
+          }
+        },
         "build": {
           "builder": "@nx-plus/docusaurus:browser",
           "options": {
@@ -48,30 +74,9 @@
           "builder": "./dist/libs/nx-build-pipe:build",
           "options": {
             "task": {
-              "type": "group",
-              "composition": "sequence",
-              "pipe": [
-                {
-                  "type": "target",
-                  "target": "goosetyped:build"
-                },
-                {
-                  "type": "runCommand",
-                  "options": {
-                    "commands": [
-                      "./node_modules/.bin/api-documenter markdown -i ./dist/libs/goosetyped  -o ./apps/docs/goosetyped/docs/api"
-                    ],
-                    "parallel": false
-                  }
-                },
-                {
-                  "type": "target",
-                  "target": "docs-goosetyped:build",
-                  "options": {
-                    "outputPath": "dist/gh-pages/goosetyped"
-                  }
-                }
-              ]
+              "type": "fromFile",
+              "path": "apps/docs/gh-pages.js",
+              "args": [ "goosetyped" ]
             },
             "env": {
               "GH_PAGES_BUILD": true
@@ -101,39 +106,9 @@
           "builder": "./dist/libs/nx-build-pipe:build",
           "options": {
             "task": {
-              "type": "group",
-              "composition": "sequence",
-              "pipe": [
-                {
-                  "type": "target",
-                  "target": "touchstone:build"
-                },
-                {
-                  "type": "runCommand",
-                  "options": {
-                    "commands": [
-                      "./node_modules/.bin/api-documenter markdown -i ./dist/libs/touchstone  -o ./apps/docs/touchstone/docs/api"
-                    ],
-                    "parallel": false
-                  }
-                },
-                {
-                  "type": "target",
-                  "target": "touchstone:benchmark",
-                  "options": {
-                    "env": {
-                      "vegaDestFile": "apps/docs/touchstone/static/benchmarks/benchmark-chart"
-                    }
-                  }
-                },
-                {
-                  "type": "target",
-                  "target": "docs-touchstone:build",
-                  "options": {
-                    "outputPath": "dist/gh-pages/touchstone"
-                  }
-                }
-              ]
+              "type": "fromFile",
+              "path": "apps/docs/gh-pages.js",
+              "args": [ "touchstone" ]
             },
             "env": {
               "GH_PAGES_BUILD": true
@@ -163,30 +138,9 @@
           "builder": "./dist/libs/nx-build-pipe:build",
           "options": {
             "task": {
-              "type": "group",
-              "composition": "sequence",
-              "pipe": [
-                {
-                  "type": "target",
-                  "target": "nesbus:build"
-                },
-                {
-                  "type": "runCommand",
-                  "options": {
-                    "commands": [
-                      "./node_modules/.bin/api-documenter markdown -i ./dist/libs/nesbus  -o ./apps/docs/nesbus/docs/api"
-                    ],
-                    "parallel": false
-                  }
-                },
-                {
-                  "type": "target",
-                  "target": "docs-nesbus:build",
-                  "options": {
-                    "outputPath": "dist/gh-pages/nesbus"
-                  }
-                }
-              ]
+              "type": "fromFile",
+              "path": "apps/docs/gh-pages.js",
+              "args": [ "nesbus" ]
             },
             "env": {
               "GH_PAGES_BUILD": true
@@ -227,6 +181,25 @@
           }
         },
         "build": {
+          "builder": "./dist/libs/nx-build-pipe:build",
+          "options": {
+            "task": {
+              "type": "group",
+              "composition": "sequence",
+              "pipe": [
+                {
+                  "type": "target",
+                  "target": "decorate:package"
+                },
+                {
+                  "type": "target",
+                  "target": "decorate:apiExtractor"
+                }
+              ]
+            }
+          }
+        },
+        "package": {
           "builder": "@nrwl/node:package",
           "outputs": ["{options.outputPath}"],
           "options": {
@@ -242,6 +215,13 @@
           "builder": "@jscutlery/semver:version",
           "options": {
             "syncVersions": false
+          }
+        },
+        "apiExtractor": {
+          "builder": "./dist/libs/nx-api-extractor:build",
+          "options": {
+            "buildTargetName": "package",
+            "baseConfigFile": "./api-extractor.base.json"
           }
         }
       }
@@ -266,6 +246,25 @@
           }
         },
         "build": {
+          "builder": "./dist/libs/nx-build-pipe:build",
+          "options": {
+            "task": {
+              "type": "group",
+              "composition": "sequence",
+              "pipe": [
+                {
+                  "type": "target",
+                  "target": "tom:package"
+                },
+                {
+                  "type": "target",
+                  "target": "tom:apiExtractor"
+                }
+              ]
+            }
+          }
+        },
+        "package": {
           "builder": "@nrwl/node:package",
           "outputs": ["{options.outputPath}"],
           "options": {
@@ -291,6 +290,13 @@
           "options": {
             "syncVersions": false
           }
+        }
+      },
+      "apiExtractor": {
+        "builder": "./dist/libs/nx-api-extractor:build",
+        "options": {
+          "buildTargetName": "package",
+          "baseConfigFile": "./api-extractor.base.json"
         }
       }
     },
