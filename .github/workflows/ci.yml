@@ -79,7 +79,6 @@ jobs:
     env:
       count: 4
     steps:
-      - uses: actions/checkout@v2
       - name: Cache node modules
         uses: actions/cache@v2
         with:
@@ -100,10 +99,10 @@ jobs:
             ${{ env.NX_CACHE }}-${{ hashFiles('yarn.lock') }}-
             ${{ env.NX_CACHE }}-
       - run: |
-          echo "git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules origin ${GITHUB_SHA}:${GITHUB_REF}"
-          git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules origin ${GITHUB_SHA}:${GITHUB_REF}
           echo "git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules origin main"
           git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules origin main
+          echo "git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules origin ${GITHUB_SHA}:${GITHUB_REF}"
+          git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules origin ${GITHUB_SHA}:${GITHUB_REF}
       - name: Compute Nx arguments
         if: matrix.target == 'build'
         run: echo "NX_ARGUMENTS=--prod --with-deps" >> "$GITHUB_ENV"
