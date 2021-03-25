@@ -12,7 +12,7 @@ module.exports = {
   organizationName: org,
   projectName: package,
   customFields: {
-    apiDocPrefix: `docs/api/${package}.`,
+    apiDocPrefix: `docs/api-docs/${package}.`,
   },
   themeConfig: {
     navbar: {
@@ -29,8 +29,8 @@ module.exports = {
           position: 'left',
         },
         {
-          to: 'docs/api/index',
-          activeBasePath: 'docs/api',
+          to: 'docs/api-docs/index',
+          activeBasePath: 'docs/api-docs',
           label: 'API',
           position: 'left',
         },

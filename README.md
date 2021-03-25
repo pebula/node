@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/pebula/node/badge.svg?branch=main)](https://coveralls.io/github/pebula/node?branch=main)
+
 # Repositories
 
 ## `@pebula/goosetyped`  

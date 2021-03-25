@@ -13,7 +13,7 @@ module.exports = {
   projectName: package,
   onBrokenLinks: 'warn',
   customFields: {
-    apiDocPrefix: `docs/api/${package}.`,
+    apiDocPrefix: `docs/api-docs/${package}.`,
     azureDocsUrl: 'https://docs.microsoft.com/en-us/javascript/api/@azure',
   },
   themeConfig: {
@@ -31,8 +31,8 @@ module.exports = {
           position: 'left',
         },
         {
-          to: 'docs/api/index',
-          activeBasePath: 'docs/api',
+          to: 'docs/api-docs/index',
+          activeBasePath: 'docs/api-docs',
           label: 'API',
           position: 'left',
         },
@@ -93,7 +93,7 @@ module.exports = {
               const transformer = (root) => {
                 visit(root, 'jsx', (node, _index, parent) => {
                   if (typeof node.value === 'string') {
-                    node.value = node.value.replace(/<!--\s-->/, '');
+                    node.value = node.value.replace(/<!--\s-->/g, '');
                   }
                 });
               };

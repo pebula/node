@@ -1,6 +1,0 @@
-{
-  "name": "@pebula/nesbus_arm-adapter",
-  "main": "../cjs/arm-adapter/index.js",
-  "types": "../cjs/arm-adapter/index.d.ts",
-  "private": true
-}
