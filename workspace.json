@@ -190,10 +190,6 @@
                 {
                   "type": "target",
                   "target": "decorate:package"
-                },
-                {
-                  "type": "target",
-                  "target": "decorate:apiExtractor"
                 }
               ]
             }
@@ -255,10 +251,6 @@
                 {
                   "type": "target",
                   "target": "tom:package"
-                },
-                {
-                  "type": "target",
-                  "target": "tom:apiExtractor"
                 }
               ]
             }
@@ -290,13 +282,13 @@
           "options": {
             "syncVersions": false
           }
-        }
-      },
-      "apiExtractor": {
-        "builder": "./dist/libs/nx-api-extractor:build",
-        "options": {
-          "buildTargetName": "package",
-          "baseConfigFile": "./api-extractor.base.json"
+        },
+        "apiExtractor": {
+          "builder": "./dist/libs/nx-api-extractor:build",
+          "options": {
+            "buildTargetName": "package",
+            "baseConfigFile": "./api-extractor.base.json"
+          }
         }
       }
     },
