@@ -1,15 +1,13 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "noEmit": true,
     "resolveJsonModule": true
   },
-  "include": ["./**/*.ts", "./benchmarks/**/*.json"],
+  "include": ["./src/**/*.ts"],
   "references": [
     {
-      "path": "../decorate"
-    },
-    {
-      "path": "../touchstone"
+      "path": ".."
     }
   ]
 }

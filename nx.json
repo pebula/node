@@ -19,12 +19,6 @@
     }
   },
   "projects": {
-    "decorate": {
-      "tags": []
-    },
-    "tom": {
-      "tags": []
-    },
     "docs-decorate": {
       "tags": [],
       "implicitDependencies": ["decorate"]
@@ -33,28 +27,13 @@
       "tags": [],
       "implicitDependencies": ["decorate", "tom"]
     },
-    "touchstone": {
-      "tags": []
-    },
-    "goosetyped": {
-      "tags": []
-    },
-    "nesbus": {
-      "tags": []
-    },
     "docs-touchstone": {
       "tags": [],
       "implicitDependencies": ["touchstone"]
     },
-    "nx-api-extractor": {
-      "tags": []
-    },
     "nx-api-extractor-e2e": {
       "tags": [],
       "implicitDependencies": ["nx-api-extractor"]
-    },
-    "nx-build-pipe": {
-      "tags": []
     },
     "nx-build-pipe-e2e": {
       "tags": [],
@@ -67,6 +46,33 @@
     "docs-nesbus": {
       "tags": [],
       "implicitDependencies": ["nesbus"]
+    },
+    "decorate": {
+      "tags": [],
+      "implicitDependencies": ["nx-build-pipe", "nx-api-extractor"]
+    },
+    "tom": {
+      "tags": [],
+      "implicitDependencies": ["nx-build-pipe", "nx-api-extractor", "decorate"]
+    },
+    "touchstone": {
+      "tags": [],
+      "implicitDependencies": ["nx-build-pipe", "nx-api-extractor"]
+    },
+    "goosetyped": {
+      "tags": [],
+      "implicitDependencies": ["nx-build-pipe", "nx-api-extractor"]
+    },
+    "nesbus": {
+      "tags": [],
+      "implicitDependencies": ["nx-build-pipe", "nx-api-extractor"]
+    },
+    "nx-api-extractor": {
+      "tags": [],
+      "implicitDependencies": ["nx-build-pipe"]
+    },
+    "nx-build-pipe": {
+      "tags": []
     }
   },
   "affected": {
