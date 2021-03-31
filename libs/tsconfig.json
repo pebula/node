@@ -1,0 +1,28 @@
+{
+  "extends": "../tsconfig.base.json",
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./decorate"
+    },
+    {
+      "path": "./goosetyped"
+    },
+    {
+      "path": "./nesbus"
+    },
+    {
+      "path": "./nx-api-extractor"
+    },
+    {
+      "path": "./nx-build-pipe"
+    },
+    {
+      "path": "./tom"
+    },
+    {
+      "path": "./touchstone"
+    }
+  ]
+}
