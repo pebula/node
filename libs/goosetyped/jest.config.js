@@ -22,5 +22,7 @@ module.exports = {
       skipMD5: true
     },
     autoStart: false
-  }
+  },
+  setupFilesAfterEnv: ['./jest-setup-after-env.js']
 };
+
