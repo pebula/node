@@ -1,6 +1,6 @@
 import { DecoratedDomain, Abstract, MixinFw, Type } from '@pebula/decorate';
 import { TomClassSchemaConfig } from './class';
-import { P, C, store } from './decorators';
+import { store } from './decorators';
 
 export function Mixin<T1, C1 extends Abstract<unknown>,
                       T2 = unknown, C2 extends Abstract<unknown> = Abstract<unknown>,

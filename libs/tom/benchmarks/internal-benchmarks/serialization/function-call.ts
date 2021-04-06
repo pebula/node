@@ -1,6 +1,6 @@
 import { Suite, Case } from '@pebula/touchstone';
-import { defineClassSerializer, P, serialize, jsonSerializer } from '@pebula/tom';
-import { schemaRegistry } from '../../../src/lib/serialization/registry/serializer-registry';
+import { defineClassSerializer, P, serialize, jsonSerializer } from '@pebula/tom/serialization';
+import { schemaRegistry } from '../../../serialization/registry/serializer-registry';
 
 class Model {
   @P ready?: boolean;

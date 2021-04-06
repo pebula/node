@@ -1,5 +1,5 @@
 import '@pebula/tom';
-import { P, jsonSerializer } from '@pebula/tom';
+import { P, jsonSerializer } from '@pebula/tom/serialization';
 import { NorthWind as N } from './models';
 
 export namespace Tom {

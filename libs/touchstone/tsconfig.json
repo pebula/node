@@ -1,8 +1,9 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "skipLibCheck": true
   },
   "include": ["."],
-  "exclude": ["./benchmarks/node_modules/**/*.*"],
+  "exclude": ["./benchmarks/node_modules/**/*"],
   "references": []
 }

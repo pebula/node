@@ -1,4 +1,4 @@
-import { P } from '@pebula/tom';
+import { P } from '@pebula/tom/serialization';
 import { BasicModel, NestedModel } from './iface';
 
 export class BasicModelTom implements BasicModel {

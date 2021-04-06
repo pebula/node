@@ -1,5 +1,5 @@
 import { Case, Suite } from '@pebula/touchstone';
-import { P, defineClassSerializer, jsonSerializer } from '@pebula/tom';
+import { P, defineClassSerializer, jsonSerializer } from '@pebula/tom/serialization';
 import { clearSerializer } from '@pebula/tom/testing'
 import * as Models from './models';
 

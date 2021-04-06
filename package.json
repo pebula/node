@@ -22,6 +22,7 @@
     "format:check": "nx format:check",
     "update": "nx migrate latest",
     "dep-graph": "nx dep-graph",
+    "tsc:build": "./node_modules/.bin/tsc -b ./tsconfig.references.json",
     "help": "nx help",
     "postinstall": "node ./decorate-angular-cli.js && yarn nx build nx-build-pipe && yarn nx build nx-api-extractor",
     "workspace-generator": "nx workspace-generator"

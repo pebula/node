@@ -1,5 +1,5 @@
 import * as DK from '@deepkit/type';
-import * as TOM from '@pebula/tom';
+import * as TOM from '@pebula/tom/serialization';
 import * as M from './models';
 
 describe('@pebula/tom/benchmarks', () => {

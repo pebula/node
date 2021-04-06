@@ -1,4 +1,4 @@
-import { DecoratedDomain } from '@pebula/decorate';
+import { ClassDecoratorOf, DecoratedDomain, Type } from '@pebula/decorate';
 import { PluginTargetClassifier } from './target-classifier';
 import { BaseFluentApi, DecorMixinBase } from '../base-api';
 
@@ -35,4 +35,12 @@ export const MethodPlugin: MethodPlugin = <any>domain.createDecorator({
   name: 'MethodPlugin',
   allowedScopes: ['method'],
   classifierData: { type: 'method' }
+});
+
+export type LazyPluginExtension = (lazyPluginTarget: Type<BaseFluentApi>) => ClassDecoratorOf<DecorMixinBase>;
+
+export const LazyPluginExtension: LazyPluginExtension = <any>domain.createDecorator({
+  name: 'LazyPluginExtension',
+  allowedScopes: ['class'],
+  classifierData: { }
 });

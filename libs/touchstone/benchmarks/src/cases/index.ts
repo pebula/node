@@ -2,7 +2,6 @@ import { ALL_RUNTIME_VALIDATION_SUITES } from './case';
 export * from './case';
 export * from './vanilla';
 export * from './class-validator';
-export * from './computed-types';
 export * from './io-ts';
 export * from './jointz';
 export * from './json-decoder';

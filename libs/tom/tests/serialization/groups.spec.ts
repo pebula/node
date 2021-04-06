@@ -1,4 +1,4 @@
-import { P, passthroughSerializer } from '@pebula/tom';
+import { P, passthroughSerializer } from '@pebula/tom/serialization';
 import { clearSerializer, tomDescribeSerializerJIT } from '@pebula/tom/testing';
 
 tomDescribeSerializerJIT('@pebula/tom', passthroughSerializer, childSerializer => {

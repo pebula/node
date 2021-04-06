@@ -1,5 +1,5 @@
 import { Case, Suite } from '@pebula/touchstone';
-import { P, jsonSerializer } from '@pebula/tom';
+import { P, jsonSerializer } from '@pebula/tom/serialization';
 import * as Models from './models';
 
 class Order implements Models.Order {
