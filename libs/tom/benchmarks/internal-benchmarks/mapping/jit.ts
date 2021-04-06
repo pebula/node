@@ -1,5 +1,5 @@
 import { Case, OnStart, OnCaseComplete, CaseCompleteEvent, SuiteStartEvent, Suite } from '@pebula/touchstone';
-import { P, defineClassMapping, Types, mapTypes } from '@pebula/tom';
+import { P, defineClassMapping, Types, mapTypes } from '@pebula/tom/mapping';
 import { clearMap } from '@pebula/tom/testing';
 import * as Models from './models';
 

@@ -1,5 +1,6 @@
 import * as TypeSystem from './type-system';
 
+export * from './class-schema-builder';
 export * from './decorator-api';
 export * from './schema';
 export {

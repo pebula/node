@@ -1,6 +1,6 @@
 import { Suite, Case } from '@pebula/touchstone';
 import * as DK from '@deepkit/type';
-import * as TOM from '@pebula/tom';
+import * as TOM from '@pebula/tom/serialization';
 import * as M from './models';
 
 const plain = M.plainBasicModel();

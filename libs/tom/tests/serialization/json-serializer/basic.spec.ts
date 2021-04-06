@@ -1,4 +1,4 @@
-import { P, C, jsonSerializer } from '@pebula/tom';
+import { P, C, jsonSerializer } from '@pebula/tom/serialization';
 import { tomDescribeSerializerJIT, clearSerializer } from '@pebula/tom/testing';
 
 if (!('toJSON' in BigInt.prototype)) {

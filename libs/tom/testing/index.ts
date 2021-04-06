@@ -1,11 +1,14 @@
 // import { describe } from '@jest/globals';
 import { Type } from '@pebula/decorate';
-import { Serializer } from '../src/index';
-import { ClassMappingSchema, ClassMappingSchemaFactoryOptions, mapRegistry } from '../src/lib/class-mapping';
+import { Serializer } from '@pebula/tom/serialization';
+import { ClassMappingSchemaFactoryOptions } from '@pebula/tom/mapping';
+import { Validator } from '@pebula/tom/validation';
 
-export { clearMap } from '../src/lib/class-mapping';
-export { clearConverter } from '../src/lib/converters/create-converter';
-export { clearSerializer } from '../src/lib/serialization/define-class-serializer';
+import { ClassMappingSchema } from '../mapping/mapping-schema';
+import { mapRegistry } from '../mapping/registry';
+export { clearMap } from '../mapping/define-class-mapping';
+export { clearConverter } from '../mapping/converters';
+export { clearSerializer } from '../serialization/define-class-serializer'
 
 export function getSchema<S, T>(source: Type<S>, target: Type<T>):  ClassMappingSchema<S, T> | undefined {
   return mapRegistry.get(source, target);
@@ -51,5 +54,16 @@ export function tomDescribeMapperJIT(description: string,
   for (const jitCompiler of jitCompilations) {
     const factory = (options: ClassMappingSchemaFactoryOptions<any, any> = {}) => { return { ...options, jitCompiler } };
     require('@jest/globals').describe(`${description} / class-mapping [JIT: ${jitCompiler}]`, () => fn(factory));
+  }
+}
+
+export const tomDescribeValidationJIT = <S extends Validator>(description: string, validator: S, fn: (childSerializer: S) => void) => {
+  const validators = [
+    validator.fork('strictValidator').setDefault('jitCompiler', 'strict'),
+    validator.fork('disabledValidator').setDefault('jitCompiler', 'disabled')
+  ];
+
+  for (const childValidator of validators) {
+    require('@jest/globals').describe(`${description} / class-validation [JIT: ${childValidator.defaultFactoryOptions.jitCompiler}]`, () => fn(childValidator));
   }
 }

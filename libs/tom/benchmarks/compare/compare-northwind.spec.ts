@@ -1,4 +1,4 @@
-import * as TOM from '@pebula/tom';
+import * as TOM from '@pebula/tom/serialization';
 import * as NW from './northwind';
 
 const tomNorthWindSerializer = TOM.jsonSerializer

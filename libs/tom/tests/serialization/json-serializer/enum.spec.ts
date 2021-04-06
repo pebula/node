@@ -1,4 +1,4 @@
-import { P, jsonSerializer } from '@pebula/tom';
+import { P, jsonSerializer } from '@pebula/tom/serialization';
 import { clearSerializer, tomDescribeSerializerJIT } from '@pebula/tom/testing';
 
 tomDescribeSerializerJIT('@pebula/tom', jsonSerializer, childSerializer => {

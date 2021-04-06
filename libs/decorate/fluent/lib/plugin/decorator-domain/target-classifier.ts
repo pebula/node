@@ -5,6 +5,7 @@ import {
   DecoratorInitializer,
   DecoratorOptions,
   MethodDecoratorArgs,
+  MixinFw,
   PropertyDecoratorArgs,
   TargetClassifier,
   Type,
@@ -15,7 +16,7 @@ import { PluginType } from './decorators';
 import { invalidDecoratedPluginTarget } from './errors';
 import { fromApiClassToDecoratedType } from './utils';
 
-export interface PluginClassifierRecord extends ClassifierRecord<DECOR_API_TYPE> {
+export interface PluginClassifierRecord extends ClassifierRecord<any> {
   decoratorArgs: PropertyDecoratorArgs | MethodDecoratorArgs;
   type: PluginType;
 }
@@ -37,6 +38,13 @@ export class PluginTargetClassifier extends TargetClassifier<BaseFluentApi, Plug
                          options?: DecoratorOptions): PluginClassifierRecord {
     const classifier = super.createRecord(decor, record, options);
     classifier.type = options.classifierData.type;
+
+    if (options.allowedScopes?.[0] === 'class' && options.allowedScopes.length === 1 && options.name === 'LazyPluginExtension') {
+      const lazyTargetType = classifier.metadata as Type<any>;
+      MixinFw.mixIntoClass(lazyTargetType, [classifier.decoratorArgs.classType]);
+      TargetClassifier.extendDecoratorMetadata(this, this.parent.getTarget(lazyTargetType));
+      return classifier;
+    }
 
     const type = fromApiClassToDecoratedType(record.decoratorArgs.classType);
     if (!type) {

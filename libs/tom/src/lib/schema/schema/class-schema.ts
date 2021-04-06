@@ -26,7 +26,7 @@ export class TomClassSchema<T = any> {
 
     const proto = config.clsType.prototype;
     for (const p of config.getProperties()) {
-      this.addPropertySchema(new TomPropertySchema(proto, p));
+      this.addPropertySchema(new TomPropertySchema(p));
     }
   }
 

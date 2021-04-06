@@ -1,5 +1,5 @@
 import { Suite, Case } from '@pebula/touchstone';
-import { P, jsonSerializer } from '@pebula/tom';
+import { P, jsonSerializer } from '@pebula/tom/serialization';
 
 enum JobStatus {
   Idle = 0,

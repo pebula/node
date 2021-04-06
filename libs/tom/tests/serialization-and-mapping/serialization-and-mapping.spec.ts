@@ -1,5 +1,6 @@
-import { P, jsonSerializer, mapTypes, defineClassMapping } from '@pebula/tom';
 import { clearSerializer, tomDescribeSerializerJIT } from '@pebula/tom/testing';
+import { mapTypes, defineClassMapping } from '@pebula/tom/mapping';
+import { P, jsonSerializer } from '@pebula/tom/serialization';
 
 tomDescribeSerializerJIT('@pebula/tom', jsonSerializer, childSerializer => {
 
