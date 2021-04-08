@@ -1,8 +1,22 @@
 import { StringBuilder } from './utils';
 import { Block } from './block';
-import { Base } from './base';
-import { Statement } from './statement';
 import { InlineExpression } from './inline-expressions';
+
+export class DefaultSwitchCaseBlock <TParent extends SwitchBlock<any>> extends Block<TParent>  {
+  flush(sb: StringBuilder): void {
+    sb.indentInc();
+
+    sb.appendLine(`default: `);
+
+    sb.indentInc();
+    super.flush(sb);
+    sb.indentDec();
+
+    sb.appendLine(`break;`);
+
+    sb.indentDec();
+  }
+}
 
 export class SwitchCaseBlock <TParent extends SwitchBlock<any>> extends Block<TParent> {
   private expressions: Array<InlineExpression<this>> = [];
@@ -66,6 +80,7 @@ export class SwitchBlock<TParent extends Block<any>,
   private expression: TExp;
 
   private cases: SwitchCaseBlock<this>[] = [];
+  private defaultCase: DefaultSwitchCaseBlock<this>;
 
   constructor(parent: TParent, expression?: TExp) {
     super(parent);
@@ -88,11 +103,17 @@ export class SwitchBlock<TParent extends Block<any>,
     return c;
   }
 
+  addDefault(): DefaultSwitchCaseBlock<this> {
+    this.defaultCase = new DefaultSwitchCaseBlock(this);
+    return this.defaultCase;
+  }
+
   commit(): void {
     this.expression.commit();
     for (const c of this.cases) {
       c.commit();
     }
+    this.defaultCase?.commit();
     super.commit();
   }
 
@@ -109,6 +130,10 @@ export class SwitchBlock<TParent extends Block<any>,
       c.flush(sb);
     }
 
+    if (this.defaultCase) {
+      this.defaultCase.flush(sb);
+    }
+
     sb.appendLine(`}`);
   }
 
@@ -120,6 +145,7 @@ export class SwitchBlock<TParent extends Block<any>,
     for (const c of this.cases) {
       c.validate();
     }
+    this.defaultCase?.validate();
     super.validate();
   }
 }

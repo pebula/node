@@ -1,5 +1,5 @@
 import { Code as C, TypeSystem } from '@pebula/tom';
-import { ValidatorValidateFn } from '../../schema';
+import { SchemaValidationFn, PropertyValidationFn } from '../../schema';
 import type { Validator } from './validator';
 import type { CompilerContext } from './compiler/context';
 import { ValidatorCompiler, TypeValidatorCompiler, TypeRuntimeValidator } from './validator-components';
@@ -14,14 +14,15 @@ export class ValidatorContext<V extends Validator = Validator> {
   readonly propertyBlockCompilers: ValidatorCompiler[];
   readonly validatorCompilers: Map<TypeSystem.TypeDef, TypeValidatorCompiler>;
   readonly runtimeValidators: Map<TypeSystem.TypeDef, TypeRuntimeValidator<V>>;
-  validateRuntime: ValidatorValidateFn;
 
-  constructor(validator: Validator, parent?: ValidatorContext<V>) {
+  readonly runtimeRootValidators: { schema: SchemaValidationFn; property: PropertyValidationFn; };
+
+  constructor(public readonly validator: Validator, parent?: ValidatorContext<V>) {
     validator[VALIDATOR_CONTEXT] = this;
     this.propertyBlockCompilers = parent?.propertyBlockCompilers.map( p => p.clone() ) ?? [];
     this.validatorCompilers = new Map<TypeSystem.TypeDef, TypeValidatorCompiler>(Array.from(parent?.validatorCompilers.entries() ?? []).map(([t, c]) => [t, c.clone()]));
     this.runtimeValidators = new Map<TypeSystem.TypeDef, TypeRuntimeValidator<V>>(Array.from(parent?.runtimeValidators.entries() ?? []).map(([t, c]) => [t, c.clone()]));
-    this.validateRuntime = parent?.validateRuntime;
+    this.runtimeRootValidators = !!(parent?.runtimeRootValidators) ? { ...parent.runtimeRootValidators } : { } as any;
     this.fnInitCompiler = parent?.fnInitCompiler;
     this.fnDisposeCompiler = parent?.fnDisposeCompiler;
   }

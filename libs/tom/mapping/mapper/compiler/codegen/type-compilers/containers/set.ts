@@ -22,12 +22,12 @@ function setCompiler(ctx: CompilerCodeBlockContext<C.IfBlock<C.Block<C.Block<any
     .setIterableExpression(ctx.sourceAccessor)
       .use( c => {
         const newBlockContext = ctx.clone(c, c.varName, `${tempItemName}`);
-        newBlockContext.setData('container', {
+
+        // Adding trigger handler code if we're under a union (see `CompilerCodeBlockContextData.containerInUnion` for more info)
+        newBlockContext.setData('containerInUnion', {
           type: 'set',
-          skipCurrentItemCode: () => {
-            return [
-              `continue`,
-            ];
+          handle: block => {
+            block.addCodeExpression(`continue`);
           }
         });
 

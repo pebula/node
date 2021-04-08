@@ -3,6 +3,7 @@ import { InlineExpression } from '../inline-expressions';
 
 export class IsArrayExpression<TParent extends Block<any>> extends InlineExpression<TParent> {
   private _arrayAccessor: string;
+  private _negate = false;
 
   constructor(parent: TParent, arrayAccessor?: string) {
     super(parent);
@@ -17,7 +18,7 @@ export class IsArrayExpression<TParent extends Block<any>> extends InlineExpress
   }
 
   commit(): void {
-    this.statement = `Array.isArray(${this._arrayAccessor})`;
+    this.statement = `${this._negate ? '!' : ''}Array.isArray(${this._arrayAccessor})`;
   }
 
   validate(): void {

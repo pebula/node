@@ -19,13 +19,13 @@ describe('@pebula/tom/validation', () => {
 
     const meta1 = Schema.getSchema(TestClass1).getProperties()
       .reduce( (p, c) => {
-        p[c.name] = c.validators?.reduce((prv, cur) => Object.assign(prv, { [cur.id]: cur.args }), {} as ValidatorInfoTypeMap);
+        p[c.name] = c.validators?.reduce((prv, cur) => Object.assign(prv, { [cur.id]: cur['args'] }), {} as ValidatorInfoTypeMap);
         return p;
       }, {} as Record<keyof TestClass1, ValidatorInfoTypeMap>);
 
     const meta2 = Schema.getSchema(TestClass2).getProperties()
       .reduce( (p, c) => {
-        p[c.name] = c.validators?.reduce((prv, cur) => Object.assign(prv, { [cur.id]: cur.args }), {} as ValidatorInfoTypeMap);
+        p[c.name] = c.validators?.reduce((prv, cur) => Object.assign(prv, { [cur.id]: cur['args'] }), {} as ValidatorInfoTypeMap);
         return p;
       }, {} as Record<keyof TestClass1, ValidatorInfoTypeMap>);
 
@@ -67,13 +67,13 @@ describe('@pebula/tom/validation', () => {
 
     const meta1 = Schema.getSchema(TestClass1).getProperties()
       .reduce( (p, c) => {
-        p[c.name] = c.validators?.reduce((prv, cur) => Object.assign(prv, { [cur.id]: cur.args }), {} as ValidatorInfoTypeMap);
+        p[c.name] = c.validators?.reduce((prv, cur) => Object.assign(prv, { [cur.id]: cur['args'] }), {} as ValidatorInfoTypeMap);
         return p;
       }, {} as Record<keyof TestClass1, ValidatorInfoTypeMap>);
 
     const meta2 = Schema.getSchema(TestClass2).getProperties()
       .reduce( (p, c) => {
-        p[c.name] = c.validators?.reduce((prv, cur) => Object.assign(prv, { [cur.id]: cur.args }), {} as ValidatorInfoTypeMap);
+        p[c.name] = c.validators?.reduce((prv, cur) => Object.assign(prv, { [cur.id]: cur['args'] }), {} as ValidatorInfoTypeMap);
         return p;
       }, {} as Record<keyof TestClass1, ValidatorInfoTypeMap>);
 

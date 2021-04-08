@@ -56,9 +56,10 @@ const order: Record<TypeDef, number> = {
   class: 50,
 
   map: 60,
-  objectMap: 60,
+  // objectMap comes after map, because an map can also be an object map
+  objectMap: 70,
 
-  any: 70,
+  any: 80,
 
   // This is just to please the compiler, we can't have union of union, these are flattened out into a single union.
   union: 999,

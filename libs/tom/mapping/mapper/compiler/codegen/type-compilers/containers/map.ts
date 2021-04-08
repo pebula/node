@@ -25,12 +25,12 @@ function mapCompiler(ctx: CompilerCodeBlockContext<C.IfBlock<C.Block<C.Block<any
         let valueName = !!listCounterName ? c.varName : `${c.varName}[1]`;
 
         const newBlockContext = ctx.clone(c, `${valueName}`, `${tempItemName}`);
-        newBlockContext.setData('container', {
+
+        // Adding trigger handler code if we're under a union (see `CompilerCodeBlockContextData.containerInUnion` for more info)
+        newBlockContext.setData('containerInUnion', {
           type: 'map',
-          skipCurrentItemCode: () => {
-            return [
-              `continue`,
-            ];
+          handle: block => {
+            block.addCodeExpression(`continue`);
           }
         });
 

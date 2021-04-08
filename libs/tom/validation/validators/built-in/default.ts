@@ -1,10 +1,10 @@
 import { Validator } from '../validator';
 import { generateValidatorDisposeCode, generateValidatorInitCode } from './codegen/init-dispose-compiler';
-import { validateRuntime } from './runtime/validate-runtime';
+import { runtimeSchemaValidator, runtimePropertyValidator } from './runtime/validate-runtime';
 
 import {
   checkCircularRef,
-  filterIfKeyExists,
+  propRequiredCheck,
   filterIfSkipValidation
 } from './codegen/property-code-blocks';
 import * as TVC from './codegen/validator-compilers';
@@ -21,12 +21,13 @@ export class DefaultValidator extends Validator {
     this.registerPropertyBlockCompilers();
     this.registerValidatorCompilers();
     this.registerRuntimeValidators();
-    super.setValidateRuntime(validateRuntime);
+    super.setRuntimeRootValidator(runtimeSchemaValidator, runtimePropertyValidator);
   }
 
   protected registerPropertyBlockCompilers() {
-    this.addPropertyBlockCompilers().setDefaultHandler(filterIfSkipValidation);
-    this.addPropertyBlockCompilers().setDefaultHandler(checkCircularRef);
+    this.addPropertyBlockCompiler().setHandler(filterIfSkipValidation);
+    this.addPropertyBlockCompiler().setHandler(propRequiredCheck);
+    this.addPropertyBlockCompiler().setHandler(checkCircularRef);
 
     // this
     //   .addPropertyBlockCompilers(SHARED_PCB.groupValidator)
@@ -37,8 +38,27 @@ export class DefaultValidator extends Validator {
   }
 
   protected registerValidatorCompilers() {
-    this.addValidatorCompiler(TVC.number);
+    this
+      .addValidatorCompiler(TVC.boolean)
+      .addValidatorCompiler(TVC.number)
+      .addValidatorCompiler(TVC.bigint)
+      .addValidatorCompiler(TVC.string)
+      .addValidatorCompiler(TVC.date)
 
+      .addValidatorCompiler(TVC.array)
+      .addValidatorCompiler(TVC.set)
+      .addValidatorCompiler(TVC.map)
+      .addValidatorCompiler(TVC.objectMap)
+
+      .addValidatorCompiler(TVC.classValidatorCompiler)
+      .addValidatorCompiler(TVC.enumValidatorCompiler)
+      .addValidatorCompiler(TVC.literal)
+      .addValidatorCompiler(TVC.union)
+
+      .addValidatorCompiler(TVC.arrayBuffer);
+    for (const typedArray of TVC.typedArrays) {
+      this.addValidatorCompiler(typedArray);
+    }
     // this.setTypeCompiler('boolean').register(SHARED_TC.passthrough, TC.booleanDeserialize);
     // this.setTypeCompiler('number').register(SHARED_TC.passthrough, TC.numberDeserialize);
     // this.setTypeCompiler('bigInt').register(TC.bigIntSerialize, TC.bigIntDeserialize);
@@ -64,7 +84,27 @@ export class DefaultValidator extends Validator {
   }
 
   protected registerRuntimeValidators() {
-    this.addRuntimeValidator(TRV.number);
+    this
+      .addRuntimeValidator(TRV.boolean)
+      .addRuntimeValidator(TRV.number)
+      .addRuntimeValidator(TRV.bigint)
+      .addRuntimeValidator(TRV.string)
+      .addRuntimeValidator(TRV.date)
+
+      .addRuntimeValidator(TRV.array)
+      .addRuntimeValidator(TRV.set)
+      .addRuntimeValidator(TRV.map)
+      .addRuntimeValidator(TRV.objectMap)
+
+      .addRuntimeValidator(TRV.classRuntimeValidator)
+      .addRuntimeValidator(TRV.enumRuntimeValidator)
+      .addRuntimeValidator(TRV.literal)
+      .addRuntimeValidator(TRV.union)
+
+      .addRuntimeValidator(TRV.arrayBuffer);
+    for (const typedArray of TRV.typedArrays) {
+      this.addRuntimeValidator(typedArray);
+    }
 
     // this.setRuntimeConverter<boolean>('boolean').register(SHARED_RTC.passthrough, RTC.booleanDeserialize);
     // this.setRuntimeConverter<number>('number').register(SHARED_RTC.passthrough, RTC.numberDeserialize);

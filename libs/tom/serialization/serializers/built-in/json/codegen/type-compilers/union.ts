@@ -12,7 +12,8 @@ export function union(ctx: CompilerCodeBlockContext, prop: CompilerPropertyConte
   const serializerContext = getSerializerContext(context.serializer);
   const unionList = prepareUnionTypeList(serializerContext, propMapSchema.targetPropMeta, context.isSerialize);
 
-  const ifBlock = new C.IfBlock(ctx.currentBlock); // We will find out if we use this code or not via `newBlockContext`
+  // We create an ifBlock but we still don't "commit" it to the current block, we only add it if the for loop hits, i.e. there are items in the union list
+  const ifBlock = new C.IfBlock(ctx.currentBlock);
   let newBlockContext: CompilerCodeBlockContext<C.ConditionalBlock<C.Block<any>, C.InlineExpression<C.Block<any>>>>;
   for (const { detector, subType } of unionList) {
     newBlockContext = newBlockContext ? newBlockContext.clone(ifBlock.elseIf()) : ctx.clone(ifBlock as C.ConditionalBlock<C.Block<any>>);
@@ -26,15 +27,14 @@ export function union(ctx: CompilerCodeBlockContext, prop: CompilerPropertyConte
     );
   }
 
+  // Now, if we had items, let finalize and "commit"
   if (newBlockContext) {
-    const containerData = ctx.getData('parent')?.getData('container');
-    if (containerData) {
-      const blockElse = ifBlock.else();
-      for (const exp of containerData.skipCurrentItemCode()) {
-        blockElse.addCodeExpression(exp);
-      }
-    }
+    // Triggering container code post handling for container types (see `CompilerCodeBlockContextData.containerInUnion` for more info)
+    ctx.parent
+      ?.getData('containerInUnion')
+      ?.handle(ifBlock.else());
 
+    // "commit" code
     ctx.currentBlock.add(ifBlock);
   }
 }

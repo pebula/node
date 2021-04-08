@@ -9,7 +9,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
   });
 
   describe('Validation Basics', () => {
-    it('should validate to Object', () => {
+    it('should validate to ValidationResult', () => {
       @C class Model { }
 
       const model = new Model()
@@ -18,14 +18,112 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(true);
     });
 
-    it('should validate type', () => {
+    it('should emit all error if not short circuited or a single error if short circuit is enabled', () => {
       class Model {
-        @P.optional value: number;
+        @P v1: number;
+        @P v2: string;
+        @P v3: boolean;
+      }
+
+      const model = new Model()
+      let result = childValidator.validate(model);
+      expect(result.valid).toBe(false);
+      expect(result.errors.length).toBe(3);
+      expect(result.errors).toStrictEqual([
+        new ValidationError('v1', 'number', 'required', 'Property is required'),
+        new ValidationError('v2', 'string', 'required', 'Property is required'),
+        new ValidationError('v3', 'boolean', 'required', 'Property is required'),
+      ]);
+
+      result = childValidator.fork('Short Circuited').setDefault('shortCircuit', true).validate(model);
+      expect(result.valid).toBe(false);
+      expect(result.errors.length).toBe(1);
+      expect(result.errors).toStrictEqual([
+        new ValidationError('v1', 'number', 'required', 'Property is required'),
+      ]);
+    });
+
+    it('should skip validation if skipValidation is set', () => {
+      class Model {
+        @P value: number;
+        @P.skipValidation freeAgent: number;
+      }
+
+      const model = new Model()
+      let result = childValidator.validate(model);
+      expect(result.valid).toBe(false);
+      expect(result.errors.length).toBe(1);
+      expect(result.errors[0]).toStrictEqual(new ValidationError(
+        'value',
+        'number',
+        'required',
+        'Property is required'
+      ));
+
+      model.value = 1;
+      result = childValidator.validate(model);
+      expect(result).toBeInstanceOf(ValidationResult);
+      expect(result.valid).toBe(true);
+
+      model.freeAgent = 2;
+      result = childValidator.validate(model);
+      expect(result).toBeInstanceOf(ValidationResult);
+      expect(result.valid).toBe(true);
+
+      delete model.value;
+      result = childValidator.validate(model);
+      expect(result.valid).toBe(false);
+      expect(result.errors.length).toBe(1);
+      expect(result.errors[0]).toStrictEqual(new ValidationError(
+        'value',
+        'number',
+        'required',
+        'Property is required'
+      ));
+    });
+
+    it('should skip validation if skipValidation is set', () => {
+      class Model {
+        @P.asArray('number') value: number[];
+        @P.asArray(P.as('string').skipValidation.buildSchema()) freeAgent: number[];
+      }
+
+      const model = new Model()
+      model.value = [1, '2' as any];
+      model.freeAgent = [];
+      let result = childValidator.validate(model);
+      expect(result.valid).toBe(false);
+      expect(result.errors.length).toBe(1);
+      expect(result.errors[0]).toStrictEqual(new ValidationError(
+        'value',
+        'number',
+        'type',
+        'Invalid runtime type, expected type number'
+      ));
+
+      model.value = [1];
+      model.freeAgent = [1, '2' as any];
+      result = childValidator.validate(model);
+      expect(result).toBeInstanceOf(ValidationResult);
+      expect(result.valid).toBe(true);
+
+      model.freeAgent = [1];
+      result = childValidator.validate(model);
+      expect(result).toBeInstanceOf(ValidationResult);
+      expect(result.valid).toBe(true);
+
+    });
+  });
+
+  describe('"required" validation', () => {
+    it('should validate required', () => {
+      class Model {
+        @P value: number;
       }
 
       const model = new Model()
 
-      model.value = 50;
+      model.value = 1;
       let result = childValidator.validate(model);
       expect(result).toBeInstanceOf(ValidationResult);
       expect(result.valid).toBe(true);
@@ -37,70 +135,82 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.errors[0]).toStrictEqual(new ValidationError(
         'value',
         'number',
-        'type',
-        'Invalid runtime type, expected type number'
+        'required',
+        'Property is required'
       ));
 
     });
-    it('should validate min', () => {
+
+    it('should skip required if optional', () => {
       class Model {
-        @P.optional.min(10) value: number;
+        @P.optional value: number;
       }
 
       const model = new Model()
-
-      model.value = 50;
-      let result = childValidator.validate(model);
-      expect(result).toBeInstanceOf(ValidationResult);
-      expect(result.valid).toBe(true);
-
-      model.value = 10;
-      result = childValidator.validate(model);
-      expect(result).toBeInstanceOf(ValidationResult);
-      expect(result.valid).toBe(true);
 
       model.value = 1;
-      result = childValidator.validate(model);
-      expect(result.valid).toBe(false);
-      expect(result.errors.length).toBe(1);
-      expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
-        'number',
-        'min',
-        'Minimum value is 10'
-      ));
-
-    });
-
-    it('should validate max', () => {
-      class Model {
-        @P.optional.max(10) value: number;
-      }
-
-      const model = new Model()
-
-      model.value = 5;
       let result = childValidator.validate(model);
       expect(result).toBeInstanceOf(ValidationResult);
       expect(result.valid).toBe(true);
 
-      model.value = 10;
+      delete model.value;
+      result = childValidator.validate(model);
+      expect(result).toBeInstanceOf(ValidationResult);
+      expect(result.valid).toBe(true);
+    });
+
+    it('should skip required if nullable and value is null, if undefined throw', () => {
+      class Model {
+        @P.nullable value: number;
+      }
+
+      const model = new Model()
+
+      model.value = 1;
+      let result = childValidator.validate(model);
+      expect(result).toBeInstanceOf(ValidationResult);
+      expect(result.valid).toBe(true);
+
+      model.value = null;
       result = childValidator.validate(model);
       expect(result).toBeInstanceOf(ValidationResult);
       expect(result.valid).toBe(true);
 
-      model.value = 50;
+      delete model.value;
       result = childValidator.validate(model);
+      expect(result).toBeInstanceOf(ValidationResult);
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
         'value',
         'number',
-        'max',
-        'Maximum value is 10'
+        'required',
+        'Property is required'
       ));
-
     });
 
+    it('should skip required if nullable and optional', () => {
+      class Model {
+        @P.nullable.optional value: number;
+      }
+
+      const model = new Model()
+
+      model.value = 1;
+      let result = childValidator.validate(model);
+      expect(result).toBeInstanceOf(ValidationResult);
+      expect(result.valid).toBe(true);
+
+      model.value = null;
+      result = childValidator.validate(model);
+      expect(result).toBeInstanceOf(ValidationResult);
+      expect(result.valid).toBe(true);
+
+      delete model.value;
+      result = childValidator.validate(model);
+      expect(result).toBeInstanceOf(ValidationResult);
+      expect(result.valid).toBe(true);
+    });
   });
+
 });
