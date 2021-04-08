@@ -6,9 +6,16 @@ import * as PCB from '../property-code-blocks';
 
 declare module '../../../../serializer/compiler/context/compiler-code-block-context' {
   export interface CompilerCodeBlockContextData {
-    container?: {
+    /**
+     * While compiling the items in a union list, we go over different types but the "container" types (array, set, map, objectMap) are special.
+     * Container types have items added into them, before hand (array) or after the checks (set, map, objectMap)
+     * If the object at hand did not hit for the container (it's for another type in the union list) we need to make sure we don't add it
+     * If this is the case, the compiler handler for the container will leave a trigger for us which we can check, if it's there we activate it
+     * Each container type will be able to add code that handles this scenario, i.e. add code that removes the items or skip adding it.
+     */
+    containerInUnion?: {
       type: TypeSystem.ContainerTypes;
-      skipCurrentItemCode(): string[];
+      handle(block: C.Block<C.Block<any>>): void;
     }
   }
 }
@@ -46,16 +53,16 @@ export function array(ctx: CompilerCodeBlockContext, prop: CompilerPropertyConte
             const typeCompilerHandler = serializerContext.findTypeCompilerHandler(typeDef.type, isSerialize);
 
             const newBlockContext = ctx.clone(c, `${tempArrName}[${c.indexName}]`, `${tempArrName}[${c.indexName}]`);
-            newBlockContext.setData('container', {
+
+            // Adding trigger handler code if we're under a union (see `CompilerCodeBlockContextData.containerInUnion` for more info)
+            newBlockContext.setData('containerInUnion', {
               type: 'array',
-              skipCurrentItemCode: () => {
-                return [
-                  `${tempArrName}.splice(${c.indexName}, 1)`,
-                  `${c.lengthVarName} -= 1`,
-                  `${c.indexName} -= 1`,
-                  `continue`,
-                ];
-              }
+              handle: block => {
+                block.addCodeExpression(`${tempArrName}.splice(${c.indexName}, 1)`);
+                block.addCodeExpression(`${c.lengthVarName} -= 1`);
+                block.addCodeExpression(`${c.indexName} -= 1`);
+                block.addCodeExpression(`continue`);
+              },
             });
 
             const newPropContext = new CompilerPropertyContext(prop.context, prop.ref, prop.propMapSchema.subType)
@@ -90,12 +97,12 @@ export function set(ctx: CompilerCodeBlockContext, prop: CompilerPropertyContext
           const propertyCodeBlocks =[SHARED_PCB.handleCopyRef.serializer, PCB.nonContainerPreAssignLogic.serializer, SHARED_PCB.checkCircularRef];
 
           const newBlockContext = ctx.clone(c, c.varName, `${v.name}[${v.name}.length]`);
-          newBlockContext.setData('container', {
+
+          // Adding trigger handler code if we're under a union (see `CompilerCodeBlockContextData.containerInUnion` for more info)
+          newBlockContext.setData('containerInUnion', {
             type: 'set',
-            skipCurrentItemCode: () => {
-              return [
-                `continue`,
-              ];
+            handle: block => {
+              block.addCodeExpression(`continue`);
             }
           });
 
@@ -125,12 +132,12 @@ export function set(ctx: CompilerCodeBlockContext, prop: CompilerPropertyContext
           const propertyCodeBlocks = [SHARED_PCB.handleCopyRef.deserializer, PCB.nonContainerPreAssignLogic.deserializer];
 
           const newBlockContext = ctx.clone(c, `${ctx.sourceAccessor}[${c.indexName}]`, tempItemName);
-          newBlockContext.setData('container', {
+
+          // Adding trigger handler code if we're under a union (see `CompilerCodeBlockContextData.containerInUnion` for more info)
+          newBlockContext.setData('containerInUnion', {
             type: 'set',
-            skipCurrentItemCode: () => {
-              return [
-                `continue`,
-              ];
+            handle: block => {
+              block.addCodeExpression(`continue`);
             }
           });
 
@@ -166,12 +173,12 @@ export function map(ctx: CompilerCodeBlockContext, prop: CompilerPropertyContext
 
           const [keyName, valueName] = c.varName;
           const newBlockContext = ctx.clone(c, valueName, `${v.name}[${keyName}]`);
-          newBlockContext.setData('container', {
+
+          // Adding trigger handler code if we're under a union (see `CompilerCodeBlockContextData.containerInUnion` for more info)
+          newBlockContext.setData('containerInUnion', {
             type: 'map',
-            skipCurrentItemCode: () => {
-              return [
-                `continue`,
-              ];
+            handle: block => {
+              block.addCodeExpression(`continue`);
             }
           });
 
@@ -201,12 +208,12 @@ export function map(ctx: CompilerCodeBlockContext, prop: CompilerPropertyContext
 
           const [keyName, valueName] = c.varName;
           const newBlockContext = ctx.clone(c, valueName, tempItemName);
-          newBlockContext.setData('container', {
+
+          // Adding trigger handler code if we're under a union (see `CompilerCodeBlockContextData.containerInUnion` for more info)
+          newBlockContext.setData('containerInUnion', {
             type: 'map',
-            skipCurrentItemCode: () => {
-              return [
-                `continue`,
-              ];
+            handle: block => {
+              block.addCodeExpression(`continue`);
             }
           });
 
@@ -243,12 +250,12 @@ export function objectMap(ctx: CompilerCodeBlockContext, prop: CompilerPropertyC
         }
         const [keyName, valueName] = c.varName;
         const newBlockContext = ctx.clone(c, valueName, `${tempArrName}[${keyName}]`);
-        newBlockContext.setData('container', {
-          type: 'map',
-          skipCurrentItemCode: () => {
-            return [
-              `continue`,
-            ];
+
+        // Adding trigger handler code if we're under a union (see `CompilerCodeBlockContextData.containerInUnion` for more info)
+        newBlockContext.setData('containerInUnion', {
+          type: 'objectMap',
+          handle: block => {
+            block.addCodeExpression(`continue`);
           }
         });
 

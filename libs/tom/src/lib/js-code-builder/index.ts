@@ -17,3 +17,4 @@ export * from './inline-expressions';
 export * from './program';
 export * from './utils'
 export * from './expressions';
+export * as Compiler from './compiler';

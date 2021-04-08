@@ -2,6 +2,7 @@
 import { Code as C, TypeSystem } from '@pebula/tom';
 import { CompilerCodeBlockContext, CompilerPropertyContext } from '../../../../serializer';
 import { JsonSerializer } from '../../json';
+import { escapeEnumLabel, escapeEnumValue } from '../utils';
 
 export function enumSerialize(ctx: CompilerCodeBlockContext, prop: CompilerPropertyContext<JsonSerializer>) {
   const { enumAsLabels } = prop.context.options;
@@ -50,13 +51,4 @@ export function enumDeserialize(ctx: CompilerCodeBlockContext, prop: CompilerPro
         .addAssignment(ctx.targetSetter, escapeEnumValue(record).toString())
     }
   }
-}
-
-const ESC_REGEX = /'/;
-function escapeEnumValue(record: TypeSystem.EnumRecord) {
-  return record.dual === true ? record.value : `'${record.value.replace(ESC_REGEX, `\'`)}'`;
-}
-
-function escapeEnumLabel(record: TypeSystem.EnumRecord) {
-  return `'${record.label.replace(ESC_REGEX, `\'`)}'`;
 }

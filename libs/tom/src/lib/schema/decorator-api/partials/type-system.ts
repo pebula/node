@@ -97,7 +97,7 @@ export abstract class TypeSystemApi extends ApiMixin.MixinBase<TypeSystemSchema>
     if (isBuildSchemaApi(valueType)) {
       valueType = valueType.buildSchema();
     }
-    this.$$context.schema.type = T.createTomTypeInstance('objectMap', [this.resolveToTypeDef(valueType), T.createTomTypeInstance(keyType) ]);
+    this.$$context.schema.type = T.createTomTypeInstance('objectMap', [this.resolveToTypeDef(valueType), T.createTomTypeInstance(keyType) || T.createTomTypeInstance('any') ]);
     if (isTypeSystemSchema(valueType)) {
       this.$$context.schema.subSchemas = [valueType as any];
     }

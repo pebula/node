@@ -40,6 +40,8 @@ export class ConditionalBlock<TParent extends Block<any>,
 export class IfBlock<TParent extends Block<any>,
                      TExp extends InlineExpression<TParent> = InlineExpression<TParent>> extends ConditionalBlock<TParent, TExp> {
 
+  get hasElse() { return !!this._else; }
+
   private _elseIf: ConditionalBlock<this>[] = [];
   private _else: Block<this>;
 
@@ -56,7 +58,10 @@ export class IfBlock<TParent extends Block<any>,
   }
 
   else(): Block<this> {
-    return this._else = new Block(this);
+    if (!this._else) {
+      this._else = new Block(this);
+    }
+    return this._else;
   }
 
   commit(): void {

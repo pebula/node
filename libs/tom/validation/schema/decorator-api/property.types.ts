@@ -8,11 +8,19 @@ export interface ValidationPropertySchema {
 export interface ValidationPropertyFluentApi {
   skipValidation: this;
 
-  min(value: number): this;
-  max(value: number): this;
+  min(value: number | bigint): this;                // number | bigint
+  max(value: number | bigint): this;                // number | bigint
+  equal(value: number | bigint): this;              // number | bigint
+  notEqual(value: number | bigint): this;           // number | bigint
+  readonly integer: this;                           // number | bigint
+  readonly positive: this;                          // number | bigint
+  readonly negative: this;                          // number | bigint
 
-  minLength(value: number): this;
-  maxLength(value: number): this;
+  length(value: number): this;                      // string | array | set | map | objectMap
+  minLength(value: number): this;                   // string | array | set | map | objectMap
+  maxLength(value: number): this;                   // string | array | set | map | objectMap
+  readonly empty: this;                             // string | array | set | map | objectMap
+
 }
 
 declare module '@pebula/tom/src/lib/schema/decorator-api/property' {

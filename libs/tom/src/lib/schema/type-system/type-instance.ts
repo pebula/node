@@ -58,3 +58,19 @@ export function isTomTypeEquals(t1: TomTypeInstance, t2: TomTypeInstance): boole
   }
   return false;
 }
+
+export function tomTypeInstanceToString(type: TomTypeInstance): string {
+  switch (type.type) {
+    case 'union':
+      return `union<${(type as TomTypeInstance<'union'>).typeParams.map(tomTypeInstanceToString).join(' | ')}>`;
+    case 'array':
+    case 'set':
+      return `${type.type}<${(type as TomTypeInstance<'array' | 'set'>).typeParams.map(tomTypeInstanceToString).join(', ')}>`;
+    case 'map':
+    case 'objectMap':
+      return `${type.type}<${(type as TomTypeInstance<'map' | 'objectMap'>).typeParams.map(tomTypeInstanceToString).reverse().join(', ')}>`;
+    // TODO: add support to include typeParams
+    default:
+      return type.type;
+  }
+}

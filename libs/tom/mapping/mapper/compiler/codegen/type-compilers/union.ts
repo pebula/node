@@ -49,7 +49,8 @@ function unionCompiler(ctx: CompilerCodeBlockContext, prop: CompilerPropertyCont
     throw new Error('Invalid union type');
   }
 
-  const ifBlock = new C.IfBlock(ctx.currentBlock); // We will find out if we use this code or not via `newBlockContext`
+  // We create an ifBlock but we still don't "commit" it to the current block, we only add it if the for loop hits, i.e. there are items in the union list
+  const ifBlock = new C.IfBlock(ctx.currentBlock);
   let newBlockContext: CompilerCodeBlockContext<C.ConditionalBlock<C.Block<any>, C.InlineExpression<C.Block<any>>>>;
 
   for (const { sSubType, tSubType, detector } of traverseUnion(sourcePropMeta, targetPropMeta)) {
@@ -71,15 +72,13 @@ function unionCompiler(ctx: CompilerCodeBlockContext, prop: CompilerPropertyCont
     );
   }
 
+  // Now, if we had items, let finalize and "commit"
   if (newBlockContext) {
-    const containerData = ctx.getData('container');
-    if (containerData) {
-      const blockElse = ifBlock.else();
-      for (const exp of containerData.skipCurrentItemCode()) {
-        blockElse.addCodeExpression(exp);
-      }
-    }
+    // Triggering container code post handling for container types (see `CompilerCodeBlockContextData.containerInUnion` for more info)
+    ctx.getData('containerInUnion')
+      ?.handle(ifBlock.else());
 
+    // "commit" code
     ctx.currentBlock.add(ifBlock);
   }
 }

@@ -1,6 +1,7 @@
 import { Code as C, Schema } from '@pebula/tom';
 import { ClassValidationSchema } from '../../../../schema/class-validation-schema';
 import { Validator } from '../../validator';
+import { ValidatorContext, getValidatorContext } from '../../validator-context';
 import { ROOT } from '../param-names';
 import { FnContext } from '../types';
 import { GLOBAL } from '../global';
@@ -19,13 +20,18 @@ export class CompilerContext<State = any, S extends Validator = Validator, T = a
   readonly isSerialize: boolean;
   readonly isDeserialize: boolean;
 
-  get options() { return this.classValidationSchema.options; }
-  get validator() { return this.classValidationSchema.validator; }
+  readonly options: ClassValidationSchema<S, T>['options'];
+  readonly validator: S;
+  readonly validatorContext: ValidatorContext;
 
   private contextVarRef = 0;
   private readonly reversedFnContext = new Map<unknown, string>();
 
   private constructor(public readonly classValidationSchema: ClassValidationSchema<S, T>, initialState?: State) {
+    this.options = classValidationSchema.options;
+    this.validator = classValidationSchema.validator;
+    this.validatorContext = getValidatorContext(this.validator);
+
     this.fnContext = new Map<string, unknown>()
       .set(ROOT.GLOBAL_PARAM, GLOBAL)
       .set(ROOT.CLASS_VALIDATION_SCHEMAS_PARAM, classValidationSchema)
@@ -43,7 +49,7 @@ export class CompilerContext<State = any, S extends Validator = Validator, T = a
   private static *iterateProperties<State = any, S extends Validator = Validator, T = any>(context: CompilerContext<State, S, T>): Generator<CompilerPropertyContext<State, S, T>> {
     for (const propSchema of context.classValidationSchema.classSchema.getProperties()) {
       const ref = context.propSchemas.push(propSchema) - 1;
-      yield new CompilerPropertyContext<State, S, T>(context, ref, propSchema);
+      yield new CompilerPropertyContext<State, S, T>(context, propSchema, `${ROOT.PROP_VALIDATION_SCHEMAS_PARAM}[${ref}]`);
     }
   }
 

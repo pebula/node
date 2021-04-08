@@ -1,6 +1,6 @@
 import { Type, MixinFw } from '@pebula/decorate';
 import { Schema, TypeSystem } from '@pebula/tom';
-import { ClassValidationSchema, ValidatorValidateFn } from '../../schema';
+import { ClassValidationSchema, SchemaValidationFn, PropertyValidationFn } from '../../schema';
 import { validatorRegistry } from '../../registry';
 import { FnInitCompilerHandler, ValidatorContext } from './validator-context';
 import { typeSchemaNotFoundError } from './errors';
@@ -9,6 +9,11 @@ import { ValidatorOptions } from './types';
 
 export interface ValidatorFactoryOptions {
   jitCompiler?: 'disabled' | 'enabled' | 'strict';
+
+  /**
+   * When true, will stop processing on first validation error
+   */
+  shortCircuit?: boolean;
 }
 
 export abstract class Validator<TOptions extends ValidatorFactoryOptions = ValidatorFactoryOptions> {
@@ -123,9 +128,9 @@ export abstract class Validator<TOptions extends ValidatorFactoryOptions = Valid
     return this.create<T>((target as any).constructor).validate(target, options || {});
   }
 
-  protected addPropertyBlockCompilers(validatorCompiler: ValidatorCompiler): this
-  protected addPropertyBlockCompilers(): ValidatorCompiler;
-  protected addPropertyBlockCompilers(validatorCompiler?: ValidatorCompiler): ValidatorCompiler | this {
+  protected addPropertyBlockCompiler(validatorCompiler: ValidatorCompiler): this
+  protected addPropertyBlockCompiler(): ValidatorCompiler;
+  protected addPropertyBlockCompiler(validatorCompiler?: ValidatorCompiler): ValidatorCompiler | this {
     const compiler = validatorCompiler || new ValidatorCompiler();
     this.context.propertyBlockCompilers.push(compiler);
     return validatorCompiler ? this : compiler;
@@ -136,15 +141,16 @@ export abstract class Validator<TOptions extends ValidatorFactoryOptions = Valid
     return this;
   }
 
-  protected setValidatorCompiler(type: TypeSystem.TypeDef): ValidatorCompiler {
+  protected setValidatorCompiler(type: TypeSystem.TypeDef): TypeValidatorCompiler {
     const compiler = new TypeValidatorCompiler(type);
     this.context.validatorCompilers.set(type, compiler);
     return compiler;
   }
 
-  /** Set the initial handler for runtime transformation. */
-  protected setValidateRuntime(handler: ValidatorValidateFn): this {
-    this.context.validateRuntime = handler;
+  /** Set the initial handlers for runtime transformation. */
+  protected setRuntimeRootValidator(schema: SchemaValidationFn, property: PropertyValidationFn): this {
+    this.context.runtimeRootValidators.schema = schema;
+    this.context.runtimeRootValidators.property = property;
     return this;
   }
 

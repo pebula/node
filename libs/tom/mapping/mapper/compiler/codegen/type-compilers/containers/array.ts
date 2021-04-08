@@ -18,17 +18,18 @@ function arrayCompiler(ctx: CompilerCodeBlockContext<C.IfBlock<C.Block<C.Block<a
       .setArrayExpression(tempArrName)
       .use( c => {
         const newBlockContext = ctx.clone(c, `${tempArrName}[${c.indexName}]`, `${tempArrName}[${c.indexName}]`);
-        newBlockContext.setData('container', {
+
+        // Adding trigger handler code if we're under a union (see `CompilerCodeBlockContextData.containerInUnion` for more info)
+        newBlockContext.setData('containerInUnion', {
           type: 'array',
-          skipCurrentItemCode: () => {
-            return [
-              `${tempArrName}.splice(${c.indexName}, 1)`,
-              `${c.lengthVarName} -= 1`,
-              `${c.indexName} -= 1`,
-              `continue`,
-            ];
-          }
+          handle: block => {
+            block.addCodeExpression(`${tempArrName}.splice(${c.indexName}, 1)`);
+            block.addCodeExpression(`${c.lengthVarName} -= 1`);
+            block.addCodeExpression(`${c.indexName} -= 1`);
+            block.addCodeExpression(`continue`);
+          },
         });
+
         const propertyCodeBlocks = [handleCopyRef, checkCircularRef];
 
         chainBlocks(
