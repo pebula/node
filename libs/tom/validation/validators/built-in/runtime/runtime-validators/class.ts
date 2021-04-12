@@ -6,5 +6,5 @@ export const classRuntimeValidator = new TypeRuntimeValidator<Validator, Type<an
     return !(value instanceof prop.type)
   })
   .setPostValidationHandler((value, ctx, prop) => {
-    ctx.validateSchema(value, prop.type);
+    ctx.validateSchema(value, prop);
   });

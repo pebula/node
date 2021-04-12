@@ -9,7 +9,7 @@ export const classValidatorCompiler = new TypeValidatorCompiler('class')
   })
   .setPostValidationHandler((ctx, prop) => {
     ctx.currentBlock
-      .addCodeExpression(`${ROOT.CLASS_VALIDATION_SCHEMAS_PARAM}.validator.create(${prop.schemaParam('type')}).validate(${ctx.sourceAccessor}, ${MAPPER.OPTIONS_PARAM}, ${MAPPER.CTX_PARAM})`);
+      .addCodeExpression(`${MAPPER.CTX_PARAM}.validateSchema(${ctx.sourceAccessor}, ${prop.schemaParam()})`);
 
     if (prop.context.options.shortCircuit) {
       ctx.currentBlock

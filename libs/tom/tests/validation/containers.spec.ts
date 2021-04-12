@@ -32,7 +32,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value', 0],
         'string',
         'type',
         'Invalid runtime type, expected type string'
@@ -43,7 +43,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'array',
         'type',
         'Invalid runtime type, expected type array<string>'
@@ -67,7 +67,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'array',
         'length',
         'Length must be 5'
@@ -78,7 +78,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'array',
         'length',
         'Length must be 5'
@@ -107,7 +107,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'array',
         'minLength',
         'Minimum length is 5'
@@ -137,7 +137,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'array',
         'maxLength',
         'Maximum length is 5'
@@ -162,7 +162,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'array',
         'empty',
         'Must be empty'
@@ -173,7 +173,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'array',
         'empty',
         'Must be empty'
@@ -208,7 +208,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value', 0],
         'string',
         'type',
         'Invalid runtime type, expected type string'
@@ -219,7 +219,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'set',
         'type',
         'Invalid runtime type, expected type set<string>'
@@ -243,7 +243,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'set',
         'length',
         'Length must be 5'
@@ -254,7 +254,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'set',
         'length',
         'Length must be 5'
@@ -283,7 +283,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'set',
         'minLength',
         'Minimum length is 5'
@@ -313,7 +313,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'set',
         'maxLength',
         'Maximum length is 5'
@@ -338,7 +338,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'set',
         'empty',
         'Must be empty'
@@ -349,7 +349,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'set',
         'empty',
         'Must be empty'
@@ -384,7 +384,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value', 1],
         'string',
         'type',
         'Invalid runtime type, expected type string'
@@ -395,7 +395,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'map',
         'type',
         'Invalid runtime type, expected type map<any, string>'
@@ -419,7 +419,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'map',
         'length',
         'Length must be 5'
@@ -430,7 +430,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'map',
         'length',
         'Length must be 5'
@@ -459,7 +459,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'map',
         'minLength',
         'Minimum length is 5'
@@ -489,7 +489,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'map',
         'maxLength',
         'Maximum length is 5'
@@ -514,7 +514,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'map',
         'empty',
         'Must be empty'
@@ -525,7 +525,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'map',
         'empty',
         'Must be empty'
@@ -559,7 +559,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value', 'one'],
         'string',
         'type',
         'Invalid runtime type, expected type string'
@@ -570,7 +570,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'objectMap',
         'type',
         'Invalid runtime type, expected type objectMap<, string>'
@@ -594,7 +594,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'objectMap',
         'length',
         'Length must be 5'
@@ -605,7 +605,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'objectMap',
         'length',
         'Length must be 5'
@@ -634,7 +634,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'objectMap',
         'minLength',
         'Minimum length is 5'
@@ -664,7 +664,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'objectMap',
         'maxLength',
         'Maximum length is 5'
@@ -689,7 +689,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'objectMap',
         'empty',
         'Must be empty'
@@ -700,7 +700,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'objectMap',
         'empty',
         'Must be empty'

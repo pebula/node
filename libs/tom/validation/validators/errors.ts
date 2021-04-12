@@ -1,6 +1,6 @@
 import { stringify, Type } from '@pebula/decorate';
 import { TypeSystem } from '@pebula/tom';
-import { ValidatorInfo } from '../known-validators';
+import { Constraint } from '../constraints';
 import { validatorTargetToString } from './utils';
 import { Validator } from './validator';
 
@@ -11,7 +11,7 @@ export function missingValidator(validator: Validator,
                                  target: Type<any>,
                                  prop: string,
                                  typeDef: TypeSystem.TomTypeInstance,
-                                 validatorMeta: ValidatorInfo,
+                                 validatorMeta: Constraint,
                                  registry: 'runtime' | 'jit') {
   const error = new Error(`The "${TypeSystem.tomTypeInstanceToString(typeDef)}" ${registry} type validator does not contain the validator "${validatorMeta.id}" required by ${stringify(target)}.${prop} in validator ${validator.name}`);
   error.name = 'MissingValidator';

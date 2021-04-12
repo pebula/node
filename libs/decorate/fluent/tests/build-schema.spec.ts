@@ -1,22 +1,13 @@
 import { Type, ClassDecoratorArgs, PropertyDecoratorArgs, ParameterDecoratorArgs, MethodDecoratorArgs, BaseDecoratorArgs } from '@pebula/decorate';
-import { PluginContext } from '../lib/plugin/plugin-context';
 import {
   DecorApiSuite,
   executePlugins,
   FluentPropertyPlugin, FluentMethodPlugin, MethodPlugin,
   PropertySchema,
-  DecorPropertyApi,
   ClassSchema,
   ParameterSchema,
-  DecorParameterApi,
   MethodSchema,
-  DecorMethodApi,
   DecorApi,
-  MEMBER_DECOR_API_TYPE,
-  DECOR_API_TYPE,
-  BaseClassInternalSchema,
-  PluginSchemaMap,
-  DecorMixinBase,
   Mixin, ApiMixin,
   DecorClassApi,
 } from '@pebula/decorate/fluent';
@@ -47,7 +38,7 @@ abstract class MemberSchemaFluentApiDecorator extends ApiMixin.MixinBase<MemberS
   }
 }
 
-abstract class BuildSchemaApiDecorator extends ApiMixin.MixinBase<unknown> {
+abstract class BuildSchemaApiDecorator extends ApiMixin.MixinBase {
   @MethodPlugin()
   buildSchema(target: object, name: string, index?: number) {
     const schema = DecorApi.getSchemaType(this).schemaFactory(BaseDecoratorArgs.create(target, name, index));

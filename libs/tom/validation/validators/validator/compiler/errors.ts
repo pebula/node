@@ -1,5 +1,5 @@
 import { Type } from '@pebula/decorate';
-import { ValidatorInfo } from '../../../known-validators';
+import { Constraint } from '../../../constraints';
 import { validatorTargetToString } from '../../utils';
 import { Validator } from '../validator';
 

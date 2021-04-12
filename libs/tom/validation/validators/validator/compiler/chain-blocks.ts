@@ -1,5 +1,5 @@
 import { Code as C } from '@pebula/tom';
-import { ValidatorInfo, ValidatorInfoTypeMap } from '../../../known-validators';
+import { Constraint, RegisteredConstraints } from '../../../constraints';
 import { CompilerCodeBlockContext, CompilerPropertyContext } from './context';
 
 export type ValidationCompilerHandler<BIn extends C.Block<C.Block<any>> = C.Block<C.Block<any>>,
@@ -18,9 +18,9 @@ export type ValidationCompilerHandler<BIn extends C.Block<C.Block<any>> = C.Bloc
  * Same apply for the `else` block, you can add code statements but note that the framework will also add code there, based on the logic for the type and validation being used.
  */
 export type TypeValidationCompilerHandler<BIn extends C.Block<C.Block<any>> = C.Block<C.Block<any>>,
-                                          TValidatorId extends keyof ValidatorInfoTypeMap = keyof ValidatorInfoTypeMap> = (codeBlockContext: CompilerCodeBlockContext<BIn>,
+                                          TValidatorId extends keyof RegisteredConstraints = keyof RegisteredConstraints> = (codeBlockContext: CompilerCodeBlockContext<BIn>,
                                                                                                                            propContext: CompilerPropertyContext,
-                                                                                                                           validatorMeta: ValidatorInfo<TValidatorId>) => CompilerCodeBlockContext<C.IfBlock<C.Block<any>>> | void;
+                                                                                                                           constraintData: Constraint<TValidatorId>) => CompilerCodeBlockContext<C.IfBlock<C.Block<any>>> | void;
 
 export function chainBlocks(codeContext: CompilerCodeBlockContext, propContext: CompilerPropertyContext, ...reducers: ValidationCompilerHandler[]) {
   for (const c of reducers) {
@@ -38,7 +38,7 @@ export function chainBlocks(codeContext: CompilerCodeBlockContext, propContext: 
  */
 export function runTypeValidationBlock(codeContext: CompilerCodeBlockContext,
                                        propContext: CompilerPropertyContext,
-                                       validatorMeta: ValidatorInfo,
+                                       validatorMeta: Constraint,
                                        block: TypeValidationCompilerHandler): CompilerCodeBlockContext<C.IfBlock<C.Block<any>>> | undefined {
   if (!codeContext.terminated) {
     const resultCtx = block(codeContext, propContext, validatorMeta);

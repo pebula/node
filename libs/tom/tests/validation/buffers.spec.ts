@@ -27,7 +27,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'b',
+        ['b'],
         'arrayBuffer',
         'type',
         'Invalid runtime type, expected type arrayBuffer'
@@ -55,7 +55,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
         expect(result.valid).toBe(false);
         expect(result.errors.length).toBe(1);
         expect(result.errors[0]).toStrictEqual(new ValidationError(
-          'b',
+          ['b'],
           key,
           'type',
           `Invalid runtime type, expected type ${key}`
@@ -67,7 +67,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
         expect(result.valid).toBe(false);
         expect(result.errors.length).toBe(1);
         expect(result.errors[0]).toStrictEqual(new ValidationError(
-          'b',
+         ['b'],
           key,
           'type',
           `Invalid runtime type, expected type ${key}`

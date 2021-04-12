@@ -30,16 +30,16 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(3);
       expect(result.errors).toStrictEqual([
-        new ValidationError('v1', 'number', 'required', 'Property is required'),
-        new ValidationError('v2', 'string', 'required', 'Property is required'),
-        new ValidationError('v3', 'boolean', 'required', 'Property is required'),
+        new ValidationError(['v1'], 'number', 'required', 'Property is required'),
+        new ValidationError(['v2'], 'string', 'required', 'Property is required'),
+        new ValidationError(['v3'], 'boolean', 'required', 'Property is required'),
       ]);
 
       result = childValidator.fork('Short Circuited').setDefault('shortCircuit', true).validate(model);
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors).toStrictEqual([
-        new ValidationError('v1', 'number', 'required', 'Property is required'),
+        new ValidationError(['v1'], 'number', 'required', 'Property is required'),
       ]);
     });
 
@@ -54,7 +54,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'number',
         'required',
         'Property is required'
@@ -75,7 +75,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'number',
         'required',
         'Property is required'
@@ -95,7 +95,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value', 1],
         'number',
         'type',
         'Invalid runtime type, expected type number'
@@ -133,7 +133,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'number',
         'required',
         'Property is required'
@@ -182,7 +182,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'value',
+        ['value'],
         'number',
         'required',
         'Property is required'

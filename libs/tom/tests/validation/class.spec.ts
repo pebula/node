@@ -33,7 +33,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'a',
+        ['a'],
         'class',
         'type',
         'Invalid runtime type, expected type class'
@@ -44,11 +44,35 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
-        'a',
+        ['a'],
         'class',
         'type',
         'Invalid runtime type, expected type class'
       ));
+    });
+
+    it('should validate nested type', () => {
+      class ClassA {
+        @P a1: number;
+      }
+
+      class ClassB {
+        @P a: ClassA;
+      }
+
+      const model = new ClassB();
+      model.a = new ClassA();
+
+      let result = childValidator.validate(model);
+      expect(result.valid).toBe(false);
+      expect(result.errors.length).toBe(1);
+      expect(result.errors[0]).toStrictEqual(new ValidationError(
+        ['a', 'a1'],
+        'number',
+        'required',
+        'Property is required'
+      ));
+
     });
 
   });

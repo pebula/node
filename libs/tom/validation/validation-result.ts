@@ -1,5 +1,5 @@
 import { TypeSystem } from '@pebula/tom';
-import { ValidatorNames } from './known-validators';
+import { ConstraintNames } from './constraints';
 export class ValidationResult<T = any> {
   get valid(): boolean { return this.errors.length === 0 }
   readonly errors: ValidationError[] = [];
@@ -9,9 +9,9 @@ export class ValidationResult<T = any> {
 
 export class ValidationError {
   constructor(
-    public readonly path: string,
+    public readonly path: Array<string | number | symbol | any>,
     public readonly type: TypeSystem.TypeDef,
-    public readonly validator: ValidatorNames,
+    public readonly validator: ConstraintNames,
     public readonly message: string,
   ) {}
 }

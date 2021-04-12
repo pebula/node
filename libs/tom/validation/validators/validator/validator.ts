@@ -6,6 +6,8 @@ import { FnInitCompilerHandler, ValidatorContext } from './validator-context';
 import { typeSchemaNotFoundError } from './errors';
 import { TypeRuntimeValidator, ValidatorCompiler, TypeValidatorCompiler } from './validator-components';
 import { ValidatorOptions } from './types';
+import { ClassValidatorContext } from './class-validator-context';
+import { ValidationResult } from '../../validation-result';
 
 export interface ValidatorFactoryOptions {
   jitCompiler?: 'disabled' | 'enabled' | 'strict';
@@ -124,8 +126,16 @@ export abstract class Validator<TOptions extends ValidatorFactoryOptions = Valid
     return this;
   }
 
-  validate<T = any>(target: T, options?: ValidatorOptions<T>) {
-    return this.create<T>((target as any).constructor).validate(target, options || {});
+  /**
+   * Validates the target object.
+   *
+   * Note that this is a new validation run.
+   * Do not use this to validated nested types, if you need to validate a nested type use the context's `validateSchema` method.
+   */
+  validate<T = any>(target: T, options?: ValidatorOptions<T>): ValidationResult<T> {
+    const schema = this.create<T>((target as any).constructor);
+    const ctx = ClassValidatorContext.create<T>(target, schema, options || {});
+    return schema.validate(ctx);
   }
 
   protected addPropertyBlockCompiler(validatorCompiler: ValidatorCompiler): this

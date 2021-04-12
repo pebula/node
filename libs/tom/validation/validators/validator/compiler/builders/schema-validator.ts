@@ -43,8 +43,9 @@ function generateValidatorFunction(context: CompilerContext) {
 
   context.program
     .addReturnDeclaration(new C.FunctionBlock(context.program))
-    .returnExpression.addParams(MAPPER.INPUT_PARAM, MAPPER.OPTIONS_PARAM, MAPPER.CTX_PARAM, MAPPER.LOCK_SYNC) // FunctionBlock
+    .returnExpression.addParams(MAPPER.CTX_PARAM, MAPPER.LOCK_SYNC) // FunctionBlock
       // Body of function block
+      .addVariable(true, MAPPER.INPUT_PARAM).assignValue(`${MAPPER.CTX_PARAM}.target`).parent
       .addVirtualBlock().use( c => initVirtualBlock = c).parent
       .addVirtualBlock().use( c => context.currentBlock = c ).parent
       .addVirtualBlock().use( c => disposeVirtualBlock = c).parent

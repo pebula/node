@@ -29,7 +29,7 @@ export function propRequiredCheck(ctx: CompilerCodeBlockContext, prop: CompilerP
         } else {
           ifBlock.addIfBlock()
             .setCondition(`!${skip}`)
-            .use( c => createAddErrorCode(c, prop, REQUIRED_VALIDATOR_INFO) );
+            .use( c => createAddErrorCode(ctx, prop, REQUIRED_VALIDATOR_INFO, c) );
         }
       })
     .else() // chain the else block forward, so actual value assigning is set inside it

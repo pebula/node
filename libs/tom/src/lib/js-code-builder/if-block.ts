@@ -11,15 +11,18 @@ export class ConditionalBlock<TParent extends Block<any>,
 
   protected condition: TExp;
 
-  setCondition<T extends string | InlineExpression<TParent>>(condition: T): T extends InlineExpression<TParent>
-                                                                              ? ConditionalBlock<TParent, T>
-                                                                              : ConditionalBlock<TParent, InlineExpression<TParent>> {
+  setCondition<T extends string | InlineExpression<TParent>>(condition: T, negate?: boolean): T extends InlineExpression<TParent>
+                                                                                                ? ConditionalBlock<TParent, T>
+                                                                                                : ConditionalBlock<TParent, InlineExpression<TParent>> {
 
    const myParent = this instanceof IfBlock ? this : this.parent;
    this.condition = condition instanceof InlineExpression
       ? InlineExpression.updateParent(condition as any, myParent)
       : new InlineExpression(myParent, condition as string) as any
     ;
+    if (typeof negate === 'boolean') {
+      this.condition.toggleNegate(negate);
+    }
     return this as any;
   }
 
@@ -45,10 +48,10 @@ export class IfBlock<TParent extends Block<any>,
   private _elseIf: ConditionalBlock<this>[] = [];
   private _else: Block<this>;
 
-  setCondition<T extends string | InlineExpression<TParent>>(condition: T): T extends InlineExpression<TParent>
-                                                                              ? IfBlock<TParent, T>
-                                                                              : IfBlock<TParent, InlineExpression<TParent>> {
-    return super.setCondition(condition) as any;
+  setCondition<T extends string | InlineExpression<TParent>>(condition: T, negate?: boolean): T extends InlineExpression<TParent>
+                                                                                                ? IfBlock<TParent, T>
+                                                                                                : IfBlock<TParent, InlineExpression<TParent>> {
+    return super.setCondition(condition, negate) as any;
   }
 
   elseIf() {

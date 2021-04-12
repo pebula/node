@@ -1,13 +1,11 @@
 import { Type } from '@pebula/decorate';
 import { Schema } from '@pebula/tom';
 import { ValidationResult } from '../validation-result';
-import { Validator, ValidatorFactoryOptions, ValidatorOptions, ClassValidatorContext, getValidatorContext, ValidatorContext } from '../validators';
+import { Validator, ClassValidatorContext, getValidatorContext } from '../validators';
 import { schemaValidatorCompiler } from '../validators/validator/compiler';
 
 export type SchemaValidationFn<T = any> = (this: ClassValidationSchema<Validator, T>,
-                                           target: T,
-                                           options: ValidatorFactoryOptions,
-                                           ctx?: ClassValidatorContext<T>,
+                                           ctx: ClassValidatorContext<T>,
                                            lockSync?: any[]) => ValidationResult<T>;
 
 export type PropertyValidationFn<T = any> = (value: T[keyof T],
@@ -25,9 +23,7 @@ export class ClassValidationSchema<S extends Validator, T, TData = any> {
     this.target = classSchema.type;
   }
 
-  validate(target: T,
-           options: ValidatorOptions<T, TData>,
-           ctx?: ClassValidatorContext<T>,
+  validate(ctx: ClassValidatorContext<T>,
            lockSync?: any[]): ValidationResult<T> {
     if (!this._validate) {
       this._validate = this.options.jitCompiler === 'disabled'
@@ -35,6 +31,6 @@ export class ClassValidationSchema<S extends Validator, T, TData = any> {
         : schemaValidatorCompiler(this)
       ;
     }
-    return this._validate(target, options, ctx, lockSync);
+    return this._validate(ctx, lockSync);
   }
 }

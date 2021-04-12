@@ -1,4 +1,4 @@
-import { Abstract, Class as _Class, ClassDecoratorOf, Type, DecoratedDomain, MixinFw } from '@pebula/decorate';
+import { Abstract, Class as _Class, NativeDecorator, Type, DecoratedDomain, MixinFw } from '@pebula/decorate';
 import { ClassSchema, MethodSchema, ParameterSchema, PropertySchema } from '../../schema';
 import { DecorMixinBase, DecorPropertyApi, DecorClassApi, DecorMethodApi, DecorParameterApi, BaseFluentApi } from '../base-api';
 import { DECOR_API_TYPE, PluginSchemaMap } from '../types';
@@ -282,4 +282,99 @@ export namespace ApiMixin {
    * > Note that this is used as a class, i.e. `class A extends ApiMixin.MixinBase`, this is not a function the you provide small mixins and get back the merged class!
    */
   export type MixinBase<TSchema = unknown, TClassSchema extends ClassSchema = ClassSchema> = _Class<DecorMixinBase<TSchema, TClassSchema>, typeof DecorMixinBase>;
+
+  /**
+   * A type helper to be used when extending a fluent API through augmentation.
+   *
+   * For example, a library has a fluent Property decorator which is built from base mixins.
+   *
+   * ```typescript
+   * // Library Code:
+   * export class SomePropertyFluentApi extends ApiMixin.Property<SomePropertySchema, SomeClassSchema>().With(...Some base mixins here) { }
+   * ```
+   *
+   * The library user would like to extend it with some mixins, for this we need to use the lazy plugin decorator
+   *
+   * ```typescript
+   * @LazyPluginExtension(SomePropertyFluentApi)
+   * export class UserPropertyFluentApi extends ApiMixin.MixinBase<SomePropertySchema> { // can put mixins or directly via class block:
+   *
+   * @FluentMethodPlugin()
+   *   usersExt(): this {
+   *     // do stuff
+   *     return this;
+   *   }
+   * }
+   * ```
+   *
+   * `LazyPluginExtension` will make sure all plugins are attached into `SomePropertyFluentApi` and will work in runtime, but we're still missing the design time type augmentation.
+   * We need to extend the class `SomePropertyFluentApi` in the type system so it will contain the method `usersExt`.
+   *
+   * This is done through type augmentation, and it usually goes like this:
+   *
+   * ```typescript
+   * declare module '@pebula/tom/src/lib/schema/decorator-api/property' {
+   *   export interface SomePropertyFluentApi {
+   *     // REPEAT ALL MEMBERS of UserPropertyFluentApi in here
+   *   }
+   * }
+   * ```
+   *
+   * The above is verbose and we duplicate the interface twice. In the class implementation and then in type augmentation.
+   *
+   * We can use a shortcut:
+   *
+   *```typescript
+   * declare module '@pebula/tom/src/lib/schema/decorator-api/property' {
+   *   export interface SomePropertyFluentApi extends UserPropertyFluentApi { }
+   * }
+   * ```
+   *
+   * This will work in simple cases but in most cases it will not because both `SomePropertyFluentApi` and `UserPropertyFluentApi` share base members with different signatures...
+   *
+   * To workaround this we need to use the `Extend` type:
+   *
+   * ```typescript
+   * declare module '@pebula/tom/src/lib/schema/decorator-api/property' {
+   *   export interface SomePropertyFluentApi extends ApiMixin.Extend<PropertyDecorator, SomePropertyFluentApi, UserPropertyFluentApi> { }
+   * }
+   * ```
+   *
+   * Or, using `ExtendProperty` helper, which is specific to `PropertyDecorator`
+   *
+   * ```typescript
+   * declare module '@pebula/tom/src/lib/schema/decorator-api/property' {
+   *   export interface SomePropertyFluentApi extends ApiMixin.ExtendProperty<SomePropertyFluentApi, UserPropertyFluentApi> { }
+   * }
+   * ```
+   */
+  export type Extend<D extends NativeDecorator, I, T> = {
+    [P in keyof T]: P extends keyof Omit<I, keyof T>
+      ? never
+      : T[P] extends (...args: infer U) => infer R
+        ? (...args: U) => R extends T ? I & D : R
+        : I & D
+    ;
+  }
+
+  /**
+   * Syntax sugar for ApiMixin.Extend<ClassDecorator, I, T>
+   * @see ApiMixin.Extend
+   */
+  export type ExtendClass<I, T> = Extend<ClassDecorator, I, T>;
+  /**
+   * Syntax sugar for ApiMixin.Extend<PropertyDecorator, I, T>
+   * @see ApiMixin.Extend
+   */
+  export type ExtendProperty<I, T> = Extend<PropertyDecorator, I, T>;
+  /**
+   * Syntax sugar for ApiMixin.Extend<MethodDecorator, I, T>
+   * @see ApiMixin.Extend
+   */
+  export type ExtendMethod<I, T> = Extend<MethodDecorator, I, T>;
+  /**
+   * Syntax sugar for ApiMixin.Extend<ParameterDecorator, I, T>
+   * @see ApiMixin.Extend
+   */
+  export type ExtendParameter<I, T> = Extend<ParameterDecorator, I, T>;
 }

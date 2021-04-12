@@ -1,19 +1,15 @@
 import { Schema } from '@pebula/tom';
 import { ClassValidationSchema } from '../../../schema/class-validation-schema';
-import { ClassValidatorContext, addValidationError, TypeRuntimeValidator, Validator, ValidatorFactoryOptions } from '../../validator';
+import { ClassValidatorContext, TypeRuntimeValidator, Validator } from '../../validator';
 import { ValidationResult } from '../../../validation-result';
 import { missingValidator } from '../../errors';
-import { ValidatorInfo } from '../../../known-validators';
+import { Constraint } from '../../../constraints';
 import { REQUIRED_VALIDATOR_INFO, TYPE_VALIDATOR_INFO } from '../../utils';
 
 const SHORT_CIRCUIT_ERROR = new Error();
 
 export function runtimeSchemaValidator<T = any>(this: ClassValidationSchema<Validator, T>,
-                                                target: T,
-                                                options: ValidatorFactoryOptions,
-                                                ctx?: ClassValidatorContext<T>): ValidationResult<T> {
-
-  ctx = ctx?.createChild(target, this) ?? new ClassValidatorContext(target, this, options);
+                                                ctx: ClassValidatorContext<T>): ValidationResult<T> {
 
   if (ctx.parent) {
     for (const prop of this.classSchema.getProperties()) {
@@ -59,7 +55,7 @@ export function runtimePropertyValidator<T = any>(value: T[keyof T],
       if (prop.hasDefaultValue) {
         ctx.target[prop.name] = prop.defaultValue();
       } else {
-        addValidationError<'required'>(ctx, prop, REQUIRED_VALIDATOR_INFO);
+        ctx.addValidationError<'required'>(value, prop, REQUIRED_VALIDATOR_INFO);
         if (shortCircuit) {
           throw SHORT_CIRCUIT_ERROR;
         }
@@ -78,14 +74,14 @@ export function runtimePropertyValidator<T = any>(value: T[keyof T],
 
     // if type checking fails, don't continue!
     if (executeRuntimeValidator(value, ctx, prop, TYPE_VALIDATOR_INFO, typeRuntimeValidator) === true) {
-      addValidationError(ctx, prop, TYPE_VALIDATOR_INFO);
+      ctx.addValidationError(value, prop, TYPE_VALIDATOR_INFO);
       if (shortCircuit) {
         throw SHORT_CIRCUIT_ERROR;
       }
     } else {
       for (const validatorMeta of prop.validators) {
         if (executeRuntimeValidator(value, ctx, prop, validatorMeta, typeRuntimeValidator) === true) {
-          addValidationError(ctx, prop, validatorMeta);
+          ctx.addValidationError(value, prop, validatorMeta);
           if (shortCircuit) {
             throw SHORT_CIRCUIT_ERROR;
           }
@@ -106,13 +102,13 @@ export function runtimePropertyValidator<T = any>(value: T[keyof T],
 export function executeRuntimeValidator<T = any>(value: T[keyof T],
                                                  ctx: ClassValidatorContext<T>,
                                                  prop: Schema.TomPropertySchema<T>,
-                                                 validatorInfo: ValidatorInfo,
+                                                 Constraint: Constraint,
                                                  typeRuntimeValidator: TypeRuntimeValidator) {
 
-  const runtimeValidator = typeRuntimeValidator.findHandler(validatorInfo.id);
+  const runtimeValidator = typeRuntimeValidator.findHandler(Constraint.id);
   if (runtimeValidator) {
-    return runtimeValidator(value, ctx, prop, validatorInfo);
+    return runtimeValidator(value, ctx, prop, Constraint);
   } else {
-    throw missingValidator(ctx.schema.validator, ctx.schema.target, prop.name as string, prop.typeDef, validatorInfo, 'runtime');
+    throw missingValidator(ctx.schema.validator, ctx.schema.target, prop.name as string, prop.typeDef, Constraint, 'runtime');
   }
 }

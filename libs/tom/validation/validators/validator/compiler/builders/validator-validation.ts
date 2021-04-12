@@ -1,6 +1,5 @@
-import { Code as C } from '@pebula/tom';
 import { missingValidator } from '../../../errors';
-import { ValidatorInfo } from '../../../../known-validators';
+import { Constraint } from '../../../../constraints';
 import { TypeValidatorCompiler } from '../../validator-components';
 import { runTypeValidationBlock } from '../chain-blocks';
 import { CompilerCodeBlockContext, CompilerPropertyContext } from '../context';
@@ -12,7 +11,7 @@ import { createAddErrorCode } from './add-validation-error';
 export function propertyValidatorValidationCompiler(ctx: CompilerCodeBlockContext,
                                                     prop: CompilerPropertyContext,
                                                     validatorCompiler: TypeValidatorCompiler,
-                                                    validatorMeta: ValidatorInfo) {
+                                                    validatorMeta: Constraint) {
   const validatorCompilerHandler = validatorCompiler.findHandler(validatorMeta.id);
   if (!validatorCompilerHandler) {
     const { classValidationSchema } = prop.context;
@@ -20,7 +19,7 @@ export function propertyValidatorValidationCompiler(ctx: CompilerCodeBlockContex
   }
   const returnedValidationCtxBlock = runTypeValidationBlock(ctx.clone(ctx.currentBlock.addVirtualBlock()), prop, validatorMeta, validatorCompilerHandler);
   if (returnedValidationCtxBlock) {
-    createAddErrorCode(returnedValidationCtxBlock.currentBlock, prop, validatorMeta);
+    createAddErrorCode(returnedValidationCtxBlock, prop, validatorMeta);
   }
   return returnedValidationCtxBlock;
 }

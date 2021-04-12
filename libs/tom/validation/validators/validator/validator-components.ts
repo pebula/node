@@ -1,5 +1,5 @@
 import { Code as C, Schema, TypeSystem } from '@pebula/tom';
-import { ValidatorInfo, ValidatorInfoTypeMap } from '../../known-validators';
+import { Constraint, RegisteredConstraints } from '../../constraints';
 import { ClassValidatorContext } from './class-validator-context';
 import { TypeValidationCompilerHandler, ValidationCompilerHandler } from './compiler';
 import { Validator } from './validator';
@@ -16,10 +16,10 @@ import { Validator } from './validator';
  * If you choose to take this path, make sure you know what you're doing.
  */
 export type RuntimeValidatorHandler<T = any,
-                                    TValidatorId extends keyof ValidatorInfoTypeMap = keyof ValidatorInfoTypeMap> = (value: T,
+                                    TValidatorId extends keyof RegisteredConstraints = keyof RegisteredConstraints> = (value: T,
                                                                                                                      ctx: ClassValidatorContext<any>,
                                                                                                                      prop: Schema.TomPropertySchema,
-                                                                                                                     validatorMeta: ValidatorInfo<TValidatorId>) => void | boolean;
+                                                                                                                     constraintData: Constraint<TValidatorId>) => void | boolean;
 
 /**
  * Post validation handler used for customized validation in addition to the specific validators defined for the property and type.
@@ -68,12 +68,12 @@ export class TypeValidatorCompiler<BIn extends C.Block<C.Block<any>> = C.Block<C
   }
 
   protected defaultHandler: TypeValidationCompilerHandler<BIn>;
-  protected readonly handlers: Map<keyof ValidatorInfoTypeMap, TypeValidationCompilerHandler<BIn>>;
+  protected readonly handlers: Map<keyof RegisteredConstraints, TypeValidationCompilerHandler<BIn>>;
   private _postValidationHandler: ValidationCompilerHandler<BIn, BOut>;
 
   constructor(public readonly type: TypeSystem.TypeDef, parent?: TypeValidatorCompiler<BIn, BOut>) {
     this.defaultHandler = parent?.defaultHandler;
-    this.handlers = new Map<keyof ValidatorInfoTypeMap, TypeValidationCompilerHandler<BIn>>(parent?.handlers);
+    this.handlers = new Map<keyof RegisteredConstraints, TypeValidationCompilerHandler<BIn>>(parent?.handlers);
     this._postValidationHandler = parent?.postValidationHandler;
   }
 
@@ -82,12 +82,12 @@ export class TypeValidatorCompiler<BIn extends C.Block<C.Block<any>> = C.Block<C
    * @param type The source type
    * @param handler Handler from source type to T
    */
-  setHandler<P extends keyof ValidatorInfoTypeMap>(validatorId: P, handler: TypeValidationCompilerHandler<BIn, P>): this {
+  setHandler<P extends keyof RegisteredConstraints>(validatorId: P, handler: TypeValidationCompilerHandler<BIn, P>): this {
     this.handlers.set(validatorId, handler);
     return this;
   }
 
-  removeHandler<P extends keyof ValidatorInfoTypeMap>(...validatorIds: P[]): this {
+  removeHandler<P extends keyof RegisteredConstraints>(...validatorIds: P[]): this {
     for (const id of validatorIds) {
       this.handlers.delete(id);
     }
@@ -120,7 +120,7 @@ export class TypeValidatorCompiler<BIn extends C.Block<C.Block<any>> = C.Block<C
     return new TypeValidatorCompiler(type || this.type, this);
   }
 
-  copyFrom<P extends keyof ValidatorInfoTypeMap>(vc: TypeValidatorCompiler, ...validatorIds: P[]): this {
+  copyFrom<P extends keyof RegisteredConstraints>(vc: TypeValidatorCompiler, ...validatorIds: P[]): this {
     for (const id of validatorIds) {
       const handler = vc.handlers.get(id) as TypeValidationCompilerHandler<BIn, P>;
       if (!handler) {
@@ -131,7 +131,7 @@ export class TypeValidatorCompiler<BIn extends C.Block<C.Block<any>> = C.Block<C
     return this;
   }
 
-  findHandler(validatorId?: keyof ValidatorInfoTypeMap) {
+  findHandler(validatorId?: keyof RegisteredConstraints) {
     return this.handlers.get(validatorId) || this.defaultHandler;
   }
 }
@@ -142,12 +142,12 @@ export class TypeRuntimeValidator<V extends Validator = Validator, T = any> {
     return this._postValidationHandler;
   }
 
-  protected readonly handlers: Map<keyof ValidatorInfoTypeMap, RuntimeValidatorHandler<T>>;
+  protected readonly handlers: Map<keyof RegisteredConstraints, RuntimeValidatorHandler<T>>;
   protected defaultHandler: RuntimeValidatorHandler<T>;
   private _postValidationHandler: RuntimePostValidatorHandler<T>;
 
   constructor(public readonly type: TypeSystem.TypeDef, protected readonly parent?: TypeRuntimeValidator<V, any>) {
-    this.handlers = new Map<keyof ValidatorInfoTypeMap, RuntimeValidatorHandler<T>>(parent?.handlers);
+    this.handlers = new Map<keyof RegisteredConstraints, RuntimeValidatorHandler<T>>(parent?.handlers);
     this.defaultHandler = parent?.defaultHandler;
     this._postValidationHandler = parent?.postValidationHandler;
   }
@@ -156,19 +156,19 @@ export class TypeRuntimeValidator<V extends Validator = Validator, T = any> {
     return new TypeRuntimeValidator<V, TNew>(type || this.type, this);
   }
 
-  setHandler<P extends keyof ValidatorInfoTypeMap>(validatorId: P, handler: RuntimeValidatorHandler<T, P>): this {
+  setHandler<P extends keyof RegisteredConstraints>(validatorId: P, handler: RuntimeValidatorHandler<T, P>): this {
     this.handlers.set(validatorId, handler);
     return this;
   }
 
-  removeHandler<P extends keyof ValidatorInfoTypeMap>(...validatorIds: P[]): this {
+  removeHandler<P extends keyof RegisteredConstraints>(...validatorIds: P[]): this {
     for (const id of validatorIds) {
       this.handlers.delete(id);
     }
     return this;
   }
 
-  copyFrom<P extends keyof ValidatorInfoTypeMap>(vc: TypeRuntimeValidator, ...validatorIds: P[]): this {
+  copyFrom<P extends keyof RegisteredConstraints>(vc: TypeRuntimeValidator, ...validatorIds: P[]): this {
     for (const id of validatorIds) {
       const handler = vc.handlers.get(id) as RuntimeValidatorHandler<T, P>;
       if (!handler) {
@@ -196,7 +196,7 @@ export class TypeRuntimeValidator<V extends Validator = Validator, T = any> {
     return this;
   }
 
-  findHandler(validatorId?: keyof ValidatorInfoTypeMap) {
+  findHandler(validatorId?: keyof RegisteredConstraints) {
     return this.handlers.get(validatorId) || this.defaultHandler;
   }
 }

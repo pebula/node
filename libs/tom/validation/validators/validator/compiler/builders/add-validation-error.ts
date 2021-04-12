@@ -1,19 +1,22 @@
 import { Code as C } from '@pebula/tom';
-import { ValidatorInfo } from '../../../../known-validators';
+import { Constraint } from '../../../../constraints';
 import { REQUIRED_VALIDATOR_INFO, TYPE_VALIDATOR_INFO } from '../../../utils';
-import { addValidationError } from '../../class-validator-context';
 import { setToGlobal } from '../global';
 import { MAPPER } from '../param-names';
-import { CompilerPropertyContext } from '../context';
+import { CompilerCodeBlockContext, CompilerPropertyContext } from '../context';
 
-const ADD_VALIDATION_ERROR_PARAM = setToGlobal(addValidationError);
-
-const FIXED_VALIDATORS = new Map<ValidatorInfo, string>([
+const FIXED_VALIDATORS = new Map<Constraint, string>([
   [REQUIRED_VALIDATOR_INFO, setToGlobal(REQUIRED_VALIDATOR_INFO)],
   [TYPE_VALIDATOR_INFO, setToGlobal(TYPE_VALIDATOR_INFO)],
 ]);
 
-export function createAddErrorCode(block: C.Block<C.Block<any>>, prop: CompilerPropertyContext, validatorMeta: ValidatorInfo) {
+/**
+ * @param block the code block to append the code error generation to, if not set `CompilerCodeBlockContext.currentBlock` is used
+ */
+export function createAddErrorCode(ctx: CompilerCodeBlockContext,
+                                   prop: CompilerPropertyContext,
+                                   validatorMeta: Constraint,
+                                   block?: C.Block<C.Block<any>>) {
   let validatorMetaCode: string;
   const index = prop.propMeta.validators.indexOf(validatorMeta);
   validatorMetaCode = index === -1
@@ -21,7 +24,10 @@ export function createAddErrorCode(block: C.Block<C.Block<any>>, prop: CompilerP
     : `${prop.schemaParam('validators')}[${index}]`
   ;
 
-  const code = `${ADD_VALIDATION_ERROR_PARAM}(${MAPPER.CTX_PARAM}, ${prop.schemaParam()}, ${validatorMetaCode})`;
+  const code = `${MAPPER.CTX_PARAM}.addValidationError(${ctx.sourceAccessor}, ${prop.schemaParam()}, ${validatorMetaCode})`;
+  if (!block) {
+    block = ctx.currentBlock;
+  }
   block.addCodeExpression(code);
   if (prop.context.options.shortCircuit) {
     block.addCodeExpression(`return ${MAPPER.CTX_PARAM}.result`);

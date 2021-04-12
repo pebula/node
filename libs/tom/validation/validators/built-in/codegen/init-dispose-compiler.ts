@@ -1,23 +1,8 @@
 import { Code as C } from '@pebula/tom';
-import { ClassValidatorContext } from '../../validator';
-import { ROOT, MAPPER, setToGlobal } from '../../validator/compiler';
+import { MAPPER } from '../../validator/compiler';
 import { CompilerContext } from '../local-context';
 
-const CLASS_VALIDATOR_CONTEXT_TYPE_PARAM = setToGlobal(ClassValidatorContext);
-
 export function generateValidatorInitCode(currentBlock: C.Block<C.Block<any>>, context: CompilerContext) {
-  currentBlock.addIfBlock()
-    .setCondition(`!${MAPPER.CTX_PARAM}`)
-    .addAssignment(
-      MAPPER.CTX_PARAM,
-      `new ${CLASS_VALIDATOR_CONTEXT_TYPE_PARAM}(${MAPPER.INPUT_PARAM}, ${ROOT.CLASS_VALIDATION_SCHEMAS_PARAM}, ${MAPPER.OPTIONS_PARAM})`
-    ).parent
-    .else()
-      .addAssignment(
-        MAPPER.CTX_PARAM,
-        `${MAPPER.CTX_PARAM}.createChild(${MAPPER.INPUT_PARAM})`
-      );
-
   const classHasCircular = context.classValidationSchema.classSchema.hasCircularReference();
   const maybeCircular = context.getState('maybeCircularReference');
 

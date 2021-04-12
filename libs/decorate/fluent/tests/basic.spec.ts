@@ -1,14 +1,9 @@
-import { Type, PropertyDecoratorArgs, ParameterDecoratorArgs, MethodDecoratorArgs } from '@pebula/decorate';
+import { Type, PropertyDecoratorArgs } from '@pebula/decorate';
 import {
   DecorApiSuite, executePlugins,
   FluentPropertyPlugin, FluentMethodPlugin, MethodPlugin,
   PropertySchema,
   DecorPropertyApi,
-  ClassSchema,
-  ParameterSchema,
-  DecorParameterApi,
-  MethodSchema,
-  DecorMethodApi,
   DecorClassSchemaStore,
   DecorClassApi
 } from '@pebula/decorate/fluent';

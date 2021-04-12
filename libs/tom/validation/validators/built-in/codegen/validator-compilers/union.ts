@@ -1,5 +1,5 @@
 import { Code as C, Schema } from '@pebula/tom';
-import { ValidatorInfo } from '../../../../known-validators';
+import { Constraint } from '../../../../constraints';
 import { missingValidator } from '../../../errors';
 import { TypeValidatorCompiler } from '../../../validator';
 import { CompilerPropertyContext, createAddErrorCode, runTypeValidationBlock } from '../../../validator/compiler';
@@ -29,10 +29,10 @@ export const union = new TypeValidatorCompiler('union')
     }
 
     if (newBlockContext) {
-      createAddErrorCode(ifBlock.else(), propCtx, typeValidationInfo);
+      createAddErrorCode(ctx, propCtx, typeValidationInfo, ifBlock.else());
       ctx.currentBlock.add(ifBlock);
     } else {
-      createAddErrorCode(ctx.currentBlock, propCtx, typeValidationInfo);
+      createAddErrorCode(ctx, propCtx, typeValidationInfo);
     }
 
   });
@@ -43,7 +43,7 @@ export const union = new TypeValidatorCompiler('union')
 export function propertyValidatorValidationCompiler(ctx: CompilerCodeBlockContext,
                                                     prop: CompilerPropertyContext,
                                                     validatorCompiler: TypeValidatorCompiler,
-                                                    validatorMeta: ValidatorInfo) {
+                                                    validatorMeta: Constraint) {
   const validatorCompilerHandler = validatorCompiler.findHandler(validatorMeta.id);
   if (!validatorCompilerHandler) {
     const { classValidationSchema } = prop.context;
