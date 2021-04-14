@@ -41,6 +41,10 @@ export function isTomTypeEquals(t1: TomTypeInstance, t2: TomTypeInstance): boole
       case 'array':
       case 'set':
           return isTomTypeEquals(t1.typeParams[0], t2.typeParams[0]);
+      case 'tuple':
+        const typeParams1 = (t1 as TomTypeInstance<'tuple'>).typeParams;
+        const typeParams2 = (t2 as TomTypeInstance<'tuple'>).typeParams;
+        return typeParams1.length === typeParams2.length && typeParams1.every( (t, idx) => isTomTypeEquals(t, typeParams2[idx]) );
       case 'map':
       case 'objectMap':
           return isTomTypeEquals(t1.typeParams[0], t2.typeParams[0]) && isTomTypeEquals(t1.typeParams[1], t2.typeParams[1]);
@@ -66,6 +70,8 @@ export function tomTypeInstanceToString(type: TomTypeInstance): string {
     case 'array':
     case 'set':
       return `${type.type}<${(type as TomTypeInstance<'array' | 'set'>).typeParams.map(tomTypeInstanceToString).join(', ')}>`;
+    case 'tuple':
+      return `[${(type as TomTypeInstance<'tuple'>).typeParams.map(tomTypeInstanceToString).join(', ')}]`;
     case 'map':
     case 'objectMap':
       return `${type.type}<${(type as TomTypeInstance<'map' | 'objectMap'>).typeParams.map(tomTypeInstanceToString).reverse().join(', ')}>`;

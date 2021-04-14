@@ -4,7 +4,7 @@ import * as M from './models';
 
 describe('@pebula/tom/benchmarks', () => {
 
-  it('basic benchmarked objects should match', () => {
+  it('basic serialization benchmarked objects should match', () => {
     const basicModelTomSerializer = TOM.jsonSerializer.create(M.BasicModelTom, { jitCompiler: 'strict' });
     const basicModelDeepKitSerializer = DK.jsonSerializer.for(M.BasicModelDeepKit);
     const plain = M.plainBasicModel();

@@ -1,6 +1,7 @@
 import { Code as C, TypeSystem } from '@pebula/tom';
 
 export { array } from './array';
+export { tuple } from './tuple';
 export { set } from './set';
 export { map } from './map';
 export { objectMap } from './object-map';

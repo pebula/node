@@ -18,7 +18,10 @@
     "typescript": "~3.7.5",
     "utility-types": "^3.10.0"
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "chalk": "4.1.0",
+    "ora": "^5.4.0"
+  },
   "dependencies": {
     "benchmark": "^2.1.4",
     "reflect-metadata": "^0.1.13",

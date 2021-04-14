@@ -15,7 +15,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       }
 
       const model = new Model()
-      let result = childValidator.validate(model);
+      let result = childValidator.validate(model) as ValidationResult<Model>;
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0].path).toStrictEqual(['myPathToNumber']);
@@ -33,7 +33,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       const model = new ClassB();
       model.myPathToA = new ClassA();
 
-      let result = childValidator.validate(model);
+      let result = childValidator.validate(model) as ValidationResult<ClassB>;
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0].path).toStrictEqual(['myPathToA', 'myPathToNumber']);
@@ -46,7 +46,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
 
       const model = new Model()
       model.myPathToStringArray = ['valid', 123 as any];
-      let result = childValidator.validate(model);
+      let result = childValidator.validate(model) as ValidationResult<Model>;
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0].path).toStrictEqual(['myPathToStringArray', 1]);
@@ -59,7 +59,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
 
       const model = new Model()
       model.myPathToStringSet = new Set(['valid0', 1 as any, 'valid2', 3 as any, 'valid4']);
-      let result = childValidator.validate(model);
+      let result = childValidator.validate(model) as ValidationResult<Model>;
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(2);
       expect(result.errors[0].path).toStrictEqual(['myPathToStringSet', 1]);
@@ -78,7 +78,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
         ['T-W-O', true as any],
         [3, 'valid3'],
       ]);
-      let result = childValidator.validate(model);
+      let result = childValidator.validate(model) as ValidationResult<Model>;
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(2);
       expect(result.errors[0].path).toStrictEqual(['myPathToStringMap', 'one']);

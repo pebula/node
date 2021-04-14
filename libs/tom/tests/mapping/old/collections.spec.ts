@@ -159,6 +159,33 @@ tomDescribeMapperJIT('@pebula/tom', optionsFactory => {
     });
   });
 
+  describe('Transform To Tuple', () => {
+    it('From Tuple', () => {
+      defineClassMapping(OrderDto, Order, optionsFactory())
+        .forMember('tuple', 'tuple', true)
+        .forAllOtherMembers(c => c.ignore())
+        .seal();
+
+      orderDto = new OrderDto();
+      orderDto.tuple = [4, 'test', items[0], items[1]];
+
+      const order = mapTypes(orderDto, Order);
+
+      expect(order.tuple).toBeInstanceOf(Array);
+      expect(order.tuple.length).toBe(4);
+      const tItems = order.tuple;
+
+      expect(tItems[0]).toBe(4);
+      expect(tItems[1]).toBe('test');
+      expect(tItems[2]).toBeInstanceOf(OrderItem);
+      expect(tItems[2]).toEqual(items[0]);
+      expect(tItems[3]).toBeInstanceOf(OrderItem);
+      expect(tItems[3]).toEqual(items[1]);
+    });
+
+
+  });
+
   describe('Transform to Set', () => {
     it('From Array - Nested', () => {
       defineClassMapping(OrderDto, Order, optionsFactory())
@@ -397,37 +424,27 @@ class OrderItem extends Nominal<'OrderItem'>() {
 }
 
 class OrderDto {
-  @P.as(() => OrderItemDto)
-  itemsArray: Array<OrderItemDto>;
-  @P.as(() => OrderItemDto)
-  itemsSet: Set<OrderItemDto>;
-  @P.as(() => OrderItemDto)
-  itemsMap: Map<string, OrderItemDto>;
-  @P.asObjectMap(() => OrderItemDto)
-  itemsObjectMap: { [key: string]: OrderItemDto };
+  @P.asArray(() => OrderItemDto) itemsArray: Array<OrderItemDto>;
+  @P.asSet(() => OrderItemDto) itemsSet: Set<OrderItemDto>;
+  @P.asMap(() => OrderItemDto) itemsMap: Map<string, OrderItemDto>;
+  @P.asObjectMap(() => OrderItemDto) itemsObjectMap: { [key: string]: OrderItemDto };
 
-  @P.as(Number)
-  primitiveArray: Array<Number>;
-  @P.as(Number)
-  primitiveSet: Set<Number>;
-  @P.as(Number)
-  primitiveMap: Map<string, Number>;
-  @P.asObjectMap(Number)
-  primitiveObjectMap: { [key: string]: Number };
+  @P.asArray(Number) primitiveArray: Array<Number>;
+  @P.asSet(Number) primitiveSet: Set<Number>;
+  @P.asMap(Number) primitiveMap: Map<string, Number>;
+  @P.asObjectMap(Number) primitiveObjectMap: { [key: string]: Number };
+
+  @P.asTuple('number', 'string', OrderItem, OrderItem) tuple: [number, string, OrderItemDto, OrderItemDto];
 }
 
 class Order {
-  @P.as(() => OrderItem)
-  itemsArray: Array<OrderItem>;
-  @P.as(() => OrderItem)
-  itemsSet: Set<OrderItem>;
-  @P.as(() => OrderItem)
-  itemsMap: Map<string, OrderItem>;
+  @P.asArray(() => OrderItem) itemsArray: Array<OrderItem>;
+  @P.asSet(() => OrderItem) itemsSet: Set<OrderItem>;
+  @P.asMap(() => OrderItem) itemsMap: Map<string, OrderItem>;
 
-  @P.as(Number)
-  primitiveArray: Array<Number>;
-  @P.as(Number)
-  primitiveSet: Set<Number>;
-  @P.as(Number)
-  primitiveMap: Map<string, Number>;
+  @P.asArray(Number) primitiveArray: Array<Number>;
+  @P.asSet(Number) primitiveSet: Set<Number>;
+  @P.asMap(Number) primitiveMap: Map<string, Number>;
+
+  @P.asTuple('number', 'string', OrderItem, OrderItem) tuple: [number, string, OrderItem, OrderItem];
 }

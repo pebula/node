@@ -43,7 +43,7 @@ tomDescribeSerializerJIT('@pebula/tom', jsonSerializer, childSerializer => {
   describe('circular reference in collections', () => {
     it('Circular Reference in Array', () => {
       class Order {
-        @P.as(() => Order) collection: Array<Order>;
+        @P.asArray(() => Order) collection: Array<Order>;
         @P value: number;
 
         constructor(value: number) {
@@ -74,9 +74,62 @@ tomDescribeSerializerJIT('@pebula/tom', jsonSerializer, childSerializer => {
 
     });
 
+    it('Circular Reference in Tuple', () => {
+      class Order {
+        @P.asTuple('number', Order, Order, Order) collection: [number, Order, Order, Order];
+        @P value: number;
+
+        constructor(value: number, collection?: [number, Order, Order, Order]) {
+          this.value = value;
+          if (collection) {
+            this.collection = collection.slice() as any;
+          }
+        }
+      }
+
+      const orderSerializer = childSerializer.create(Order);
+
+      const order = new Order(5);
+      const order50000 = new Order(50000, [50000, order, order, new Order(-50, [-50, order, order, null])]);
+      order.collection = [order.value, order, new Order(500), order50000];
+      order50000.collection[3].collection[3] = order50000;
+
+      let pojo = orderSerializer.serialize(order);
+      expect(pojo.value).toBe(5);
+
+      let collection: any[] = pojo.collection;
+      expect(collection).toBeInstanceOf(Array);
+      expect(pojo.collection.length).toBe(4);
+      expect(collection[0]).toBe(pojo.value);
+      expect(collection[1]).toBeUndefined();
+      expect(collection[2]).toBeInstanceOf(Object);
+      expect(collection[2].value).toBe(500);
+      expect(collection[3]).toBeInstanceOf(Object);
+      expect(collection[3].value).toBe(order50000.value);
+
+      pojo = collection[3];
+      collection = pojo.collection;
+      expect(collection).toBeInstanceOf(Array);
+      expect(collection.length).toBe(4);
+      expect(collection[0]).toBe(pojo.value);
+      expect(collection[1]).toBeUndefined();
+      expect(collection[2]).toBeUndefined();
+      expect(collection[3]).toBeInstanceOf(Object);
+      expect(collection[3].value).toBe(-50);
+
+      pojo = collection[3];
+      collection = pojo.collection;
+      expect(collection).toBeInstanceOf(Array);
+      expect(collection.length).toBe(4);
+      expect(collection[0]).toBe(pojo.value);
+      expect(collection[1]).toBeUndefined();
+      expect(collection[2]).toBeUndefined();
+      expect(collection[3]).toBeUndefined();
+    });
+
     it('Circular Reference in Set', () => {
       class Order {
-        @P.as(() => Order) collection: Set<Order>;
+        @P.asSet(() => Order) collection: Set<Order>;
         @P value: number;
 
         constructor(value: number) {
@@ -105,7 +158,7 @@ tomDescribeSerializerJIT('@pebula/tom', jsonSerializer, childSerializer => {
 
     it('Circular Reference in Map', () => {
       class Order {
-        @P.as(() => Order) collection: Map<any, Order>;
+        @P.asMap(() => Order) collection: Map<any, Order>;
         @P value: number;
 
         constructor(value: number) {

@@ -13,7 +13,7 @@ modelDeepKit.nested = modelDeepKit;
 const nestedModelTomSerializer = TOM.jsonSerializer.create(M.NestedModelTom, { jitCompiler: 'strict' });
 const nestedModelDeepKitSerializer = DK.jsonSerializer.for(M.NestedModelDeepKit);
 
-@Suite({ name: 'Framework Compare - Nested'})
+@Suite({ name: 'Serialization Framework Compare - Nested'})
 class TestSuite {
 
   @Case({ name: 'DeepKit - Serialize' })

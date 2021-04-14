@@ -6,6 +6,8 @@ export function array(v: any, context: ClassSerializerContext<any>, prop: Schema
   return Array.isArray(v);
 }
 
+export const tuple = array;
+
 export function set(v: any, context: ClassSerializerContext<any>, prop: Schema.TomPropertySchema) {
   return context.isSerialize ? v instanceof Set : Array.isArray(v);
 }

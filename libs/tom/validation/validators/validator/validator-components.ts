@@ -28,12 +28,15 @@ export type RuntimeValidatorHandler<T = any,
  * For example, in containers (array, set, map, objectMap) this is how we validate the items in the container.
  * In classes this is how nested classes are validated.
  *
+ * If you return false, the  framework will treat it as a mark that a validation error was found.
+ * It will not add a validation error like it does in runtime validation handlers but it will operate other logic related to error (e.g. short circuit)
+ *
  * Note that if validation error short-circuit, it will fail before reaching the post validation handler.
  * In addition, failing to validate against the `type` validator will result in skipping the entire validation for the property, including the post validation handler.
  */
 export type RuntimePostValidatorHandler<T = any> = (value: T,
                                                     ctx: ClassValidatorContext<any>,
-                                                    prop: Schema.TomPropertySchema) => void;
+                                                    prop: Schema.TomPropertySchema) => boolean | void;
 
 export class ValidatorCompiler<BIn extends C.Block<C.Block<any>> = C.Block<C.Block<any>>, BOut extends C.Block<C.Block<any>> = C.Block<C.Block<any>>> {
   get handler(): ValidationCompilerHandler<BIn, BOut> {

@@ -25,11 +25,10 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       model.status = JobStatus.Done;
 
       let result = childValidator.validate(model);
-      expect(result).toBeInstanceOf(ValidationResult);
-      expect(result.valid).toBe(true);
+      expect(result).toBe(true);
 
       model.status = 'Done' as any;
-      result = childValidator.validate(model);
+      result = childValidator.validate(model) as ValidationResult<Job>;
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
@@ -40,7 +39,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       ));
 
       model.status = 555;
-      result = childValidator.validate(model);
+      result = childValidator.validate(model) as ValidationResult<Job>;
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(

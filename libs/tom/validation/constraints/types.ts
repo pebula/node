@@ -6,6 +6,7 @@ export type ConstraintInput<TArgs extends Array<any>> = TArgs;
 
 export interface RegisteredConstraints {
   type: ConstraintInput<never>;
+  typeTuple: ConstraintInput<[number]>;
   required: ConstraintInput<never>;
 }
 
@@ -20,24 +21,6 @@ export type RegisteredConstraintsFromConstraintsApi<T> = {
   ;
 }
 
-export type Constraint<T extends ConstraintNames = ConstraintNames> = { id: T } & (T extends NoArgsConstraintNames ? {} : { args: RegisteredConstraints[T] });
+export type Constraint<T extends ConstraintNames = ConstraintNames> = { id: T; negate?: boolean } & (T extends NoArgsConstraintNames ? {} : { args: RegisteredConstraints[T] });
 
-export type ConstraintErrorMsgFactory<P extends ConstraintNames> = (info: { value: any, paths: any[], prop: Schema.TomPropertySchema, validatorMeta: Constraint<P> }) => string;
-
-const store = new Map<ConstraintNames, ConstraintErrorMsgFactory<ConstraintNames>>();
-
-export function setConstraintErrorMsgFactory<P extends ConstraintNames>(constraint: P, fn: ConstraintErrorMsgFactory<P>) {
-  store.set(constraint, fn);
-  return setConstraintErrorMsgFactory;
-}
-
-export const ConstraintErrorMsg = <P extends ConstraintNames>(fn: ConstraintErrorMsgFactory<P>) => {
-  return ( (target: any, key: P, desc?: any) => {
-    setConstraintErrorMsgFactory(key, fn);
-  });
-}
-
-export function createConstraintErrorMsg<P extends ConstraintNames>(value: any, paths: any[], prop: Schema.TomPropertySchema, validatorMeta: Constraint<P>): string {
-  const msgFactory = store.get(validatorMeta.id) || (() => 'Validation error');
-  return msgFactory({ value, paths, prop, validatorMeta: validatorMeta as Constraint });
-}
+export type ConstraintErrorMsgFactory<P extends ConstraintNames> = (info: { value: any, paths: any[], prop: Schema.TomPropertySchema, constraint: Constraint<P> }) => string;

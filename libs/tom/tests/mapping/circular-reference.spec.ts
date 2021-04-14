@@ -48,7 +48,7 @@ tomDescribeMapperJIT('@pebula/tom', optionsFactory => {
   describe('circular reference in collections', () => {
     it('Circular Reference in Array', () => {
       class Order {
-        @P.as(() => Order) collection: Array<Order>;
+        @P.asArray(() => Order) collection: Array<Order>;
         @P value: number;
 
         constructor(value: number) {
@@ -94,7 +94,7 @@ tomDescribeMapperJIT('@pebula/tom', optionsFactory => {
 
     it('Circular Reference in Map', () => {
       class Order {
-        @P.as(() => Order) collection: Map<any, Order>;
+        @P.asMap(() => Order) collection: Map<any, Order>;
         @P value: number;
 
         constructor(value: number) {

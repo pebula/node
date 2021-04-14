@@ -82,7 +82,7 @@ export class PropertySerializerSchema<T, TKey extends keyof T = keyof T> impleme
     if (!this.targetPropMeta.subType) {
       throw new Error('SubType is valid only for containers');
     }
-    return this.createSubType(this.targetPropMeta.subType);
+    return this.createSubPropertySerializer(this.targetPropMeta.subType);
   })
   subType?: PropertySerializerSchema<T, TKey>;
 
@@ -90,10 +90,11 @@ export class PropertySerializerSchema<T, TKey extends keyof T = keyof T> impleme
     Object.assign(this, raw);
   }
 
-  private createSubType(subTypeProp: Schema.TomPropertySchema<T, TKey>) {
+  createSubPropertySerializer(propSchema: Schema.TomPropertySchema): PropertySerializerSchema<any> {
     const subType = new PropertySerializerSchema({}, this.prop, this.target);
     subType.copyByRef = this.copyByRef;
-    Object.defineProperty(subType, 'targetPropMeta', { value: subTypeProp });
+    Object.defineProperty(subType, 'targetPropMeta', { value: propSchema });
     return subType;
   }
+
 }

@@ -5,7 +5,7 @@ const tomNorthWindSerializer = TOM.jsonSerializer
 
 describe('@pebula/tom/benchmarks', () => {
 
-  it('nortwind benchmarked objects should match', () => {
+  it('nortwind serialization  benchmarked objects should match', () => {
     const tomCustomerSerializer = NW.Tom.northWindSerializer.create(NW.Tom.Customer);
     const deepKitCustomerSerializer = NW.DeepKit.northWindSerializer.for(NW.DeepKit.Customer);
 

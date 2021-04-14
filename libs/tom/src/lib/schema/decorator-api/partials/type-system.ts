@@ -39,8 +39,10 @@ export abstract class TypeSystemApi extends ApiMixin.MixinBase<TypeSystemSchema>
     while (types.length > 0) {
       const type = types.pop();
       if (isBuildSchemaApi(type)) {
-        types.push(type.buildSchema());
+        // re-process within this loop, this time as TypeSystemSchema or any other built type
+        types.push(type.buildSchema() as TypeSystemSchema);
       } else if (T.isTomTypeInstance(type) && type.type === 'union') {
+        // re-process each union, within this loop
         types.push(...(type as T.TomTypeInstance<'union'>).typeParams);
       } else if (isTypeSystemSchema(type) && type.type.type === 'union') {
         typeParams.push(...(type.type as T.TomTypeInstance<'union'>).typeParams);
@@ -62,9 +64,25 @@ export abstract class TypeSystemApi extends ApiMixin.MixinBase<TypeSystemSchema>
       type = type.buildSchema();
     }
     this.$$context.schema.type = T.createTomTypeInstance('array', [ this.resolveToTypeDef(type) ]);
-    if (isTypeSystemSchema(type)) {
-      this.$$context.schema.subSchemas = [type as any];
+    this.$$context.schema.subSchemas = [isTypeSystemSchema(type) ? type : undefined];
+    return this;
+  }
+
+  @FluentMethodPlugin()
+  asTuple(...types: Array<T.SingleTypes | T.BufferTypes | T.BufferRuntimeTypes | T.NativeRuntimeTypes | T.CustomClassType | T.TomTypeInstance | TypeSystemSchema | this>): this {
+    const typeParams: T.TomTypeInstance[] = [];
+    const subSchemas: TypeSystemSchema[] = [];
+
+    for (let t of types) {
+      if (isBuildSchemaApi(t)) {
+        t = t.buildSchema();
+      }
+      typeParams.push(this.resolveToTypeDef(t));
+      subSchemas.push(isTypeSystemSchema(t) ? t : undefined);
     }
+
+    this.$$context.schema.type = T.createTomTypeInstance('tuple', typeParams);
+    this.$$context.schema.subSchemas = subSchemas;
     return this;
   }
 
@@ -74,9 +92,7 @@ export abstract class TypeSystemApi extends ApiMixin.MixinBase<TypeSystemSchema>
       type = type.buildSchema();
     }
     this.$$context.schema.type = T.createTomTypeInstance('set', [ this.resolveToTypeDef(type) ]);
-    if (isTypeSystemSchema(type)) {
-      this.$$context.schema.subSchemas = [type as any];
-    }
+    this.$$context.schema.subSchemas = [isTypeSystemSchema(type) ? type : undefined];
     return this;
   }
 
@@ -86,9 +102,7 @@ export abstract class TypeSystemApi extends ApiMixin.MixinBase<TypeSystemSchema>
       valueType = valueType.buildSchema();
     }
     this.$$context.schema.type = T.createTomTypeInstance('map', [this.resolveToTypeDef(valueType), this.resolveToTypeDef(keyType) || T.createTomTypeInstance('any')]);
-    if (isTypeSystemSchema(valueType)) {
-      this.$$context.schema.subSchemas = [valueType as any];
-    }
+    this.$$context.schema.subSchemas = [isTypeSystemSchema(valueType) ? valueType : undefined];
     return this;
   }
 
@@ -98,9 +112,7 @@ export abstract class TypeSystemApi extends ApiMixin.MixinBase<TypeSystemSchema>
       valueType = valueType.buildSchema();
     }
     this.$$context.schema.type = T.createTomTypeInstance('objectMap', [this.resolveToTypeDef(valueType), T.createTomTypeInstance(keyType) || T.createTomTypeInstance('any') ]);
-    if (isTypeSystemSchema(valueType)) {
-      this.$$context.schema.subSchemas = [valueType as any];
-    }
+    this.$$context.schema.subSchemas = [isTypeSystemSchema(valueType) ? valueType : undefined];
     return this;
   }
 

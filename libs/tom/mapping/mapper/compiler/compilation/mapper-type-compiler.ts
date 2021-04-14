@@ -31,6 +31,13 @@ export class MapperTypeCompiler<T extends TypeSystem.TypeDef> {
     return this;
   }
 
+  setHandlers(types: TypeSystem.TypeDef[], handler: MapperTypeCompilerHandler): this {
+    for (const type of types) {
+      this.handlers.set(type, handler);
+    }
+    return this;
+  }
+
   /**
    * Set a default, wildcard handler to be used to map from source to the target T when a specific handler does not exists
    * @param handler
@@ -62,8 +69,8 @@ export class MapperTypeCompiler<T extends TypeSystem.TypeDef> {
     return this.handlers.get(sourcePropMeta.typeDef.type) || this.defaultHandler;
   }
 
-  clone(): MapperTypeCompiler<T> {
-    return new MapperTypeCompiler<T>(this.type, this.handlers);
+  clone<TNew extends TypeSystem.TypeDef = T>(type?: TNew): MapperTypeCompiler<TNew> {
+    return new MapperTypeCompiler<TNew>(type || this.type as any, this.handlers);
   }
 }
 

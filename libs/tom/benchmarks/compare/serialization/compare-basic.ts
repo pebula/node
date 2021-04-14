@@ -10,7 +10,7 @@ const modelDeepKit = Object.assign(new M.BasicModelDeepKit(), plain);
 const basicModelDeepKitSerializer = DK.jsonSerializer.for(M.BasicModelDeepKit);
 const basicModelTomSerializer = TOM.jsonSerializer.create(M.BasicModelTom, { jitCompiler: 'strict' });
 
-@Suite({ name: 'Framework Compare - Basic'})
+@Suite({ name: 'Serialization Framework Compare - Basic'})
 class TestSuite {
 
   @Case({ name: 'DeepKit - Serialize' })

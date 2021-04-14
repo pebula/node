@@ -37,29 +37,33 @@ const order: Record<TypeDef, number> = {
   number: 40,
   string: 40,
   date: 40,
-  array: 40,
-  set: 40,
-  arrayBuffer: 40,
-  int8Array: 40,
-  int16Array: 40,
-  int32Array: 40,
-  uint8Array: 40,
-  uint16Array: 40,
-  uint32Array: 40,
-  uint8ClampedArray: 40,
-  bigInt64Array: 40,
-  bigUint64Array: 40,
-  float32Array: 40,
-  float64Array: 40,
+
+  tuple: 50,
+
+  arrayBuffer: 51,
+  int8Array: 52,
+  int16Array: 52,
+  int32Array: 52,
+  uint8Array: 52,
+  uint16Array: 52,
+  uint32Array: 52,
+  uint8ClampedArray: 52,
+  bigInt64Array: 52,
+  bigUint64Array: 52,
+  float32Array: 52,
+  float64Array: 52,
+
+  array: 53,
+  set: 53,
 
   // `class` comes before `map` and `objectMap` because the latter can be objects, which are also class instances...
-  class: 50,
+  class: 60,
 
-  map: 60,
+  map: 70,
   // objectMap comes after map, because an map can also be an object map
-  objectMap: 70,
+  objectMap: 80,
 
-  any: 80,
+  any: 90,
 
   // This is just to please the compiler, we can't have union of union, these are flattened out into a single union.
   union: 999,
@@ -89,7 +93,7 @@ function isClassLikePropertySchema(p: TomPropertySchema) {
  * The returned sorted list reflects the order in which runtime objects should be evaluated in order to find the actual type.
  */
 export function determineUnionListResolveOrder(unionType: TomPropertySchema<any>) {
-  const sorted = unionType.unionSubTypes.slice().sort(sortPropertySchemaByTypeOrder);
+  const sorted = unionType.subTypes.slice().sort(sortPropertySchemaByTypeOrder);
   const classLikeProperties = sorted.filter(isClassLikePropertySchema);
   return { sorted, classLikeProperties };
 }

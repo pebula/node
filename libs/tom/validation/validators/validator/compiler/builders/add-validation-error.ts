@@ -15,12 +15,12 @@ const FIXED_VALIDATORS = new Map<Constraint, string>([
  */
 export function createAddErrorCode(ctx: CompilerCodeBlockContext,
                                    prop: CompilerPropertyContext,
-                                   validatorMeta: Constraint,
+                                   validatorInfo: Constraint,
                                    block?: C.Block<C.Block<any>>) {
   let validatorMetaCode: string;
-  const index = prop.propMeta.validators.indexOf(validatorMeta);
+  const index = prop.propMeta.validators.indexOf(validatorInfo);
   validatorMetaCode = index === -1
-    ? FIXED_VALIDATORS.get(validatorMeta) || `{ id: ${JSON.stringify(validatorMeta.id)} }`
+    ? FIXED_VALIDATORS.get(validatorInfo) || `{ id: ${JSON.stringify(validatorInfo.id)} }`
     : `${prop.schemaParam('validators')}[${index}]`
   ;
 

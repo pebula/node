@@ -1,31 +1,32 @@
 import { ApiMixin, FluentMethodPlugin, FluentPropertyPlugin, LazyPluginExtension } from '@pebula/decorate/fluent';
 import { TomPropertyFluentApi, TomPropertySchemaConfig } from '../../../src/lib/schema';
-import { Constraint, RegisteredConstraints, ConstraintErrorMsg } from '../types';
+import { ConstraintDef } from '../definitions';
+import { Constraint, RegisteredConstraints } from '../types';
 
 @LazyPluginExtension(TomPropertyFluentApi)
 export class StringConstraintsFluentApi extends ApiMixin.MixinBase<TomPropertySchemaConfig> {
 
   //#region Validation: string
   @FluentMethodPlugin()
-  @ConstraintErrorMsg<'pattern'>(({value, validatorMeta}) => `Pattern mismatch, "${value}" does not fit the pattern ${validatorMeta.args[0].toString()}`)
+  @ConstraintDef<'pattern'>({ createErrorMsg: ({value, constraint}) => `Pattern mismatch, "${value}" does not fit the pattern ${constraint.args[0].toString()}` })
   pattern(pattern: RegExp | string, flags?: string): this {
     return this.addValidator({ id: 'pattern', args: [typeof pattern === 'string' ? new RegExp(pattern, flags) : pattern] })
   }
 
   @FluentMethodPlugin()
-  @ConstraintErrorMsg<'contains'>(({value, validatorMeta}) => `The value "${value}" does not contain "${validatorMeta.args[0]}"`)
+  @ConstraintDef<'contains'>({ createErrorMsg: ({value, constraint}) => `The value "${value}" does not contain "${constraint.args[0]}"` })
   contains(value:  string): this {
     return this.addValidator({ id: 'contains', args: [value] })
   }
 
   @FluentPropertyPlugin()
-  @ConstraintErrorMsg<'alpha'>(({value, validatorMeta}) => `The value "${value}" contains non alpha characters`)
+  @ConstraintDef<'alpha'>({ createErrorMsg: ({value}) => `The value "${value}" contains non alpha characters` })
   get alpha(): this {
     return this.addValidator({ id: 'alpha' })
   }
 
   @FluentPropertyPlugin()
-  @ConstraintErrorMsg<'alphaNumeric'>(({value, validatorMeta}) => `The value "${value}" contains non alpha-numeric characters`)
+  @ConstraintDef<'alphaNumeric'>({ createErrorMsg: ({value}) => `The value "${value}" contains non alpha-numeric characters` })
   get alphaNumeric(): this {
     return this.addValidator({ id: 'alphaNumeric' })
   }

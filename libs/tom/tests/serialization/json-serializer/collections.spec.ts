@@ -27,7 +27,7 @@ tomDescribeSerializerJIT('@pebula/tom', jsonSerializer, childSerializer => {
   describe('type-compilers - containers (Array / Set / Map)', () => {
     it('From/To Array - Nested', () => {
       class Order {
-        @P.as(() => OrderItem) itemsArray: Array<OrderItem>;
+        @P.asArray(OrderItem) itemsArray: Array<OrderItem>;
       }
 
       const orderSerializer = childSerializer.create(Order);
@@ -50,6 +50,51 @@ tomDescribeSerializerJIT('@pebula/tom', jsonSerializer, childSerializer => {
         expect(item).toBeInstanceOf(OrderItem);
         expect(item).toEqual(items[index]);
       });
+    });
+
+    it('From/To Tuple - Nested', () => {
+      class Order {
+        @P.asArray(P.asTuple('number', OrderItem, P.as('date').optional)) itemsArray: Array<[number, OrderItem, Date?]>;
+      }
+
+      const orderSerializer = childSerializer.create(Order);
+
+      let order = new Order();
+      const date = new Date();
+      order.itemsArray = [
+        [0, items[0]],
+        [1, items[1], date],
+      ];
+
+      const pojo = orderSerializer.serialize(order);
+      expect(pojo.itemsArray).toBeInstanceOf(Array);
+      expect(pojo.itemsArray.length).toBe(2);
+
+      expect(pojo.itemsArray[0]).toBeInstanceOf(Array);
+      expect(pojo.itemsArray[0][0]).toBe(0);
+      expect(pojo.itemsArray[0][1]).toEqual(items[0]);
+      expect(pojo.itemsArray[0][2]).toBeUndefined();
+
+      expect(pojo.itemsArray[1]).toBeInstanceOf(Array);
+      expect(pojo.itemsArray[1][0]).toBe(1);
+      expect(pojo.itemsArray[1][1]).toEqual(items[1]);
+      expect(pojo.itemsArray[1][2]).toEqual(date.toJSON());
+      order = orderSerializer.deserialize(pojo);
+
+      expect(order.itemsArray).toBeInstanceOf(Array);
+      expect(order.itemsArray.length).toBe(2);
+
+      expect(order.itemsArray[0]).toBeInstanceOf(Array);
+      expect(order.itemsArray[0][0]).toBe(0);
+      expect(order.itemsArray[0][1]).not.toBe(items[0]);
+      expect(order.itemsArray[0][1]).toStrictEqual(items[0]);
+      expect(order.itemsArray[0][2]).toBeUndefined();
+
+      expect(order.itemsArray[1]).toBeInstanceOf(Array);
+      expect(order.itemsArray[1][0]).toBe(1);
+      expect(order.itemsArray[1][1]).not.toBe(items[1]);
+      expect(order.itemsArray[1][1]).toStrictEqual(items[1]);
+      expect(order.itemsArray[1][2]).toEqual(date);
     });
 
     it('From Set/To - Nested', () => {
@@ -81,7 +126,7 @@ tomDescribeSerializerJIT('@pebula/tom', jsonSerializer, childSerializer => {
 
     it('From Map/To - Nested', () => {
       class Order {
-        @P.as(() => OrderItem) itemsMap: Map<string, OrderItem>;
+        @P.asMap(() => OrderItem) itemsMap: Map<string, OrderItem>;
       }
 
       const orderSerializer = childSerializer.create(Order);
@@ -110,7 +155,7 @@ tomDescribeSerializerJIT('@pebula/tom', jsonSerializer, childSerializer => {
 
     it('From Array/To - Primitive', () => {
       class Order {
-        @P.as(Number) primitiveArray: Array<Number>;
+        @P.asArray(Number) primitiveArray: Array<Number>;
       }
 
       const orderSerializer = childSerializer.create(Order);
@@ -138,7 +183,7 @@ tomDescribeSerializerJIT('@pebula/tom', jsonSerializer, childSerializer => {
 
     it('From Set/To - Primitive', () => {
       class Order {
-        @P.as(Number) primitiveSet: Set<Number>;
+        @P.asSet(Number) primitiveSet: Set<Number>;
       }
 
       const orderSerializer = childSerializer.create(Order);
@@ -166,7 +211,7 @@ tomDescribeSerializerJIT('@pebula/tom', jsonSerializer, childSerializer => {
 
     it('From Map/To - Primitive', () => {
       class Order {
-        @P.as(Number) primitiveMap: Map<string, Number>;
+        @P.asMap(Number) primitiveMap: Map<string, Number>;
       }
       const orderSerializer = childSerializer.create(Order);
 

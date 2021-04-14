@@ -4,7 +4,7 @@ import * as M from './models';
 
 describe('@pebula/tom/benchmarks', () => {
 
-  it('nested benchmarked objects should match', () => {
+  it('nested serialization benchmarked objects should match', () => {
     const nestedModelTomSerializer = TOM.jsonSerializer.create(M.NestedModelTom, { jitCompiler: 'strict' });
     const nestedModelDeepKitSerializer = DK.jsonSerializer.for(M.NestedModelDeepKit);
     const plain = M.plainNestedModel();

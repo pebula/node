@@ -1,7 +1,9 @@
 import * as FS from 'fs';
 import simpleGit from 'simple-git';
 
-import { TouchStone, Mixin, SimpleConsoleReporter, TouchStoneEndEvent, OnTouchStoneEnd } from '@pebula/touchstone';
+import { TouchStone, Mixin, TouchStoneEndEvent, OnTouchStoneEnd } from '@pebula/touchstone';
+import { PrettyConsoleReporter } from '@pebula/touchstone/reporters/pretty-console';
+
 import './internal-benchmarks';
 import './compare';
 import './js';
@@ -10,9 +12,8 @@ const suiteFilterIndex = process.argv.findIndex( a => a.startsWith('--suite'));
 const filter = suiteFilterIndex > -1 ? process.argv[suiteFilterIndex] : '';
 
 @TouchStone()
-class TestRun extends Mixin(SimpleConsoleReporter) {
+class TestRun extends Mixin(PrettyConsoleReporter) {
   benchmarkOptions = {
-    delay: 0.5,
     initCount: 5,
   };
 

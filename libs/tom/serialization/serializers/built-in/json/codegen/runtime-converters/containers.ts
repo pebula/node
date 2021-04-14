@@ -19,6 +19,24 @@ export function array(v: any, context: ClassSerializerContext<any>, prop: Schema
   }
 }
 
+export function tuple(v: any, context: ClassSerializerContext<any>, prop: Schema.TomPropertySchema) {
+  if (Array.isArray(v)) {
+    const newValue = [];
+    const { subTypes } = prop;
+    for (let i = 0, len = Math.min(subTypes.length, v.length); i < len; i++) {
+      const item = v[i];
+      if (!context.recursionStack?.includes(item)) {
+        const val = transform(context, item, subTypes[i]);
+        newValue.push(val);
+      } else {
+        newValue.push(undefined);
+      }
+    }
+    return newValue;
+  } else {
+    return [];
+  }
+}
 export function set(v: any, context: ClassSerializerContext<any>, prop: Schema.TomPropertySchema) {
   if (context.isSerialize) {
     const newValue = [];

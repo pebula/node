@@ -59,11 +59,11 @@ tomDescribeMapperJIT('@pebula/tom', optionsFactory => {
       }
 
       class P1 {
-        @P.as(() => C1) c: C1[];
+        @P.asArray(() => C1) c: C1[];
       }
 
       class P2 extends Nominal<'P2'>() {
-        @P.as(() => C2) c: C2[];
+        @P.asArray(() => C2) c: C2[];
       }
 
       defineClassMapping(C1, C2, optionsFactory())

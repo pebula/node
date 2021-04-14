@@ -46,6 +46,7 @@ export class DefaultValidator extends Validator {
       .addValidatorCompiler(TVC.date)
 
       .addValidatorCompiler(TVC.array)
+      .addValidatorCompiler(TVC.tuple)
       .addValidatorCompiler(TVC.set)
       .addValidatorCompiler(TVC.map)
       .addValidatorCompiler(TVC.objectMap)
@@ -92,6 +93,7 @@ export class DefaultValidator extends Validator {
       .addRuntimeValidator(TRV.date)
 
       .addRuntimeValidator(TRV.array)
+      .addRuntimeValidator(TRV.tuple)
       .addRuntimeValidator(TRV.set)
       .addRuntimeValidator(TRV.map)
       .addRuntimeValidator(TRV.objectMap)

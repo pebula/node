@@ -8,6 +8,7 @@ export const objectMap = object;
 
 mapperRuntimeTypeDetectorRegistry
   .set('array', array)
+  .set('tuple', array)
   .set('set', set)
   .set('map', map)
   .set('objectMap', objectMap);

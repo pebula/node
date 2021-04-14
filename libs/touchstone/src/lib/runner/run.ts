@@ -32,7 +32,7 @@ function runSuites(context: TsGlobalContext,
           suite.abort();
           done(event);
         })
-        .run();
+        .run({ async: true });
     } else {
       runSuites(context, done, suitCycle);
     }

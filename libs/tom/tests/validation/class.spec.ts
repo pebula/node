@@ -25,29 +25,28 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       model.a.a1 = 15;
 
       let result = childValidator.validate(model);
-      expect(result).toBeInstanceOf(ValidationResult);
-      expect(result.valid).toBe(true);
+      expect(result).toBe(true);
 
       model.a = 123 as any;
-      result = childValidator.validate(model);
+      result = childValidator.validate(model) as ValidationResult<ClassB>;
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
         ['a'],
         'class',
         'type',
-        'Invalid runtime type, expected type class'
+        'Invalid runtime type, expected type ClassA'
       ));
 
       model.a = new ClassB() as any;
-      result = childValidator.validate(model);
+      result = childValidator.validate(model) as ValidationResult<ClassB>;
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
         ['a'],
         'class',
         'type',
-        'Invalid runtime type, expected type class'
+        'Invalid runtime type, expected type ClassA'
       ));
     });
 
@@ -63,7 +62,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       const model = new ClassB();
       model.a = new ClassA();
 
-      let result = childValidator.validate(model);
+      let result = childValidator.validate(model) as ValidationResult<ClassB>;
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(

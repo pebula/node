@@ -25,7 +25,8 @@
     "tsc:build": "./node_modules/.bin/tsc -b ./tsconfig.references.json",
     "help": "nx help",
     "postinstall": "node ./decorate-angular-cli.js && yarn nx build nx-build-pipe && yarn nx build nx-api-extractor",
-    "workspace-generator": "nx workspace-generator"
+    "workspace-generator": "nx workspace-generator",
+    "ts": "./node_modules/.bin/ts-node -r tsconfig-paths/register -P ./tsconfig.base.json -O \"{ \\\"module\\\": \\\"commonjs\\\", \\\"resolveJsonModule\\\": true }\""
   },
   "private": true,
   "dependencies": {
@@ -76,13 +77,17 @@
     "@types/node": "12.12.38",
     "@typescript-eslint/eslint-plugin": "4.3.0",
     "@typescript-eslint/parser": "4.3.0",
+    "ajv": "^8.1.0",
+    "ajv-formats": "^2.0.2",
     "canvas": "^2.7.0",
     "depcheck": "^1.4.0",
     "dotenv": "6.2.0",
     "eslint": "6.8.0",
     "eslint-config-prettier": "8.1.0",
     "expect-type": "^0.11.0",
+    "fastest-validator": "^1.10.1",
     "jest": "26.2.2",
+    "ora": "^5.4.0",
     "prettier": "2.0.4",
     "reflect-metadata": "^0.1.13",
     "simple-git": "^2.37.0",

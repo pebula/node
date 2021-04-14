@@ -3,6 +3,7 @@
     "codegen",
     "nesbus",
     "outdent",
+    "pojo",
     "serializers"
   ]
 }

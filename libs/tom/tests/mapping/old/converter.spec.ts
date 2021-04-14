@@ -179,12 +179,12 @@ tomDescribeMapperJIT('@pebula/tom', optionsFactory => {
   describe('Converter with collections', () => {
     it('should use value converters in collections', () => {
       class OrderDto {
-        @P.as(Types.String)
+        @P.asArray(Types.String)
         dates: Array<string>;
       }
 
       class Order {
-        @P.as(Date)
+        @P.asArray(Date)
         dates: Array<Date>;
       }
 
@@ -242,13 +242,11 @@ tomDescribeMapperJIT('@pebula/tom', optionsFactory => {
         .seal();
 
       class OrderDto {
-        @P.enum(E1)
-        values: Array<E1>;
+        @P.asArray(P.enum(E1)) values: Array<E1>;
       }
 
       class Order {
-        @P.enum(E2)
-        values: Array<E2>;
+        @P.asArray(P.enum(E2)) values: Array<E2>;
       }
 
       defineClassMapping(OrderDto, Order, optionsFactory())

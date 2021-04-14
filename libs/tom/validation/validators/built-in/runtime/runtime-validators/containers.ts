@@ -1,3 +1,4 @@
+import { Schema } from '@pebula/tom';
 import { TypeRuntimeValidator, Validator } from '../../../validator';
 import { string } from './primitive';
 
@@ -12,6 +13,26 @@ export const array = new TypeRuntimeValidator<Validator, Array<any>>('array')
       for (let i = 0, len = value.length; i < len; i++) {
         ctx.currentIndexOrKey = i;
         ctx.validateProperty(value[i], subProp);
+      }
+      ctx.currentIndexOrKey = undefined;
+    }
+  });
+
+export const tuple = array.clone<Array<any>>('tuple')
+  .setHandler('type', (value, ctx, prop, validatorMeta) => {
+    if (Array.isArray(value)) {
+      if (value.length >= Schema.getTupleMinItems(prop)) {
+        return false;
+      }
+    }
+    return true;
+  })
+  .setPostValidationHandler((value, ctx, prop) => {
+    if (value.length > 0) {
+      const subProps = prop.subTypes;
+      for (let i = 0, len = value.length; i < len; i++) {
+        ctx.currentIndexOrKey = i;
+        ctx.validateProperty(value[i], subProps[i]);
       }
       ctx.currentIndexOrKey = undefined;
     }

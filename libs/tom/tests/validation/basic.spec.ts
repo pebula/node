@@ -14,8 +14,8 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
 
       const model = new Model()
       const result = childValidator.validate(model);
-      expect(result).toBeInstanceOf(ValidationResult);
-      expect(result.valid).toBe(true);
+      expect(result).toBe(true);
+
     });
 
     it('should emit all error if not short circuited or a single error if short circuit is enabled', () => {
@@ -26,7 +26,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       }
 
       const model = new Model()
-      let result = childValidator.validate(model);
+      let result = childValidator.validate(model) as ValidationResult<Model>;
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(3);
       expect(result.errors).toStrictEqual([
@@ -35,7 +35,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
         new ValidationError(['v3'], 'boolean', 'required', 'Property is required'),
       ]);
 
-      result = childValidator.fork('Short Circuited').setDefault('shortCircuit', true).validate(model);
+      result = childValidator.fork('Short Circuited').setDefault('shortCircuit', true).validate(model) as ValidationResult<Model>;
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors).toStrictEqual([
@@ -50,7 +50,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       }
 
       const model = new Model()
-      let result = childValidator.validate(model);
+      let result = childValidator.validate(model) as ValidationResult<Model>;
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
@@ -61,17 +61,15 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       ));
 
       model.value = 1;
-      result = childValidator.validate(model);
-      expect(result).toBeInstanceOf(ValidationResult);
-      expect(result.valid).toBe(true);
+      expect(childValidator.validate(model)).toBe(true);
+
 
       model.freeAgent = 2;
-      result = childValidator.validate(model);
-      expect(result).toBeInstanceOf(ValidationResult);
-      expect(result.valid).toBe(true);
+      expect(childValidator.validate(model)).toBe(true);
+
 
       delete model.value;
-      result = childValidator.validate(model);
+      result = childValidator.validate(model) as ValidationResult<Model>;
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
@@ -91,7 +89,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
       const model = new Model()
       model.value = [1, '2' as any];
       model.freeAgent = [];
-      let result = childValidator.validate(model);
+      let result = childValidator.validate(model) as ValidationResult<Model>;
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
@@ -103,14 +101,11 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
 
       model.value = [1];
       model.freeAgent = [1, '2' as any];
-      result = childValidator.validate(model);
-      expect(result).toBeInstanceOf(ValidationResult);
-      expect(result.valid).toBe(true);
+      expect(childValidator.validate(model)).toBe(true);
+
 
       model.freeAgent = [1];
-      result = childValidator.validate(model);
-      expect(result).toBeInstanceOf(ValidationResult);
-      expect(result.valid).toBe(true);
+      expect(childValidator.validate(model)).toBe(true);
 
     });
   });
@@ -125,11 +120,11 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
 
       model.value = 1;
       let result = childValidator.validate(model);
-      expect(result).toBeInstanceOf(ValidationResult);
-      expect(result.valid).toBe(true);
+      expect(result).toBe(true);
+
 
       delete model.value;
-      result = childValidator.validate(model);
+      result = childValidator.validate(model) as ValidationResult<Model>;
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
@@ -150,13 +145,13 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
 
       model.value = 1;
       let result = childValidator.validate(model);
-      expect(result).toBeInstanceOf(ValidationResult);
-      expect(result.valid).toBe(true);
+      expect(result).toBe(true);
+
 
       delete model.value;
       result = childValidator.validate(model);
-      expect(result).toBeInstanceOf(ValidationResult);
-      expect(result.valid).toBe(true);
+      expect(result).toBe(true);
+
     });
 
     it('should skip required if nullable and value is null, if undefined throw', () => {
@@ -168,17 +163,16 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
 
       model.value = 1;
       let result = childValidator.validate(model);
-      expect(result).toBeInstanceOf(ValidationResult);
-      expect(result.valid).toBe(true);
+      expect(result).toBe(true);
+
 
       model.value = null;
       result = childValidator.validate(model);
-      expect(result).toBeInstanceOf(ValidationResult);
-      expect(result.valid).toBe(true);
+      expect(result).toBe(true);
+
 
       delete model.value;
-      result = childValidator.validate(model);
-      expect(result).toBeInstanceOf(ValidationResult);
+      result = childValidator.validate(model) as ValidationResult<Model>;
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);
       expect(result.errors[0]).toStrictEqual(new ValidationError(
@@ -198,18 +192,18 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
 
       model.value = 1;
       let result = childValidator.validate(model);
-      expect(result).toBeInstanceOf(ValidationResult);
-      expect(result.valid).toBe(true);
+      expect(result).toBe(true);
+
 
       model.value = null;
       result = childValidator.validate(model);
-      expect(result).toBeInstanceOf(ValidationResult);
-      expect(result.valid).toBe(true);
+      expect(result).toBe(true);
+
 
       delete model.value;
       result = childValidator.validate(model);
-      expect(result).toBeInstanceOf(ValidationResult);
-      expect(result.valid).toBe(true);
+      expect(result).toBe(true);
+
     });
   });
 

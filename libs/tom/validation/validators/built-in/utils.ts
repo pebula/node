@@ -1,4 +1,4 @@
-import { TypeSystem } from '@pebula/tom';
+import { TypeSystem, Schema } from '@pebula/tom';
 const ESC_REGEX = /'/;
 
 export const ALPHA_REGEX = /^[A-Za-z]+$/;
@@ -11,5 +11,4 @@ export function escapeEnumValue(record: TypeSystem.EnumRecord) {
 export function escapeEnumLabel(record: TypeSystem.EnumRecord) {
   return `'${record.label.replace(ESC_REGEX, `\'`)}'`;
 }
-
 

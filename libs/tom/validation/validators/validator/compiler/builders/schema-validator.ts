@@ -19,10 +19,13 @@ export function schemaValidatorCompiler<S extends Validator,
   const mainBlock = context.currentBlock;
   const propertyCodeBlocks = context.validatorContext.propertyBlockCompilers.map( c => c.handler ).filter( c => !!c);
 
+  const varName = mainBlock.addVariable(false).name;
+
   for (const propContext of context.generator) {
     context.currentBlock = mainBlock.addVirtualBlock();
+    context.currentBlock.addAssignment(varName, getValueFromSourceCode(propContext));
     propertyValidatorCompiler(
-      new CompilerCodeBlockContext(context.currentBlock, getValueFromSourceCode(propContext)),
+      new CompilerCodeBlockContext(context.currentBlock, varName),
       propContext,
       propertyCodeBlocks,
     );
@@ -43,13 +46,12 @@ function generateValidatorFunction(context: CompilerContext) {
 
   context.program
     .addReturnDeclaration(new C.FunctionBlock(context.program))
-    .returnExpression.addParams(MAPPER.CTX_PARAM, MAPPER.LOCK_SYNC) // FunctionBlock
+    .returnExpression.addParams(MAPPER.INPUT_PARAM, MAPPER.CTX_PARAM, MAPPER.LOCK_SYNC) // FunctionBlock
       // Body of function block
-      .addVariable(true, MAPPER.INPUT_PARAM).assignValue(`${MAPPER.CTX_PARAM}.target`).parent
       .addVirtualBlock().use( c => initVirtualBlock = c).parent
       .addVirtualBlock().use( c => context.currentBlock = c ).parent
       .addVirtualBlock().use( c => disposeVirtualBlock = c).parent
-      .addReturnDeclaration(`${MAPPER.CTX_PARAM}.result`);
+      .addReturnDeclaration(`!${MAPPER.CTX_PARAM}.hasError || ${MAPPER.CTX_PARAM}.result`);
 
   return { initVirtualBlock, disposeVirtualBlock };
 }

@@ -62,6 +62,7 @@ export class JsonSerializer extends Serializer<JsonSerializerFactoryOptions> {
     }
 
     this.setTypeCompiler('array').register(TC.array, TC.array);
+    this.setTypeCompiler('tuple').register(TC.tuple, TC.tuple);
     this.setTypeCompiler('set').register(TC.set, TC.set);
     this.setTypeCompiler('map').register(TC.map, TC.map);
     this.setTypeCompiler('objectMap').register(TC.objectMap, TC.objectMap);
@@ -86,6 +87,7 @@ export class JsonSerializer extends Serializer<JsonSerializerFactoryOptions> {
     }
 
     this.setTypeDetectorCompiler('array').register(TDC.array, TDC.array);
+    this.setTypeDetectorCompiler('tuple').register(TDC.tuple, TDC.tuple);
     this.setTypeDetectorCompiler('set').register(TDC.set, TDC.set);
     this.setTypeDetectorCompiler('map').register(TDC.map, TDC.map);
     this.setTypeDetectorCompiler('objectMap').register(TDC.objectMap, TDC.objectMap);
@@ -110,6 +112,7 @@ export class JsonSerializer extends Serializer<JsonSerializerFactoryOptions> {
     }
 
     this.setRuntimeConverter('array').register(RTC.array, RTC.array);
+    this.setRuntimeConverter('tuple').register(RTC.tuple, RTC.tuple);
     this.setRuntimeConverter('set').register(RTC.set, RTC.set);
     this.setRuntimeConverter('map').register(RTC.map, RTC.map);
     this.setRuntimeConverter('objectMap').register(RTC.objectMap, RTC.objectMap);
@@ -133,6 +136,7 @@ export class JsonSerializer extends Serializer<JsonSerializerFactoryOptions> {
     }
 
     this.setRuntimeTypeDetector('array').register(RTTD.array, RTTD.array);
+    this.setRuntimeTypeDetector('tuple').register(RTTD.tuple, RTTD.tuple);
     this.setRuntimeTypeDetector('set').register(RTTD.set, RTTD.set);
     this.setRuntimeTypeDetector('map').register(RTTD.map, RTTD.map);
     this.setRuntimeTypeDetector('objectMap').register(RTTD.objectMap, RTTD.objectMap);

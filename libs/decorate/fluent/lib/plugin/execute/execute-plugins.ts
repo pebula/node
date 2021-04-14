@@ -27,7 +27,7 @@ export function executePlugins(instance: BaseFluentApi | DecorMixinBase, schema:
 
 export function executePluginsLocal(instance: BaseFluentApi, plugins: Array<[PluginClassifierRecord, any[]?]>): void {
   while (plugins.length) {
-    const [plugin, args] = plugins.pop();
+    const [plugin, args] = plugins.shift(); // We take from the start to match the code flow definition (@P.optional.min(5).max(7))
     switch (plugin.type) {
       case 'fluentProperty':
         plugin.decoratorArgs.descriptor.get.call(instance);

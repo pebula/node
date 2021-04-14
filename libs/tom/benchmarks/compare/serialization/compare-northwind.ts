@@ -8,7 +8,7 @@ const tomNorthWindSerializer = TOM.jsonSerializer
 const tomCustomerSerializer = NW.Tom.northWindSerializer.create(NW.Tom.Customer);
 const deepKitCustomerSerializer = NW.DeepKit.northWindSerializer.for(NW.DeepKit.Customer);
 
-@Suite({ name: 'Framework Compare - NorthWind', caseInvokeType: 'method' })
+@Suite({ name: 'Serialization Framework Compare - NorthWind', caseInvokeType: 'method' })
 class TestSuite {
 
   plainCustomers: NW.NorthWind.Customer[];

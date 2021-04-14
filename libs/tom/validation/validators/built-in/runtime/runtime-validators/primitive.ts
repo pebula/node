@@ -19,9 +19,6 @@ export const number = new TypeRuntimeValidator<Validator, number>('number')
   .setHandler('equal', (value, ctx, prop, constraintData) => {
     return value !== constraintData.args[0];
   })
-  .setHandler('notEqual', (value, ctx, prop, constraintData) => {
-    return value === constraintData.args[0];
-  })
   .setHandler('integer', (value) => {
     return value % 1 !== 0;
   })

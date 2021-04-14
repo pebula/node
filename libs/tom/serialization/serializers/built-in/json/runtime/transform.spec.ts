@@ -58,8 +58,7 @@ describe('@pebula/tom', () => {
 
     it('should transform a simple plain object', () => {
       class C {
-        @P
-        p: any;
+        @P p: any;
       }
 
       const t = createTransformHelpers(C, 'serialize');
@@ -71,8 +70,7 @@ describe('@pebula/tom', () => {
 
     it('should transform nested plain objects', () => {
       class C {
-        @P
-        p: any;
+        @P p: any;
       }
 
       const t = createTransformHelpers(C, 'serialize');
@@ -105,8 +103,7 @@ describe('@pebula/tom', () => {
 
     it('should transform arrays', () => {
       class C {
-        @P.as(() => Object)
-        p: any[];
+        @P.asArray('any') p: any[];
       }
 
       const t = createTransformHelpers(C, 'serialize');
@@ -118,8 +115,7 @@ describe('@pebula/tom', () => {
 
     it('should transform complex nested arrays and objects', () => {
       class C {
-        @P.as(() => Object)
-        p: any[];
+        @P.asArray(Object) p: any[];
       }
 
       const t = createTransformHelpers(C, 'serialize');
@@ -137,16 +133,11 @@ describe('@pebula/tom', () => {
 
     it('should convert primitive types', () => {
       class C {
-        @P
-        pString: string;
-        @P.nullable
-        pStringNullable: string;
-        @P
-        pNumber: number;
-        @P
-        pBoolean: boolean;
-        @P.as(() => Date)
-        pDate: Date;
+        @P pString: string;
+        @P.nullable pStringNullable: string;
+        @P pNumber: number;
+        @P pBoolean: boolean;
+        @P.as(Date) pDate: Date;
       }
       const t = createTransformHelpers(C, 'deserialize');
 
@@ -172,8 +163,7 @@ describe('@pebula/tom', () => {
 
     it('should transform a simple plain object', () => {
       class C {
-        @P
-        p: any;
+        @P p: any;
       }
 
       const t = createTransformHelpers(C, 'deserialize');
@@ -185,8 +175,7 @@ describe('@pebula/tom', () => {
 
     it('should transform nested plain objects', () => {
       class C {
-        @P
-        p: any;
+        @P p: any;
       }
 
       const t = createTransformHelpers(C, 'deserialize');
@@ -200,8 +189,7 @@ describe('@pebula/tom', () => {
 
     it('should transform nested plain objects with circular reference protection', () => {
       class C {
-        @P
-        p: any;
+        @P p: any;
       }
 
       const t = createTransformHelpers(C, 'deserialize');
@@ -219,8 +207,7 @@ describe('@pebula/tom', () => {
 
     it('should transform arrays', () => {
       class C {
-        @P.as(() => Object)
-        p: any[];
+        @P.asArray(() => Object) p: any[];
       }
 
       const t = createTransformHelpers(C, 'deserialize');
@@ -232,8 +219,7 @@ describe('@pebula/tom', () => {
 
     it('should transform complex nested arrays and objects', () => {
       class C {
-        @P.as(() => Object)
-        p: any[];
+        @P.asArray('any') p: any[];
       }
 
       const t = createTransformHelpers(C, 'deserialize');

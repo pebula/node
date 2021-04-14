@@ -21,18 +21,14 @@ declare module '../../../../serializer/compiler/context/compiler-code-block-cont
 }
 
 /**
- * Wrap `checkCircularRef` for array, checking if `checkCircularRef` wrapped the block (there is potential circular ref)
- * If so, we remove that item from the array and update the loop params.
+ * Returns a code gen block only when the circular reference block has hit.
+ * I.E it will return the if block so you can handle `else()`
  */
-function arrayCircularRefFactory(arrName: string, indexName: string, lenName: string) {
+function addCodeToCircularReferenceHit(fn: (b: C.IfBlock<any>) => void) {
   return (currentContext: CompilerCodeBlockContext, prop: CompilerPropertyContext) => {
     const returnContext = SHARED_PCB.checkCircularRef(currentContext, prop);
     if (returnContext !== currentContext && returnContext.currentBlock instanceof C.IfBlock) {
-      returnContext.currentBlock
-        .else()
-        .addCodeExpression(`${arrName}.splice(${indexName}, 1)`).parent
-        .addCodeExpression(`${indexName} -= 1`).parent
-        .addCodeExpression(`${lenName} -= 1`).parent
+      fn(returnContext.currentBlock);
     }
     return returnContext;
   }
@@ -68,7 +64,14 @@ export function array(ctx: CompilerCodeBlockContext, prop: CompilerPropertyConte
             const newPropContext = new CompilerPropertyContext(prop.context, prop.ref, prop.propMapSchema.subType)
             const propertyCodeBlocks = [SHARED_PCB.handleCopyRef.deserializer, PCB.nonContainerPreAssignLogic.deserializer];
             if (isSerialize) {
-              propertyCodeBlocks.push(arrayCircularRefFactory(tempArrName, c.indexName, c.lengthVarName));
+              //  Wrap `checkCircularRef` for array, checking if `checkCircularRef` wrapped the block (there is potential circular ref)
+              //  If so, we remove that item from the array and update the loop params.
+              propertyCodeBlocks.push(addCodeToCircularReferenceHit(b => {
+                b.else()
+                  .addCodeExpression(`${tempArrName}.splice(${c.indexName}, 1)`).parent
+                  .addCodeExpression(`${c.indexName} -= 1`).parent
+                  .addCodeExpression(`${ c.lengthVarName} -= 1`).parent
+              }));
             }
             chainBlocks(
               newBlockContext,
@@ -80,6 +83,41 @@ export function array(ctx: CompilerCodeBlockContext, prop: CompilerPropertyConte
       .parent
     .else()
       .addAssignment(`${ctx.targetSetter}`, `[]`);
+}
+
+export function tuple(ctx: CompilerCodeBlockContext, prop: CompilerPropertyContext) {
+  const { context, propMapSchema } = prop;
+  const isSerialize = context.isSerialize;
+  const serializerContext = getSerializerContext(context.serializer);
+  const subTypes = propMapSchema.targetPropMeta.subTypes;
+
+  ctx.currentBlock
+  .addIfBlock()
+    .setCondition(new C.IsArrayExpression(ctx.currentBlock, ctx.sourceAccessor))
+    .use(block => {
+      block.addAssignment(`${ctx.targetSetter}`, `${ctx.sourceAccessor}.slice()`);
+      for (let i = 0, len = subTypes.length; i < len; i++) {
+        const subType = subTypes[i];
+        const newPropContext = new CompilerPropertyContext(context, prop.ref, propMapSchema.createSubPropertySerializer(subType));
+        const typeCompilerHandler = serializerContext.findTypeCompilerHandler(subType.typeDef.type, context.isSerialize);
+        const propertyCodeBlocks = [SHARED_PCB.handleCopyRef.deserializer, PCB.nonContainerPreAssignLogic.deserializer];
+
+        if (isSerialize) {
+          //  Wrap `checkCircularRef` for array, checking if `checkCircularRef` wrapped the block (there is potential circular ref)
+          //  If so, we remove that item from the array and update the loop params.
+          propertyCodeBlocks.push(addCodeToCircularReferenceHit(b => {
+            b.else().addAssignment(`${ctx.targetSetter}[${i}]`, 'undefined');
+          }));
+        }
+
+        chainBlocks(
+          ctx.clone(block, `${ctx.sourceAccessor}[${i}]`, `${ctx.targetSetter}[${i}]`),
+          newPropContext,
+          ...propertyCodeBlocks,
+          typeCompilerHandler
+        );
+      }
+    });
 }
 
 export function set(ctx: CompilerCodeBlockContext, prop: CompilerPropertyContext) {

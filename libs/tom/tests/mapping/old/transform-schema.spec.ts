@@ -303,12 +303,9 @@ class Order {
   id: number;
   @P.groups('admin')
   customer: Customer;
-  @P.as(() => Address)
-  addresses: Address[];
-  @P.as(() => OrderItem)
-  items: Set<OrderItem>;
-  @P.as(() => OrderItem)
-  additionalItems: Map<string, OrderItem>;
+  @P.asArray(() => Address) addresses: Address[];
+  @P.asSet(() => OrderItem) items: Set<OrderItem>;
+  @P.asMap(() => OrderItem) additionalItems: Map<string, OrderItem>;
   @P
   shipping: ShippingOption;
   @P
@@ -316,14 +313,10 @@ class Order {
     type: 'creditCard' | 'paypal' | 'bitcoin';
     currency: string;
   };
-  @P.as(() => Number)
-  dictionary: Map<string, number>;
-  @P
-  supportDeepPath: string;
-  @P
-  directReferenceCopy: { [key: string]: any };
-  @P
-  adHocData: { verify: boolean };
+  @P.asMap(() => Number) dictionary: Map<string, number>;
+  @P supportDeepPath: string;
+  @P directReferenceCopy: { [key: string]: any };
+  @P adHocData: { verify: boolean };
 }
 /* ---------------------------------------------- */
 

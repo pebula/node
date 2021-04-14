@@ -36,7 +36,7 @@ export type BufferRuntimeTypes =
 export type EnumType = Enum | ( () => Enum );
 
 export type NativeTypes = 'boolean' | 'number' | 'bigInt' | 'string' | 'date'
-export type ContainerTypes = 'array' | 'set' | 'map' | 'objectMap';
+export type ContainerTypes = 'array' | 'set' | 'tuple' | 'map' | 'objectMap';
 export type TypedBufferTypes =
   | 'int8Array'
   | 'int16Array'
@@ -73,6 +73,7 @@ export interface TomTypesInstanceDataMap {
   enum: EnumType;
   array: [valueType: TomTypeInstance];
   set: [valueType: TomTypeInstance];
+  tuple: TomTypeInstance[];
   map: [valueType: TomTypeInstance, key?: TomTypeInstance];
   objectMap: [valueType: TomTypeInstance, key?: TomTypeInstance<'string' | 'number' | 'any'>];
   literal: string | number | true | false | undefined | null;
@@ -106,6 +107,7 @@ export const containerRuntimeTypeDefMap = new Map<ContainerRuntimeTypes, Contain
 export const containerTypeDefMap = new Map<ContainerTypes, ContainerRuntimeTypes>(
   Array.from(containerRuntimeTypeDefMap.entries()).map( e => e.reverse() as [ContainerTypes, ContainerRuntimeTypes])
 );
+containerTypeDefMap.set('tuple', Array);
 
 export const typedBufferRuntimeTypeDefMap = new Map<TypedBufferRuntimeTypes, TypedBufferTypes>([
   [Int8Array, 'int8Array'],
@@ -143,6 +145,7 @@ export interface TypeMap {
   string: string,
   date: Date;
   array: Array<any>;
+  tuple: Array<any>;
   set: Set<any>;
   map: Map<any, any>;
   objectMap: object;

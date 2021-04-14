@@ -1,3 +1,4 @@
+import { LazyInit } from '@pebula/decorate';
 import { Schema } from '@pebula/tom';
 import { Constraint, createConstraintErrorMsg, ConstraintNames } from '../../constraints';
 import { ClassValidationSchema } from '../../schema';
@@ -16,6 +17,22 @@ export interface PropertyValidatorContext<T, D = any> {
 
 export class ClassValidatorContext<T, D = any> implements PropertyValidatorContext<T ,D> {
 
+  get hasError(): boolean {
+    return this._result ? !this.result.valid : false;
+  }
+
+  get result(): ValidationResult<T> {
+    if (!this._result) {
+      this._result = this.parent?.result ?? new ValidationResult<T>(this.target);
+    }
+    return this._result;
+  }
+
+  @LazyInit(function(this: ClassValidatorContext<T>) {
+    return this.parent?.recursionStack ?? [];
+  })
+  readonly recursionStack: any[]
+
   /**
    * If set, indicates that we are currently processing a child of a container item.
    * If the container is an `array` or `set` it will be the index number.
@@ -26,26 +43,25 @@ export class ClassValidatorContext<T, D = any> implements PropertyValidatorConte
 
   private validatorContext: ValidatorContext;
   private classParentProp: Schema.TomPropertySchema;
+  private _result: ValidationResult<T>;
 
-  protected constructor(public readonly target: T,
+  constructor(public readonly target: T,
                         public readonly schema: ClassValidationSchema<Validator, T>,
                         public readonly options: ValidatorOptions<T, D>,
-                        public readonly recursionStack: any[],
-                        public readonly result: ValidationResult<T>,
                         public readonly parent: ClassValidatorContext<any, D> | null) {
     this.validatorContext = parent?.validatorContext ?? getValidatorContext(schema.validator);
   }
 
   static create<T, D = any>(target: T, schema: ClassValidationSchema<Validator, T>, options: ValidatorOptions<T, D>): ClassValidatorContext<T, D> {
-    return new ClassValidatorContext<T>(target, schema, options, [], new ValidationResult(target), null);
+    return new ClassValidatorContext<T>(target, schema, options, null);
   }
 
   addValidationError<T extends ConstraintNames = ConstraintNames>(value: any,
-                                                                prop: Schema.TomPropertySchema,
-                                                                validatorMeta: Constraint<T>) {
+                                                                  prop: Schema.TomPropertySchema,
+                                                                  constraint: Constraint<T>) {
     const paths = this.getPath(prop);
-    const msg = createConstraintErrorMsg(value, paths, prop, validatorMeta);
-    const error = new ValidationError(paths, prop.typeDef.type, validatorMeta.id, msg);
+    const msg = createConstraintErrorMsg(value, paths, prop, constraint);
+    const error = new ValidationError(paths, prop.typeDef.type, constraint.id, msg);
     this.result.errors.push(error);
   }
 
@@ -54,8 +70,6 @@ export class ClassValidatorContext<T, D = any> implements PropertyValidatorConte
       target,
       schema || (this.schema as any),
       this.options,
-      this.recursionStack,
-      this.result as ValidationResult,
       this
     );
   }
@@ -77,11 +91,11 @@ export class ClassValidatorContext<T, D = any> implements PropertyValidatorConte
   /**
    * Executes a runtime schema validation
    */
-  validateSchema<Q = any>(value: Q, prop: Schema.TomPropertySchema<Q>): ValidationResult<Q> {
+  validateSchema<Q = any>(value: Q, prop: Schema.TomPropertySchema<Q>): true | ValidationResult<Q> {
     const schema = this.schema.validator.create(prop.type);
     const childCtx = this.createChild(value, schema);
     childCtx.classParentProp = prop;
-    return schema.validate(childCtx);
+    return schema.validate(value, childCtx);
   }
 
   /**

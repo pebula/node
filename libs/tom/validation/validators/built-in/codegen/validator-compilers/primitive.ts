@@ -29,11 +29,6 @@ export const number = new TypeValidatorCompiler('number')
       ctx.currentBlock.addIfBlock().setCondition(`${ctx.sourceAccessor} !== ${constraintData.args[0]}`)
     );
   })
-  .setHandler('notEqual', (ctx, prop, constraintData) => {
-    return ctx.clone(
-      ctx.currentBlock.addIfBlock().setCondition(`${ctx.sourceAccessor} === ${constraintData.args[0]}`)
-    );
-  })
   .setHandler('integer', (ctx) => {
     return ctx.clone(
       ctx.currentBlock.addIfBlock().setCondition(`${ctx.sourceAccessor} % 1 !== 0`)

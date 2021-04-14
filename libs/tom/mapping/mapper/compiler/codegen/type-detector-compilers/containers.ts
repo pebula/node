@@ -6,6 +6,8 @@ export function array(ctx: CompilerCodeBlockContext<C.ConditionalBlock<any>>, pr
   return ctx.clone(block);
 }
 
+export const tuple = array;
+
 export function set(ctx: CompilerCodeBlockContext<C.ConditionalBlock<any>>, prop: CompilerPropertyContext) {
   const block = ctx.currentBlock.setCondition(`${ctx.sourceAccessor} instanceof Set`);
   return ctx.clone(block);
@@ -23,6 +25,7 @@ export function objectMap(ctx: CompilerCodeBlockContext<C.ConditionalBlock<any>>
 
 mapperTypeDetectorCompilerRegistry
   .set('array', array)
+  .set('tuple', tuple)
   .set('set', set)
   .set('map', map)
   .set('objectMap', objectMap);

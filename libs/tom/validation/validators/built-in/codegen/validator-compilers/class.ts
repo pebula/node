@@ -8,8 +8,13 @@ export const classValidatorCompiler = new TypeValidatorCompiler('class')
     );
   })
   .setPostValidationHandler((ctx, prop) => {
+    const schema = prop.context.classValidationSchema.validator.create(prop.propMeta.type);
+    const nestedSchemaVar = prop.context.setContextVar(schema);
+
+    const childCtxVar = ctx.currentBlock.addVariable(true).assignValue(`${MAPPER.CTX_PARAM}.createChild(${ctx.sourceAccessor}, ${nestedSchemaVar})`).name;
     ctx.currentBlock
-      .addCodeExpression(`${MAPPER.CTX_PARAM}.validateSchema(${ctx.sourceAccessor}, ${prop.schemaParam()})`);
+      .addCodeExpression(`${childCtxVar}.classParentProp = ${prop.schemaParam()}`).parent
+      .addCodeExpression(`${nestedSchemaVar}.validate(${ctx.sourceAccessor}, ${childCtxVar})`);
 
     if (prop.context.options.shortCircuit) {
       ctx.currentBlock

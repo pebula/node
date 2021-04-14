@@ -26,6 +26,13 @@ export class MapperTypeConverter<T extends TypeSystem.TypeDef, TType = any> {
     return this;
   }
 
+  setHandlers<SType = any>(types: TypeSystem.TypeDef[], handler: MapperTypeConverterHandler<SType, TType>): this {
+    for (const type of types) {
+      this.handlers.set(type, handler);
+    }
+    return this;
+  }
+
   setDefaultHandler(handler: MapperTypeConverterHandler<any, TType>): this {
     this.defaultHandler = handler;
     return this;
@@ -52,8 +59,8 @@ export class MapperTypeConverter<T extends TypeSystem.TypeDef, TType = any> {
     return this.handlers.get(sourcePropMeta.typeDef.type) || this.defaultHandler;
   }
 
-  clone(): MapperTypeConverter<T, TType> {
-    return new MapperTypeConverter<T, TType>(this.type, this.handlers);
+  clone<TNew extends TypeSystem.TypeDef = T, TTypeNew = TType>(type?: TNew): MapperTypeConverter<TNew, TTypeNew> {
+    return new MapperTypeConverter<TNew, TTypeNew>(type || this.type as any, this.handlers);
   }
 }
 

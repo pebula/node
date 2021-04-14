@@ -38,10 +38,10 @@ export function chainBlocks(codeContext: CompilerCodeBlockContext, propContext: 
  */
 export function runTypeValidationBlock(codeContext: CompilerCodeBlockContext,
                                        propContext: CompilerPropertyContext,
-                                       validatorMeta: Constraint,
+                                       constraint: Constraint,
                                        block: TypeValidationCompilerHandler): CompilerCodeBlockContext<C.IfBlock<C.Block<any>>> | undefined {
   if (!codeContext.terminated) {
-    const resultCtx = block(codeContext, propContext, validatorMeta);
+    const resultCtx = block(codeContext, propContext, constraint);
     if (resultCtx) {
       const { currentBlock } = resultCtx;
       if (currentBlock !== codeContext.currentBlock) {

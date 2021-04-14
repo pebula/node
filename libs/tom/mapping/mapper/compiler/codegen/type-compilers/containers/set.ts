@@ -62,6 +62,36 @@ export const set = new MapperTypeCompiler('set')
   .setHandler('map', (ctx, prop) => {
     const block = ctx.currentBlock.addIfBlock().setCondition(`${ctx.sourceAccessor} instanceof Map`);
     setCompiler(ctx.clone(block, `Array.from(${ctx.sourceAccessor}.values())`), prop);
+  })
+  .setHandler('tuple', (ctx, prop) => {
+    const { propMapSchema } = prop;
+    const tSubType = propMapSchema.targetPropMeta.subType;
+    const sSubTypes = propMapSchema.sourcePropMeta.subTypes;
+
+    const block = ctx.currentBlock.addIfBlock().setCondition(new C.IsArrayExpression(ctx.currentBlock, ctx.sourceAccessor));
+    const arrName = block.addVariable(true).assignValue(`${ctx.sourceAccessor}.slice()`).name;
+    const tempItemVar = block.addVariable(false).name;
+    block.addAssignment(ctx.targetSetter, `new Set()`);
+
+    for (let i = 0, len = sSubTypes.length; i < len; i++) {
+      const childPropMapSchema = prop.propMapSchema.createChild(tSubType, sSubTypes[i]);
+      const newPropContext = new CompilerPropertyContext(
+        prop.context,
+        prop.ref,
+        childPropMapSchema,
+        prop.context.setContextVar(childPropMapSchema)
+      );
+
+      const propertyCodeBlocks = [handleCopyRef, checkCircularRef];
+
+      chainBlocks(
+        ctx.clone(ctx.currentBlock, `${arrName}[${i}]`, `${tempItemVar}`),
+        newPropContext,
+        (ctx, prop) => generatePropertyMap(ctx, prop, propertyCodeBlocks),
+      );
+
+      block.addCodeExpression(`${ctx.targetSetter}.add(${tempItemVar})`);
+    }
   });
 
 mapperTypeCompilerRegistry.set(set);

@@ -6,7 +6,7 @@ import { transform } from '../../transform';
 function *traverseUnion<S, T>(tProp: Schema.TomPropertySchema<T>, sProp: Schema.TomPropertySchema<S>) {
   const { sorted, classLikeProperties } = Schema.determineUnionListResolveOrder(tProp);
   const sourceUnionSubTypes = sProp.isUnion
-    ? sProp.unionSubTypes.slice()
+    ? sProp.subTypes.slice()
     : [sProp]
   ;
 

@@ -17,7 +17,7 @@ export function union(ctx: CompilerCodeBlockContext, prop: CompilerPropertyConte
   let newBlockContext: CompilerCodeBlockContext<C.ConditionalBlock<C.Block<any>, C.InlineExpression<C.Block<any>>>>;
   for (const { detector, subType } of unionList) {
     newBlockContext = newBlockContext ? newBlockContext.clone(ifBlock.elseIf()) : ctx.clone(ifBlock as C.ConditionalBlock<C.Block<any>>);
-    const newPropContext = new CompilerPropertyContext(context, prop.ref, createSubPropertySerializer(propMapSchema, subType));
+    const newPropContext = new CompilerPropertyContext(context, prop.ref, propMapSchema.createSubPropertySerializer(subType));
     const typeDetectorContext = chainBlocks(newBlockContext, newPropContext, detector);
     const typeCompilerHandler = serializerContext.findTypeCompilerHandler(subType.typeDef.type, context.isSerialize);
     chainBlocks(
@@ -54,11 +54,4 @@ function prepareUnionTypeList(context: SerializerContext,
   }
 
   return result;
-}
-
-function createSubPropertySerializer(unionType: PropertySerializerSchema<any>, propSchema: Schema.TomPropertySchema): PropertySerializerSchema<any> {
-  const subType = new PropertySerializerSchema({}, unionType.prop, unionType.target);
-  subType.copyByRef = unionType.copyByRef;
-  Object.defineProperty(subType, 'targetPropMeta', { value: propSchema });
-  return subType;
 }

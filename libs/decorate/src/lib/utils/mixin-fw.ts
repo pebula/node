@@ -1,6 +1,6 @@
 import toFastProperties from 'to-fast-properties';
-import { Abstract, Proto, Type } from '../types';
-import { iterateClassHierarchy } from './proto';
+import { Abstract, Proto, Type, } from '../types';
+import { iterateClassHierarchy, getBaseClass } from './proto';
 
 const mixedInClasses = Symbol('∆Decorate:mixedInClasses');
 const MixinScopeInstance = 1;
@@ -59,8 +59,15 @@ export abstract class MixinFw {
                                                            scope: MixinFw.MixinScope = MixinFw.MixinScope.All,
                                                            forceCopyParentMembers: boolean = true): void {
     const proto = cls.prototype;
-    const mixedInList: Set<Abstract<any> | Type<any>> = new Set();
 
+    const mixedInList: Set<Abstract<any> | Type<any>> = cls[mixedInClasses] === getBaseClass(cls)?.[mixedInClasses]
+      ? new Set(cls[mixedInClasses] || [])
+      : cls[mixedInClasses] || new Set();
+    ;
+
+
+    cls[mixedInClasses] || new Set();
+    getBaseClass
     for (const mixin of mixins) {
       mixedInList.add(mixin);
       if (MixinScopeStatic === (scope & MixinScopeStatic)) {

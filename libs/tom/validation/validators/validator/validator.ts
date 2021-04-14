@@ -132,10 +132,17 @@ export abstract class Validator<TOptions extends ValidatorFactoryOptions = Valid
    * Note that this is a new validation run.
    * Do not use this to validated nested types, if you need to validate a nested type use the context's `validateSchema` method.
    */
-  validate<T = any>(target: T, options?: ValidatorOptions<T>): ValidationResult<T> {
+  validate<T = any>(target: T, options?: ValidatorOptions<T>): true | ValidationResult<T> {
     const schema = this.create<T>((target as any).constructor);
     const ctx = ClassValidatorContext.create<T>(target, schema, options || {});
-    return schema.validate(ctx);
+    return schema.validate(target, ctx);
+  }
+
+  factory<T>(type: Type<T>) {
+    const schema = this.create<T>(type);
+    return (target: T, options?: ValidatorOptions<T>): true | ValidationResult<T> => {
+      return schema.validate(target, new ClassValidatorContext<T>(target, schema, options, null));
+    };
   }
 
   protected addPropertyBlockCompiler(validatorCompiler: ValidatorCompiler): this

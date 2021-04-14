@@ -26,7 +26,7 @@ tomDescribeSerializerJIT('@pebula/tom', jsonSerializer, childSerializer => {
         @P date: Date;
         @P.enum(JobStatus) enumProp: JobStatus;
         @P.union(P.literal('v1'), P.literal('v2'), P.as('number')) union: 'v1' | 'v2' | number;
-        @P.as(() => SubModel) subModels: Array<SubModel>;
+        @P.asArray(() => SubModel) subModels: Array<SubModel>;
       }
 
       class SubModel {
@@ -42,7 +42,7 @@ tomDescribeSerializerJIT('@pebula/tom', jsonSerializer, childSerializer => {
         @P dateB: Date;
         @P.enum(JobStatus) enumPropB: JobStatus;
         @P.union(P.literal('v1'), P.literal('v2'), P.as('number')) unionB: 'v1' | 'v2' | number;
-        @P.as(() => SubModel) subModelsB: Array<SubModel>;
+        @P.asArray(() => SubModel) subModelsB: Array<SubModel>;
       }
 
       class SubModelB {

@@ -6,6 +6,8 @@ export function array(ctx: CompilerCodeBlockContext<C.ConditionalBlock<any>>, pr
   return ctx.clone(block);
 }
 
+export const tuple = array;
+
 export function set(ctx: CompilerCodeBlockContext<C.ConditionalBlock<any>>, prop: CompilerPropertyContext) {
   if (prop.context.isSerialize) {
     const block = ctx.currentBlock.setCondition(`${ctx.sourceAccessor} instanceof Set`);

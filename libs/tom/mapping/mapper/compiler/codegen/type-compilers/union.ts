@@ -13,7 +13,7 @@ import { literalIfMerger } from '../property-code-blocks';
 function *traverseUnion<S, T>(sProp: Schema.TomPropertySchema<S>, tProp: Schema.TomPropertySchema<T>) {
   const { sorted, classLikeProperties } = Schema.determineUnionListResolveOrder(tProp);
   const sourceUnionSubTypes = sProp.isUnion
-    ? sProp.unionSubTypes.slice()
+    ? sProp.subTypes.slice()
     : [sProp]
   ;
 

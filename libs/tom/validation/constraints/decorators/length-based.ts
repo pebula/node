@@ -1,31 +1,32 @@
 import { ApiMixin, FluentMethodPlugin, FluentPropertyPlugin, LazyPluginExtension } from '@pebula/decorate/fluent';
 import { TomPropertyFluentApi, TomPropertySchemaConfig } from '../../../src/lib/schema';
-import { Constraint, RegisteredConstraints, ConstraintErrorMsg } from '../types';
+import { ConstraintDef } from '../definitions';
+import { Constraint, RegisteredConstraints } from '../types';
 
 @LazyPluginExtension(TomPropertyFluentApi)
 export class LengthBasedConstraintsFluentApi extends ApiMixin.MixinBase<TomPropertySchemaConfig> {
 
   //#region Validation: string | array | set | map | objectMap
   @FluentMethodPlugin()
-  @ConstraintErrorMsg<'length'>(({validatorMeta}) => `Length must be ${validatorMeta.args[0]}`)
+  @ConstraintDef<'length'>({ createErrorMsg: ({constraint}) => `Length must be ${constraint.args[0]}` })
   length(value: number): this {
     return this.addValidator({ id: 'length', args: [value] })
   }
 
   @FluentMethodPlugin()
-  @ConstraintErrorMsg<'minLength'>(({validatorMeta}) => `Minimum length is ${validatorMeta.args[0]}`)
+  @ConstraintDef<'minLength'>({ createErrorMsg: ({constraint}) => `Minimum length is ${constraint.args[0]}` })
   minLength(value: number): this {
     return this.addValidator({ id: 'minLength', args: [value] })
   }
 
   @FluentMethodPlugin()
-  @ConstraintErrorMsg<'maxLength'>(({validatorMeta}) => `Maximum length is ${validatorMeta.args[0]}`)
+  @ConstraintDef<'maxLength'>({ createErrorMsg: ({constraint}) => `Maximum length is ${constraint.args[0]}` })
   maxLength(value: number): this {
     return this.addValidator({ id: 'maxLength', args: [value] })
   }
 
   @FluentPropertyPlugin()
-  @ConstraintErrorMsg<'empty'>(() => `Must be empty`)
+  @ConstraintDef<'empty'>({ createErrorMsg: () => `Must be empty` })
   get empty(): this {
     return this.addValidator({ id: 'empty' })
   }
