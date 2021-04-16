@@ -5,14 +5,17 @@ module.exports = {
       'getting-started/installation',
       'getting-started/basic-example',
     ],
-    'Basic': [
-
+    'Using Touchstone': [
+      'using-touchstone/suite-container',
+      'using-touchstone/suites-and-cases',
+      'using-touchstone/events',
     ],
     'Reporters': [
       'reporters/introduction',
-      'reporters/vega-lite-reporter',
       'reporters/simple-console-reporter',
-      'reporters/custom-reporters',
+      'reporters/pretty-console-reporter',
+      'reporters/chart-js-html-reporter',
+      'reporters/vega-lite-reporter',
     ]
   },
 };

@@ -66,7 +66,7 @@ export interface CaseStats extends Stats {
 // @public (undocumented)
 export abstract class ChartJsHtmlReporter {
     // (undocumented)
-    chartFile: string;
+    chartJsHtmlReporterOutputFile: string;
     // (undocumented)
     onChartJsHtmlReporterFinalize(event: TouchStoneEndEvent): Promise<void>;
     // (undocumented)

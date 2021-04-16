@@ -3,17 +3,18 @@ id: basic-example
 title: Basic Usage
 sidebar_label: 3. Basic Usage
 ---
+import DocLink from '@site-shared/theme/DocLink';
 
 To run a benchmark you need
 
 - At least one benchmark **Case**
 - At least one **Suite**, grouping the case/s.
-- At touchstone configuration container, used for configuration, composition, etc... (not mandatory)
+- A touchstone configuration container, used for configuration, composition, etc... (not mandatory)
 
 We start with a **Suite** and 2 **Cases** benchmarks:
 
 ```typescript
-import { Suite, Case } from '@pebula/touchstone';
+import { Suite, Case, touchStone } from '@pebula/touchstone';
 
 @Suite({ name: 'My First Benchmark Suite' })
 class MyFirstBenchmarkSuite {
@@ -28,77 +29,63 @@ class MyFirstBenchmarkSuite {
     /* Benchmarking... */
   }
 }
+
+// await touchStone(); // for top level await
+touchStone()
+    .then( () => console.log('Done') )
+    .catch( err => console.error(err) );
 ```
 
 We can add more suites with cases or add cases to the existing suite.
 
-At this point we can call `await touchStone()` to execute the suites or we can
-use a touchstone configuration container and let it execute automatically.
+At this point we can call `await touchStone()` to execute the suite/s.  
+`touchStone()` will run go over all suites and execute all cases within each suite.
 
-Now we add the configuration container:
+Something is missing though, it will not report anything, we need a **reporter** for that...
 
-```typescript
-@TouchStone()
-class MyPerformanceTest extends Mixin(SimpleConsoleReporter, VegaLiteReporter) {
-  benchmarkOptions = {
-    delay: 0.5,
-    initCount: 5,
-  };
+## Reports
 
-  getVegaLiteReporterFilename() {
-    return 'my-benchmarks';
-  }
+Reporters are used to output the statistics and result of the suite/s, case/s and other metadata collected in the benchmarking process.
 
-  getVegaLiteReporterFileOrientation() {
-    return 'vertical' as 'vertical';
-  }
-}
-```
-
-The process will start benchmarking at the next tick automatically.
-
-Note that we can define the default benchmark options (`benchmarkOptions`) which will apply to all cases.
-
-:::tip
-You can define the `benchmarkOptions` per **Suite** and per **Case**, at each level the options from the parent level are cloned and the new
-options are merged into them (override).
-:::
-
-The mixins add methods to the class `MyPerformanceTest` which we can override thus enabling configuration for each reporter in a JS native way.
-
-The method `getVegaLiteReporterFilename()` is called from `VegaLiteReporter` which also holds a default implementation for it, if we override it
-we can control some of the configuration.
-
-:::info
-Note that the container `MyPerformanceTest` get instantiated and the instance is used as the context (`this`) for all life cycle events by default.
-This is also true for classes decorated with **Suite**, i.e. life cycle events defined on the **Suite** share a context (`this`).
-:::
-
-:::warning
-By default, **@Case()** methods are **NOT** invoked with a context, even though they are class members.  
-This is done to prevent any impact on the benchmark results.
-
-If you wish to provide the suite's instance to the case method, same as done for life cycle methods you need to set
-the `caseInvokeType` property in the `@Suite()` metadata argument parameter.
+Each report implements it's own output medium, let's add the default console reporter:
 
 ```typescript
-@Suite({ caseInvokeType: 'method' })
-class MyCase {
-  private myProp: number;
+import { Suite, Case, SimpleConsoleReporter } from '@pebula/touchstone';
 
-  @OnStart()
-  start() {
-    this.myProp = 99; // can also be done in the constructor
+@Suite({ name: 'My First Benchmark Suite' })
+class MyFirstBenchmarkSuite extends Mixin(SimpleConsoleReporter) {
+ @Case({ name: 'my-first-benchmark' })
+  firstBenchmark() {
+    /* Benchmarking... */
   }
 
   @Case()
-  validate() {
-    const oneHundred = this.myProp + 1;
-    // oneHundred -> 100
+  async secondBenchmark() {
+     // Will automatically detect that it's async. Name is taken from method name.
+    /* Benchmarking... */
   }
 }
 ```
 
-It is recommended to initialize suite's in the `@OnStart` life cycle event and not in the constructor.  
-This way you will never define a constructor in a mixin class, which in the case of mixins never run!
+Note that all we do here is **extend** our suite with the reporter class using the `Mixin` function.
+
+:::tip
+
+- A report can output to multiple mediums, it is up to the implementation of each report
+- You can **mixin** multiple reports.
+
 :::
+
+
+This is pretty simple and will work with multiple suite's as well.  
+You can configure a different reporter for different suites but it is also harder to manage.
+
+To help managing the suite, creating a shared configuration and automate execution use the <DocLink to="docs/using-touchstone/suite-container">suite container</DocLink>.
+
+:::info
+
+A reporter is nothing but a class which hooks into life cycle events from the benchmarking process.
+
+:::
+
+You can read more about reporters, starting from the <DocLink to="docs/reporters/introduction">reporters introduction</DocLink>

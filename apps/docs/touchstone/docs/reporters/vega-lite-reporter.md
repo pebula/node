@@ -1,12 +1,18 @@
 ---
 id: vega-lite-reporter
 title: Vega Lite Reporter
-sidebar_label: 2. Vega Lite Reporter
+sidebar_label: 5. Vega Lite Reporter
 ---
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
 The **Vega Lite Reporter** reporter is a graph reporter that renders a graph for each suite
 with each case represented as a bar.
+
+|               |                                                                                     |
+|---------------|-------------------------------------------------------------------------------------|
+| Import        | import { VegaLiteReporter } from '@pebula/touchstone/reporters/vega-lite'           |
+| Dependencies  | canvas, vega, vega-lite                                                             |
+| Configuration | **Required**                                                                        |
 
 The reporter supports 3 types of outputs:
 

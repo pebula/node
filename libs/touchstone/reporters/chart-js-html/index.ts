@@ -1,8 +1,8 @@
 import * as FS from 'fs';
 import * as Path from 'path';
-import { OnTouchStoneEnd, OnTouchStoneStart } from '../decorators';
-import { TouchStoneStartEvent, TouchStoneEndEvent } from '../runner/events';
-import { SuiteResult } from '../result/suite-result';
+import { OnTouchStoneEnd, OnTouchStoneStart } from '../../src/lib/decorators';
+import { TouchStoneStartEvent, TouchStoneEndEvent } from '../../src/lib/runner/events';
+import { SuiteResult } from '../../src/lib/result/suite-result';
 
 const colors: Array<RGB> = [ [0, 200, 0], [200, 0, 0] ];
 type RGB = [number, number, number];
@@ -107,18 +107,18 @@ function createHTML(results: SuiteResult[]) {
         ${results.map(createCanvas).join('\n')}
       </div>
     </body>
-  </html>  
+  </html>
 `}
 
 export abstract class ChartJsHtmlReporter {
-  chartFile: string;
+  chartJsHtmlReporterOutputFile: string;
 
   @OnTouchStoneStart()
   onChartJsHtmlReporterTouchStoneStart(event: TouchStoneStartEvent) {
     // We use this as a Mixin so constructor will not fire
     // Use this as the initialization point.
-    if (!this.chartFile) {
-      this.chartFile = 'benchmark-chart.html';
+    if (!this.chartJsHtmlReporterOutputFile) {
+      this.chartJsHtmlReporterOutputFile = 'benchmark-chart.html';
     }
   }
 
@@ -128,9 +128,9 @@ export abstract class ChartJsHtmlReporter {
   }
 
   private async chartJsHtmlReporterSaveFile(html: string) {
-    const filePath = Path.isAbsolute(this.chartFile)
-      ? this.chartFile
-      : Path.join(process.cwd(), this.chartFile)
+    const filePath = Path.isAbsolute(this.chartJsHtmlReporterOutputFile)
+      ? this.chartJsHtmlReporterOutputFile
+      : Path.join(process.cwd(), this.chartJsHtmlReporterOutputFile)
     ;
 
     FS.writeFileSync(filePath, html, 'utf8');

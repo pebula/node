@@ -1,6 +1,7 @@
 import * as Path from 'path';
 import * as FS from 'fs';
-import { TouchStone, Suite, OnTouchStoneStart, OnStart, Mixin, VegaLiteReporter, SimpleConsoleReporter, TouchStoneStartEvent, SuiteStartEvent } from '@pebula/touchstone';
+import { TouchStone, Suite, OnTouchStoneStart, OnStart, Mixin, SimpleConsoleReporter, TouchStoneStartEvent, SuiteStartEvent } from '@pebula/touchstone';
+import { VegaLiteReporter } from '@pebula/touchstone/reporters/vega-lite';
 import { ALL } from './cases';
 import { createData } from './data';
 

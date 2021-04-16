@@ -19,7 +19,7 @@ export {
   CaseResult, CaseStats,
 } from './lib/result';
 
-export { VegaLiteReporter, ChartJsHtmlReporter, SimpleConsoleReporter, Orientation } from './lib/reporters';
+export { SimpleConsoleReporter } from './lib/reporters';
 
 export {
   CaseCompleteEvent,

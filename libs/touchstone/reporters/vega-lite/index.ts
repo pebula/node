@@ -6,9 +6,9 @@ import { TopLevelSpec, compile } from 'vega-lite';
 import { LayerSpec } from 'vega-lite/build/src/spec';
 import { TopLevel } from 'vega-lite/build/src/spec/base';
 
-import { OnTouchStoneEnd } from '../decorators';
-import { TouchStoneEndEvent } from '../runner/events';
-import { SuiteResult } from '../result/suite-result';
+import { OnTouchStoneEnd } from '../../src/lib/decorators';
+import { TouchStoneEndEvent } from '../../src/lib/runner/events';
+import { SuiteResult } from '../../src/lib/result/suite-result';
 
 export type Orientation = 'vertical' | 'horizontal';
 
@@ -205,7 +205,7 @@ export abstract class VegaLiteReporter {
         await this.vegaLiteReporterSaveSvg(filePath, svgCharts);
       }
     }
-  
+
     if (isPng) {
       const canvas = await this.vegaLiteReporterCreatePngCharts(views);
       await this.vegaLiteReporterSavePng(filePath, canvas);
@@ -312,7 +312,7 @@ ${spec.data.values.map( (v, i) => `          <div class="case-checkbox"><input t
           const liveSpec = Object.assign({}, spec);
           liveSpec.data = { values: spec.data.values.slice() };
           vegaEmbed('#vis-' + i, liveSpec);
-          
+
           document.querySelector('#vis-toggle-orientation-${index}').addEventListener('click', (event) => {
             toggleOrientation(liveSpec);
             vegaEmbed('#vis-' + i, liveSpec);
@@ -354,7 +354,7 @@ ${spec.data.values.map( (v, i) => `          <div class="case-checkbox"><input t
       .case-checkbox input, .case-checkbox label {
         cursor: pointer;
       }
-    </style>   
+    </style>
     <div style="display: flex; flex-direction: row;">
       ${specs.map(createEmbeddedSuite).join('\n')}
     </div>
