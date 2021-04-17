@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://pebula.github.io/node/tom/blog</id>
+    <title>Typed Object Mapper Blog</title>
+    <updated>2015-10-25T23:29:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://pebula.github.io/node/tom/blog"/>
+    <subtitle>Typed Object Mapper Blog</subtitle>
+    <icon>https://pebula.github.io/node/tom/img/favicon.ico</icon>
+</feed>
