@@ -176,6 +176,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/decorate"],
           "options": {
+            "outputPath": "coverage/libs/decorate",
             "jestConfig": "libs/decorate/jest.config.js",
             "passWithNoTests": true
           }
@@ -237,6 +238,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/tom"],
           "options": {
+            "outputPath": "coverage/libs/tom",
             "jestConfig": "libs/tom/jest.config.js",
             "passWithNoTests": true
           }
@@ -307,6 +309,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/touchstone"],
           "options": {
+            "outputPath": "coverage/libs/touchstone",
             "jestConfig": "libs/touchstone/jest.config.js",
             "passWithNoTests": true
           }
@@ -402,6 +405,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/goosetyped"],
           "options": {
+            "outputPath": "coverage/libs/goosetyped",
             "jestConfig": "libs/goosetyped/jest.config.js",
             "passWithNoTests": true
           },
@@ -472,6 +476,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/nesbus"],
           "options": {
+            "outputPath": "coverage/libs/nesbus",
             "jestConfig": "libs/nesbus/jest.config.js",
             "passWithNoTests": true
           }
@@ -537,6 +542,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/nx-api-extractor"],
           "options": {
+            "outputPath": "coverage/libs/nx-api-extractor",
             "jestConfig": "libs/nx-api-extractor/jest.config.js",
             "passWithNoTests": true
           }
@@ -597,6 +603,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/nx-build-pipe"],
           "options": {
+            "outputPath": "coverage/libs/nx-build-pipe",
             "jestConfig": "libs/nx-build-pipe/jest.config.js",
             "passWithNoTests": true
           }
