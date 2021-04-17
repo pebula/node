@@ -58,8 +58,12 @@ const ghPagesTask = (appName) => {
 
   const pipe = [
     {
-      type: 'target',
-      target: `${appName}:package`
+      name: "build package",
+      type: "runCommand",
+      options: {
+        commands: [`yarn nx run ${appName}:package --with-deps`],
+        parallel: false
+      }
     },
     ...(config.docs ? apiDocsTasks() : []),
     {
