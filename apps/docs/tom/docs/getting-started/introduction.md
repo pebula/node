@@ -5,6 +5,14 @@ sidebar_label: 1. Introduction
 ---
 import ExtRelativeLink from '@site-shared/theme/ExtRelativeLink';
 
+# Documentation is a Work In Progress
+
+While we work on the documentation you can start using TOM by learning from examples in our source code:  
+
+- <a href="https://github.com/pebula/node/tree/main/libs/tom/tests" target="_blank">Unit testing soure code</a> (<a href="https://coveralls.io/github/pebula/node" target="_blank">Code Coverage</a>)
+- <a href="https://github.com/pebula/node/tree/main/libs/tom/benchmarks" target="_blank">Benchmarking source code</a>
+
+
 ## Supported Types
 
 TOM supports a wide list of types, almost any type out there is supported!

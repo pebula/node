@@ -5,7 +5,7 @@ const package = 'decorate';
 
 module.exports = {
   title: 'Decorate',
-  tagline: 'Strictly typed decorator factory',
+  tagline: 'Strictly typed decorator management tool for metadata driven libraries / applications.',
   url: `https://${org}.github.io/${repo}/${package}`,
   baseUrl: process.env.GH_PAGES_BUILD ? `/${repo}/${package}/` : '/',
   favicon: 'img/favicon.ico',

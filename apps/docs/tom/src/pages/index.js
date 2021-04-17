@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 const features = [
   {
     title: <>Type Protection</>,
-    imageUrl: 'img/undraw_docusaurus_mountain.svg',
+    imageUrl: 'img/type-protection.svg',
     description: (
       <>
         TOM is fully type safe, protecting your from interface updates, runtime type errors and more...
@@ -18,7 +18,7 @@ const features = [
   },
   {
     title: <>Focus on What Matters</>,
-    imageUrl: 'img/undraw_docusaurus_tree.svg',
+    imageUrl: 'img/focus.svg',
     description: (
       <>
         TOM lets you focus on your application logic, taking away the complex and mundane work
@@ -28,7 +28,7 @@ const features = [
   },
   {
     title: <>Light Speed Performance</>,
-    imageUrl: 'img/undraw_docusaurus_react.svg',
+    imageUrl: 'img/fast.svg',
     description: (
       <>
         TOM is fast, really, it is fast!
