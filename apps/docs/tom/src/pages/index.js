@@ -8,12 +8,11 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Easy to Use</>,
+    title: <>Type Protection</>,
     imageUrl: 'img/undraw_docusaurus_mountain.svg',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        TOM is fully type safe, protecting your from interface updates, runtime type errors and more...
       </>
     ),
   },
@@ -22,18 +21,21 @@ const features = [
     imageUrl: 'img/undraw_docusaurus_tree.svg',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        TOM lets you focus on your application logic, taking away the complex and mundane work
+        required to build and maintain serialization, validation and type to type mapping.
       </>
     ),
   },
   {
-    title: <>Powered by React</>,
+    title: <>Light Speed Performance</>,
     imageUrl: 'img/undraw_docusaurus_react.svg',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        TOM is fast, really, it is fast!
+        By using a runtime JIT compilation engine TOM can create highly optimized JS serialization, validation and mapping
+        functions which run super fast!
+        TOM also includes a runtime function to each of the above so it can also fallback if not JIT is available due to lack of type information
+        or just because you disabled it.
       </>
     ),
   },
@@ -72,8 +74,7 @@ function Home() {
                 'button button--outline button--secondary button--lg',
                 styles.getStarted
               )}
-              to={useBaseUrl('docs/doc1')}
-            >
+              to={useBaseUrl('docs/getting-started/introduction')}>
               Get Started
             </Link>
           </div>
@@ -91,6 +92,10 @@ function Home() {
             </div>
           </section>
         )}
+        <div className="text--center">
+          We're just scratching the surface, TOM is also highly extensible allowing type customization of any sort and offers a wide array of features!
+
+        </div>
       </main>
     </Layout>
   );

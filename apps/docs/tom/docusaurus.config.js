@@ -5,7 +5,7 @@ const package = 'tom';
 
 module.exports = {
   title: 'Typed Object Mapper',
-  tagline: 'A super-fast, type safe object mapper and serializer',
+  tagline: 'A super-fast, type safe, object serialization, validation and mapping',
   url: `https://${org}.github.io/${repo}/${package}`,
   baseUrl: process.env.GH_PAGES_BUILD ? `/${repo}/${package}/` : '/',
   favicon: 'img/favicon.ico',
