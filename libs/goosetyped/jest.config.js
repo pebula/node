@@ -12,6 +12,9 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/libs/goosetyped',
+  testPathIgnorePatterns : [
+    '<rootDir>/testing/'
+  ],
   preset: '@shelf/jest-mongodb',
   mongodbMemoryServerOptions: {
     instance: {
