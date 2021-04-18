@@ -5,13 +5,8 @@
 ```ts
 
 import * as benchmark from 'benchmark';
-import { Canvas } from 'canvas';
-import { LayerSpec } from 'vega-lite/build/src/spec';
 import { Stats } from 'benchmark';
 import { Times } from 'benchmark';
-import { TopLevel } from 'vega-lite/build/src/spec/base';
-import { TopLevelSpec } from 'vega-lite';
-import { View } from 'vega';
 
 // @public (undocumented)
 export interface BenchmarkOptions {
@@ -64,16 +59,6 @@ export interface CaseStats extends Stats {
 }
 
 // @public (undocumented)
-export abstract class ChartJsHtmlReporter {
-    // (undocumented)
-    chartJsHtmlReporterOutputFile: string;
-    // (undocumented)
-    onChartJsHtmlReporterFinalize(event: TouchStoneEndEvent): Promise<void>;
-    // (undocumented)
-    onChartJsHtmlReporterTouchStoneStart(event: TouchStoneStartEvent): void;
-}
-
-// @public (undocumented)
 export function Mixin<T1, C1>(m1: C1 & Cls<T1>): Ctor<T1> & C1;
 
 // @public (undocumented)
@@ -121,9 +106,6 @@ export const OnTouchStoneEnd: (metadata?: NoopMetadataArgs) => MethodDecoratorOf
 
 // @public (undocumented)
 export const OnTouchStoneStart: (metadata?: NoopMetadataArgs) => MethodDecoratorOf<[TouchStoneStartEvent], any>;
-
-// @public (undocumented)
-export type Orientation = 'vertical' | 'horizontal';
 
 // @public (undocumented)
 export abstract class SimpleConsoleReporter {
@@ -216,34 +198,6 @@ export interface TouchStoneRun {
 export interface TouchStoneStartEvent {
     // (undocumented)
     type: 'touchStoneStart';
-}
-
-// @public
-export abstract class VegaLiteReporter {
-    // (undocumented)
-    protected buildGraphData(width: number, height: number, results: SuiteResult): TopLevel<LayerSpec>;
-    // (undocumented)
-    getVegaLiteReporterFilename(): string;
-    // (undocumented)
-    getVegaLiteReporterFileOrientation(): Orientation;
-    // (undocumented)
-    getVegaLiteReporterFileTypes(): Array<'html' | 'svg' | 'png'>;
-    // (undocumented)
-    onVegaLiteReporterFinalize(event: TouchStoneEndEvent): Promise<void>;
-    // (undocumented)
-    protected setOrientation(orientation: Orientation, spec: TopLevel<LayerSpec>): void;
-    // (undocumented)
-    protected vegaLiteReporterCreatePngCharts(views: View[]): Promise<Canvas>;
-    // (undocumented)
-    protected vegaLiteReporterCreateSvgCharts(views: View[]): Promise<string[]>;
-    // (undocumented)
-    protected vegaLiteReporterSaveCharts(charts: TopLevel<LayerSpec>[]): Promise<void>;
-    // (undocumented)
-    protected vegaLiteReporterSaveHtml(filePath: string, specs: TopLevelSpec[]): Promise<void>;
-    // (undocumented)
-    protected vegaLiteReporterSavePng(filePath: string, canvas: Canvas): Promise<void>;
-    // (undocumented)
-    protected vegaLiteReporterSaveSvg(filePath: string, svgCharts: string[]): Promise<void>;
 }
 
 
