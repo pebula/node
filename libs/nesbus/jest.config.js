@@ -12,7 +12,8 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   testPathIgnorePatterns : [
-    '<rootDir>/tests/'
+    '<rootDir>/tests/server/',
+    '<rootDir>/tests/utils/'
   ],
   coverageDirectory: '../../coverage/libs/nesbus',
   testEnvironment: '<rootDir>/tests/utils/service-bus-env-setup/jest-service-bus-test-environment',
