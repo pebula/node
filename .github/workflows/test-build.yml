@@ -2,6 +2,11 @@ name: Nx Distributed Tasks [PUSH]
 
 on:
   workflow_dispatch:
+    inputs:
+      skipCache:
+        description: 'Skip NX Cache'
+        required: true
+        default: 'false'
   push:
     branches:
       - main
@@ -75,7 +80,7 @@ jobs:
         run: echo "NX_ARGUMENTS=--prod --with-deps" >> "$GITHUB_ENV"
       - name: Compute Nx arguments
         if: matrix.target == 'test'
-        run: echo 'NX_ARGUMENTS=--codeCoverage --coverageReporters=lcov' >> "$GITHUB_ENV"
+        run: echo 'NX_ARGUMENTS=--codeCoverage --coverageReporters=lcov --skip-nx-cache=${{ github.event.inputs.skipCache}}' >> "$GITHUB_ENV"
       - name: nx run-many:${{ matrix.target }}
         run: node ./tools/build/run-many.js ${{ matrix.target }} ${{ matrix.index }} ${{ env.count }} refs/heads/main refs/heads/main $NX_ARGUMENTS
       - name: Merge Coverage Reports
