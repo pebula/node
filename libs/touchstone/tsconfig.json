@@ -3,7 +3,11 @@
   "compilerOptions": {
     "skipLibCheck": true
   },
-  "include": ["."],
+  "include": ["./**/*.ts"],
   "exclude": ["./benchmarks/node_modules/**/*"],
-  "references": []
+  "references": [
+    {
+      "path": "../decorate"
+    }
+  ]
 }

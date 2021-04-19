@@ -1,5 +1,4 @@
-import { Cls, getInheritanceChain } from '../utils';
-import { Decorator } from '../decoration';
+import { Type, DecoratorInitializer, iterateClassHierarchy } from '@pebula/decorate';
 import { MetadataInfo, decoratorStore } from './suite-definition-container';
 import {
   RunInfo, createRun,
@@ -7,19 +6,14 @@ import {
 } from './definitions';
 
 export interface RunDefinitions {
-  target: Cls<any>,
+  target: Type<any>,
   run: RunInfo | undefined;
   lifeCycle: LifeCycleMethodInfo;
 }
 
-export function createRunDefinitions(target: Cls<any>, metadata: Map<Decorator<any>, MetadataInfo[]>): RunDefinitions {
-  const inheritanceChain = getInheritanceChain(target, true);
-
-  for (const baseTarget of inheritanceChain) {
-    const baseContainer = decoratorStore.getTarget(baseTarget);
-    if (baseContainer) {
-      baseContainer.extendDecoratorMetadata(decoratorStore, target);
-    }
+export function createRunDefinitions(target: Type<any>, metadata: Map<DecoratorInitializer<any>, MetadataInfo[]>): RunDefinitions {
+  for (const baseTarget of iterateClassHierarchy(target, { emitSelf: false })) {
+    decoratorStore.extendDecoratorMetadata(baseTarget, target);
   }
 
   const run = createRun(metadata);

@@ -1,5 +1,5 @@
 import * as benchmark from 'benchmark';
-import { ClassDecoratorOf } from '../utils';
+import { ClassDecoratorOf } from '@pebula/decorate';
 import { BenchmarkOptions } from '../interfaces';
 import { decoratorStore } from '../store';
 import { ensureName } from './utils';
@@ -21,6 +21,17 @@ export interface TouchStoneMetadataArgs {
    * @defaultValue false
    */
   manualRun?: boolean;
+
+  /**
+   * The action to when auto run (`manualRun` is not true) has finished.
+   *
+   * - processExit: Exist the process
+   * - ignore: Do nothing
+   * - Function: Invoke a handler function
+   *
+   * @default processExist
+   */
+  onAutoRunEnd?: 'processExit' | 'ignore' | ((err?: Error) => void);
 }
 
 export interface TouchStoneRun {
@@ -33,7 +44,7 @@ export interface TouchStoneRun {
    * ## Options resolution process:
    *
    * For each `Case` select the options by merging the following objects (first one wins):
-   * 
+   *
    * - Use options defined on the Case
    * - Use options defined on the Suite
    * - Use options defined for the entire run (WE ARE HERE)
@@ -45,22 +56,31 @@ export interface TouchStoneRun {
 export type InternalTsRunOptions = Omit<TouchStoneRun, 'benchmarkOptions'> & { benchmarkOptions: benchmark.Options };
 
 export const TouchStone = decoratorStore
-  .createDecorator<TouchStoneMetadataArgs, ClassDecoratorOf<TouchStoneRun & { [key: string]: any }>>({
-    allowedTargets: ['class'],
+  .createDecorator<ClassDecoratorOf<TouchStoneRun & { [key: string]: any }>, TouchStoneMetadataArgs, true>({
+    allowedScopes: ['class'],
     onExecute: (decoratorArgs, metadata) => {
       metadata = ensureName(decoratorArgs, metadata);
       if (!metadata.manualRun) {
         process.nextTick(async () => {
+          const onAutoRunEnd = metadata.onAutoRunEnd;
           try {
             await touchStone();
-            process.exit(0);
+            if (typeof onAutoRunEnd === 'function') {
+              onAutoRunEnd();
+            } else if (onAutoRunEnd !== 'ignore') {
+              process.exit(0);
+            }
           } catch (err) {
-            console.error(err);
-            process.exit(1);
+            if (typeof onAutoRunEnd === 'function') {
+              onAutoRunEnd(err);
+            } else if (onAutoRunEnd !== 'ignore') {
+              console.error(err);
+              process.exit(1);
+            }
           }
         });
       }
-      
+
       return metadata;
     },
   });

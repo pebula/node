@@ -1,4 +1,3 @@
-import { isFunction } from '../../utils';
 import { TouchStoneRun } from '../../decorators/touchstone';
 
 export function filterNonFunction(name: string, filter: string | RegExp | (string | RegExp)[]) {
@@ -16,7 +15,7 @@ export function filterNonFunction(name: string, filter: string | RegExp | (strin
 }
 
 export function filterSuite(name: string, filter: TouchStoneRun['suites']): boolean {
-  if (isFunction(filter)) {
+  if (typeof filter === 'function') {
     return filter(name);
   } else if (!!filter) {
     return filterNonFunction(name, filter);
@@ -26,7 +25,7 @@ export function filterSuite(name: string, filter: TouchStoneRun['suites']): bool
 }
 
 export function filterCase(name: string, suiteName: string, filter: TouchStoneRun['cases']): boolean {
-  if (isFunction(filter)) {
+  if (typeof filter === 'function') {
     return filter(name, suiteName);
   } else if (!!filter) {
     return filterNonFunction(name, filter);

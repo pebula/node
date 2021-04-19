@@ -1,5 +1,4 @@
-import { MethodDecoratorArgs } from '../../utils';
-import { Decorator } from '../../decoration';
+import { DecoratorInitializer, MethodDecoratorArgs } from '@pebula/decorate';
 import { Case, CaseMetadataArgs } from '../../decorators/case';
 import { MetadataInfo } from '../suite-definition-container';
 import { isAsyncMethod } from '../utils';
@@ -16,14 +15,14 @@ function createCaseInfo(rawInfo: MetadataInfo<CaseMetadataArgs>): CaseInfo {
   const { target, key, descriptor } = (rawInfo.decoratorArgs as MethodDecoratorArgs);
   return {
     proto: target,
-    key,
+    key: key as string,
     method: descriptor.value,
     metadata: rawInfo.metadata,
-    isPromise: isAsyncMethod(target, key),
+    isPromise: isAsyncMethod(target, key as string),
   };
 }
 
-export function createCases(metadata: Map<Decorator<any>, MetadataInfo[]>) {
+export function createCases(metadata: Map<DecoratorInitializer<any>, MetadataInfo[]>) {
   const rawCases: Array<MetadataInfo<CaseMetadataArgs>> = metadata.get(Case) || [];
   const cases = new Map<string, CaseInfo>()
 

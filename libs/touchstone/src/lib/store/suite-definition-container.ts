@@ -1,37 +1,27 @@
-import { Ctor, DecoratorArgs } from '../utils';
-import { DecoratorStore, Decorator, DecorationTargetContainer, MetadataRecord } from '../decoration';
-import { SuiteMetadataArgs, CaseMetadataArgs, NoopMetadataArgs } from '../decorators';
+import {
+  ClassifierRecord,
+  DecoratedDomain,
+  Decorator,
+  DecoratorInitializer,
+  DecoratorOptions,
+  TargetClassifier,
+  Type,
+} from '@pebula/decorate';
+import { SuiteMetadataArgs, CaseMetadataArgs } from '../decorators';
 import { SuiteDefinitions } from './suite-definition';
 import { RunDefinitions } from './run-definition';
 
-export type AllMetadataArgs = SuiteMetadataArgs | CaseMetadataArgs | NoopMetadataArgs;
-export interface MetadataInfo<T extends AllMetadataArgs = AllMetadataArgs> extends MetadataRecord<T> {
+export type AllMetadataArgs = SuiteMetadataArgs | CaseMetadataArgs;
+export interface MetadataInfo<T extends AllMetadataArgs = AllMetadataArgs> extends ClassifierRecord<T> {
 }
 
-export class SuiteDefinitionContainer extends DecorationTargetContainer<MetadataInfo> {
-  static create(target: Ctor<any>) {
-    return new SuiteDefinitionContainer(target);
+export class SuiteDefinitionContainer extends TargetClassifier<MetadataInfo> {
+  static create(target: Type<any>, parent: DecoratedDomain<SuiteDefinitionContainer>) {
+    return new SuiteDefinitionContainer(target, parent);
   }
 
   private suiteDefinitions: SuiteDefinitions;
   private runDefinitions: RunDefinitions;
-
-  addMetadata<T extends AllMetadataArgs>(decor: Decorator<T>, decoratorArgs: DecoratorArgs, metadata: T) {
-    this.runDefinitions = this.suiteDefinitions = undefined;
-
-    const metaInfos = this.metadata.get(decor) || [];
-
-    if (metaInfos.length === 0) {
-      this.metadata.set(decor, metaInfos);
-    }
-
-    if (!metadata) {
-      metadata = {} as any;
-    }
-
-    const metadataInfo: MetadataInfo<T> = { metadata: (metadata) as any, decoratorArgs };
-    metaInfos.push(metadataInfo);
-  }
 
   getSuiteDefs() {
     if (!this.suiteDefinitions) {
@@ -46,6 +36,14 @@ export class SuiteDefinitionContainer extends DecorationTargetContainer<Metadata
     }
     return this.runDefinitions;
   }
+
+  protected createRecord(decor: Decorator | DecoratorInitializer<AllMetadataArgs>,
+                         record: ClassifierRecord<AllMetadataArgs>,
+                         options?: DecoratorOptions): MetadataInfo {
+    this.runDefinitions = this.suiteDefinitions = undefined;
+    const classifier = super.createRecord(decor, record, options);
+    return classifier;
+  }
 }
 
-export const decoratorStore = new DecoratorStore(SuiteDefinitionContainer);
+export const decoratorStore = new DecoratedDomain(SuiteDefinitionContainer);

@@ -1,6 +1,5 @@
-import { MethodDecoratorArgs } from '../../utils';
-import { Decorator } from '../../decoration';
-import { NoopMetadataArgs, OnStart, OnCaseComplete, OnAbort, OnError, OnReset, OnComplete, OnTouchStoneStart, OnTouchStoneEnd } from '../../decorators/life-cycle-methods';
+import { DecoratorInitializer, MethodDecoratorArgs } from '@pebula/decorate';
+import { OnStart, OnCaseComplete, OnAbort, OnError, OnReset, OnComplete, OnTouchStoneStart, OnTouchStoneEnd } from '../../decorators/life-cycle-methods';
 import { MetadataInfo } from '../suite-definition-container';
 import { isAsyncMethod } from '../utils';
 
@@ -27,7 +26,7 @@ export interface TouchStoneLifeCycleMethodInfo {
 export type LifeCycleMethodInfo = BenchmarkLifeCycleMethodInfo & TouchStoneLifeCycleMethodInfo;
 
 /** Only events fired by benchmark.js */
-const BENCHMARK_LIFE_CYCLE_METHOD_DECORATORS: () => Partial<Record<keyof BenchmarkLifeCycleMethodInfo, Decorator<NoopMetadataArgs>>> = () => ({
+const BENCHMARK_LIFE_CYCLE_METHOD_DECORATORS: () => Partial<Record<keyof BenchmarkLifeCycleMethodInfo, DecoratorInitializer>> = () => ({
   start: OnStart,
   cycle: OnCaseComplete,
   abort: OnAbort,
@@ -36,30 +35,30 @@ const BENCHMARK_LIFE_CYCLE_METHOD_DECORATORS: () => Partial<Record<keyof Benchma
   complete: OnComplete,
 });
 
-const TOUCHSTONE_LIFE_CYCLE_METHOD_DECORATORS: () => Partial<Record<keyof TouchStoneLifeCycleMethodInfo, Decorator<NoopMetadataArgs>>> = () => ({
+const TOUCHSTONE_LIFE_CYCLE_METHOD_DECORATORS: () => Partial<Record<keyof TouchStoneLifeCycleMethodInfo, DecoratorInitializer>> = () => ({
   touchStoneStart: OnTouchStoneStart,
   touchStoneEnd: OnTouchStoneEnd,
 });
 
-function createLifeCycleMethodInfo(rawInfo: MetadataInfo<NoopMetadataArgs>): LifeCycleMethod {
+function createLifeCycleMethodInfo(rawInfo: MetadataInfo): LifeCycleMethod {
   const { target, key, descriptor } = (rawInfo.decoratorArgs as MethodDecoratorArgs);
   return {
-    key,
+    key: key as string,
     method: descriptor.value,
-    isPromise: isAsyncMethod(target, key),
+    isPromise: isAsyncMethod(target, key as string),
   };
 }
 
-export function getLifeCycleMethodForDecorator(metadata: Map<Decorator<any>, MetadataInfo[]>, decor: Decorator<NoopMetadataArgs>): LifeCycleMethod[] {
+export function getLifeCycleMethodForDecorator(metadata: Map<DecoratorInitializer<any>, MetadataInfo[]>, decor: DecoratorInitializer): LifeCycleMethod[] {
   const metaInfos = metadata.get(decor) || [];
   return metaInfos.map(createLifeCycleMethodInfo);
 }
 
-export function createLifeCycleMethods(metadata: Map<Decorator<any>, MetadataInfo[]>, include: 'benchmark'): BenchmarkLifeCycleMethodInfo;
-export function createLifeCycleMethods(metadata: Map<Decorator<any>, MetadataInfo[]>, include: 'touchstone'): TouchStoneLifeCycleMethodInfo;
-export function createLifeCycleMethods(metadata: Map<Decorator<any>, MetadataInfo[]>, include: 'all'): LifeCycleMethodInfo;
-export function createLifeCycleMethods(metadata: Map<Decorator<any>, MetadataInfo[]>, include: 'benchmark' | 'touchstone' | 'all'): LifeCycleMethodInfo {
-  let entires: Array<[string, Decorator<NoopMetadataArgs>]>;
+export function createLifeCycleMethods(metadata: Map<DecoratorInitializer<any>, MetadataInfo[]>, include: 'benchmark'): BenchmarkLifeCycleMethodInfo;
+export function createLifeCycleMethods(metadata: Map<DecoratorInitializer<any>, MetadataInfo[]>, include: 'touchstone'): TouchStoneLifeCycleMethodInfo;
+export function createLifeCycleMethods(metadata: Map<DecoratorInitializer<any>, MetadataInfo[]>, include: 'all'): LifeCycleMethodInfo;
+export function createLifeCycleMethods(metadata: Map<DecoratorInitializer<any>, MetadataInfo[]>, include: 'benchmark' | 'touchstone' | 'all'): LifeCycleMethodInfo {
+  let entires: Array<[string, DecoratorInitializer]>;
   switch (include) {
     case 'benchmark':
       entires = Object.entries(BENCHMARK_LIFE_CYCLE_METHOD_DECORATORS());

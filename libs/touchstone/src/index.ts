@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-export { Mixin } from './lib/decoration';
+export { Mixin } from '@pebula/decorate';
 
 export {
   BenchmarkOptions,
@@ -11,7 +11,7 @@ export {
   Suite, SuiteMetadataArgs,
   Case, CaseMetadataArgs,
   OnTouchStoneStart, OnTouchStoneEnd,
-  OnStart, OnCaseComplete, OnAbort, OnError, OnReset, OnComplete, NoopMetadataArgs,
+  OnStart, OnCaseComplete, OnAbort, OnError, OnReset, OnComplete,
 } from './lib/decorators';
 
 export {

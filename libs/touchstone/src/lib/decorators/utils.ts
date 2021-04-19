@@ -1,4 +1,4 @@
-import { stringify, DecoratorArgs } from '../utils';
+import { DecoratorArgsType, DecoratorArgs, stringify } from '@pebula/decorate';
 
 /**
  * Verifies that decorator metadata input is an object and that it has the name property assigned.
@@ -12,7 +12,7 @@ export function ensureName<T extends { name?: string; }>(decoratorArgs: Decorato
     metadata = {} as T;
   }
   if (!metadata.name) {
-    metadata.name = decoratorArgs.type === 'class'
+    metadata.name = DecoratorArgsType.isClass(decoratorArgs)
       ? stringify(decoratorArgs.target)
       : stringify(decoratorArgs.key)
     ;

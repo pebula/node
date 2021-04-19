@@ -1,4 +1,4 @@
-import { MethodDecoratorOf, MethodDecoratorArgs } from '../utils';
+import { MethodDecoratorArgs, MethodDecoratorOf } from '@pebula/decorate';
 import { decoratorStore } from '../store';
 import { BenchmarkOptions } from '../interfaces';
 import { ensureName } from './utils';
@@ -17,7 +17,7 @@ export interface CaseMetadataArgs {
    * ## Options resolution process:
    *
    * For each `Case` select the options by merging the following objects (first one wins):
-   * 
+   *
    * - Use options defined on the Case (WE ARE HERE)
    * - Use options defined on the Suite
    * - Use options defined for the entire run
@@ -38,8 +38,8 @@ export interface CaseMetadataArgs {
 }
 
 export const Case = decoratorStore
-  .createDecorator<CaseMetadataArgs, MethodDecoratorOf<any, any>>({
+  .createDecorator<MethodDecoratorOf<any, any>, CaseMetadataArgs, true>({
     allowMulti: true,
-    allowedTargets: ['method'],
+    allowedScopes: ['method'],
     onExecute: (decoratorArgs: MethodDecoratorArgs, metadata) => ensureName(decoratorArgs, metadata),
   });

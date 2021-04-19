@@ -4,7 +4,7 @@ export interface Ctor<T> extends Function {
   new (...args: any[]): T;
 }
 
-export const ALL_RUNTIME_VALIDATION_SUITES: Array<Ctor<PackageCase>> = [];
+export const ALL_RUNTIME_VALIDATION_SUITES: [Ctor<PackageCase>, ...Array<Ctor<PackageCase>>] = [] as any;
 
 export abstract class PackageCase {
   constructor(protected data: Data) {}

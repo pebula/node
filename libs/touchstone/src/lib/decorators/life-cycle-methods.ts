@@ -1,4 +1,4 @@
-import { MethodDecoratorOf } from '../utils';
+import { MethodDecoratorOf } from '@pebula/decorate';
 import { decoratorStore } from '../store';
 import {
   CaseCompleteEvent,
@@ -10,14 +10,12 @@ import {
   TouchStoneStartEvent, TouchStoneEndEvent,
 } from '../runner/events';
 
-export interface NoopMetadataArgs { }
+export const OnStart = decoratorStore.createDecorator<MethodDecoratorOf<[SuiteStartEvent], boolean | void>>({ allowMulti: true, allowedScopes: ['method'] });
+export const OnCaseComplete = decoratorStore.createDecorator<MethodDecoratorOf<[CaseCompleteEvent], boolean | void>>({ allowMulti: true, allowedScopes: ['method'] });
+export const OnAbort = decoratorStore.createDecorator<MethodDecoratorOf<[SuiteAbortEvent], void>>({ allowMulti: true, allowedScopes: ['method'] });
+export const OnError = decoratorStore.createDecorator<MethodDecoratorOf<[SuiteErrorEvent], void>>({ allowMulti: true, allowedScopes: ['method'] });
+export const OnReset = decoratorStore.createDecorator<MethodDecoratorOf<[SuiteResetEvent], void>>({ allowMulti: true, allowedScopes: ['method'] });
+export const OnComplete = decoratorStore.createDecorator<MethodDecoratorOf<[SuiteCompleteEvent], boolean | void>>({ allowMulti: true, allowedScopes: ['method'] });
 
-export const OnStart = decoratorStore.createDecorator<NoopMetadataArgs, MethodDecoratorOf<[SuiteStartEvent], boolean | void>>({ allowMulti: true, allowedTargets: ['method'] });
-export const OnCaseComplete = decoratorStore.createDecorator<NoopMetadataArgs, MethodDecoratorOf<[CaseCompleteEvent], boolean | void>>({ allowMulti: true, allowedTargets: ['method'] });
-export const OnAbort = decoratorStore.createDecorator<NoopMetadataArgs, MethodDecoratorOf<[SuiteAbortEvent], void>>({ allowMulti: true, allowedTargets: ['method'] });
-export const OnError = decoratorStore.createDecorator<NoopMetadataArgs, MethodDecoratorOf<[SuiteErrorEvent], void>>({ allowMulti: true, allowedTargets: ['method'] });
-export const OnReset = decoratorStore.createDecorator<NoopMetadataArgs, MethodDecoratorOf<[SuiteResetEvent], void>>({ allowMulti: true, allowedTargets: ['method'] });
-export const OnComplete = decoratorStore.createDecorator<NoopMetadataArgs, MethodDecoratorOf<[SuiteCompleteEvent], boolean | void>>({ allowMulti: true, allowedTargets: ['method'] });
-
-export const OnTouchStoneStart = decoratorStore.createDecorator<NoopMetadataArgs, MethodDecoratorOf<[TouchStoneStartEvent], any>>({ allowMulti: true, allowedTargets: ['method'] });
-export const OnTouchStoneEnd = decoratorStore.createDecorator<NoopMetadataArgs, MethodDecoratorOf<[TouchStoneEndEvent], any>>({ allowMulti: true, allowedTargets: ['method'] });
+export const OnTouchStoneStart = decoratorStore.createDecorator<MethodDecoratorOf<[TouchStoneStartEvent], any>>({ allowMulti: true, allowedScopes: ['method'] });
+export const OnTouchStoneEnd = decoratorStore.createDecorator<MethodDecoratorOf<[TouchStoneEndEvent], any>>({ allowMulti: true, allowedScopes: ['method'] });
