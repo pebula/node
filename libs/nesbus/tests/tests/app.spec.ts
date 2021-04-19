@@ -1,12 +1,11 @@
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Sender } from '@azure/service-bus';
-import { INestApplication, INestMicroservice, Controller, Injectable } from '@nestjs/common';
+import { INestApplication, Controller, Injectable } from '@nestjs/common';
 import { Queue, Subscription, Ctx, SbContext, QueueEmitter, Topic, SbIntercept, SbErrorHandler, SbErrorEvent, SbMessageErrorEvent } from '@pebula/nesbus';
 import { SbBackoffRetry } from '@pebula/nesbus/tasks';
 
-import { MessageStorage, SUBSCRIBERS, EMITTERS } from '../server';
-import { TestMessage, TestModuleFactory } from '../utils';
+import { TestMessage, TestModuleFactory, MessageStorage, SUBSCRIBERS, EMITTERS } from '../__env';
 
 class TestErrorHandler extends SbErrorHandler {
   lastError: SbErrorEvent[] = [];
@@ -133,7 +132,7 @@ describe('@pebula/nesbus', () => {
     const [ receivedMsg ] = await msgStore.waitForCount(1);
     TestMessage.checkMessageContents(testMessage, receivedMsg);
   });
-  
+
   it('should route queue message using observable handling', async () => {
     const testMessage = TestMessage.getSample();
     await serviceBusEmitClient.testQueue2.send(testMessage);

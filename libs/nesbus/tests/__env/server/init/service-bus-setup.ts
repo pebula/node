@@ -3,7 +3,7 @@ import { ApplicationTokenCredentials } from '@azure/ms-rest-nodeauth';
 
 import { ServiceBusModule, SbServerOptions } from '@pebula/nesbus';
 import { registerArmAdapter } from '@pebula/nesbus/arm-adapter';
-import { NoopLogger } from '../../../src/lib/noop-logger';
+import { NoopLogger } from '../../../../src/lib/noop-logger';
 
 import { ConfigService } from '../services';
 

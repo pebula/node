@@ -12,11 +12,13 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   testPathIgnorePatterns : [
-    '<rootDir>/tests/server/',
-    '<rootDir>/tests/utils/'
+
   ],
+  coveragePathIgnorePatterns: [
+    '<rootDir>/tests/__env',
+],
   coverageDirectory: '../../coverage/libs/nesbus',
-  testEnvironment: '<rootDir>/tests/utils/service-bus-env-setup/jest-service-bus-test-environment',
+  testEnvironment: '<rootDir>/tests/__env/utils/service-bus-env-setup/jest-service-bus-test-environment',
   testEnvironmentOptions: {
     envSetup: false,
     envTeardown: false,

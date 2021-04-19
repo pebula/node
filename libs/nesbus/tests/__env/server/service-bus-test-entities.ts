@@ -6,13 +6,13 @@ export interface EntityTestEnvSetup {
   teardown?: boolean;
 }
 
-declare module '../../src/lib/interfaces/subscriber' {
+declare module '../../../src/lib/interfaces/subscriber' {
   export interface SbSubscriberMetadataOptions {
     testEnvSetup?: EntityTestEnvSetup;
   }
 }
 
-declare module '../../src/lib/interfaces/emitter' {
+declare module '../../../src/lib/interfaces/emitter' {
   export interface SbEmitterMetadataOptions {
     testEnvSetup?: EntityTestEnvSetup;
   }
