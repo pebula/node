@@ -1,6 +1,6 @@
 import { isFunction } from 'util';
 import { Test, TestingModule } from '@nestjs/testing';
-import { createSbServer } from '@pebula/nesbus';
+import { createSbServer, SbModuleRegisterOptions } from '@pebula/nesbus';
 
 import { ModuleMetadata, Provider } from '@nestjs/common/interfaces';
 import { NestBusSharedModule,  createServiceBusModule } from '../server';
@@ -22,8 +22,8 @@ export class TestModuleFactory {
 
   private constructor() { }
 
-  addServiceBusModule(...providers: Provider[]): Pick<TestModuleFactory, 'compile' | 'addMetadata'> {
-    const serviceBusModule = createServiceBusModule(...providers);
+  addServiceBusModule(providers?: Provider[], clients?: SbModuleRegisterOptions['clients']): Pick<TestModuleFactory, 'compile' | 'addMetadata'> {
+    const serviceBusModule = createServiceBusModule(providers, clients);
     this.moduleMetadata.imports.push(serviceBusModule);
     return this;
   }
@@ -48,13 +48,14 @@ export class TestModuleFactory {
   async init(port = 4000) {
     const moduleBuilder = Test.createTestingModule(this.moduleMetadata);
     const testingModule = await moduleBuilder.compile();
-    if (isFunction(this.fn)) {
+    if (typeof this.fn === 'function') {
       this.fn(testingModule);
     }
     const app = testingModule.createNestApplication();
     app.connectMicroservice({ strategy: createSbServer() });
     await app.startAllMicroservicesAsync();
-    await app.listenAsync(port);
+
+    await app.listen(port);
 
     // app = moduleFixture.createNestMicroservice({ strategy: createSbServer() });
     // await app.listenAsync();

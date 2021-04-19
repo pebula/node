@@ -15,6 +15,8 @@ module.exports = {
 
   ],
   coveragePathIgnorePatterns: [
+    '<rootDir>/arm-adapter',
+    '<rootDir>/src/lib/atom-adapter/atom-client',
     '<rootDir>/tests/__env',
 ],
   coverageDirectory: '../../coverage/libs/nesbus',

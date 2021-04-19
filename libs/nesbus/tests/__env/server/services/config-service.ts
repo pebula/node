@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import {
-  ServiceBusModule,
-  SbServerOptions,
   SbManagementDefaultsAdapter,
   SbRuleEntityProvision,
   SbTopicSubscriptionEntityProvision,
@@ -76,7 +74,7 @@ export class ConfigService {
         ];
       },
     };
-  
+
     return defaults;
   }
 

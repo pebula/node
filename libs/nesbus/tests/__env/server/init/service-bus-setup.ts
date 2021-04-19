@@ -1,7 +1,7 @@
 import { Provider } from '@nestjs/common/interfaces';
 import { ApplicationTokenCredentials } from '@azure/ms-rest-nodeauth';
 
-import { ServiceBusModule, SbServerOptions } from '@pebula/nesbus';
+import { ServiceBusModule, SbServerOptions, SbModuleRegisterOptions } from '@pebula/nesbus';
 import { registerArmAdapter } from '@pebula/nesbus/arm-adapter';
 import { NoopLogger } from '../../../../src/lib/noop-logger';
 
@@ -78,17 +78,23 @@ export function createServerOptions(config: ConfigService) {
   return [ sbServerOptions ];
 }
 
-export function createServiceBusModule(...providers: Provider[]) {
+export function createServiceBusModule(providers?: Provider[], clients?: SbModuleRegisterOptions['clients']) {
+  if (!clients) {
+    clients = [
+      {
+        logger: NoopLogger.shared, // createLogger('SbClient: default'),
+      },
+    ];
+  }
+  if (!providers) {
+    providers = [];
+  }
   return ServiceBusModule.register({
     servers: {
       useFactory: createServerOptions,
       inject: [ConfigService],
     },
-    clients: [
-      {
-        logger: NoopLogger.shared, // createLogger('SbClient: default'),
-      },
-    ],
+    clients,
     providers,
   });
 }

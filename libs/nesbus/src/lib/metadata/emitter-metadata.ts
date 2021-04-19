@@ -1,5 +1,4 @@
 import { SbEmitterTypeMap, SbEmitterMetadataOptions, MetaOrMetaFactory } from '../interfaces';
-import { isFunction } from 'util';
 
 export class SbEmitterMetadata<T extends keyof SbEmitterTypeMap = keyof SbEmitterTypeMap> {
   static is(obj: any): obj is SbEmitterMetadata {
@@ -12,7 +11,7 @@ export class SbEmitterMetadata<T extends keyof SbEmitterTypeMap = keyof SbEmitte
 
   constructor(public readonly type: T,
               metaOptions: SbEmitterTypeMap[T] extends SbEmitterMetadataOptions ? MetaOrMetaFactory<SbEmitterTypeMap[T]> : never) {
-    if (isFunction(metaOptions)) {
+    if (typeof metaOptions === 'function') {
       this.metaFactory = metaOptions as any;
     } else {
       this.metaOptions = { ...(metaOptions as any) };

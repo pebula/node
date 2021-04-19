@@ -75,7 +75,7 @@ export class SbServerDiscoveryService {
       server.registerRoute('method', key, metadata, instanceWrapper, legacyMessageHandler);
     } else {
       const handler = instanceWrapper.instance[key];
-      if (!isFunction(handler)) {
+      if (typeof handler !== 'function') {
         throw errors.invalidSubscriberDecoration(key, metadata);
       }
       server.registerRoute('pipe', key, metadata, instanceWrapper, handler);
