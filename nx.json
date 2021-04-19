@@ -57,7 +57,7 @@
     },
     "touchstone": {
       "tags": [],
-      "implicitDependencies": ["nx-build-pipe", "nx-api-extractor"]
+      "implicitDependencies": ["nx-build-pipe", "nx-api-extractor", "decorate"]
     },
     "goosetyped": {
       "tags": [],
