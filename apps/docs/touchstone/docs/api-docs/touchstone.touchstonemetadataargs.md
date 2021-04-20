@@ -16,4 +16,5 @@ export interface TouchStoneMetadataArgs
 |  --- | --- | --- |
 |  [manualRun](./touchstone.touchstonemetadataargs.manualrun.md) | boolean | When true, will not run automatically, instead it will wait for manual execution. |
 |  [name](./touchstone.touchstonemetadataargs.name.md) | string | The name of the touchstone configuration. This is not mandatory, if not set the class name is used.<!-- -->You can ues this value to filter configurations. |
+|  [onAutoRunEnd](./touchstone.touchstonemetadataargs.onautorunend.md) | 'processExit' \| 'ignore' \| ((err?: Error) =&gt; void) | The action to when auto run (<code>manualRun</code> is not true) has finished.<!-- -->- processExit: Exist the process - ignore: Do nothing - Function: Invoke a handler function processExist |
 

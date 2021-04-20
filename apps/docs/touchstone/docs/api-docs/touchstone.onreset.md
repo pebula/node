@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-OnReset: (metadata?: NoopMetadataArgs) => MethodDecoratorOf<[SuiteResetEvent], void>
+OnReset: () => <Z extends Partial<Record<K, (args_0: SuiteResetEvent) => void>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: SuiteResetEvent) => void>) => void | TypedPropertyDescriptor<(args_0: SuiteResetEvent) => void>
 ```

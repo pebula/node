@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-OnTouchStoneStart: (metadata?: NoopMetadataArgs) => MethodDecoratorOf<[TouchStoneStartEvent], any>
+OnTouchStoneStart: () => <Z extends Partial<Record<K, (args_0: TouchStoneStartEvent) => any>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: TouchStoneStartEvent) => any>) => void | TypedPropertyDescriptor<(args_0: TouchStoneStartEvent) => any>
 ```

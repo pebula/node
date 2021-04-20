@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-OnError: (metadata?: NoopMetadataArgs) => MethodDecoratorOf<[SuiteErrorEvent], void>
+OnError: () => <Z extends Partial<Record<K, (args_0: SuiteErrorEvent) => void>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: SuiteErrorEvent) => void>) => void | TypedPropertyDescriptor<(args_0: SuiteErrorEvent) => void>
 ```

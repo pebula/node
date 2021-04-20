@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-OnAbort: (metadata?: NoopMetadataArgs) => MethodDecoratorOf<[SuiteAbortEvent], void>
+OnAbort: () => <Z extends Partial<Record<K, (args_0: SuiteAbortEvent) => void>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: SuiteAbortEvent) => void>) => void | TypedPropertyDescriptor<(args_0: SuiteAbortEvent) => void>
 ```

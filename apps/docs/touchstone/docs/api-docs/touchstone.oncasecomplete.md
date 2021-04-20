@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-OnCaseComplete: (metadata?: NoopMetadataArgs) => MethodDecoratorOf<[CaseCompleteEvent], boolean | void>
+OnCaseComplete: () => <Z extends Partial<Record<K, (args_0: CaseCompleteEvent) => boolean | void>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: CaseCompleteEvent) => boolean | void>) => void | TypedPropertyDescriptor<(args_0: CaseCompleteEvent) => boolean | void>
 ```

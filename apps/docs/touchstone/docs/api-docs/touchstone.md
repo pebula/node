@@ -8,21 +8,12 @@
 
 |  Class | Description |
 |  --- | --- |
-|  [ChartJsHtmlReporter](./touchstone.chartjshtmlreporter.md) |  |
 |  [SimpleConsoleReporter](./touchstone.simpleconsolereporter.md) |  |
-|  [VegaLiteReporter](./touchstone.vegalitereporter.md) | A reporter that creates visual graphs from the results. Can output html, svg and/or png |
 
 ## Functions
 
 |  Function | Description |
 |  --- | --- |
-|  [Mixin(m1)](./touchstone.mixin.md) |  |
-|  [Mixin(m1, m2)](./touchstone.mixin_1.md) |  |
-|  [Mixin(m1, m2, m3)](./touchstone.mixin_2.md) |  |
-|  [Mixin(m1, m2, m3, m4)](./touchstone.mixin_3.md) |  |
-|  [Mixin(m1, m2, m3, m4, m5)](./touchstone.mixin_4.md) |  |
-|  [Mixin(m1, m2, m3, m4, m5, mn)](./touchstone.mixin_5.md) |  |
-|  [Mixin(mixins)](./touchstone.mixin_6.md) |  |
 |  [touchStone()](./touchstone.touchstone.md) |  |
 
 ## Interfaces
@@ -34,7 +25,6 @@
 |  [CaseMetadataArgs](./touchstone.casemetadataargs.md) |  |
 |  [CaseResult](./touchstone.caseresult.md) |  |
 |  [CaseStats](./touchstone.casestats.md) | An object of stats including mean, margin or error, and standard deviation.  https://benchmarkjs.com/docs\#prototype\_stats |
-|  [NoopMetadataArgs](./touchstone.noopmetadataargs.md) |  |
 |  [SuiteAbortEvent](./touchstone.suiteabortevent.md) |  |
 |  [SuiteCompleteEvent](./touchstone.suitecompleteevent.md) |  |
 |  [SuiteErrorEvent](./touchstone.suiteerrorevent.md) |  |
@@ -62,10 +52,4 @@
 |  [OnTouchStoneStart](./touchstone.ontouchstonestart.md) |  |
 |  [Suite](./touchstone.suite.md) |  |
 |  [TouchStone](./touchstone.touchstone.md) |  |
-
-## Type Aliases
-
-|  Type Alias | Description |
-|  --- | --- |
-|  [Orientation](./touchstone.orientation.md) |  |
 

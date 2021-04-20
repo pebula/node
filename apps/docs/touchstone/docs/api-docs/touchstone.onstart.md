@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-OnStart: (metadata?: NoopMetadataArgs) => MethodDecoratorOf<[SuiteStartEvent], boolean | void>
+OnStart: () => <Z extends Partial<Record<K, (args_0: SuiteStartEvent) => boolean | void>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: SuiteStartEvent) => boolean | void>) => void | TypedPropertyDescriptor<(args_0: SuiteStartEvent) => boolean | void>
 ```

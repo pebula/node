@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-Case: (metadata?: CaseMetadataArgs) => MethodDecoratorOf<any, any>
+Case: (metadata?: CaseMetadataArgs) => <Z extends Partial<Record<K, (() => any) | ((...args: any) => any)>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(() => any) | ((...args: any) => any)>) => void | TypedPropertyDescriptor<(() => any) | ((...args: any) => any)>
 ```
