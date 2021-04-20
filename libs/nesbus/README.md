@@ -1,6 +1,6 @@
 # `@pebula/nesbus`
 
-[![Documentation](https://img.shields.io/badge/Documentation-9cf?style=for-the-badge)](https://pebula.github.io/node/nesbus/docs/getting-started/introduction/)   ![npm (scoped)](https://img.shields.io/npm/v/@pebula/nesbus?color=green&style=for-the-badge)  [![GitHub](https://img.shields.io/badge/Source_Code-green?style=for-the-badge&logo=github)](https://github.com/pebula/node/tree/master/libs/nesbus)
+[![Documentation](https://img.shields.io/badge/Documentation-9cf?style=for-the-badge)](https://pebula.github.io/node/nesbus/docs/getting-started/introduction/)   ![npm (scoped)](https://img.shields.io/npm/v/@pebula/nesbus?color=green&style=for-the-badge)  [![GitHub](https://img.shields.io/badge/Source_Code-green?style=for-the-badge&logo=github)](https://github.com/pebula/node/tree/main/libs/nesbus)
 
 **NesBus** (Nest / Service Bus) is a microservice extension for **NestJS** that adds support for Azure Service Bus within **NestJS** in a
 simple and intuitive way.

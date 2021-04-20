@@ -35,7 +35,7 @@ module.exports = {
           position: 'left',
         },
         {
-          href: `https://github.com/${org}/${repo}/tree/master/libs/${package}`,
+          href: `https://github.com/${org}/${repo}/tree/main/libs/${package}`,
           label: 'GitHub',
           position: 'right',
         },
@@ -54,7 +54,7 @@ module.exports = {
           items: [
             {
               label: 'GitHub',
-              href: `https://github.com/${org}/${repo}/tree/master/libs/${package}`,
+              href: `https://github.com/${org}/${repo}/tree/main/libs/${package}`,
             },
           ],
         },
@@ -85,7 +85,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: `https://github.com/${org}/${repo}/tree/master/apps/docs/${package}/docs`,
+          editUrl: `https://github.com/${org}/${repo}/tree/main/apps/docs/${package}/docs`,
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
