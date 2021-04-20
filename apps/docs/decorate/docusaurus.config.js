@@ -1,104 +1,34 @@
+const { SharedConfig } = require('../_shared/shared.docusaurus.config');
 
-const org = 'pebula';
-const repo = 'node';
-const package = 'decorate';
+const sharedConfig = new SharedConfig({
+  dirName: __dirname,
+  org: 'pebula',
+  repo: 'node',
+
+  // PACKAGE NAME!
+  package: 'decorate',
+
+  // TITLE
+  title: 'Decorate',
+
+  // SHORT DESCRIPTION (MAIN PAGE)
+  tagline: 'Strictly typed decorator management tool for metadata driven libraries / applications.',
+});
 
 module.exports = {
-  title: 'Decorate',
-  tagline: 'Strictly typed decorator management tool for metadata driven libraries / applications.',
-  url: `https://${org}.github.io/${repo}/${package}`,
-  baseUrl: process.env.GH_PAGES_BUILD ? `/${repo}/${package}/` : '/',
-  favicon: 'img/favicon.ico',
-  organizationName: org,
-  projectName: package,
-  onBrokenLinks: 'warn',
+  ...sharedConfig.rootOptions(),
   customFields: {
-    apiDocPrefix: `docs/api-docs/${package}.`,
+    apiDocPrefix: `docs/api-docs/${sharedConfig.package}.`,
   },
   themeConfig: {
-    navbar: {
-      title: `@${org}/${package}`,
-      logo: {
-        alt: `@${org}/${package}`,
-        src: 'img/logo.svg',
-      },
-      items: [
-        {
-          to: 'docs/getting-started/introduction',
-          activeBasePath: 'docs',
-          label: 'Docs',
-          position: 'left',
-        },
-        {
-          href: `https://github.com/${org}/${repo}/tree/main/libs/${package}`,
-          label: 'GitHub',
-          position: 'right',
-        },
-      ],
-    },
-    footer: {
-      style: 'dark',
-      links: [
-        {
-          title: 'Docs',
-          items: [
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'GitHub',
-              href: `https://github.com/${org}/${repo}/tree/main/libs/${package}`,
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} Shlomi Assaf. Built with Docusaurus.`,
-    },
-    googleAnalytics: {
-      trackingID: 'UA-11687894-9',
-      // Optional fields.
-      anonymizeIP: true,
-    },
+    navbar: sharedConfig.navbar(false), // true -> with api docs item
+    footer: sharedConfig.footer(),
+    googleAnalytics: sharedConfig.googleAnalytics('UA-11687894-9'),
   },
   plugins: [
-    require.resolve('docusaurus-lunr-search'),
-    [
-      '@couds/docusaurus-resolve-plugin',
-      {
-        modules: [],
-        alias: {
-          '@site-shared': require('path').resolve(__dirname, '../_shared'),
-        },
-      }
-    ]
+    ...sharedConfig.plugins(),
   ],
   presets: [
-    [
-      '@docusaurus/preset-classic',
-      {
-        docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: `https://github.com/${org}/${repo}/tree/main/apps/docs/${package}/docs`,
-          beforeDefaultRemarkPlugins: [
-            function() {
-              const visit = require('unist-util-visit');
-              const transformer = (root) => {
-                visit(root, 'jsx', (node, _index, parent) => {
-                  if (typeof node.value === 'string') {
-                    node.value = node.value.replace(/<!--\s-->/g, '');
-                  }
-                });
-              };
-              return transformer;
-            }
-          ],
-        },
-        theme: {
-          customCss: require.resolve('./src/css/custom.css'),
-        },
-      },
-    ],
+    sharedConfig.docusaurusPresetClassic(false), // true -> fix invalid markup created from api-documenter
   ],
 };

@@ -1,110 +1,35 @@
+const { SharedConfig } = require('../_shared/shared.docusaurus.config');
 
-const org = 'pebula';
-const repo = 'node';
-const package = 'goosetyped';
+const sharedConfig = new SharedConfig({
+  dirName: __dirname,
+  org: 'pebula',
+  repo: 'node',
+
+  // PACKAGE NAME!
+  package: 'goosetyped',
+
+  // TITLE
+  title: 'GooseTyped',
+
+  // SHORT DESCRIPTION (MAIN PAGE)
+  tagline: '',
+});
 
 module.exports = {
-  title: 'GooseTyped',
-  tagline: '',
-  url: `https://${org}.github.io/${repo}/${package}`,
-  baseUrl: process.env.GH_PAGES_BUILD ? `/${repo}/${package}/` : '/',
-  favicon: 'img/favicon.ico',
-  organizationName: org,
-  projectName: package,
+  ...sharedConfig.rootOptions(),
   customFields: {
-    apiDocPrefix: `docs/api-docs/${package}.`,
+    apiDocPrefix: `docs/api-docs/${sharedConfig.package}.`,
     mongooseDocsUrl: 'https://mongoosejs.com/docs',
   },
   themeConfig: {
-    navbar: {
-      title: `@${org}/${package}`,
-      logo: {
-        alt: `@${org}/${package}`,
-        src: 'img/logo.svg',
-      },
-      items: [
-        {
-          to: 'docs/getting-started/introduction',
-          activeBasePath: 'docs/getting-started/introduction',
-          label: 'Docs',
-          position: 'left',
-        },
-        {
-          to: 'docs/api-docs/index',
-          activeBasePath: 'docs/api-docs',
-          label: 'API',
-          position: 'left',
-        },
-        {
-          href: `https://github.com/${org}/${repo}/tree/main/libs/${package}`,
-          label: 'GitHub',
-          position: 'right',
-        },
-      ],
-    },
-    footer: {
-      style: 'dark',
-      links: [
-        {
-          title: 'Docs',
-          items: [
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'GitHub',
-              href: `https://github.com/${org}/${repo}/tree/main/libs/${package}`,
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} Shlomi Assaf. Built with Docusaurus.`,
-    },
-    googleAnalytics: {
-      trackingID: 'UA-11687894-9',
-      // Optional fields.
-      anonymizeIP: true,
-    },
+    navbar: sharedConfig.navbar(true), // true -> with api docs item
+    footer: sharedConfig.footer(),
+    googleAnalytics: sharedConfig.googleAnalytics('UA-11687894-9'),
   },
   plugins: [
-    require.resolve('docusaurus-lunr-search'),
-    [
-      '@couds/docusaurus-resolve-plugin',
-      {
-        modules: [],
-        alias: {
-          '@site-shared': require('path').resolve(__dirname, '../_shared'),
-        },
-      }
-    ]
+    ...sharedConfig.plugins(),
   ],
   presets: [
-    [
-      '@docusaurus/preset-classic',
-      {
-        docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: `https://github.com/${org}/${repo}/tree/main/apps/docs/${package}/docs`,
-          beforeDefaultRemarkPlugins: [
-            function() {
-              const visit = require('unist-util-visit');
-              const transformer = (root) => {
-                visit(root, 'jsx', (node, _index, parent) => {
-                  if (typeof node.value === 'string') {
-                    node.value = node.value.replace(/<!--\s-->/, '');
-                  }
-                });
-              };
-              return transformer;
-            }
-          ],
-        },
-        theme: {
-          customCss: require.resolve('./src/css/custom.css'),
-        },
-      },
-    ],
+    sharedConfig.docusaurusPresetClassic(true), // true -> fix invalid markup created from api-documenter
   ],
 };
