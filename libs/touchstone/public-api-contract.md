@@ -5,6 +5,8 @@
 ```ts
 
 import * as benchmark from 'benchmark';
+import { ClassDecoratorOf } from '@pebula/decorate';
+import { Mixin } from '@pebula/decorate';
 import { Stats } from 'benchmark';
 import { Times } from 'benchmark';
 
@@ -18,7 +20,7 @@ export interface BenchmarkOptions {
 }
 
 // @public (undocumented)
-export const Case: (metadata?: CaseMetadataArgs) => MethodDecoratorOf<any, any>;
+export const Case: (metadata?: CaseMetadataArgs) => <Z extends Partial<Record<K, (() => any) | ((...args: any) => any)>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(() => any) | ((...args: any) => any)>) => void | TypedPropertyDescriptor<(() => any) | ((...args: any) => any)>;
 
 // @public (undocumented)
 export interface CaseCompleteEvent extends BaseEvent<'caseComplete'> {
@@ -58,54 +60,31 @@ export interface CaseStats extends Stats {
     min: number;
 }
 
-// @public (undocumented)
-export function Mixin<T1, C1>(m1: C1 & Cls<T1>): Ctor<T1> & C1;
+export { Mixin }
 
 // @public (undocumented)
-export function Mixin<T1, C1, T2, C2>(m1: C1 & Cls<T1>, m2: C2 & Cls<T2>): Ctor<T1 & T2> & C1 & C2;
+export const OnAbort: () => <Z extends Partial<Record<K, (args_0: SuiteAbortEvent) => void>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: SuiteAbortEvent) => void>) => void | TypedPropertyDescriptor<(args_0: SuiteAbortEvent) => void>;
 
 // @public (undocumented)
-export function Mixin<T1, C1, T2, C2, T3, C3>(m1: C1 & Cls<T1>, m2: C2 & Cls<T2>, m3: C3 & Cls<T3>): Ctor<T1 & T2 & T3> & C1 & C2 & C3;
+export const OnCaseComplete: () => <Z extends Partial<Record<K, (args_0: CaseCompleteEvent) => boolean | void>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: CaseCompleteEvent) => boolean | void>) => void | TypedPropertyDescriptor<(args_0: CaseCompleteEvent) => boolean | void>;
 
 // @public (undocumented)
-export function Mixin<T1, C1, T2, C2, T3, C3, T4, C4>(m1: C1 & Cls<T1>, m2: C2 & Cls<T2>, m3: C3 & Cls<T3>, m4: C4 & Cls<T4>): Ctor<T1 & T2 & T3 & T4> & C1 & C2 & C3 & C4;
+export const OnComplete: () => <Z extends Partial<Record<K, (args_0: SuiteCompleteEvent) => boolean | void>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: SuiteCompleteEvent) => boolean | void>) => void | TypedPropertyDescriptor<(args_0: SuiteCompleteEvent) => boolean | void>;
 
 // @public (undocumented)
-export function Mixin<T1, C1, T2, C2, T3, C3, T4, C4, T5, C5>(m1: C1 & Cls<T1>, m2: C2 & Cls<T2>, m3: C3 & Cls<T3>, m4: C4 & Cls<T4>, m5: C5 & Cls<T5>): Ctor<T1 & T2 & T3 & T4 & T5> & C1 & C2 & C3 & C4 & C5;
+export const OnError: () => <Z extends Partial<Record<K, (args_0: SuiteErrorEvent) => void>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: SuiteErrorEvent) => void>) => void | TypedPropertyDescriptor<(args_0: SuiteErrorEvent) => void>;
 
 // @public (undocumented)
-export function Mixin<T1, C1, T2, C2, T3, C3, T4, C4, T5, C5>(m1: C1 & Cls<T1>, m2: C2 & Cls<T2>, m3: C3 & Cls<T3>, m4: C4 & Cls<T4>, m5: C5 & Cls<T5>, ...mn: Array<Cls<any>>): Ctor<T1 & T2 & T3 & T4 & T5> & C1 & C2 & C3 & C4 & C5;
+export const OnReset: () => <Z extends Partial<Record<K, (args_0: SuiteResetEvent) => void>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: SuiteResetEvent) => void>) => void | TypedPropertyDescriptor<(args_0: SuiteResetEvent) => void>;
 
 // @public (undocumented)
-export function Mixin(...mixins: Array<Cls<any>>): Ctor<any>;
+export const OnStart: () => <Z extends Partial<Record<K, (args_0: SuiteStartEvent) => boolean | void>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: SuiteStartEvent) => boolean | void>) => void | TypedPropertyDescriptor<(args_0: SuiteStartEvent) => boolean | void>;
 
 // @public (undocumented)
-export interface NoopMetadataArgs {
-}
+export const OnTouchStoneEnd: () => <Z extends Partial<Record<K, (args_0: TouchStoneEndEvent) => any>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: TouchStoneEndEvent) => any>) => void | TypedPropertyDescriptor<(args_0: TouchStoneEndEvent) => any>;
 
 // @public (undocumented)
-export const OnAbort: (metadata?: NoopMetadataArgs) => MethodDecoratorOf<[SuiteAbortEvent], void>;
-
-// @public (undocumented)
-export const OnCaseComplete: (metadata?: NoopMetadataArgs) => MethodDecoratorOf<[CaseCompleteEvent], boolean | void>;
-
-// @public (undocumented)
-export const OnComplete: (metadata?: NoopMetadataArgs) => MethodDecoratorOf<[SuiteCompleteEvent], boolean | void>;
-
-// @public (undocumented)
-export const OnError: (metadata?: NoopMetadataArgs) => MethodDecoratorOf<[SuiteErrorEvent], void>;
-
-// @public (undocumented)
-export const OnReset: (metadata?: NoopMetadataArgs) => MethodDecoratorOf<[SuiteResetEvent], void>;
-
-// @public (undocumented)
-export const OnStart: (metadata?: NoopMetadataArgs) => MethodDecoratorOf<[SuiteStartEvent], boolean | void>;
-
-// @public (undocumented)
-export const OnTouchStoneEnd: (metadata?: NoopMetadataArgs) => MethodDecoratorOf<[TouchStoneEndEvent], any>;
-
-// @public (undocumented)
-export const OnTouchStoneStart: (metadata?: NoopMetadataArgs) => MethodDecoratorOf<[TouchStoneStartEvent], any>;
+export const OnTouchStoneStart: () => <Z extends Partial<Record<K, (args_0: TouchStoneStartEvent) => any>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: TouchStoneStartEvent) => any>) => void | TypedPropertyDescriptor<(args_0: TouchStoneStartEvent) => any>;
 
 // @public (undocumented)
 export abstract class SimpleConsoleReporter {
@@ -183,6 +162,7 @@ export interface TouchStoneEndEvent {
 export interface TouchStoneMetadataArgs {
     manualRun?: boolean;
     name?: string;
+    onAutoRunEnd?: 'processExit' | 'ignore' | ((err?: Error) => void);
 }
 
 // @public (undocumented)
