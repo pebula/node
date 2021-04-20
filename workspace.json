@@ -21,6 +21,7 @@
         },
         "build": {
           "builder": "@nx-plus/docusaurus:browser",
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/docs/decorate"
           }
@@ -53,6 +54,7 @@
         },
         "build": {
           "builder": "@nx-plus/docusaurus:browser",
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/docs/tom"
           }
@@ -85,6 +87,7 @@
         },
         "build": {
           "builder": "@nx-plus/docusaurus:browser",
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/docs/goosetyped"
           }
@@ -117,6 +120,7 @@
         },
         "build": {
           "builder": "@nx-plus/docusaurus:browser",
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/docs/touchstone"
           }
@@ -149,6 +153,7 @@
         },
         "build": {
           "builder": "@nx-plus/docusaurus:browser",
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/docs/nesbus"
           }
