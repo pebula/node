@@ -24,7 +24,7 @@ class SharedConfig {
   navbar(apiDocs) {
     const maybeApiDocs = [];
     if (apiDocs) {
-      a.push({
+      maybeApiDocs.push({
         to: 'docs/api-docs/index',
         activeBasePath: 'docs/api-docs',
         label: 'API',
