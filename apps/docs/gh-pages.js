@@ -58,6 +58,7 @@ const ghPagesTask = (appName) => {
 
   const pipe = [
     {
+      // We use the type "runCommand" and not "target" because nx will not check for caching with internal chaining of "target", only through a new process
       name: "build package",
       type: "runCommand",
       options: {
@@ -67,12 +68,14 @@ const ghPagesTask = (appName) => {
     },
     ...(config.docs ? apiDocsTasks() : []),
     {
-      type: 'target',
-      target: `docs-${appName}:build`,
+      // We use the type "runCommand" and not "target" because nx will not check for caching with internal chaining of "target", only through a new process
+      name: "build package",
+      type: "runCommand",
       options: {
-        outputPath: `dist/gh-pages/${appName}`
+        commands: [`yarn nx build docs-${appName} --outputPath=dist/gh-pages/${appName}`],
+        parallel: false
       }
-    }
+    },
   ];
   if (typeof config.beforeEmit === 'function') {
     // config.beforeEmit(pipe);
