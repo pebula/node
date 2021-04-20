@@ -1,8 +1,18 @@
 [![Coverage Status](https://coveralls.io/repos/github/pebula/node/badge.svg?branch=main)](https://coveralls.io/github/pebula/node?branch=main)
 
-# Repositories
+# Pebula Node
 
-## `@pebula/tom`  
+Monorepo for node<sup>[1](#footnote1)</sup> libraries. Contain the following libraries:
+
+Package       | Version | Documentation  | Source Code
+--------------|---------|----------------|------------
+[@pebula/tom](#@pebula/tom) | [![npm (scoped)](https://img.shields.io/npm/v/@pebula/tom?color=green&style=flat-square)](https://www.npmjs.com/package/@pebula/tom) | [![Docs](https://img.shields.io/badge/Docs-9cf?style=flat-square&label=‎&logo=Read%20The%20Docs&logoColor=white&color=31A8FF)](https://pebula.github.io/node/tom) | [![GitHub](https://img.shields.io/badge/Source_Code-green?style=flat-square&label=‎&logo=github)](https://github.com/pebula/node/tree/main/libs/tom)
+[@pebula/goosetyped](#@pebula/goosetyped) | [![npm (scoped)](https://img.shields.io/npm/v/@pebula/goosetyped?color=green&style=flat-square)](https://www.npmjs.com/package/@pebula/goosetyped) | [![Docs](https://img.shields.io/badge/Docs-9cf?style=flat-square&label=‎&logo=Read%20The%20Docs&logoColor=white&color=31A8FF)](https://pebula.github.io/node/goosetyped) | [![GitHub](https://img.shields.io/badge/Source_Code-green?style=flat-square&label=‎&logo=github)](https://github.com/pebula/node/tree/main/libs/goosetyped)
+[@pebula/nesbus](#@pebula/nesbus) | [![npm (scoped)](https://img.shields.io/npm/v/@pebula/nesbus?color=green&style=flat-square)](https://www.npmjs.com/package/@pebula/nesbus) | [![Docs](https://img.shields.io/badge/Docs-9cf?style=flat-square&label=‎&logo=Read%20The%20Docs&logoColor=white&color=31A8FF)](https://pebula.github.io/node/nesbus) | [![GitHub](https://img.shields.io/badge/Source_Code-green?style=flat-square&label=‎&logo=github)](https://github.com/pebula/node/tree/main/libs/nesbus)
+[@pebula/touchstone](#@pebula/touchstone) | [![npm (scoped)](https://img.shields.io/npm/v/@pebula/touchstone?color=green&style=flat-square)](https://www.npmjs.com/package/@pebula/touchstone) | [![Docs](https://img.shields.io/badge/Docs-9cf?style=flat-square&label=‎&logo=Read%20The%20Docs&logoColor=white&color=31A8FF)](https://pebula.github.io/node/touchstone) | [![GitHub](https://img.shields.io/badge/Source_Code-green?style=flat-square&label=‎&logo=github)](https://github.com/pebula/node/tree/main/libs/touchstone)
+[@pebula/decorate](#@pebula/decorate) | [![npm (scoped)](https://img.shields.io/npm/v/@pebula/decorate?color=green&style=flat-square)](https://www.npmjs.com/package/@pebula/decorate) | [![Docs](https://img.shields.io/badge/Docs-9cf?style=flat-square&label=‎&logo=Read%20The%20Docs&logoColor=white&color=31A8FF)](https://pebula.github.io/node/decorate) | [![GitHub](https://img.shields.io/badge/Source_Code-green?style=flat-square&label=‎&logo=github)](https://github.com/pebula/node/tree/main/libs/decorate)
+
+## @pebula/tom
 
 A super-fast, type safe, object serialization, validation and mapping
 
@@ -10,7 +20,7 @@ A super-fast, type safe, object serialization, validation and mapping
 
 --------------
 
-## `@pebula/goosetyped`  
+## @pebula/goosetyped
 
 GooseTyped allows you to focus on building your models more clearly. Simplifying most of the domain specific concepts of mongoose resulting in a modern ORM code which in turn, allows taking advantage of modern JS features and design patterns.
 
@@ -18,7 +28,7 @@ GooseTyped allows you to focus on building your models more clearly. Simplifying
 
 --------------
 
-## `@pebula/nesbus`  
+## @pebula/nesbus
 
 Hassle free service bus integration.
 Provides a code-first approach to service bus entity management including provisioning.
@@ -29,7 +39,7 @@ Setting up service bus is now as simple as setting up an express server!
 
 --------------
 
-## `@pebula/touchstone`  
+## @pebula/touchstone
 
 Metadata-driven benchmarking framework, built on top of [benchmark.js](https://benchmarkjs.com/)
 
@@ -37,8 +47,12 @@ Metadata-driven benchmarking framework, built on top of [benchmark.js](https://b
 
 --------------
 
-## `@pebula/decorate`  
+## @pebula/decorate
 
 Strictly typed decorator management tool for metadata driven libraries / applications.
 
 [![Documentation](https://img.shields.io/badge/Documentation-9cf?style=for-the-badge)](https://pebula.github.io/node/decorate)   ![npm (scoped)](https://img.shields.io/npm/v/@pebula/decorate?color=green&style=for-the-badge)  [![GitHub](https://img.shields.io/badge/Source_Code-green?style=for-the-badge&logo=github)](https://github.com/pebula/node/tree/main/libs/decorate)
+
+--------------
+
+<a id="footnote1" name="footnote1">1</a>: Most libraries will work on the browser but they are designed for node (i.e. performance, bundle size, etc...)
