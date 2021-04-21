@@ -34,6 +34,7 @@ const printColors = (colors: RGB[]) => {
 }
 
 function createHorizontalBarChartJsDefinition(result: SuiteResult) {
+  // result.cases.sort( (c1, c2) => c2.hz > c1.hz ? -1 : 1);
   return `
 {
   type: 'horizontalBar',
@@ -43,7 +44,7 @@ function createHorizontalBarChartJsDefinition(result: SuiteResult) {
       {
         label: "Cases",
         backgroundColor: ${JSON.stringify(printColors(spreadColors(colors[0], colors[1], result.cases.length)))},
-        data: ${JSON.stringify(result.cases.map( c => Math.round(c.hz) ).sort() )},
+        data: ${JSON.stringify(result.cases.map( c => Math.round(c.hz) ) )},
       }
     ]
   },
