@@ -3,6 +3,7 @@ id: chart-js-html-reporter
 title: ChartJS HTML Reporter
 sidebar_label: 4. ChartJS HTML Reporter
 ---
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 The `ChartJsHtmlReporter` is a charting reporter which outputs an HTML file that uses the `CharJS` charting library.
 
@@ -31,3 +32,5 @@ class MyPerformanceTest extends Mixin(ChartJsHtmlReporter) {
   chartJsHtmlReporterOutputFile = `./my-custom-path.html';
 }
 ```
+
+<img alt="ChartJS HTML Reporter" src={useBaseUrl('img/chartjs-html-report.png')} />
