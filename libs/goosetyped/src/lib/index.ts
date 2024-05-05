@@ -33,7 +33,7 @@ export * from './interfaces/mongoose';
 export {
   GtQuery,
   GtResource, GtModel,
-  Resource, SubDocument, Model,
+  Resource, SubDocument, ModelExtensions,
 } from './model';
 
 export {

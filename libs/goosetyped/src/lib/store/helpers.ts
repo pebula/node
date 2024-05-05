@@ -1,7 +1,7 @@
-import { Schema, SchemaTypeOpts } from 'mongoose';
+import { Schema, Model } from 'mongoose';
 import { gtSchemaStore } from './schema-store';
 import { Ctor } from '../utils';
-import { Model, Resource } from '../model';
+import { Resource } from '../model';
 
 /**
  * Returns the mongoose schema for the provided Model / Resource
@@ -18,15 +18,14 @@ export function getSchemaOf<T>(modelClass: Ctor<T>): Schema | undefined {
  */
 export function getDiscriminatorKeysOf(modelClass: Ctor<any>): string[] {
   const container = gtSchemaStore.get(modelClass);
-  const discriminator = container && container.localInfo.discriminator;
-  if (discriminator) {
-    if (discriminator.type === 'root') {
-      return Array.from(discriminator.children.keys());
-    } else {
-      return Array.from((discriminator.root.discriminator as any).children.keys());
-    }
-  }
-  return [];
+  let discriminator = container && container.localInfo.discriminator;
+
+  while (discriminator?.type === 'child')
+    discriminator = discriminator.root?.discriminator;
+
+  return discriminator?.type === 'root'
+    ? Array.from(discriminator.children.keys())
+    : [];
 }
 
 /**
@@ -44,7 +43,7 @@ export function getDiscriminatorKeyFor(modelClass: Ctor<any>): string | undefine
 /**
  * Return all Models / Resources registered in GooseTyped
  */
-export function findModels(): Array<Model | Resource> {
+export function findModels(): Array<Model<any> | Resource> {
   return gtSchemaStore.findModels({});
 }
 

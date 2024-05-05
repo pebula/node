@@ -22,7 +22,7 @@ describe('goosetyped', () => {
         column: string;
       }
 
-      expect(spyStuff.spy).toBeCalledTimes(1);
+      expect(spyStuff.spy).toHaveBeenCalledTimes(1);
       expect(spyStuff.catcher.options).toEqual({});
       expect(spyStuff.catcher.key).toBe('column');
       expect(spyStuff.catcher.target).toBe(TestModel.prototype);
@@ -35,7 +35,7 @@ describe('goosetyped', () => {
         column: string;
       }
 
-      expect(spyStuff.spy).toBeCalledTimes(1);
+      expect(spyStuff.spy).toHaveBeenCalledTimes(1);
       expect(spyStuff.catcher.options).toBe(metadata);
       expect(spyStuff.catcher.key).toBe('column');
       expect(spyStuff.catcher.target).toBe(TestModel.prototype);

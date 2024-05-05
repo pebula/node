@@ -3,19 +3,12 @@ import { GtConnectOptions } from '../interfaces';
 import { isPromise, isFunction } from '../utils';
 import { GtSchemaContainer } from '../store/schema-container';
 
-enum MongooseConnectionReadyState {
-  disconnected = 0,
-  connected = 1,
-  connecting = 2,
-  disconnecting = 3,
-}
-
 const DEFAULT_CONNECT_OPTIONS: GtConnectOptions = {
   compileAt: 'immediate',
 };
 
 function isConnected(connection: mongoose.Connection) {
-  return connection.readyState === MongooseConnectionReadyState.connected;
+  return connection.readyState === mongoose.ConnectionStates.connected;
 }
 
 export class GtConnectionStore {
@@ -30,7 +23,7 @@ export class GtConnectionStore {
 
   getCompiler(connectionId?: string) {
     if (!connectionId) {
-      return mongoose;
+      return mongoose.connection;
     } else {
       const conn = this.connections.get(connectionId);
       if (!conn) {

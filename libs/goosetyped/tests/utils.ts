@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
+import { ResolveDocumentType } from '../src/lib/utils';
 
 export const createMongoConnection = async () => {
-  const m = await mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+  const m = await mongoose.connect(process.env.MONGO_URL);
   return m.connection;
 }
 
@@ -11,7 +12,7 @@ export const initMongoConnection = (cleanModelsStrategy?: 'diff' | 'all') => {
 
   beforeAll(async () => {
     try {
-      connection = await mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+      connection = await mongoose.connect(process.env.MONGO_URL);
     } catch (err) {
       console.error(err);
       process.exit(1);
@@ -42,12 +43,12 @@ export const initMongoConnection = (cleanModelsStrategy?: 'diff' | 'all') => {
   return () => connection;
 };
 
-export function checkDocumentAfterCreate<T extends mongoose.Document = mongoose.Document>(model: T, expectedData: Partial<T>) {
+export function checkDocumentAfterCreate<T extends mongoose.Document = mongoose.Document>(model: T, expectedData: Partial<ResolveDocumentType<T>>) {
   expect(model._id).toBeDefined();
   checkSubDocumentAfterCreate(model, expectedData);
 }
 
-export function checkSubDocumentAfterCreate<T = any>(model: T, expectedData: Partial<T>, prefix = '') {
+export function checkSubDocumentAfterCreate<T = any>(model: T, expectedData: Partial<ResolveDocumentType<T>>, prefix = '') {
   for (const [key, value] of Object.entries(expectedData)) {
     if (typeof value === 'object') {
       if (model[key] !== value) {

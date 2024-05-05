@@ -23,7 +23,7 @@ describe('goosetyped', () => {
       class TestModel {
       }
 
-      expect(spyStuff.spy).toBeCalledTimes(1);
+      expect(spyStuff.spy).toHaveBeenCalledTimes(1);
       expect(spyStuff.catcher.options).toBe(metadata);
       expect(spyStuff.catcher.key).toBeUndefined();
       expect(spyStuff.catcher.target).toBe(TestModel);

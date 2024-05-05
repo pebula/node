@@ -26,7 +26,7 @@ describe('DecoratedDomain', () => {
         }
       }).not.toThrow();
 
-      expect(onExecute).toBeCalledTimes(2);
+      expect(onExecute).toHaveBeenCalledTimes(2);
     });
 
     it('should throw if a decorated is used multiple times on the same type but allowMulti is false', () => {
@@ -142,7 +142,7 @@ describe('DecoratedDomain', () => {
         @M() method(@P() param: string) { } //+2
       }
 
-      expect(onExecute).toBeCalledTimes(5);
+      expect(onExecute).toHaveBeenCalledTimes(5);
     });
 
     it('should create proper decorator initializer types', () => {

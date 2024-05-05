@@ -1,5 +1,5 @@
 import { CTOR_INVOKED } from './constants';
-import { checkIfCtorInvoked, ensureInstanceOf } from './utils';
+import { checkIfCtorInvoked } from './utils';
 import { GtLocalInfo } from './local-info';
 
 
@@ -54,14 +54,15 @@ export function syncModelInstance(source: any, target: any, localInfo: GtLocalIn
   if (skipTargetCheck || !checkIfCtorInvoked(target)) {
     const bind = bindToTarget === null ? checkIfCtorInvoked(source) : bindToTarget;
     for (const [key, prop] of localInfo.props) {
-      if (key in source) {
+
+      if (key in source)
         // All embedded properties on model are wrapped so this will trigger a recursion call to here again
         target[key] = source[key];
-      }
-      if (bind) {
+
+      if (bind)
         Object.defineProperty(source, key, { get: () => target[key], set: value => target[key] = value });
-      }
     }
+
     Reflect.set(target, CTOR_INVOKED, true);
   }
 }

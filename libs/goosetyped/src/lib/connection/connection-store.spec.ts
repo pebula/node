@@ -7,6 +7,7 @@ import { GtModel } from '../model';
 import { addConnection } from './add-connection';
 import { GtModelCompilationError } from '../errors/model-compilation-error';
 import { getSchemaOf } from '../store/helpers';
+import { mapSchemaType } from '../store';
 
 describe('goosetyped', () => {
   describe('Deffered Model Compilation / Connections', () => {
@@ -26,6 +27,7 @@ describe('goosetyped', () => {
 
     it('should not compile unique connection models immediately', async () => {
       jest.useFakeTimers();
+      mapSchemaType(Date, { schemaType: mongoose.Schema.Types.Date });
 
       @GtDocument({
         connectionId: 'testConnection',
@@ -41,25 +43,28 @@ describe('goosetyped', () => {
       explorer.hasColumn('dt', true);
       expect(mongoose.models['TestModel']).toBeUndefined();
 
-      const connection = mongoose.createConnection(process.env.MONGO_URL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+      const connection = mongoose.createConnection(process.env.MONGO_URL);
       const addConnectionPromise = addConnection('testConnection', () => connection );
 
       explorer = new SchemaTestExplorer(TestModel, false);
       explorer.hasColumn('dt', true);
-      expect(mongoose.models['TestModel']).toBeUndefined();
+      expect(mongoose.models[explorer.container.getName()]).toBeUndefined();
 
       await addConnectionPromise;
 
       explorer = new SchemaTestExplorer(TestModel, false);
       explorer.hasColumn('dt');
-      expect(mongoose.model(explorer.container.getName())).toBeDefined();
+      expect(mongoose.models[explorer.container.getName()]).toBeUndefined();
+
+      explorer = new SchemaTestExplorer(TestModel, false);
+      expect(connection.model(explorer.container.getName())).toBeDefined();
 
       connection.close();
     });
 
     it('should throw an error throw the error handler on deffered model compilation', async () => {
       expect.assertions(4);
-      const connection = mongoose.createConnection(process.env.MONGO_URL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+      const connection = mongoose.createConnection(process.env.MONGO_URL);
 
       try {
         @GtDocument({
@@ -84,6 +89,7 @@ describe('goosetyped', () => {
 
     it('should execute beforeCompile if it was set', async () => {
       jest.useFakeTimers();
+      mapSchemaType(Date, { schemaType: mongoose.Schema.Types.Date });
 
       @GtDocument({
         connectionId: 'testConnection2',
@@ -103,7 +109,7 @@ describe('goosetyped', () => {
           ['dt1']: Date,
         })
       };
-      const connection = mongoose.createConnection(process.env.MONGO_URL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+      const connection = mongoose.createConnection(process.env.MONGO_URL);
       const addConnectionPromise = addConnection('testConnection2', () => connection, { beforeCompile } );
 
       await addConnectionPromise;

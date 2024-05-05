@@ -1,6 +1,7 @@
 // tslint:disable: ban-types
 import mongoose from 'mongoose';
 import { GtSchemaMetadataArgs, GtDocumentMetadataArgs } from '../interfaces';
+
 import {
   GtSchemaMetadata,
   GtSubDocumentMetadata,
@@ -12,10 +13,12 @@ import { gtConnectionStore } from '../connection';
 import { GtSchemaStore } from './schema-store';
 import { setSkipVersioning } from './helpers';
 import { GtLocalInfo } from '../model/local-info';
-import { Ctor, getBaseClass } from '../utils';
-import { createEmbeddedContainerForType } from '../model/containers';
+import { Ctor, createModelName, getBaseClass } from '../utils';
+import { GtDocumentArrayPath, GtSubdocumentPath, Schema, createEmbeddedContainerForType } from '../model/containers';
 import { GtModelCompilationError } from '../errors';
 import { isFunction } from '../utils/misc';
+import { GT_DISCRIMINATOR_ROOT } from '../model/constants';
+import { GtModelContainer, GtResourceContainer } from '../model/base';
 
 const BUILT = Symbol('BUILT');
 
@@ -35,6 +38,7 @@ export class GtSchemaContainer<TInstance extends mongoose.Document = mongoose.Do
       }
     }
   }
+
   private static extendContainer(targetContainer: GtSchemaContainer, baseContainer: GtSchemaContainer, owInherited = false): void {
     baseContainer.build();
 
@@ -64,7 +68,7 @@ export class GtSchemaContainer<TInstance extends mongoose.Document = mongoose.Do
 
   model: mongoose.Model<TInstance> & TStatic;
   schemaMetadata: GtSchemaMetadata;
-  readonly schema: mongoose.Schema;
+  readonly schema: Schema;
   readonly hierarchy = { base: new Set<GtSchemaContainer>(), extending: new Set<GtSchemaContainer>() };
   readonly localInfo: GtLocalInfo;
   private columns = new Map<string, GtColumnMetadata>();
@@ -74,8 +78,6 @@ export class GtSchemaContainer<TInstance extends mongoose.Document = mongoose.Do
   private queryHelper?: Ctor<any>;
 
   constructor(public readonly target: Ctor<any>, public readonly store: GtSchemaStore) {
-    this.schema = new mongoose.Schema();
-
     let baseTarget = getBaseClass(target);
     while (baseTarget && baseTarget !== Object) {
       const baseContainer = store.get(baseTarget);
@@ -87,6 +89,8 @@ export class GtSchemaContainer<TInstance extends mongoose.Document = mongoose.Do
     }
 
     this.localInfo = new GtLocalInfo(this);
+    this.schema = Schema.create(this);
+    this.detectDiscriminators();
   }
 
   getName() {
@@ -255,8 +259,8 @@ export class GtSchemaContainer<TInstance extends mongoose.Document = mongoose.Do
       this.processGlobalOptionsSetInColumnMetadata(column);
 
       knownContainer = this.findKnownContainer(column);
-      const schema = knownContainer && column.isContainer ? createEmbeddedContainerForType(knownContainer, column) : column.schema;
-      this.schema.add({ [column.key]: schema });
+      const schema = knownContainer ? createEmbeddedContainerForType(knownContainer, column, this.schema) : column.schema;
+      this.schema.add({ [column.key]: schema } as any);
 
       if (knownContainer) {
         this.handleNestedDocumentsAndDiscriminators(knownContainer, column);
@@ -276,17 +280,14 @@ export class GtSchemaContainer<TInstance extends mongoose.Document = mongoose.Do
     }
   }
 
-  private compileModel(metadata: GtDocumentMetadata, compiler: mongoose.Connection | Pick<mongoose.Mongoose, 'model'>) {
+  private compileModel(metadata: GtDocumentMetadata, compiler: mongoose.Connection) {
     const { discriminator } = this.localInfo;
     if (discriminator && discriminator.type === 'child') {
       const model = discriminator.root.container.model;
       const { schema } = this;
       return model.discriminator(this.target as any, schema) as any;
     }
-    return compiler instanceof mongoose.Connection
-      ? compiler.model(this.target as any, this.schema, metadata.collection)
-      : compiler.model<TInstance>(this.target as any, this.schema, metadata.collection, metadata.skipInit)
-    ;
+    return compiler.model(this.target as any, this.schema, metadata.collection);
   }
 
   /**
@@ -294,9 +295,9 @@ export class GtSchemaContainer<TInstance extends mongoose.Document = mongoose.Do
    */
   private handleNestedDocumentsAndDiscriminators(knownContainer: GtSchemaContainer, column: GtColumnMetadata): void {
     if (knownContainer.localInfo.discriminator && knownContainer.localInfo.discriminator.type === 'root') {
-      const documentArray = this.schema.path(column.key) as mongoose.Schema.Types.DocumentArray;
+      const document = this.schema.path(column.key) as GtSubdocumentPath | GtDocumentArrayPath;
       for (const [key, c] of knownContainer.localInfo.discriminator.children) {
-        const Model = documentArray.discriminator(key, c.schema);
+        const Model = document.discriminator(key, c.schema);
         // We don't compile this model because it is created as part of a column
         // The model on which this column is defined on will perform a recursive compilation
         // to all of it's embedded columns to ensure compilation of mongoose generated classes.
@@ -306,5 +307,22 @@ export class GtSchemaContainer<TInstance extends mongoose.Document = mongoose.Do
 
   private findKnownContainer(column: GtColumnMetadata) {
     return this.store.get(column.resolvedColumnType.underlyingType);
+  }
+
+  private detectDiscriminators() {
+    // discriminator, but not me... thus i'm a child
+    if (this.localInfo.discriminator?.type === 'child') {
+      const root: typeof GtModelContainer | typeof GtResourceContainer = this.target[GT_DISCRIMINATOR_ROOT];
+
+      if (root.localInfo.discriminator?.type !== 'root')
+        throw new Error("Invalid discriminator state");
+
+      const discriminatorKey = root.localInfo.container.getSchemaOptions('discriminatorKey');
+      const discriminatorValue = createModelName(this.target);
+      this.setSchemaOptions('discriminatorKey', discriminatorKey);
+
+      root.localInfo.discriminator.children.set(discriminatorValue, this);
+      Object.defineProperty(this.target.prototype, discriminatorKey, { value: discriminatorValue, configurable: true, enumerable: true, writable: true });
+    }
   }
 }

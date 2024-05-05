@@ -1,7 +1,8 @@
 // tslint:disable: ban-types
+import { Model } from 'mongoose';
 import { safeConstructor, Ctor } from '../utils';
 import { GtSchemaContainer } from './schema-container';
-import { Model, Resource } from '../model';
+import { Resource } from '../model';
 
 export class GtSchemaStore {
   static get(): GtSchemaStore {
@@ -29,7 +30,7 @@ export class GtSchemaStore {
     return result;
   }
 
-  findModels(query: {}): Array<Model | Resource> {
+  findModels(query: {}): Array<Model<any> | Resource> {
     return Array.from(this.containers.values()).map( c => c.model || c.target as any );
   }
 }

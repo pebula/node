@@ -45,6 +45,7 @@ describe('goosetyped', () => {
       class TestClass extends GtModel(TimestampMixin, VersionMixin, OwnerMixin) {
         @GtColumn() name: string;
       }
+
       let t = await TestClass.create({ name: 'test', owner: 'tester' });
       t = await TestClass.findById(t.id);
       expect(t.createDate).toBeInstanceOf(Date);
@@ -157,6 +158,7 @@ describe('goosetyped', () => {
       await TestClass.create({ name: 'noTest', owner: 'd2' });
       await TestClass.create({ name: 'best1', owner: 'e' });
       await TestClass.create({ name: 'best2', owner: 'f' });
+      
       let results = await TestClass.find().nameWithT();
       expect(results.length).toBe(3);
 

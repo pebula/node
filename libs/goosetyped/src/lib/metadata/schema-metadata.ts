@@ -81,7 +81,6 @@ export class GtSubDocumentMetadata extends GtSchemaMetadata {
 
 export class GtDocumentMetadata extends GtSchemaMetadata {
   collection?: string;
-  skipInit?: boolean;
   connectionId?: string;
 
   autoIndex?: boolean;
@@ -89,13 +88,12 @@ export class GtDocumentMetadata extends GtSchemaMetadata {
   bufferCommands?: boolean;
   capped?: boolean | number | { size?: number; max?: number; autoIndexId?: boolean; };
   minimize?: boolean;
-  collation?: mongodb.CollationDocument;
+  collation?: mongodb.CollationOptions;
 
   constructor(target: Function, metadata: GtDocumentMetadataArgs) {
     super(target, metadata);
     bulkSetIfExists(metadata, this as GtDocumentMetadata)
       .set('collection')
-      .set('skipInit', false)
       .set('connectionId');
 
     for (const k of PASS_THROUGH_MODEL_OPTIONS) {

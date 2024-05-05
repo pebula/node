@@ -81,3 +81,6 @@ export type StripDoc<T extends Document, TExcept extends keyof Document = never>
  */
 export type StripDoColumns<T extends Document, TExcept extends keyof Document = never>
   = Pick<T, SetDifference<NonFunctionKeys<T>, Exclude<keyof Document, TExcept>>>;
+
+export type ExtractProps<T> = Pick<T, { [K in keyof T]: T[K] extends (...args: any[]) => any ? never : K }[keyof T]>;
+export type ResolveDocumentType<T, TFallback = T> = T extends Document<any, any, infer DocType> ? ExtractProps<DocType> : TFallback;

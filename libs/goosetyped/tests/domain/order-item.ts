@@ -1,15 +1,10 @@
 import {
-  GtModel,
   GtVersionKey,
   GtDocument,
   GtColumn,
-  GtDiscriminator,
   GtTimestampCreated,
   GtTimestampUpdated,
   GtIndex,
-  GtToJSON,
-  DocumentArray,
-  GtInitHook, GtSaveHook,
 } from '../../src/index';
 import { BaseTestingModel } from './base-testing.model';
 import { BaseSupplierInfo } from './supplier';

@@ -1,4 +1,4 @@
-import { Schema, Document, Model } from 'mongoose';
+import { Schema, Document, Model, Types } from 'mongoose';
 import { GtSchemaContainer } from '../../../store';
 import { SCHEMA_CONTAINER } from '../symbol';
 import { GtMap } from './map.type';
@@ -16,9 +16,11 @@ export class GtMapPath extends Schema.Types.Map {
   private readonly [SCHEMA_CONTAINER]: GtSchemaContainer;
   private $__schemaType: any; // tslint:disable-line: variable-name
 
-  constructor(container: GtSchemaContainer, key: string, schema: Schema, private options?: any) {
+  constructor(container: GtSchemaContainer, key: string, valueSchema: Schema, parentSchema?: Schema, options?: any) {
     super(key, options);
-    this.of = schema;
+    this.of = valueSchema;
+    if (parentSchema)
+      this.$__schemaType = (parentSchema as any).interpretAsType(`${key}.$*`, valueSchema, Object.assign({ typeKey: 'type' }, options ?? {}));
     this[SCHEMA_CONTAINER] = container;
   }
 
@@ -55,7 +57,7 @@ export class GtMapPath extends Schema.Types.Map {
     const ctor = this.constructor as any;
     const options = Object.assign({}, this.options || {});
 
-    const cloned = new ctor(this[SCHEMA_CONTAINER], this.path, this.of, options);
+    const cloned = new ctor(this[SCHEMA_CONTAINER], this.path, this.of, undefined, options);
     if (this.$__schemaType != null) {
       cloned.$__schemaType = this.$__schemaType.clone();
     }

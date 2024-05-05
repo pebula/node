@@ -31,6 +31,6 @@ export class GtMap extends MongooseMap {
     super.set(key, initialValue);
     const document = this.get(key);
     const container: GtSchemaContainer = this[SCHEMA_CONTAINER];
-    container.localInfo.processEmbeddedArrayItemModelInstance(document, value);
+    container.localInfo.processEmbeddedArrayItemModelInstance(document, value, this);
   }
 }

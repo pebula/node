@@ -11,9 +11,10 @@ import {
 } from './schema-options';
 import { gtSchemaStore } from '../store';
 import { GtDiscriminator } from './discriminator-type';
+import { GtModel } from '../model';
 
-function getOptionValue<TOptKey extends keyof mongoose.SchemaOptions>(cls: any, key: TOptKey): mongoose.SchemaOptions[TOptKey] {
-  return gtSchemaStore.get(cls).getSchemaOptions(key);
+function getOptionValue<TOptKey extends keyof mongoose.SchemaOptions, TOpt extends mongoose.SchemaOptions = mongoose.SchemaOptions>(cls: any, key: TOptKey): TOpt[TOptKey] {
+  return gtSchemaStore.get(cls).getSchemaOptions(key) as TOpt[TOptKey];
 }
 
 describe('goosetyped', () => {
@@ -80,15 +81,17 @@ describe('goosetyped', () => {
         }
       }
 
-      const { transform, ...config } = getOptionValue(TestModel, 'toObject');
+      const { transform, ...config } = getOptionValue<'toObject', mongoose.SchemaOptions<any>>(TestModel, 'toObject');
       expect(config).toEqual(metadata);
+      expect(transform).toBeInstanceOf(Function);
 
       const testModel = new TestModel();
       const retValue: any = {};
       const spy = jest.spyOn(testModel, 'toObjectTransform');
-      transform(testModel, retValue, null);
-      expect(spy).toBeCalledTimes(1);
-      expect(spy).toBeCalledWith(retValue, null);
+      if (typeof transform !== 'boolean')
+        transform(testModel, retValue, null);
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(retValue, null);
       expect(retValue.self).toBe(testModel);
     });
 
@@ -105,15 +108,17 @@ describe('goosetyped', () => {
         }
       }
 
-      const { transform, ...config } = getOptionValue(TestModel, 'toJSON');
+      const { transform, ...config } = getOptionValue<'toJSON', mongoose.SchemaOptions<any>>(TestModel, 'toJSON');
       expect(config).toEqual(metadata);
-
+      expect(transform).toBeInstanceOf(Function);
+      
       const testModel = new TestModel();
       const retValue: any = {};
       const spy = jest.spyOn(testModel, 'toJSONTransform');
-      transform(testModel, retValue, null);
-      expect(spy).toBeCalledTimes(1);
-      expect(spy).toBeCalledWith(retValue, null);
+      if (typeof transform !== 'boolean')
+        transform(testModel, retValue, null);
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(retValue, null);
       expect(retValue.self).toBe(testModel);
     });
   });

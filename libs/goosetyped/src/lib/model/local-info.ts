@@ -3,7 +3,7 @@ import { EmbeddedDocument } from '../mongoose.extend';
 import { GtSchemaContainer } from '../store';
 import { createModelName } from '../utils';
 import { GtColumnMetadata } from '../metadata';
-import { GT_LOCAL_INFO, GT_DISCRIMINATOR_ROOT } from './constants';
+import { GT_DISCRIMINATOR_ROOT, GT_LOCAL_INFO } from './constants';
 import { ensureInstanceOf } from './utils';
 import { GtModelContainer, GtResourceContainer } from './base';
 import { syncModelInstance } from './sync';
@@ -31,7 +31,10 @@ export class GtLocalInfo {
     this.cls = target as any;
     this.cls[GT_LOCAL_INFO] = this;
 
-    this.detectDiscriminators(this.cls[GT_DISCRIMINATOR_ROOT]);
+    const root: typeof GtModelContainer | typeof GtResourceContainer = target[GT_DISCRIMINATOR_ROOT];
+    // discriminator, but not me... thus i'm a child
+    if (root && root !== target)
+      this.discriminator = { type: 'child', root: root.localInfo };
   }
 
   addProp(info: GtLocalPropInfo): void {
@@ -77,7 +80,7 @@ export class GtLocalInfo {
         if (!source) { // we don't mind "falsy" values because we're always in the context of embedded columns.
           set.call(this, source);
         } else {
-          const { propLocalInfo, propValue } = ensureInstanceOf(source, localInfo);
+          const { pLocalInfo, propValue } = ensureInstanceOf(source, localInfo, this);
           // if provValue is not doc it means we created a new instance so DO NOT bind
           // if they both equal, it means that doc was an instance from the user so do bind.
           const bind = propValue === source;
@@ -85,9 +88,8 @@ export class GtLocalInfo {
           /* Direct assign propValue to model, the syncModelInstance all will duplicate work */
           set.call(this, propValue);
           const target = get.call(this);
-          if (propValue !== target) {
-            syncModelInstance(propValue, target, propLocalInfo, false, bind);
-          }
+          if (propValue !== target)
+            syncModelInstance(propValue, target, pLocalInfo, false, bind);
 
           /* Assign minimal object to model (like in CTOR) and then sync to model, more risky cause we don't know user logic when assigning */
           // if (propLocalInfo !== localInfo) {
@@ -118,24 +120,11 @@ export class GtLocalInfo {
     }
   }
 
-  processEmbeddedArrayItemModelInstance(embeddedDoc: EmbeddedDocument, doc: any): void {
-    const { propLocalInfo, propValue } = ensureInstanceOf(doc, this);
+  processEmbeddedArrayItemModelInstance(embeddedDoc: EmbeddedDocument, doc: any, parent: any): void {
+    const { pLocalInfo, propValue } = ensureInstanceOf(doc, this, parent);
     // if provValue is not doc it means we created a new instance so DO NOT bind
     // if they both equal, it means that doc was an instance from the user so do bind.
     const bind = propValue === doc;
-    syncModelInstance(propValue, embeddedDoc, propLocalInfo, false, bind);
-  }
-
-  private detectDiscriminators(root: typeof GtModelContainer | typeof GtResourceContainer) {
-    // discriminator, but not me... thus i'm a child
-    if (root && root !== this.cls) {
-      const rootLocalInfo = root[GT_LOCAL_INFO];
-      this.discriminator = { type: 'child', root: rootLocalInfo };
-      const discriminatorKey = rootLocalInfo.container.getSchemaOptions('discriminatorKey');
-      const discriminatorValue = createModelName(this.cls);
-      this.container.setSchemaOptions('discriminatorKey', discriminatorKey);
-      (rootLocalInfo.discriminator as any).children.set(discriminatorValue, this.container);
-      Object.defineProperty(this.cls.prototype, discriminatorKey, { value: discriminatorValue, configurable: true, enumerable: true, writable: true });
-    }
+    syncModelInstance(propValue, embeddedDoc, pLocalInfo, false, bind);
   }
 }

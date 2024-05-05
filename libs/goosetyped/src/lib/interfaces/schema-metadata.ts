@@ -55,14 +55,6 @@ export interface GtDocumentMetadataArgs extends GtSchemaMetadataArgs {
   collection?: string;
 
   /**
-   * Whether to skip initialization
-   * Optional: When not set, default's to false
-   *
-   * Note that this refer to the skipInit from mongoose.
-   */
-  skipInit?: boolean;
-
-  /**
    * The connection id to use when registering the model.
    * If a connection id is not defined (default behavior) then the model is registered using the default connection.
    *
@@ -100,5 +92,5 @@ export interface GtDocumentMetadataArgs extends GtSchemaMetadataArgs {
   /**
    * See @link https://mongoosejs.com/docs/guide.html#collation
    */
-  collation?: mongodb.CollationDocument;
+  collation?: mongodb.CollationOptions;
 }
