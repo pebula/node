@@ -76,11 +76,11 @@ export class LinkEntity {
    */
   protected _context: ClientEntityContext;
   /**
-   * @property {NodeJS.Timer} _tokenRenewalTimer The token renewal timer that keeps track of when
+   * @property {NodeJS.Timeout} _tokenRenewalTimer The token renewal timer that keeps track of when
    * the Client Entity is due for token renewal.
    * @protected
    */
-  protected _tokenRenewalTimer?: NodeJS.Timer;
+  protected _tokenRenewalTimer?: NodeJS.Timeout;
   /**
    * Creates a new ClientEntity instance.
    * @constructor
@@ -193,7 +193,7 @@ export class LinkEntity {
    * removed.
    */
   protected async _closeLink(link?: Sender | Receiver): Promise<void> {
-    clearTimeout(this._tokenRenewalTimer as NodeJS.Timer);
+    clearTimeout(this._tokenRenewalTimer as NodeJS.Timeout);
     if (link) {
       try {
         // This should take care of closing the link and it's underlying session. This should also

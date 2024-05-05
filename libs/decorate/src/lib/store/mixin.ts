@@ -78,7 +78,7 @@ const mixedInClassesConstructors = Symbol('∆Decorate:mixedInClassesConstructor
  */
 function handleConstructors(mixin: Abstract<any> | Type<any>, Constructors: Set<(...args: any[]) => void>) {
   if (mixinCtorRef in mixin) {
-    Constructors.add(mixin[mixinCtorRef]);
+    Constructors.add(mixin[mixinCtorRef] as any);
   }
   if (MixinFw.isMixinTarget(mixin)) {
     for (const subMixin of MixinFw.getClassMixins(mixin)) {
@@ -94,7 +94,7 @@ function handleConstructors(mixin: Abstract<any> | Type<any>, Constructors: Set<
  */
 function executeConstructors(cls: Type<any>, instance: any, args?: any[]) {
   if (mixedInClassesConstructors in cls) {
-    for (const ctor of cls[mixedInClassesConstructors]) {
+    for (const ctor of cls[mixedInClassesConstructors] as Function[]) {
       ctor.apply(instance, args);
     }
   }

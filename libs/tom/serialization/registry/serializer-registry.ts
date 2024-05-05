@@ -40,7 +40,7 @@ class InternalSchemaRegistry<S extends Serializer> {
   deleteOperation(target: Type<any>, operation: SerializerOp): boolean {
     const operations = this.schemas.get(target);
     if (operations?.[operation]) {
-      operations[operation] = undefined;
+      (operations as any)[operation] = undefined;
       return true;
     }
     return false;

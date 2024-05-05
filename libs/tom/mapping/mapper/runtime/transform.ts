@@ -95,7 +95,7 @@ export function transformUnknown(context: ClassMappingContext<any, any>,
   // We only ignore the reflected type cause if the value is a list and we don't have type info, we need to resolve to a list!
   const listContainerTargetType = resolveListContainer(value, ignoreReflectedContainer ? undefined : targetMeta);
   if (listContainerTargetType) {
-    const newValue = toPlainObject ? [] : new listContainerTargetType();
+    const newValue = toPlainObject ? [] : new (listContainerTargetType as any)();
     const collection: IterableIterator<any> = value instanceof Map ? value.values() : value;
     for (const subValue of collection) {
       if (newValue instanceof Set) {

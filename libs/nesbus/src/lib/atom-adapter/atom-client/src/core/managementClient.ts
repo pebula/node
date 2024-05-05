@@ -314,7 +314,7 @@ export class ManagementClient extends LinkEntity {
     try {
       // Always clear the timeout, as the isOpen check may report
       // false without ever having cleared the timeout otherwise.
-      clearTimeout(this._tokenRenewalTimer as NodeJS.Timer);
+      clearTimeout(this._tokenRenewalTimer as NodeJS.Timeout);
       if (this._isMgmtRequestResponseLinkOpen()) {
         const mgmtLink = this._mgmtReqResLink;
         this._mgmtReqResLink = undefined;

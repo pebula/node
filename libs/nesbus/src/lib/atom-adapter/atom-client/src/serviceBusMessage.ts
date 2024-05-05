@@ -519,7 +519,7 @@ export function fromAmqpMessage(
     }
     if (msg.message_annotations[Constants.sequenceNumber] != null) {
       if (Buffer.isBuffer(msg.message_annotations[Constants.sequenceNumber])) {
-        props.sequenceNumber = Long.fromBytesBE(msg.message_annotations[Constants.sequenceNumber]);
+        props.sequenceNumber = Long.fromString(msg.message_annotations[Constants.sequenceNumber].readBigInt64BE().toString());
       } else {
         props.sequenceNumber = Long.fromNumber(msg.message_annotations[Constants.sequenceNumber]);
       }

@@ -52,7 +52,7 @@ export interface OnAmqpEventAsPromise extends OnAmqpEvent {
 export interface PromiseLike {
   resolve: (value?: any) => void;
   reject: (reason?: any) => void;
-  timer: NodeJS.Timer;
+  timer: NodeJS.Timeout;
 }
 
 /**
@@ -209,15 +209,15 @@ export class MessageReceiver extends LinkEntity {
    * the lock is automatically renewed.
    * @protected
    */
-  protected _messageRenewLockTimers: Map<string, NodeJS.Timer | undefined> = new Map<
+  protected _messageRenewLockTimers: Map<string, NodeJS.Timeout | undefined> = new Map<
     string,
-    NodeJS.Timer | undefined
+    NodeJS.Timeout | undefined
   >();
   /**
-   * @property {NodeJS.Timer} _newMessageReceivedTimer The timer that keeps track of time since the
+   * @property {NodeJS.Timeout} _newMessageReceivedTimer The timer that keeps track of time since the
    * last message was received.
    */
-  protected _newMessageReceivedTimer?: NodeJS.Timer;
+  protected _newMessageReceivedTimer?: NodeJS.Timeout;
   /**
    * Resets the `_newMessageReceivedTimer` timer when a new message is received.
    */
@@ -267,7 +267,7 @@ export class MessageReceiver extends LinkEntity {
       this.maxAutoRenewDurationInSeconds > 0 && this.receiveMode === ReceiveMode.peekLock;
     this._clearMessageLockRenewTimer = (messageId: string) => {
       if (this._messageRenewLockTimers.has(messageId)) {
-        clearTimeout(this._messageRenewLockTimers.get(messageId) as NodeJS.Timer);
+        clearTimeout(this._messageRenewLockTimers.get(messageId) as NodeJS.Timeout);
         log.receiver(
           "[%s] Cleared the message renew lock timer for message with id '%s'.",
           this._context.namespace.connectionId,
