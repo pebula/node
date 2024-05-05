@@ -4,21 +4,41 @@
 
 ```ts
 
+/// <reference types="mongoose/types/aggregate" />
+/// <reference types="mongoose/types/callback" />
+/// <reference types="mongoose/types/collection" />
+/// <reference types="mongoose/types/connection" />
+/// <reference types="mongoose/types/cursor" />
+/// <reference types="mongoose/types/document" />
+/// <reference types="mongoose/types/error" />
+/// <reference types="mongoose/types/expressions" />
+/// <reference types="mongoose/types/helpers" />
+/// <reference types="mongoose/types/indexes" />
+/// <reference types="mongoose/types/inferschematype" />
+/// <reference types="mongoose/types/middlewares" />
+/// <reference types="mongoose/types/models" />
+/// <reference types="mongoose/types/mongooseoptions" />
+/// <reference types="mongoose/types/pipelinestage" />
+/// <reference types="mongoose/types/populate" />
+/// <reference types="mongoose/types/query" />
+/// <reference types="mongoose/types/schemaoptions" />
+/// <reference types="mongoose/types/schematypes" />
+/// <reference types="mongoose/types/session" />
+/// <reference types="mongoose/types/types" />
+/// <reference types="mongoose/types/utility" />
+/// <reference types="mongoose/types/validation" />
+/// <reference types="mongoose/types/virtuals" />
+
 import { Document as Document_2 } from 'mongoose';
-import { FilterQuery } from 'mongoose';
-import { InsertManyOptions } from 'mongoose';
-import { MapReduceOptions } from 'mongoose';
-import { Model as Model_2 } from 'mongoose';
+import M from 'mongoose';
+import { Model } from 'mongoose';
 import * as mongodb from 'mongodb';
 import * as mongoose from 'mongoose';
 import { default as mongoose_2 } from 'mongoose';
 import { NonFunctionKeys } from 'utility-types';
-import { PopulateOptions } from 'mongoose';
-import { QueryOptions } from 'mongoose';
-import { SaveOptions } from 'mongoose';
 import { Schema } from 'mongoose';
 import { SchemaType } from 'mongoose';
-import { SchemaTypeOpts } from 'mongoose';
+import { SchemaTypeOptions } from 'mongoose';
 import { SetDifference } from 'utility-types';
 import { Subtract } from 'utility-types';
 import { Types } from 'mongoose';
@@ -43,7 +63,7 @@ export class DocumentArray<T extends Document_2> extends Types.DocumentArray<T> 
 }
 
 // @public
-export function findModels(): Array<Model | Resource>;
+export function findModels(): Array<Model<any> | Resource>;
 
 // @public
 export function getDiscriminatorKeyFor(modelClass: Ctor<any>): string | undefined;
@@ -104,7 +124,7 @@ export function GtDeleteOneHook(stage: 'pre' | 'post'): MethodDecoratorOf<never,
 export function GtDiscriminator(): PropertyDecoratorOf<string>;
 
 // @public (undocumented)
-export function GtDocument(metadata?: GtDocumentMetadataArgs): ClassDecoratorOf<Document_2, Model>;
+export function GtDocument(metadata?: GtDocumentMetadataArgs): ClassDecoratorOf<Document_2, ModelExtensions>;
 
 // @public (undocumented)
 export interface GtDocumentMetadataArgs extends GtSchemaMetadataArgs {
@@ -116,11 +136,10 @@ export interface GtDocumentMetadataArgs extends GtSchemaMetadataArgs {
         max?: number;
         autoIndexId?: boolean;
     };
-    collation?: mongodb.CollationDocument;
+    collation?: mongodb.CollationOptions;
     collection?: string;
     connectionId?: string;
     minimize?: boolean;
-    skipInit?: boolean;
 }
 
 // @public (undocumented)
@@ -156,22 +175,7 @@ export function GtLocalProp(): PropertyDecorator;
 export function GtMethod(): MethodDecorator;
 
 // @public (undocumented)
-export function GtModel(): Ctor<Document_2> & Model;
-
-// @public (undocumented)
-export function GtModel<T1, C1>(m1: C1 & Ctor<T1>): Ctor<Document_2 & T1> & Model & C1;
-
-// @public (undocumented)
-export function GtModel<T1, C1, T2, C2>(m1: C1 & Ctor<T1>, m2: C2 & Ctor<T2>): Ctor<Document_2 & T1 & T2> & Model & C1 & C2;
-
-// @public (undocumented)
-export function GtModel<T1, C1, T2, C2, T3, C3>(m1: C1 & Ctor<T1>, m2: C2 & Ctor<T2>, m3: C3 & Ctor<T3>): Ctor<Document_2 & T1 & T2 & T3> & Model & C1 & C2 & C3;
-
-// @public (undocumented)
-export function GtModel<T1, C1, T2, C2, T3, C3, T4, C4>(m1: C1 & Ctor<T1>, m2: C2 & Ctor<T2>, m3: C3 & Ctor<T3>, m4: C4 & Ctor<T4>): Ctor<Document_2 & T1 & T2 & T3 & T4> & Model & C1 & C2 & C3 & C4;
-
-// @public (undocumented)
-export function GtModel<T1, C1, T2, C2, T3, C3, T4, C4, T5, C5>(m1: C1 & Ctor<T1>, m2: C2 & Ctor<T2>, m3: C3 & Ctor<T3>, m4: C4 & Ctor<T4>, m5: C5 & Ctor<T5>): Ctor<Document_2 & T1 & T2 & T3 & T4 & T5> & Model & C1 & C2 & C3 & C4 & C5;
+export function GtModel<T1, C1, T2, C2, T3, C3, T4, C4, T5, C5>(m1?: C1 & Ctor<T1>, m2?: C2 & Ctor<T2>, m3?: C3 & Ctor<T3>, m4?: C4 & Ctor<T4>, m5?: C5 & Ctor<T5>): Ctor<Document_2<any, any, T1 & T2 & T3 & T4 & T5> & T1 & T2 & T3 & T4 & T5> & ModelExtensions<{}, {}, {}, any>;
 
 // @public (undocumented)
 export function GtPlugin(metadata: GtPluginMetadataArgs): ClassDecorator;
@@ -187,16 +191,16 @@ export interface GtPluginMetadataArgs<T = any> {
 }
 
 // @public (undocumented)
-export function GtQuery<Q1>(QH: Ctor<Q1>): <T, C>(Cls: Ctor<Document_2 & T> & Model & C) => Ctor<Document_2 & T> & C & Model<Q1>;
+export function GtQuery<Q1>(QH: Ctor<Q1>): <T, C>(Cls: Ctor<Document_2 & T> & ModelExtensions & C) => Ctor<Document_2 & T> & C & ModelExtensions<Q1>;
 
 // @public (undocumented)
-export function GtQuery<Q1, Q2>(Q1: Ctor<Q1>, Q2: Ctor<Q2>): <T, C>(Cls: Ctor<Document_2 & T> & Model & C) => Ctor<Document_2 & T> & C & Model<Q1 & Q2>;
+export function GtQuery<Q1, Q2>(Q1: Ctor<Q1>, Q2: Ctor<Q2>): <T, C>(Cls: Ctor<Document_2 & T> & ModelExtensions & C) => Ctor<Document_2 & T> & C & ModelExtensions<Q1 & Q2>;
 
 // @public (undocumented)
-export function GtQuery<Q1, Q2, Q3>(Q1: Ctor<Q1>, Q2: Ctor<Q2>, Q3: Ctor<Q3>): <T, C>(Cls: Ctor<Document_2 & T> & Model & C) => Ctor<Document_2 & T> & C & Model<Q1 & Q2 & Q3>;
+export function GtQuery<Q1, Q2, Q3>(Q1: Ctor<Q1>, Q2: Ctor<Q2>, Q3: Ctor<Q3>): <T, C>(Cls: Ctor<Document_2 & T> & ModelExtensions & C) => Ctor<Document_2 & T> & C & ModelExtensions<Q1 & Q2 & Q3>;
 
 // @public (undocumented)
-export function GtQuery<Q1, Q2, Q3, Q4>(Q1: Ctor<Q1>, Q2: Ctor<Q2>, Q3: Ctor<Q3>, Q4: Ctor<Q4>): <T, C>(Cls: Ctor<Document_2 & T> & Model & C) => Ctor<Document_2 & T> & C & Model<Q1 & Q2 & Q3 & Q4>;
+export function GtQuery<Q1, Q2, Q3, Q4>(Q1: Ctor<Q1>, Q2: Ctor<Q2>, Q3: Ctor<Q3>, Q4: Ctor<Q4>): <T, C>(Cls: Ctor<Document_2 & T> & ModelExtensions & C) => Ctor<Document_2 & T> & C & ModelExtensions<Q1 & Q2 & Q3 & Q4>;
 
 // @public (undocumented)
 export function GtRemoveHook(stage: 'pre' | 'post'): MethodDecoratorOf<never, any>;
@@ -275,135 +279,93 @@ export function mapSchemaType(runtimeType: any, metadata: GtSchemaTypeMetadataAr
 export type MethodDecoratorOf<TArgs extends [any] | [any, any] | [any, any, any] | [any, any, any, any] | [any, any, any, any, any] | [any, any, any, any, any, any] | [any, any, any, any, any, any, any] = never, TReturn = void> = <Z extends Partial<Record<K, (...args: TArgs) => TReturn>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(...args: TArgs) => TReturn>) => TypedPropertyDescriptor<(...args: TArgs) => TReturn> | void;
 
 // @public (undocumented)
-export interface Model<QueryHelpers = {}> extends Model_2<Document_2<any>, QueryHelpers> {
-    $where<T extends Document_2>(this: Ctor<T>, argument: string | Function): DocumentQuery<T[], T, QueryHelpers> & QueryHelpers;
+export interface ModelExtensions<TQueryHelpers = {}, TInstanceMethods = {}, TVirtuals = {}, TSchema = any> {
+    $where<T>(this: Ctor<T>, argument: string | Function): DocumentQuery<Array<M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>, M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>, TQueryHelpers, T, 'find'> & TQueryHelpers;
     // (undocumented)
-    [GT_DOCUMENT]: boolean;
-    create<T extends Document_2>(this: Ctor<T>, docs: any[], callback?: (err: any, res: T[]) => void): Promise<T[]>;
+    aggregate<R = any, T = never>(this: Ctor<T>, pipeline?: M.PipelineStage[], options?: M.AggregateOptions): M.Aggregate<Array<R>>;
     // (undocumented)
-    create<T extends Document_2>(this: Ctor<T>, docs: any[], options?: SaveOptions, callback?: (err: any, res: T[]) => void): Promise<T[]>;
+    aggregate<R = any, T = never>(this: Ctor<T>, pipeline: M.PipelineStage[]): M.Aggregate<Array<R>>;
+    bulkSave<T>(this: Ctor<T>, documents: Array<M.Document>, options?: M.MongooseBulkSaveOptions): Promise<mongodb.BulkWriteResult>;
+    bulkWrite<T>(this: Ctor<T>, writes: Array<M.AnyBulkWriteOperation<T extends M.Document ? any : (T extends {} ? T : any)>>, options: M.MongooseBulkWriteOptions & {
+        ordered: false;
+    }): Promise<mongodb.BulkWriteResult & {
+        mongoose?: {
+            validationErrors: Error[];
+        };
+    }>;
     // (undocumented)
-    create<T extends Document_2>(this: Ctor<T>, ...docs: any[]): Promise<T>;
+    bulkWrite<T>(this: Ctor<T>, writes: Array<M.AnyBulkWriteOperation<T extends M.Document ? any : (T extends {} ? T : any)>>, options?: M.MongooseBulkWriteOptions): Promise<mongodb.BulkWriteResult>;
+    collection: M.Collection;
+    countDocuments<T>(this: Ctor<T>, filter?: M.FilterQuery<T>, options?: (mongodb.CountOptions & M.MongooseBaseQueryOptions<T>) | null): DocumentQuery<number, M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>, TQueryHelpers, T, 'countDocuments'> & TQueryHelpers;
     // (undocumented)
-    create<T extends Document_2>(this: Ctor<T>, ...docsWithCallback: any[]): Promise<T>;
-    ctor<T extends Document_2>(this: Ctor<T>, doc: Partial<T>): T;
-    find<T extends Document_2>(this: Ctor<T>, callback?: (err: any, res: T[]) => void): DocumentQuery<T[], T, QueryHelpers> & QueryHelpers;
+    create<T>(this: Ctor<T>, docs: Array<Partial<T>>, options: M.CreateOptions & {
+        aggregateErrors: true;
+    }): Promise<(M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers> | M.Error)[]>;
     // (undocumented)
-    find<T extends Document_2>(this: Ctor<T>, conditions: FilterQuery<T>, callback?: (err: any, res: T[]) => void): DocumentQuery<T[], T, QueryHelpers> & QueryHelpers;
+    create<T>(this: Ctor<T>, docs: Array<Partial<T>>, options: M.CreateOptions): Promise<M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>[]>;
     // (undocumented)
-    find<T extends Document_2>(this: Ctor<T>, conditions: FilterQuery<T>, projection?: any | null, callback?: (err: any, res: T[]) => void): DocumentQuery<T[], T, QueryHelpers> & QueryHelpers;
+    create<T>(this: Ctor<T>, doc: Partial<T>): Promise<M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>;
     // (undocumented)
-    find<T extends Document_2>(this: Ctor<T>, conditions: FilterQuery<T>, projection?: any | null, options?: any | null, callback?: (err: any, res: T[]) => void): DocumentQuery<T[], T, QueryHelpers> & QueryHelpers;
-    findById<T extends Document_2>(this: Ctor<T>, id: any | string | number, callback?: (err: any, res: T | null) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
+    create<T>(this: Ctor<T>, doc1: Partial<T>, doc2: Partial<T>, ...docs: Array<Partial<T>>): Promise<M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>[]>;
+    createCollection<T, D extends mongodb.Document>(this: Ctor<T>, options?: mongodb.CreateCollectionOptions & Pick<M.SchemaOptions, 'expires'>): Promise<mongodb.Collection<D>>;
+    createSearchIndex<T>(this: Ctor<T>, description: M.SearchIndexDescription): Promise<string>;
+    ctor<T extends M.Document>(this: Ctor<T>, doc?: Partial<T>): T;
+    db: M.Connection;
+    deleteMany<T>(this: Ctor<T>, filter?: M.FilterQuery<T>, options?: (mongodb.DeleteOptions & M.MongooseBaseQueryOptions<T>) | null): DocumentQuery<mongodb.DeleteResult, M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>, TQueryHelpers, T, 'deleteMany'> & TQueryHelpers;
     // (undocumented)
-    findById<T extends Document_2>(this: Ctor<T>, id: any | string | number, projection: any, callback?: (err: any, res: T | null) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
+    deleteMany<T>(this: Ctor<T>, filter: M.FilterQuery<T>): DocumentQuery<mongodb.DeleteResult, M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>, TQueryHelpers, T, 'deleteMany'> & TQueryHelpers;
+    deleteOne<T>(this: Ctor<T>, filter?: M.FilterQuery<T>, options?: (mongodb.DeleteOptions & M.MongooseBaseQueryOptions<T>) | null): DocumentQuery<mongodb.DeleteResult, M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>, TQueryHelpers, T, 'deleteOne'> & TQueryHelpers;
     // (undocumented)
-    findById<T extends Document_2>(this: Ctor<T>, id: any | string | number, projection: any, options: any, callback?: (err: any, res: T | null) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    findByIdAndDelete<T extends Document_2>(this: Ctor<T>): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
+    deleteOne<T>(this: Ctor<T>, filter: M.FilterQuery<T>): DocumentQuery<mongodb.DeleteResult, M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>, TQueryHelpers, T, 'deleteOne'> & TQueryHelpers;
+    dropSearchIndex<T>(this: Ctor<T>, name: string): Promise<void>;
+    find<T, ResultDoc = M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>(this: Ctor<T>, filter: M.FilterQuery<T>, projection: M.ProjectionType<T> | null | undefined, options: M.QueryOptions<T> & {
+        lean: true;
+    }): DocumentQuery<M.GetLeanResultType<T, T[], 'find'>, ResultDoc, TQueryHelpers, T, 'find'> & TQueryHelpers;
     // (undocumented)
-    findByIdAndDelete<T extends Document_2>(this: Ctor<T>, id: any | number | string, callback?: (err: any, res: T | null) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
+    find<T, ResultDoc = M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>(this: Ctor<T>, filter: M.FilterQuery<T>, projection?: M.ProjectionType<T> | null | undefined, options?: M.QueryOptions<T> | null | undefined): DocumentQuery<Array<ResultDoc>, ResultDoc, TQueryHelpers, T, 'find'> & TQueryHelpers;
     // (undocumented)
-    findByIdAndDelete<T extends Document_2>(this: Ctor<T>, id: any | number | string, options: QueryOptions, callback?: (err: any, res: mongodb.FindAndModifyWriteOpResultObject<T | null>) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
+    find<T, ResultDoc = M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>(this: Ctor<T>, filter: M.FilterQuery<T>, projection?: M.ProjectionType<T> | null | undefined): DocumentQuery<Array<ResultDoc>, ResultDoc, TQueryHelpers, T, 'find'> & TQueryHelpers;
     // (undocumented)
-    findByIdAndDelete<T extends Document_2>(this: Ctor<T>, id: any | number | string, options: QueryOptions, callback?: (err: any, res: T | null) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    findByIdAndRemove<T extends Document_2>(this: Ctor<T>): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
+    find<T, ResultDoc = M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>(this: Ctor<T>, filter: M.FilterQuery<T>): DocumentQuery<Array<ResultDoc>, ResultDoc, TQueryHelpers, T, 'find'> & TQueryHelpers;
     // (undocumented)
-    findByIdAndRemove<T extends Document_2>(this: Ctor<T>, id: any | number | string, callback?: (err: any, res: T | null) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
+    find<T, ResultDoc = M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>(this: Ctor<T>): DocumentQuery<Array<ResultDoc>, ResultDoc, TQueryHelpers, T, 'find'> & TQueryHelpers;
+    findById<T, ResultDoc = M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>(this: Ctor<T>, id: any, projection: M.ProjectionType<T> | null | undefined, options: M.QueryOptions<T> & {
+        lean: true;
+    }): DocumentQuery<M.GetLeanResultType<T, T, 'findOne'> | null, ResultDoc, TQueryHelpers, T, 'findOne'> & TQueryHelpers;
     // (undocumented)
-    findByIdAndRemove<T extends Document_2>(this: Ctor<T>, id: any | number | string, options: QueryOptions, callback?: (err: any, res: mongodb.FindAndModifyWriteOpResultObject<T | null>) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
+    findById<T, ResultDoc = M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>(this: Ctor<T>, id: any, projection?: M.ProjectionType<T> | null, options?: M.QueryOptions<T> | null): DocumentQuery<ResultDoc | null, ResultDoc, TQueryHelpers, T, 'findOne'> & TQueryHelpers;
     // (undocumented)
-    findByIdAndRemove<T extends Document_2>(this: Ctor<T>, id: any | number | string, options: QueryOptions, callback?: (err: any, res: T | null) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    findByIdAndUpdate<T extends Document_2>(this: Ctor<T>): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
+    findById<T, ResultDoc = M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>(this: Ctor<T>, id: any, projection?: M.ProjectionType<T> | null): DocumentQuery<ResultDoc | null, ResultDoc, TQueryHelpers, T, 'findOne'> & TQueryHelpers;
     // (undocumented)
-    findByIdAndUpdate<T extends Document_2>(this: Ctor<T>, id: any | number | string, update: any, callback?: (err: any, res: T | null) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
+    init<T>(this: Ctor<T>): Promise<M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>;
+    insertMany<T>(this: Ctor<T>, docs: Array<T>): Promise<Array<M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>>;
     // (undocumented)
-    findByIdAndUpdate<T extends Document_2>(this: Ctor<T>, id: any | number | string, update: any, options: {
+    insertMany<T>(this: Ctor<T>, docs: Array<T>, options: M.InsertManyOptions & {
+        lean: true;
+    }): Promise<Array<M.Require_id<T>>>;
+    // (undocumented)
+    insertMany<T>(this: Ctor<T>, doc: Array<T>, options: M.InsertManyOptions & {
+        ordered: false;
         rawResult: true;
-    } & {
-        upsert: true;
-    } & {
-        new: true;
-    } & QueryOptions, callback?: (err: any, res: T) => void): DocumentQuery<T, T, QueryHelpers> & QueryHelpers;
+    }): Promise<mongodb.InsertManyResult<M.Require_id<T>> & {
+        mongoose: {
+            validationErrors: (M.CastError | M.Error.ValidatorError)[];
+            results: Array<M.Error | Object | M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>;
+        };
+    }>;
     // (undocumented)
-    findByIdAndUpdate<T extends Document_2>(this: Ctor<T>, id: any | number | string, update: any, options: {
-        upsert: true;
-        new: true;
-    } & QueryOptions, callback?: (err: any, res: mongodb.FindAndModifyWriteOpResultObject<T>) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    // (undocumented)
-    findByIdAndUpdate<T extends Document_2>(this: Ctor<T>, id: any | number | string, update: any, options: {
+    insertMany<T>(this: Ctor<T>, docs: Array<T>, options: M.InsertManyOptions & {
+        lean: true;
         rawResult: true;
-    } & QueryOptions, callback?: (err: any, res: mongodb.FindAndModifyWriteOpResultObject<T | null>) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
+    }): Promise<mongodb.InsertManyResult<M.Require_id<T>>>;
     // (undocumented)
-    findByIdAndUpdate<T extends Document_2>(this: Ctor<T>, id: any | number | string, update: any, options: QueryOptions, callback?: (err: any, res: T | null) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    findOne<T extends Document_2>(this: Ctor<T>, conditions?: any, callback?: (err: any, res: T | null) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    // (undocumented)
-    findOne<T extends Document_2>(this: Ctor<T>, conditions: any, projection: any, callback?: (err: any, res: T | null) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    // (undocumented)
-    findOne<T extends Document_2>(this: Ctor<T>, conditions: any, projection: any, options: any, callback?: (err: any, res: T | null) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    findOneAndDelete<T extends Document_2>(this: Ctor<T>): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    // (undocumented)
-    findOneAndDelete<T extends Document_2>(this: Ctor<T>, conditions: any, callback?: (err: any, res: T | null) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    // (undocumented)
-    findOneAndDelete<T extends Document_2>(this: Ctor<T>, conditions: any, options: {
+    insertMany<T>(this: Ctor<T>, docs: Array<T>, options: M.InsertManyOptions & {
         rawResult: true;
-    } & QueryOptions, callback?: (err: any, doc: mongodb.FindAndModifyWriteOpResultObject<T | null>, res: any) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
+    }): Promise<mongodb.InsertManyResult<M.Require_id<M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>>>;
     // (undocumented)
-    findOneAndDelete<T extends Document_2>(this: Ctor<T>, conditions: any, options: QueryOptions, callback?: (err: any, res: T | null) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    findOneAndRemove<T extends Document_2>(this: Ctor<T>): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
+    insertMany<T>(this: Ctor<T>, doc: Array<T>, options: M.InsertManyOptions): Promise<Array<M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>>;
     // (undocumented)
-    findOneAndRemove<T extends Document_2>(this: Ctor<T>, conditions: any, callback?: (err: any, res: T | null) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    // (undocumented)
-    findOneAndRemove<T extends Document_2>(this: Ctor<T>, conditions: any, options: {
-        rawResult: true;
-    } & QueryOptions, callback?: (err: any, doc: mongodb.FindAndModifyWriteOpResultObject<T | null>, res: any) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    // (undocumented)
-    findOneAndRemove<T extends Document_2>(this: Ctor<T>, conditions: any, options: QueryOptions, callback?: (err: any, res: T | null) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    findOneAndUpdate<T extends Document_2>(this: Ctor<T>): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    // (undocumented)
-    findOneAndUpdate<T extends Document_2>(this: Ctor<T>, conditions: any, update: any, callback?: (err: any, doc: T | null, res: any) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    // (undocumented)
-    findOneAndUpdate<T extends Document_2>(this: Ctor<T>, conditions: any, update: any, options: {
-        rawResult: true;
-    } & {
-        upsert: true;
-        new: true;
-    } & QueryOptions, callback?: (err: any, doc: mongodb.FindAndModifyWriteOpResultObject<T>, res: any) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    // (undocumented)
-    findOneAndUpdate<T extends Document_2>(this: Ctor<T>, conditions: any, update: any, options: {
-        upsert: true;
-        new: true;
-    } & QueryOptions, callback?: (err: any, doc: T, res: any) => void): DocumentQuery<T, T, QueryHelpers> & QueryHelpers;
-    // (undocumented)
-    findOneAndUpdate<T extends Document_2>(this: Ctor<T>, conditions: any, update: any, options: {
-        rawResult: true;
-    } & QueryOptions, callback?: (err: any, doc: mongodb.FindAndModifyWriteOpResultObject<T | null>, res: any) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    // (undocumented)
-    findOneAndUpdate<T extends Document_2>(this: Ctor<T>, conditions: any, update: any, options: QueryOptions, callback?: (err: any, doc: T | null, res: any) => void): DocumentQuery<T | null, T, QueryHelpers> & QueryHelpers;
-    geoSearch<T extends Document_2>(this: Ctor<T>, conditions: any, options: {
-        near: number[];
-        maxDistance: number;
-        limit?: number;
-        lean?: boolean;
-    }, callback?: (err: any, res: T[]) => void): DocumentQuery<T[], T, QueryHelpers> & QueryHelpers;
-    hydrate<T extends Document_2>(this: Ctor<T>, obj: any): T;
-    init<T extends Document_2>(this: Ctor<T>, callback?: (err: any) => void): Promise<T>;
-    insertMany<T extends Document_2>(this: Ctor<T>, docs: any[], callback?: (error: any, docs: T[]) => void): Promise<T[]>;
-    // (undocumented)
-    insertMany<T extends Document_2>(this: Ctor<T>, docs: any[], options?: {
-        ordered?: boolean;
-        rawResult?: boolean;
-    } & InsertManyOptions, callback?: (error: any, docs: T[]) => void): Promise<T[]>;
-    // (undocumented)
-    insertMany<T extends Document_2>(this: Ctor<T>, doc: any, callback?: (error: any, doc: T) => void): Promise<T>;
-    // (undocumented)
-    insertMany<T extends Document_2>(this: Ctor<T>, doc: any, options?: {
-        ordered?: boolean;
-        rawResult?: boolean;
-    } & InsertManyOptions, callback?: (error: any, doc: T) => void): Promise<T>;
-    mapReduce<Key, Value, T extends Document_2>(this: Ctor<T>, o: MapReduceOptions<T, Key, Value>, callback?: (err: any, res: any) => void): Promise<any>;
-    populate<T extends Document_2>(this: Ctor<T>, docs: any[], options: PopulateOptions | PopulateOptions[], callback?: (err: any, res: T[]) => void): Promise<T[]>;
-    // (undocumented)
-    populate<T>(docs: any, options: PopulateOptions | PopulateOptions[], callback?: (err: any, res: T) => void): Promise<T>;
+    model<T>(this: Ctor<T>): M.Model<T, TQueryHelpers, TInstanceMethods, TVirtuals>;
 }
 
 // @public (undocumented)
@@ -423,7 +385,7 @@ export interface Resource<T = unknown> {
     // (undocumented)
     prototype: SubDocument & T;
     // (undocumented)
-    schema: Schema;
+    schema: M.Schema;
 }
 
 // @public (undocumented)
@@ -465,7 +427,6 @@ export interface ValidatorOpts<T = any> {
     // (undocumented)
     validator: ValidatorFn<T>;
 }
-
 
 // (No @packageDocumentation comment for this package)
 

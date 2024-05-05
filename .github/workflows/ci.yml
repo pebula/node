@@ -1,9 +1,10 @@
 name: Nx Distributed Tasks [PR]
 
 on:
-  pull_request:
+  push:
     branches:
       - main
+  pull_request:
 
 env:
   BUILD_ARTIFACTS: dist-artifacts
@@ -16,16 +17,21 @@ jobs:
   install-deps:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 20
       - name: Cache node modules
         id: cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ env.DEPENDENCIES_CACHE }}-${{ hashFiles('yarn.lock') }}
       - name: yarn install
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --pure-lockfile
+        run: |
+          sudo apt install libsdl-pango-dev
+          yarn install --pure-lockfile
       - name: Build local nx plugins
         if: steps.cache.outputs.cache-hit == 'true'
         run: |
@@ -33,7 +39,7 @@ jobs:
           yarn nx build nx-api-extractor
       - name: Cache dist (for nx-build-pipe, etc...)
         id: cache-build
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: dist
           key: ${{ runner.os }}-dist-${{ github.sha }}
@@ -49,25 +55,27 @@ jobs:
     env:
       count: 4
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
-          ref: main
+          node-version: 20
+      - uses: actions/checkout@v4
+        with:
           fetch-depth: 0
       - run: |
           echo "git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules origin ${GITHUB_SHA}:${GITHUB_REF}"
           git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules origin ${GITHUB_SHA}:${GITHUB_REF}
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ env.DEPENDENCIES_CACHE }}-${{ hashFiles('yarn.lock') }}
       - name: Cache dist (for nx-build-pipe, etc...)
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: dist
           key: ${{ runner.os }}-dist-${{ github.sha }}
       - name: Cache Nx
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: node_modules/.cache/nx
           key: ${{ env.NX_CACHE }}-${{ hashFiles('yarn.lock') }}-${{ matrix.target }}-${{ matrix.index }}-${{ github.sha }}
@@ -100,6 +108,9 @@ jobs:
     needs: distributed-task
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 20
     - name: Coveralls Finished
       uses: coverallsapp/github-action@master
       with:
