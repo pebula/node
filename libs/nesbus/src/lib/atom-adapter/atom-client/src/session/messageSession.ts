@@ -237,16 +237,16 @@ export class MessageSession extends LinkEntity {
    */
   private _onSettled: OnAmqpEvent;
   /**
-   * @property {NodeJS.Timer} _sessionLockRenewalTimer The session lock renewal timer that keeps
+   * @property {NodeJS.Timeout} _sessionLockRenewalTimer The session lock renewal timer that keeps
    * track of when the MessageSession is due for session lock renewal.
    */
-  private _sessionLockRenewalTimer?: NodeJS.Timer;
+  private _sessionLockRenewalTimer?: NodeJS.Timeout;
   /**
-   * @property {NodeJS.Timer} _newMessageReceivedTimer The new message received timer that keeps
+   * @property {NodeJS.Timeout} _newMessageReceivedTimer The new message received timer that keeps
    * track of closing the MessageSession if no message was received in the configured
    * `newMessageWaitTimeoutInSeconds` seconds.
    */
-  private _newMessageReceivedTimer?: NodeJS.Timer;
+  private _newMessageReceivedTimer?: NodeJS.Timeout;
 
   private _totalAutoLockRenewDuration: number;
 

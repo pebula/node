@@ -241,7 +241,7 @@ export function getIntegerOrUndefined(value: any): number | undefined {
     return undefined;
   }
   const result = parseInt(value.toString());
-  return result == NaN ? undefined : result;
+  return Number.isNaN(result) ? undefined : result;
 }
 
 /**

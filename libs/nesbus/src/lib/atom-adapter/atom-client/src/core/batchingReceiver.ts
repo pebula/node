@@ -84,7 +84,7 @@ export class BatchingReceiver extends MessageReceiver {
 
     this.isReceivingMessages = true;
     return new Promise<ServiceBusMessage[]>((resolve, reject) => {
-      let totalWaitTimer: NodeJS.Timer | undefined;
+      let totalWaitTimer: NodeJS.Timeout | undefined;
 
       const onSessionError: OnAmqpEvent = (context: EventContext) => {
         this.isReceivingMessages = false;

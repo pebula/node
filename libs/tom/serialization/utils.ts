@@ -8,4 +8,4 @@ import { Serializer } from './serializers';
  */
 export const serializerTargetToString = <T extends Type<any>>(serializer: Serializer,
                                                               target: T,
-                                                              prop?: string | keyof T) => `[Serializer: ${serializer.name} | Class: ${stringify(target)}${prop ? '.' + prop : ''}]`;
+                                                              prop?: string | keyof T) => `[Serializer: ${serializer.name} | Class: ${stringify(target)}${prop ? '.' + prop.toString() : ''}]`;

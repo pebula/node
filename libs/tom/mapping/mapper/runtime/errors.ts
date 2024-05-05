@@ -8,7 +8,7 @@ import { TypeSystem } from '@pebula/tom';
  */
  export const serializerSourceTargetToString = <T extends Type<any>>(source: Type<any>,
                                                                      target: T,
-                                                                     prop?: string | keyof T) => `[Source: ${stringify(source)} | Target: ${stringify(target)}${prop ? '.' + prop : ''}]`;
+                                                                     prop?: string | keyof T) => `[Source: ${stringify(source)} | Target: ${stringify(target)}${prop ? '.' + prop.toString() : ''}]`;
 
 export function invalidDataObjectError(source: Type<any>, target: Type<any>, msg: boolean | string) {
   let error: Error;

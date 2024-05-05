@@ -4,6 +4,8 @@
 
 ```ts
 
+/// <reference types="node" />
+
 import { BaseRpcContext } from '@nestjs/microservices/ctx-host/base-rpc.context';
 import { CallHandler } from '@nestjs/common';
 import { Ctx } from '@nestjs/microservices';
@@ -298,7 +300,6 @@ export function Subscription<T = false>(metadata: MetaOrMetaFactory<SbSubscripti
 
 // @public
 export const Topic: (metadata: MetaOrMetaFactory<SbTopicMetadataOptions>) => PropertyDecorator;
-
 
 // (No @packageDocumentation comment for this package)
 

@@ -9,7 +9,7 @@ import { Constraint } from '../constraints';
  */
 export const validatorTargetToString = <T extends Type<any>>(validator: Validator,
                                                              target: T,
-                                                             prop?: string | keyof T) => `[Validator: ${validator.name} | Class: ${stringify(target)}${prop ? '.' + prop : ''}]`;
+                                                             prop?: string | keyof T) => `[Validator: ${validator.name} | Class: ${stringify(target)}${prop ? '.' + prop.toString() : ''}]`;
 
 export const REQUIRED_VALIDATOR_INFO: Constraint<'required'> = { id: 'required' };
 export const TYPE_VALIDATOR_INFO: Constraint<'type'> = { id: 'type' };
