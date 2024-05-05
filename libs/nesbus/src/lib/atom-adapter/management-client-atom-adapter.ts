@@ -25,12 +25,12 @@ export class SbManagementClientAtomAdapter implements SbManagementClientAdapter 
   }
 
   async getQueue(queueName: string) {
-    return this.managementClient.getQueueDetails(queueName);
+    return await this.managementClient.getQueueDetails(queueName);
   }
   async upsertQueue(queueName: string, queue: SbQueue, isNew: boolean) {
     return isNew
-      ? this.managementClient.createQueue(queueName, queue)
-      : this.managementClient.updateQueue(queueName, queue)
+      ? await this.managementClient.createQueue(queueName, queue)
+      : await this.managementClient.updateQueue(queueName, queue)
     ;
   }
   async deleteQueue(queueName: string) {
@@ -38,12 +38,12 @@ export class SbManagementClientAtomAdapter implements SbManagementClientAdapter 
   }
 
   async getTopic(topicName: string) {
-    return this.managementClient.getTopicDetails(topicName);
+    return await this.managementClient.getTopicDetails(topicName);
   }
   async upsertTopic(topicName: string, topic: SbTopic, isNew: boolean) {
     return isNew
-      ? this.managementClient.createTopic(topicName, topic)
-      : this.managementClient.updateTopic(topicName, topic)
+      ? await this.managementClient.createTopic(topicName, topic)
+      : await this.managementClient.updateTopic(topicName, topic)
     ;
   }
   async deleteTopic(topicName: string) {
@@ -51,12 +51,12 @@ export class SbManagementClientAtomAdapter implements SbManagementClientAdapter 
   }
 
   async getSubscription(topicName: string, subscriptionName: string) {
-    return this.managementClient.getSubscriptionDetails(topicName, subscriptionName);
+    return await this.managementClient.getSubscriptionDetails(topicName, subscriptionName);
   }
   async upsertSubscription(topicName: string, subscriptionName: string, subscription: SbSubscription, isNew: boolean) {
     return isNew
-      ? this.managementClient.createSubscription(topicName, subscriptionName, subscription)
-      : this.managementClient.updateSubscription(topicName, subscriptionName, subscription)
+      ? await this.managementClient.createSubscription(topicName, subscriptionName, subscription)
+      : await this.managementClient.updateSubscription(topicName, subscriptionName, subscription)
     ;
   }
   async deleteSubscription(topicName: string, subscriptionName: string) {
@@ -64,12 +64,12 @@ export class SbManagementClientAtomAdapter implements SbManagementClientAdapter 
   }
 
   async getRule(topicName: string, subscriptionName: string, ruleName: string) {
-    return this.managementClient.getRuleDetails(topicName, subscriptionName, ruleName);
+    return await this.managementClient.getRuleDetails(topicName, subscriptionName, ruleName);
   }
   async upsertRule(topicName: string, subscriptionName: string, ruleName: string, rule: SbRule, isNew: boolean) {
     return isNew
-      ? this.managementClient.createRule(topicName, subscriptionName, ruleName, rule)
-      : this.managementClient.updateRule(topicName, subscriptionName, ruleName, rule)
+      ? await this.managementClient.createRule(topicName, subscriptionName, ruleName, rule)
+      : await this.managementClient.updateRule(topicName, subscriptionName, ruleName, rule)
     ;
   }
   async deleteRule(topicName: string, subscriptionName: string, ruleName: string) {

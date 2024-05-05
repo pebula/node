@@ -12,7 +12,7 @@ class SharedConfig {
     return {
       title: this.config.title,
       tagline: this.config.tagline,
-      url: `https://${this.org}.github.io/${this.repo}/${this.package}`,
+      url: `https://${this.org}.github.io`,
       baseUrl: process.env.GH_PAGES_BUILD ? `/${this.repo}/${this.package}/` : '/',
       favicon: 'img/favicon.ico',
       organizationName: this.org,
@@ -101,7 +101,7 @@ class SharedConfig {
     ];
   }
 
-  docusaurusPresetClassic(detectInvalidApiDocsMarkup) {
+  docusaurusPresetClassic(detectInvalidApiDocsMarkup, additionalPresetConfig) {
     const beforeDefaultRemarkPlugins = {};
     if (detectInvalidApiDocsMarkup) {
       beforeDefaultRemarkPlugins.beforeDefaultRemarkPlugins = [
@@ -130,6 +130,7 @@ class SharedConfig {
         theme: {
           customCss: require('path').resolve(this.dirName, './src/css/custom.css'),
         },
+        ...(additionalPresetConfig ?? {})
       },
     ];
   }

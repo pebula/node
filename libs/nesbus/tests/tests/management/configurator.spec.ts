@@ -14,8 +14,9 @@ describe('@pebula/nesbus', () => {
       return tmp;
     }
 
+    jest.setTimeout(10000 * 30);
+
     beforeAll(() => {
-      jest.setTimeout(10000 * 30);
 
       const config = new ConfigService();
 

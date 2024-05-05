@@ -27,6 +27,7 @@ const affected = execSync(
 ).toString('utf-8');
 const array = JSON.parse(affected)
   .tasks.map((t) => t.target.project)
+  .filter(p => !p.startsWith('docs-'))
   .slice()
   .sort();
 

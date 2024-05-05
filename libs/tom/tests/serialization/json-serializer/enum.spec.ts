@@ -35,7 +35,7 @@ tomDescribeSerializerJIT('@pebula/tom', jsonSerializer, childSerializer => {
       job.status = JobStatus.Error;
       expect(serializer.serialize(job).status).toBe(JobStatus.Error);
 
-      job.status = 666;
+      job.status = 666 as any;
       expect(serializer.serialize(job).status).toBe(666);
 
       const pojo: { status?: JobStatus } = { };
@@ -53,7 +53,7 @@ tomDescribeSerializerJIT('@pebula/tom', jsonSerializer, childSerializer => {
       pojo.status = JobStatus.Error;
       expect(serializer.deserialize(pojo).status).toBe(JobStatus.Error);
 
-      pojo.status = 666;
+      pojo.status = 666 as any;
       expect(serializer.deserialize(pojo).status).toBeUndefined();
 
     });
@@ -144,7 +144,7 @@ tomDescribeSerializerJIT('@pebula/tom', jsonSerializer, childSerializer => {
       job.status = '__NONE' as any;
       expect(serializer.serialize(job).status).toBe('__NONE');
 
-      job.status = 666;
+      job.status = 666 as any;
       expect(serializer.serialize(job).status).toBe(666);
 
       const pojo: { status?: JobStatus } = { };
@@ -168,7 +168,7 @@ tomDescribeSerializerJIT('@pebula/tom', jsonSerializer, childSerializer => {
       pojo.status = '__NONE' as any;
       expect(serializer.deserialize(pojo).status).toBeUndefined();
 
-      pojo.status = 666;
+      pojo.status = 666 as any;
       expect(serializer.deserialize(pojo).status).toBeUndefined();
 
     });
@@ -207,7 +207,7 @@ tomDescribeSerializerJIT('@pebula/tom', jsonSerializer, childSerializer => {
       job.status = '__NONE' as any;
       expect(serializer.serialize(job).status).toBeUndefined();
 
-      job.status = 666;
+      job.status = 666 as any;
       expect(serializer.serialize(job).status).toBeUndefined();
 
       const pojo: { status?: keyof typeof JobStatus } = { };

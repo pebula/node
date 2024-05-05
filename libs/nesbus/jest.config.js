@@ -1,9 +1,10 @@
 module.exports = {
   displayName: 'nesbus',
+  maxWorkers: '1',
   setupFiles: ['./jest-setup.ts'],
   preset: '../../jest.preset.js',
   transform: {
-    '^.+\\.[tj]sx?$': ['ts-jest', { tsConfig: '<rootDir>/tsconfig.spec.json' }]
+    '^.+\\.[tj]sx?$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }]
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   testPathIgnorePatterns : [
@@ -15,9 +16,9 @@ module.exports = {
     '<rootDir>/tests/__env',
 ],
   coverageDirectory: '../../coverage/libs/nesbus',
-  testEnvironment: '<rootDir>/tests/__env/utils/service-bus-env-setup/jest-service-bus-test-environment',
+  testEnvironment: '<rootDir>/tests/__env/utils/service-bus-env-setup/init-runtime',
   testEnvironmentOptions: {
-    envSetup: false,
-    envTeardown: false,
+    envSetup: true,
+    envTeardown: true,
   },
 };
