@@ -40,8 +40,8 @@ describe('goosetyped', () => {
         const spy = jest.spyOn(containerResolvedType.type, 'toSchema');
         getMongoType(containerResolvedType, userResolvedType)
 
-        expect(spy).toBeCalledTimes(1);
-        expect(spy).toBeCalledWith(containerResolvedType.type.schemaType, userResolvedType.type.schemaType);
+        expect(spy).toHaveBeenCalledTimes(1);
+        expect(spy). toHaveBeenCalledWith(containerResolvedType.type.schemaType, userResolvedType.type.schemaType);
         expect(spy).toReturnWith({ type: [Schema.Types.Number] });
       });
 

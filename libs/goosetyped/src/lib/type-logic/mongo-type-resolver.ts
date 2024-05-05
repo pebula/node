@@ -1,4 +1,4 @@
-import { Schema, SchemaTypeOpts } from 'mongoose';
+import { Schema, SchemaTypeOptions } from 'mongoose';
 import { GtColumnMetadataArgs } from '../interfaces';
 import { isFunction } from '../utils';
 import { isContainerResolveType, getMongoSchemaFromResolvedType } from './utils';
@@ -33,7 +33,7 @@ export function getMongoType(reflectedType: ResolveType, userType: Partial<Resol
 
 export function createFinalColumnTypes(reflectedType: ResolveType, userType: Partial<ResolveType> | undefined, options: GtColumnMetadataArgs<any>) {
   const schema = getMongoType(reflectedType, userType);
-  const schemaTypeOpts: SchemaTypeOpts<any> = schema instanceof Schema || isFunction(schema)
+  const SchemaTypeOptions: SchemaTypeOptions<any> = schema instanceof Schema || isFunction(schema)
     ? { type: schema }
     : schema
   ;
@@ -42,16 +42,16 @@ export function createFinalColumnTypes(reflectedType: ResolveType, userType: Par
 
   for (const k of PASS_THROUGH_COLUMN_OPTIONS) {
     if (k in options) {
-      schemaTypeOpts[k] = options[k];
+      SchemaTypeOptions[k] = options[k];
     }
   }
 
   if (options.enum) {
-    schemaTypeOpts.enum = Array.isArray(options.enum)
+    SchemaTypeOptions.enum = Array.isArray(options.enum)
       ? options.enum
       : resolveEnum(options.enum, underlyingType)
     ;
   }
 
-  return { underlyingType, schema: schemaTypeOpts };
+  return { underlyingType, schema: SchemaTypeOptions };
 }

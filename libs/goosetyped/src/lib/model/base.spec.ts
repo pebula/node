@@ -11,6 +11,7 @@ import {
   PickupSupplierInfo,
   SupplierInfoSubDocument,
 } from '../../../tests';
+import { DocumentArray } from '../build-in-schema-types';
 
 describe('goosetyped', () => {
   initMongoConnection();
@@ -72,12 +73,12 @@ describe('goosetyped', () => {
       const order1 = await Order.create({
         customer: {
           name: 'Testing Joe',
-        },
+        } as Customer,
       });
       const order2 = await Order.create({
         customer: {
           name: 'Testing Moe',
-        },
+        } as Customer,
       });
 
       expect(order1.customer.instanceId).toBe(1);
@@ -118,7 +119,7 @@ describe('goosetyped', () => {
       const order = new Order({ customer: customer1 });
       const order1 = await Order.create(order);
       const order2 = await Order.create({ customer: customer2 });
-      const order3 = await Order.create({ customer: customer3 });
+      const order3 = await Order.create({ customer: customer3 as any });
 
       const paris: Array<[Partial<Customer>, Order]> = [
         [customer1, order1],
@@ -255,12 +256,12 @@ describe('goosetyped', () => {
     it('should create a wrapped model instance - Arrays', async () => {
       const item = new OrderItem({ sku: 'A4', quantity: 4 });
       const order1 = await Order.create({
-        items: [ { sku: 'A1', quantity: 1 }, { sku: 'A7', quantity: 7 } ],
+        items: new DocumentArray([ { sku: 'A1', quantity: 1 }, { sku: 'A7', quantity: 7 } ]),
       });
       const order2 = await Order.create({
-        items: [ { sku: 'A2', quantity: 2 } ],
+        items: new DocumentArray([ { sku: 'A2', quantity: 2 } ]),
       });
-      const order3 = await Order.create({ items: [ item ] });
+      const order3 = await Order.create({ items: new DocumentArray([ item ]) });
 
       expect(order1.items.length).toBe(2);
       expect(order2.items.length).toBe(1);
@@ -305,7 +306,7 @@ describe('goosetyped', () => {
       const items2 = createItems();
 
       const order1 = new Order({ items: items1 as any });
-      const order2 = await Order.create({ items: items2 });
+      const order2 = await Order.create({ items: items2 as any });
 
       const [ item1_1, item1_2 ] = order1.items;
 
@@ -440,8 +441,8 @@ describe('goosetyped', () => {
     });
 
     it('should throw when trying to directly instantiate a base discriminator class', () => {
-      expect(() => new BaseComm()).toThrowError('Directly instantiating the base discriminator type is not allowed');
-      expect(() => new BasePaymentMethod()).toThrowError('Directly instantiating the base discriminator type is not allowed');
+      expect(() => new BaseComm()).toThrow('Directly instantiating the base discriminator type is not allowed');
+      expect(() => new BasePaymentMethod()).toThrow('Directly instantiating the base discriminator type is not allowed');
     });
   });
 });

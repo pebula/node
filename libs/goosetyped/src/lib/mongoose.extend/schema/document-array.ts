@@ -1,19 +1,12 @@
-import { Schema, Document } from 'mongoose';
-import { ArrayPath } from './array';
+import { Schema } from 'mongoose';
+import { SchemaTypePrivate } from '../schema-type';
 
 /**
  * Represents an instance of a document array Schema for a property
  */
-export interface DocumentArrayPath extends ArrayPath, Schema.Types.DocumentArray {
+export interface DocumentArrayPath extends Schema.Types.DocumentArray, SchemaTypePrivate {
   schema: any;
-
-  /**
-   * Casts values for set().
-   *
-   * @param value
-   * @param doc document that triggers the casting
-   * @param init whether this is an initialization cast
-   * @api private
-   */
-  cast(value: any, doc: Document, init: boolean, prev?: any, options?: any): any;
+  schemaOptions: any;
+  get caster(): typeof Schema.Types.Subdocument;
+  set caster(value: typeof Schema.Types.Subdocument);
 }

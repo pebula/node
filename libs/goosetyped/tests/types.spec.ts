@@ -6,7 +6,7 @@ import {
   GtDiscriminator,
 } from '../src/lib/index';
 
-import { initMongoConnection, checkSubDocumentAfterCreate, checkDocumentAfterCreate } from './utils';
+import { initMongoConnection, checkSubDocumentAfterCreate } from './utils';
 import { Ctor } from '../src/lib/utils/types';
 
 describe('E2E Tests', () => {
@@ -31,7 +31,7 @@ describe('E2E Tests', () => {
       };
 
       check(await TestModel.create({ col: new Map([ ['year', 2000] ]) }));
-      check(await TestModel.create({ col: { year: 2000 } }));
+      check(await TestModel.create({ col: { year: 2000 } as any }));
     });
 
     it('should support the map type (embedded)', async () => {
@@ -79,24 +79,24 @@ describe('E2E Tests', () => {
       const otherResourceLike = { prop2: 1 };
 
       let doc = await TestModel.create({
-        mapModel: new Map<string, OtherModel | Partial<OtherModel>>([ ['a', new OtherModel(otherModelLike)] ]),
-        mapResource: new Map<string, OtherResource | Partial<OtherResource>>([ ['a', new OtherResource(otherResourceLike)] ]),
+        mapModel: new Map<string, OtherModel>([ ['a', new OtherModel(otherModelLike)] ]),
+        mapResource: new Map<string, OtherResource>([ ['a', new OtherResource(otherResourceLike)] ]),
       });
 
       check(doc.mapModel, 'a', OtherModel, otherModelLike);
       check(doc.mapResource, 'a', OtherResource, otherResourceLike);
 
       doc = await TestModel.create({
-        mapModel: { a: new OtherModel(otherModelLike) },
-        mapResource: { a: new OtherResource(otherResourceLike) },
+        mapModel: { a: new OtherModel(otherModelLike) } as any,
+        mapResource: { a: new OtherResource(otherResourceLike) } as any,
       });
 
       check(doc.mapModel, 'a', OtherModel, otherModelLike);
       check(doc.mapResource, 'a', OtherResource, otherResourceLike);
 
       doc = await TestModel.create({
-        mapModel: { a: otherModelLike },
-        mapResource: { a: otherResourceLike },
+        mapModel: { a: otherModelLike } as any,
+        mapResource: { a: otherResourceLike } as any,
       });
 
       check(doc.mapModel, 'a', OtherModel, otherModelLike);
@@ -151,17 +151,17 @@ describe('E2E Tests', () => {
       const p2ModelLike = { val2: 'val2' };
 
       let doc = await TestModel.create({
-        mapModel: new Map<string, BaseModel | Partial<BaseModel>>([
+        mapModel: new Map<string, BaseModel>([
           ['p1', new P1Model(p1ModelLike)],
           ['p2', new P2Model(p2ModelLike)],
         ]),
-      });
+      })
 
       check(doc.mapModel, 'p1', P1Model, p1ModelLike);
       check(doc.mapModel, 'p2', P2Model, p2ModelLike);
 
       doc = await TestModel.create({
-        mapModel: { p1: new P1Model(p1ModelLike), p2: new P2Model(p2ModelLike) },
+        mapModel: { p1: new P1Model(p1ModelLike), p2: new P2Model(p2ModelLike) } as any,
       });
 
       check(doc.mapModel, 'p1', P1Model, p1ModelLike);
@@ -171,7 +171,7 @@ describe('E2E Tests', () => {
         mapModel: {
           p1: { ...p1ModelLike, kind: 'P1Model' },
           p2: { ...p2ModelLike, kind: 'P2Model' },
-        },
+        } as any,
       });
 
       check(doc.mapModel, 'p1', P1Model, p1ModelLike);

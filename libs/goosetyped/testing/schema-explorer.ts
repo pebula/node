@@ -1,6 +1,6 @@
 // tslint:disable: max-classes-per-file
 // tslint:disable: ban-types
-import { SchemaTypeOpts, SchemaOptions, SchemaType } from 'mongoose';
+import { SchemaTypeOptions, SchemaOptions, SchemaType } from 'mongoose';
 import { gtSchemaStore, GtSchemaContainer } from '../src/lib/store';
 import { Ctor } from '../src/lib/utils';
 import { GtColumnMetadata } from '../src/lib/metadata';
@@ -80,7 +80,7 @@ export class SchemaTypeTestExplorer<T, Z extends Ctor<T>> {
     return this;
   }
 
-  schema(schema: SchemaTypeOpts<any>): this {
+  schema(schema: SchemaTypeOptions<any>): this {
     const { resolvedColumnType } = this.column;
     expect(resolvedColumnType.schema).toEqual(schema);
     return this;
@@ -92,7 +92,7 @@ export class SchemaTypeTestExplorer<T, Z extends Ctor<T>> {
     return this;
   }
 
-  hasOptionValue<TOptKey extends keyof SchemaTypeOpts<any>>(key: TOptKey, value: SchemaTypeOpts<any>[TOptKey]): this  {
+  hasOptionValue<TOptKey extends keyof SchemaTypeOptions<any>>(key: TOptKey, value: SchemaTypeOptions<any>[TOptKey]): this  {
     expect(this.schemaType['options'][key]).toEqual(value);
     return this;
   }

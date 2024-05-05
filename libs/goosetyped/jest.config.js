@@ -1,14 +1,8 @@
 module.exports = {
   displayName: 'goosetyped',
   setupFiles: ['./jest-setup.ts'],
-  globals: {
-    'ts-jest': {
-      tsConfig: '<rootDir>/tsconfig.spec.json',
-    },
-  },
-  testEnvironment: 'node',
   transform: {
-    '^.+\\.[tj]sx?$': 'ts-jest',
+    '^.+\\.[tj]sx?$': ['ts-jest', { tsConfig: '<rootDir>/tsconfig.spec.json' }]
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/libs/goosetyped',
@@ -16,16 +10,6 @@ module.exports = {
     '<rootDir>/testing/'
   ],
   preset: '@shelf/jest-mongodb',
-  mongodbMemoryServerOptions: {
-    instance: {
-      dbName: 'jest'
-    },
-    binary: {
-      version: '4.0.2', // Version of MongoDB
-      skipMD5: true
-    },
-    autoStart: false
-  },
   setupFilesAfterEnv: ['./jest-setup-after-env.js']
 };
 

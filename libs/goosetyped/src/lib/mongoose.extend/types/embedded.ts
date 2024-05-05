@@ -1,4 +1,4 @@
-import {  Document } from 'mongoose';
+import { Document, Schema } from 'mongoose';
 import { Ctor } from '../../utils';
 
 /**
@@ -9,5 +9,6 @@ export interface EmbeddedDocument extends Document {
 }
 
 export interface EmbeddedDocumentStatic<T> extends Ctor<EmbeddedDocument> {
+  readonly schema: Schema;
   discriminators: { [key: string]: any };
 }

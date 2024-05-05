@@ -21,7 +21,7 @@ describe('goosetyped', () => {
         static method() { return; }
       }
 
-      expect(spyStuff.spy).toBeCalledTimes(1);
+      expect(spyStuff.spy).toHaveBeenCalledTimes(1);
       expect(spyStuff.catcher.options).toEqual(null);
       expect(spyStuff.catcher.key).toBe('method');
       expect(spyStuff.catcher.target).toBe(TestModel);
@@ -33,7 +33,7 @@ describe('goosetyped', () => {
         method() { return; }
       }
 
-      expect(spyStuff.spy).toBeCalledTimes(1);
+      expect(spyStuff.spy).toHaveBeenCalledTimes(1);
       expect(spyStuff.catcher.options).toEqual(null);
       expect(spyStuff.catcher.key).toBe('method');
       expect(spyStuff.catcher.target).toBe(TestModel.prototype);

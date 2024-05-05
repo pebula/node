@@ -16,7 +16,7 @@ describe('goosetyped-e2e', () => {
 
       connection = await createMongoConnection();
       try {
-        await connection.db.collection('testclasses', { strict: true });
+        await connection.db.collection('testclasses');
         throw new Error('Collection should not exist');
       } catch (err) {
       }

@@ -1,5 +1,5 @@
 // tslint:disable: max-classes-per-file
-import { Schema, Types, Document, SchemaType, SchemaTypeOpts } from 'mongoose';
+import { Schema, Types, Document, SchemaType, SchemaTypeOptions } from 'mongoose';
 import { GtSchemaType } from '../decorators';
 
 @GtSchemaType({
@@ -13,7 +13,7 @@ export class ObjectId extends String {
   schemaType: Schema.Types.Array,
   isContainer: true,
   toSchema(reflectedType: typeof SchemaType | Schema, userType?: typeof SchemaType | Schema) {
-    const arraySchemaTypeOpts: SchemaTypeOpts<any> = {
+    const arraySchemaTypeOpts: SchemaTypeOptions<any> = {
      type: [userType],
     };
     return arraySchemaTypeOpts;

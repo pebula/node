@@ -1,4 +1,4 @@
-import { Schema, SchemaTypeOpts } from 'mongoose';
+import { Schema, SchemaTypeOptions } from 'mongoose';
 import { GtSchemaTypeMetadataArgs } from '../interfaces';
 import { Ctor } from '../utils';
 
@@ -16,7 +16,7 @@ import { Ctor } from '../utils';
  * In any case, both interfaces contain the `schemaType` property which holds a direct reference to the `SchemaType`.
  * If the referenced `SchemaType` is a container type (e.g. Map, Array) it will also contain 2 additional properties.
  * - `isContainer`: always set to true, used to distinguish between the 2 interfaces at runtime.
- * - `toSchema`: A factory that is used to create the final mongoose type (which always is `SchemaTypeOpts`)
+ * - `toSchema`: A factory that is used to create the final mongoose type (which always is `SchemaTypeOptions`)
  *
  * For example, a mongoose Map type of dates (`Map<Date>`) is defined as follows:
  *
@@ -53,7 +53,7 @@ export interface ResolvedColumnType {
   /**
    * The final schema to be used in mongoose.
    */
-  schema: SchemaTypeOpts<any>;
+  schema: SchemaTypeOptions<any>;
   /**
    * The actual runtime type for this column.
    * This will be the user provided runtime type, if provided.

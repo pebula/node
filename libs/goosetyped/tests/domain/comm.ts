@@ -1,7 +1,5 @@
 // tslint:disable: max-classes-per-file
 import {
-  GtDocument, GtModel,
-  GtVersionKey,
   GtSubDocument, GtResource,
   GtColumn,
   GtDiscriminator,
@@ -9,9 +7,6 @@ import {
   GtTimestampUpdated,
   GtIndex,
   GtLocalProp,
-  GtToJSON,
-  DocumentArray,
-  GtInitHook, GtSaveHook,
 } from '../../src/index';
 
 @GtSubDocument({ noId: true })
