@@ -65,7 +65,7 @@ describe('map-schema', () => {
 
     it('should not warn if mapping is not sealed and expectImmediateSeal is not set', (cb) => {
       expect.assertions(2);
-      spyOn(console, 'warn');
+      jest.spyOn(console, 'warn');
 
       new ClassMappingSchemaFactory(C1, C2);
       expect(mapRegistry.has(C1, C2)).toBe(false);
@@ -76,8 +76,8 @@ describe('map-schema', () => {
       }, 10);
     });
 
-    it('should warn if mapping is not sealed and expectImmediateSeal is not set', async (cb) => {
-      spyOn(console, 'warn');
+    it('should warn if mapping is not sealed and expectImmediateSeal is not set', (cb) => {
+      jest.spyOn(console, 'warn');
 
       new ClassMappingSchemaFactory(C1, C2, { expectImmediateSeal: true });
       expect(mapRegistry.has(C1, C2)).toBe(false);

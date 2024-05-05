@@ -24,12 +24,11 @@ module.exports = {
   themeConfig: {
     navbar: sharedConfig.navbar(false), // true -> with api docs item
     footer: sharedConfig.footer(),
-    googleAnalytics: sharedConfig.googleAnalytics('UA-11687894-9'),
   },
   plugins: [
     ...sharedConfig.plugins(),
   ],
   presets: [
-    sharedConfig.docusaurusPresetClassic(false), // true -> fix invalid markup created from api-documenter
+    sharedConfig.docusaurusPresetClassic(false, { googleAnalytics: sharedConfig.googleAnalytics('UA-11687894-9') }), // true -> fix invalid markup created from api-documenter
   ],
 };

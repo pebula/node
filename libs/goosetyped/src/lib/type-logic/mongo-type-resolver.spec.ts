@@ -8,9 +8,9 @@ describe('goosetyped', () => {
 
       it('should throw if there is no mongo type match', () => {
         expect(() => getMongoType({ tsType: String }, undefined))
-          .toThrowError('Invalid type definition, could not find a valid type which maps to a Schema or SchemaType');
+          .toThrow('Invalid type definition, could not find a valid type which maps to a Schema or SchemaType');
         expect(() => getMongoType({ tsType: String }, { tsType: String }))
-          .toThrowError('Invalid type definition, could not find a valid type which maps to a Schema or SchemaType');
+          .toThrow('Invalid type definition, could not find a valid type which maps to a Schema or SchemaType');
       });
 
       it('should resolve the main mongo type from a single-item reflected and user resolved types', () => {
@@ -59,7 +59,7 @@ describe('goosetyped', () => {
           },
         };
         expect(() => getMongoType(containerResolvedType, { tsType: String, type: undefined }))
-          .toThrowError('Invalid type configuration, container type requires an explicity type definition');
+          .toThrow('Invalid type configuration, container type requires an explicity type definition');
       });
 
       it('should set the default option on the final schema', () => {

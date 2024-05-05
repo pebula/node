@@ -1,0 +1,20 @@
+{
+  "extends": "../../../../../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "../../../../../../dist/out-tsc",
+    "declaration": true,
+    "types": ["node"],
+    "plugins": [
+      { "transform": "typescript-transform-paths" },
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ]
+  },
+  "ts-node": {
+    "transpileOnly": true,
+    "logError": true,
+    "ignoreDiagnostics": [7006, 2683]
+  },
+  "exclude": ["**/*.spec.ts", "tests/**/*.*", "benchmarks/**/*.*"],
+  "include": ["**/*.ts"]
+}

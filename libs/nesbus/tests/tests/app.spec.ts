@@ -92,8 +92,9 @@ describe('@pebula/nesbus', () => {
   let errorHandler: TestErrorHandler;
   let msgStore: MessageStorage;
 
+  jest.setTimeout(10000 * 30);
+
   beforeAll(async () => {
-    jest.setTimeout(10000 * 30);
 
     app = await TestModuleFactory.create()
       .addServiceBusModule([{ provide: SbErrorHandler, useClass: TestErrorHandler }])

@@ -38,7 +38,7 @@ tomDescribeValidationJIT('@pebula/tom', defaultValidator, childValidator => {
         'Invalid runtime type, expected type enum'
       ));
 
-      model.status = 555;
+      model.status = 555 as any;
       result = childValidator.validate(model) as ValidationResult<Job>;
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBe(1);

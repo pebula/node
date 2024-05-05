@@ -62,7 +62,7 @@ tomDescribeMapperJIT('@pebula/tom', ['enabled', 'disabled'], optionsFactory => {
       expect(o).toEqual(order);
 
       expect(() => mapTypes(orderDto, OrderDto, Order))
-        .toThrowError(invalidDataObjectError(OrderDto, Order, true));
+        .toThrow(invalidDataObjectError(OrderDto, Order, true));
 
       createOrderMap().seal(); // return to original schema
     });

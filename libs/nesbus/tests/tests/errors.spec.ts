@@ -28,7 +28,7 @@ describe('@pebula/nesbus', () => {
 
   it('should throw invalidOrMissingConfiguration', () => {
     const createClient = () => SbResourceManager.get().createClient({ name: 'UNIT_TEST' });
-    expect(createClient).toThrowError(E.invalidOrMissingConfiguration(
+    expect(createClient).toThrow(E.invalidOrMissingConfiguration(
       'SbClientOptions.client',
       'Connection credentials are missing and no matching server found for the identity',
     ));
@@ -37,7 +37,7 @@ describe('@pebula/nesbus', () => {
   it('throw resourceAlreadyExists', () => {
     const createClient = () => SbResourceManager.get().createClient(createSbClientOptions('UNIT_TEST'));
     createClient();
-    expect(createClient).toThrowError(E.resourceAlreadyExists('client', 'UNIT_TEST'));
+    expect(createClient).toThrow(E.resourceAlreadyExists('client', 'UNIT_TEST'));
   });
 
   it('invalid handler type', async () => {

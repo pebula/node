@@ -45,7 +45,7 @@ describe('map-schema', () => {
 
     it('should not warn if mapping is not sealed and expectImmediateSeal is not set', (cb) => {
       expect.assertions(2);
-      spyOn(console, 'warn');
+      jest.spyOn(console, 'warn');
 
       class C1 {}
       class C2 {}
@@ -57,8 +57,8 @@ describe('map-schema', () => {
       }, 10);
     });
 
-    it('should warn if mapping is not sealed and expectImmediateSeal is set', async (cb) => {
-      spyOn(console, 'warn');
+    it('should warn if mapping is not sealed and expectImmediateSeal is set', (cb) => {
+      jest.spyOn(console, 'warn');
 
       class C1 {}
       class C2 {}

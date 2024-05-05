@@ -1,4 +1,3 @@
-import { isFunction } from 'util';
 import { Test, TestingModule } from '@nestjs/testing';
 import { createSbServer, SbModuleRegisterOptions } from '@pebula/nesbus';
 
