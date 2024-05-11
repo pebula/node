@@ -23,7 +23,11 @@ export enum SupplierDeliveryType {
 
 @GtSubDocument({ noId: true })
 export class SupplierInfoSubDocument extends GtResource() {
-
+ 
+  @GtIndex({ sort: 'asc' })
+  @GtColumn({ required: true })
+  infoId: string;
+  
   @GtColumn({})
   someValue: string;
 

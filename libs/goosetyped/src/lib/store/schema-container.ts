@@ -13,11 +13,11 @@ import { gtConnectionStore } from '../connection';
 import { GtSchemaStore } from './schema-store';
 import { setSkipVersioning } from './helpers';
 import { GtLocalInfo } from '../model/local-info';
-import { Ctor, createModelName, getBaseClass } from '../utils';
+import { Ctor, resolveModelName, getBaseClass } from '../utils';
 import { GtDocumentArrayPath, GtSubdocumentPath, Schema, createEmbeddedContainerForType } from '../model/containers';
 import { GtModelCompilationError } from '../errors';
 import { isFunction } from '../utils/misc';
-import { GT_DISCRIMINATOR_ROOT } from '../model/constants';
+import { GT_BASED_ON, GT_DISCRIMINATOR_ROOT } from '../model/constants';
 import { GtModelContainer, GtResourceContainer } from '../model/base';
 
 const BUILT = Symbol('BUILT');
@@ -255,11 +255,14 @@ export class GtSchemaContainer<TInstance extends mongoose.Document = mongoose.Do
   private applyColumn(column: GtColumnMetadata): void {
     let knownContainer: GtSchemaContainer;
 
+    if (this.localInfo.hasProp(column))
+      return;
+
     if (!column.softColumn) {
       this.processGlobalOptionsSetInColumnMetadata(column);
 
       knownContainer = this.findKnownContainer(column);
-      const schema = knownContainer ? createEmbeddedContainerForType(knownContainer, column, this.schema) : column.schema;
+      const schema = knownContainer && createEmbeddedContainerForType(knownContainer, column, this.schema) || column.schema;
       this.schema.add({ [column.key]: schema } as any);
 
       if (knownContainer) {
@@ -285,7 +288,7 @@ export class GtSchemaContainer<TInstance extends mongoose.Document = mongoose.Do
     if (discriminator && discriminator.type === 'child') {
       const model = discriminator.root.container.model;
       const { schema } = this;
-      return model.discriminator(this.target as any, schema) as any;
+      return model.discriminator(this.target as any, schema, { clone: false }) as any;
     }
     return compiler.model(this.target as any, this.schema, metadata.collection);
   }
@@ -318,7 +321,7 @@ export class GtSchemaContainer<TInstance extends mongoose.Document = mongoose.Do
         throw new Error("Invalid discriminator state");
 
       const discriminatorKey = root.localInfo.container.getSchemaOptions('discriminatorKey');
-      const discriminatorValue = createModelName(this.target);
+      const discriminatorValue = resolveModelName(this.target);
       this.setSchemaOptions('discriminatorKey', discriminatorKey);
 
       root.localInfo.discriminator.children.set(discriminatorValue, this);

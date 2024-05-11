@@ -4,7 +4,7 @@ import * as mongoose from 'mongoose';
 import * as mongodb from 'mongodb';
 import { GtSchemaMetadataArgs, GtSubDocumentMetadataArgs, GtDocumentMetadataArgs } from '../interfaces';
 import { GtSchemaContainer } from '../store';
-import { createModelName, bulkSetIfExists } from '../utils';
+import { resolveModelName, bulkSetIfExists } from '../utils';
 
 const PASS_THROUGH_MODEL_OPTIONS: Array<keyof GtDocumentMetadataArgs & keyof mongoose.SchemaOptions> = [
   'autoIndex',
@@ -32,7 +32,7 @@ export class GtSchemaMetadata {
   toJSON?: mongoose.ToObjectOptions;
 
   constructor(target: Function, metadata: GtSchemaMetadataArgs) {
-    this.name = createModelName(target);
+    this.name = resolveModelName(target);
     bulkSetIfExists(metadata, this as GtSchemaMetadata)
       .set('id')
       .set('toObject')

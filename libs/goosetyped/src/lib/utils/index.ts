@@ -1,4 +1,5 @@
 // tslint:disable: ban-types
+import { DiscriminatorOptions } from 'mongoose';
 import { Ctor } from './types';
 export * from './types';
 export * from './misc';
@@ -15,6 +16,6 @@ export function safeConstructor(target: object | Ctor<any> | Function): Ctor<any
   throw new Error('Invalid target object provided. Target is not a function nor a prototype.');
 }
 
-export function createModelName(target: Function): string {
-  return target.name;
+export function resolveModelName(target: Ctor<any> | Function | DiscriminatorOptions['value']): string {
+  return typeof target === 'function' ? target.name : target?.toString();
 }

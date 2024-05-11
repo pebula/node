@@ -337,6 +337,16 @@ export interface ModelExtensions<TQueryHelpers = {}, TInstanceMethods = {}, TVir
     // (undocumented)
     findById<T, ResultDoc = M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>(this: Ctor<T>, id: any, projection?: M.ProjectionType<T> | null): DocumentQuery<ResultDoc | null, ResultDoc, TQueryHelpers, T, 'findOne'> & TQueryHelpers;
     // (undocumented)
+    findOne<T, ResultDoc = M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>(this: Ctor<T>, filter: M.FilterQuery<T>, projection: M.ProjectionType<T> | null | undefined, options: M.QueryOptions<T> & {
+        lean: true;
+    }): DocumentQuery<M.GetLeanResultType<T, T, 'findOne'> | null, ResultDoc, TQueryHelpers, T, 'findOne'> & TQueryHelpers;
+    // (undocumented)
+    findOne<T, ResultDoc = M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>(this: Ctor<T>, filter?: M.FilterQuery<T>, projection?: M.ProjectionType<T> | null, options?: M.QueryOptions<T> | null): DocumentQuery<ResultDoc | null, ResultDoc, TQueryHelpers, T, 'findOne'> & TQueryHelpers;
+    // (undocumented)
+    findOne<T, ResultDoc = M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>(this: Ctor<T>, filter?: M.FilterQuery<T>, projection?: M.ProjectionType<T> | null): DocumentQuery<ResultDoc | null, ResultDoc, TQueryHelpers, T, 'findOne'> & TQueryHelpers;
+    // (undocumented)
+    findOne<T, ResultDoc = M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>(this: Ctor<T>, filter?: M.FilterQuery<T>): DocumentQuery<ResultDoc | null, ResultDoc, TQueryHelpers, T, 'findOne'> & TQueryHelpers;
+    // (undocumented)
     init<T>(this: Ctor<T>): Promise<M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>;
     insertMany<T>(this: Ctor<T>, docs: Array<T>): Promise<Array<M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>>;
     // (undocumented)
