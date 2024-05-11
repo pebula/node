@@ -12,70 +12,82 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["package", "build", "lint", "test", "e2e"]
+        "cacheableOperations": [
+          "package",
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
+        "parallel": 3
       }
-    }
-  },
-  "projects": {
-    "decorate": {
-      "tags": [],
-      "implicitDependencies": ["nx-build-pipe", "nx-api-extractor"]
-    },
-    "docs-decorate": {
-      "tags": [],
-      "implicitDependencies": ["decorate"]
-    },
-    "docs-goosetyped": {
-      "tags": [],
-      "implicitDependencies": ["goosetyped"]
-    },
-    "docs-nesbus": {
-      "tags": [],
-      "implicitDependencies": ["nesbus"]
-    },
-    "docs-tom": {
-      "tags": [],
-      "implicitDependencies": ["decorate", "tom"]
-    },
-    "docs-touchstone": {
-      "tags": [],
-      "implicitDependencies": ["touchstone"]
-    },
-    "goosetyped": {
-      "tags": [],
-      "implicitDependencies": ["nx-build-pipe", "nx-api-extractor"]
-    },
-    "nesbus": {
-      "tags": [],
-      "implicitDependencies": ["nx-build-pipe", "nx-api-extractor"]
-    },
-    "nx-api-extractor": {
-      "tags": [],
-      "implicitDependencies": ["nx-build-pipe"]
-    },
-    "nx-api-extractor-e2e": {
-      "tags": [],
-      "implicitDependencies": ["nx-api-extractor"]
-    },
-    "nx-build-pipe": {
-      "tags": []
-    },
-    "nx-build-pipe-e2e": {
-      "tags": [],
-      "implicitDependencies": ["nx-build-pipe"]
-    },
-    "tom": {
-      "tags": [],
-      "implicitDependencies": ["nx-build-pipe", "nx-api-extractor", "decorate"]
-    },
-    "touchstone": {
-      "tags": [],
-      "implicitDependencies": ["nx-build-pipe", "nx-api-extractor", "decorate"]
     }
   },
   "affected": {
     "defaultBase": "main"
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/workspace"
+  },
+  "generators": {
+    "@nrwl/workspace": {
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/cypress": {
+      "cypress-project": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/react": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/web": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/node": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nx-plugin": {
+      "plugin": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nest": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/express": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    }
   }
 }
