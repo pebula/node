@@ -1,0 +1,46 @@
+{
+  "name": "nx-api-extractor",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/nx-api-extractor/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/nx-api-extractor/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/nx-api-extractor"],
+      "options": {
+        "outputPath": "coverage/libs/nx-api-extractor",
+        "jestConfig": "libs/nx-api-extractor/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/nx-api-extractor",
+        "tsConfig": "libs/nx-api-extractor/tsconfig.lib.json",
+        "packageJson": "libs/nx-api-extractor/package.json",
+        "main": "libs/nx-api-extractor/src/index.ts",
+        "assets": [
+          "libs/nx-api-extractor/*.md",
+          {
+            "input": "./libs/nx-api-extractor/src",
+            "glob": "**/*.!(ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/nx-api-extractor",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "name": "nx-build-pipe",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/nx-build-pipe/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/nx-build-pipe/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/nx-build-pipe"],
+      "options": {
+        "outputPath": "coverage/libs/nx-build-pipe",
+        "jestConfig": "libs/nx-build-pipe/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/nx-build-pipe",
+        "tsConfig": "libs/nx-build-pipe/tsconfig.lib.json",
+        "packageJson": "libs/nx-build-pipe/package.json",
+        "main": "libs/nx-build-pipe/src/index.ts",
+        "assets": [
+          "libs/nx-build-pipe/*.md",
+          {
+            "input": "./libs/nx-build-pipe/src",
+            "glob": "**/*.!(ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/nx-build-pipe",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./libs/nx-build-pipe",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    }
+  }
+}

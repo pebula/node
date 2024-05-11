@@ -1,0 +1,72 @@
+{
+  "name": "goosetyped",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/goosetyped/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/goosetyped/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/goosetyped"],
+      "options": {
+        "outputPath": "coverage/libs/goosetyped",
+        "jestConfig": "libs/goosetyped/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configuration": {
+        "liveDb": {
+          "jestConfig": "libs/goosetyped/jest.config.livedb.js"
+        }
+      }
+    },
+    "build": {
+      "executor": "./dist/libs/nx-build-pipe:build",
+      "options": {
+        "task": {
+          "type": "group",
+          "composition": "sequence",
+          "pipe": [
+            {
+              "type": "target",
+              "target": "goosetyped:package"
+            },
+            {
+              "type": "target",
+              "target": "goosetyped:apiExtractor"
+            }
+          ]
+        }
+      }
+    },
+    "package": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/goosetyped",
+        "tsConfig": "libs/goosetyped/tsconfig.lib.json",
+        "packageJson": "libs/goosetyped/package.json",
+        "main": "libs/goosetyped/src/index.ts",
+        "assets": ["libs/goosetyped/*.md"],
+        "srcRootForCompilationRoot": "libs/goosetyped"
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "syncVersions": false
+      }
+    },
+    "apiExtractor": {
+      "executor": "./dist/libs/nx-api-extractor:build",
+      "options": {
+        "buildTargetName": "package",
+        "baseConfigFile": "./api-extractor.base.json"
+      }
+    }
+  }
+}
