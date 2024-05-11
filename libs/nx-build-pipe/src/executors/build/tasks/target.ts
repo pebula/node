@@ -1,12 +1,18 @@
-import { parseTargetString, readTargetOptions, runExecutor } from '@nrwl/devkit';
+import { parseTargetString, readTargetOptions, runExecutor } from '@nx/devkit';
 import { ExecutorContext, getTaskGlobalOptions, logger } from '../../utils';
 import { BuildPipeTargetTask } from '../schema';
 import { Task } from './task.type';
 
-function isNxBuildPipeTarget(project: string, target: string, context: ExecutorContext) {
+function isNxBuildPipeTarget(
+  project: string,
+  target: string,
+  context: ExecutorContext
+) {
   const targetConfig = context.workspace.projects[project]?.targets[target];
-  return targetConfig?.executor === context.target.executor
-    || targetConfig?.executor === '@pebula/nx-build-pipe:build';
+  return (
+    targetConfig?.executor === context.target.executor ||
+    targetConfig?.executor === '@pebula/nx-build-pipe:build'
+  );
 }
 
 export const target: Task<'target'> = {
@@ -16,13 +22,26 @@ export const target: Task<'target'> = {
     const targetOptions = readTargetOptions(targetDescription, context);
 
     const baseOptions = getTaskGlobalOptions(task, context);
-    Object.assign(targetOptions, {...baseOptions, ...(task.options || {})});
+    Object.assign(targetOptions, { ...baseOptions, ...(task.options || {}) });
 
-    if (isNxBuildPipeTarget(targetDescription.project, targetDescription.target, context)) {
-      targetOptions.taskOptions = {...context.rootOptions.taskOptions, ...(targetOptions.taskOptions || {})};
+    if (
+      isNxBuildPipeTarget(
+        targetDescription.project,
+        targetDescription.target,
+        context
+      )
+    ) {
+      targetOptions.taskOptions = {
+        ...context.rootOptions.taskOptions,
+        ...(targetOptions.taskOptions || {}),
+      };
     }
 
-    const executing = await runExecutor(targetDescription, targetOptions, context);
+    const executing = await runExecutor(
+      targetDescription,
+      targetOptions,
+      context
+    );
 
     // Run in sequence, as intended by Nx, this will usually be one executor but it depends on the executor implementation!
     for await (const s of executing) {
@@ -33,5 +52,7 @@ export const target: Task<'target'> = {
     }
     return { success: true };
   },
-  getDescription(task: BuildPipeTargetTask): string { return task.target; },
-}
+  getDescription(task: BuildPipeTargetTask): string {
+    return task.target;
+  },
+};

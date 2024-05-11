@@ -1,6 +1,7 @@
 {
   "name": "@pebula/touchstone",
   "version": "1.0.1",
+  "types": "src/index.d.ts",
   "keywords": [
     "benchmark",
     "benchmark.js",

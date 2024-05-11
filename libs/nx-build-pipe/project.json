@@ -5,13 +5,13 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/nx-build-pipe/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/nx-build-pipe"],
       "options": {
         "outputPath": "coverage/libs/nx-build-pipe",
@@ -20,12 +20,11 @@
       }
     },
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/nx-build-pipe",
         "tsConfig": "libs/nx-build-pipe/tsconfig.lib.json",
-        "packageJson": "libs/nx-build-pipe/package.json",
         "main": "libs/nx-build-pipe/src/index.ts",
         "assets": [
           "libs/nx-build-pipe/*.md",

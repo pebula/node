@@ -2,7 +2,6 @@
   "version": 2,
   "outputCapture": "direct-nodejs",
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "title": "Api ExtractorExecutor",
   "description": "For detailed description of the configuration see https://github.com/microsoft/rushstack/blob/51e568825902d285edf9f43f9954c38ea0b04527/apps/api-extractor/src/api/IConfigFile.ts#L286",
   "type": "object",
@@ -51,7 +50,11 @@
         },
         "newlineKind": {
           "type": "string",
-          "enum": ["crlf", "lf", "os"],
+          "enum": [
+            "crlf",
+            "lf",
+            "os"
+          ],
           "description": "Specifies what type of newlines API Extractor should use when writing output files. \nBy default, the output files will be written with Windows-style newlines. \nTo use POSIX-style newlines, specify 'lf' instead. \nTo use the OS's default newline kind, specify 'os'."
         },
         "messages": {
@@ -197,7 +200,13 @@
       "properties": {
         "logLevel": {
           "type": "string",
-          "enum": ["error", "warning", "info", "verbose", "none"],
+          "enum": [
+            "error",
+            "warning",
+            "info",
+            "verbose",
+            "none"
+          ],
           "description": "Specifies whether the message should be written to the the tool's output log. \nNote that the `addToApiReportFile` property may supersede this option."
         },
         "addToApiReportFile": {

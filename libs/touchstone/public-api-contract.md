@@ -5,8 +5,6 @@
 ```ts
 
 import * as benchmark from 'benchmark';
-import { ClassDecoratorOf } from '@pebula/decorate';
-import { Mixin } from '@pebula/decorate';
 import { Stats } from 'benchmark';
 import { Times } from 'benchmark';
 
@@ -60,7 +58,81 @@ export interface CaseStats extends Stats {
     min: number;
 }
 
-export { Mixin }
+// @public (undocumented)
+export function Mixin<T1, C1 extends Abstract<unknown>,
+T2 = unknown, C2 extends Abstract<unknown> = Abstract<unknown>,
+T3 = unknown, C3 extends Abstract<unknown> = Abstract<unknown>,
+T4 = unknown, C4 extends Abstract<unknown> = Abstract<unknown>,
+T5 = unknown, C5 extends Abstract<unknown> = Abstract<unknown>,
+T6 = unknown, C6 extends Abstract<unknown> = Abstract<unknown>>(m1: C1 & Abstract<T1>,
+m2?: C2 & Abstract<T2>,
+m3?: C3 & Abstract<T3>,
+m4?: C4 & Abstract<T4>,
+m5?: C5 & Abstract<T5>,
+m6?: C6 & Abstract<T6>,
+...mn: Array<Abstract<any>>): Type<T1 & T2 & T3 & T4 & T5 & T6> & Omit<C1 & C2 & C3 & C4 & C5 & C6, 'constructor'> & Mixin.MixedClassStatic;
+
+// @public
+export function Mixin<T, S>(...mixins: Array<S & Abstract<T>>): Type<T> & S {
+    // (undocumented)
+    export class __MixinClass {
+        constructor(...args: any[]) {
+            executeConstructors(__MixinClass, this, args);
+        }
+    }
+
+    const // (undocumented)
+    constructors: Set<(...args: any[]) => void> = new Set();
+
+    MixinFw.mixIntoClass(__MixinClass, mixins, mixin => {
+        handleConstructors(mixin, constructors);
+        DecoratedDomain.extendDecoratorMetadata(mixin, __MixinClass);
+    }) as any;
+
+    if (constructors.size > 0) {
+        __MixinClass[mixedInClassesConstructors] = constructors;
+    }
+
+    return __MixinClass as any;
+}
+
+// @public (undocumented)
+export namespace Mixin {
+
+
+    const // (undocumented)
+    hasMixin = MixinFw.hasMixin;
+    // (undocumented)
+    export type classHasMixin = typeof MixinFw.classHasMixin;
+
+    const // (undocumented)
+    classHasMixin = MixinFw.classHasMixin;
+    // (undocumented)
+    export type hasMixin = typeof MixinFw.hasMixin;
+
+    const // (undocumented)
+    isMixinTarget = MixinFw.isMixinTarget;
+    // (undocumented)
+    export type isMixinTarget = typeof MixinFw.isMixinTarget;
+
+    const // (undocumented)
+    MixinScope = MixinFw.MixinScope;
+    // (undocumented)
+    export type MixedClassStatic = MixinFw.MixedClassStatic;
+
+    // (undocumented)
+    export type MixinScope = typeof MixinFw.MixinScope;
+
+    const Constructor: <Z extends object>(target: Z extends Function ? never : Z, key: string | symbol, descriptor: PropertyDescriptor) => PropertyDescriptor | void =
+    (target: object, key: any, descriptor: PropertyDescriptor) => {
+        Object.defineProperty(target.constructor, mixinCtorRef, {
+            value: descriptor.value,
+            configurable: false,
+            enumerable: false,
+            writable: false,
+        });
+    }
+}
 
 // @public (undocumented)
 export const OnAbort: () => <Z extends Partial<Record<K, (args_0: SuiteAbortEvent) => void>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: SuiteAbortEvent) => void>) => void | TypedPropertyDescriptor<(args_0: SuiteAbortEvent) => void>;
@@ -101,7 +173,7 @@ export abstract class SimpleConsoleReporter {
 }
 
 // @public (undocumented)
-export const Suite: (metadata?: SuiteMetadataArgs) => ClassDecoratorOf<any, unknown>;
+export const Suite: (metadata?: SuiteMetadataArgs) => ClassDecoratorOf<any>;
 
 // @public (undocumented)
 export interface SuiteAbortEvent extends BaseEvent<'abort'> {
@@ -145,7 +217,7 @@ export interface SuiteStartEvent extends BaseEvent<'start'> {
 // @public (undocumented)
 export const TouchStone: (metadata?: TouchStoneMetadataArgs) => ClassDecoratorOf<TouchStoneRun & {
     [key: string]: any;
-}, unknown>;
+}>;
 
 // @public (undocumented)
 export function touchStone(): Promise<void>;
@@ -179,7 +251,6 @@ export interface TouchStoneStartEvent {
     // (undocumented)
     type: 'touchStoneStart';
 }
-
 
 // (No @packageDocumentation comment for this package)
 

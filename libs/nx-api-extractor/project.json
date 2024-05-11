@@ -5,13 +5,13 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/nx-api-extractor/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/nx-api-extractor"],
       "options": {
         "outputPath": "coverage/libs/nx-api-extractor",
@@ -20,12 +20,11 @@
       }
     },
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/nx-api-extractor",
         "tsConfig": "libs/nx-api-extractor/tsconfig.lib.json",
-        "packageJson": "libs/nx-api-extractor/package.json",
         "main": "libs/nx-api-extractor/src/index.ts",
         "assets": [
           "libs/nx-api-extractor/*.md",

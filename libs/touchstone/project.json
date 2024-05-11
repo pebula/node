@@ -5,13 +5,13 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/touchstone/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/touchstone"],
       "options": {
         "outputPath": "coverage/libs/touchstone",
@@ -39,12 +39,11 @@
       }
     },
     "package": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/touchstone",
         "tsConfig": "libs/touchstone/tsconfig.lib.json",
-        "packageJson": "libs/touchstone/package.json",
         "main": "libs/touchstone/src/index.ts",
         "assets": ["libs/touchstone/*.md"],
         "srcRootForCompilationRoot": "libs/touchstone"
