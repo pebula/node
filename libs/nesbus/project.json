@@ -1,0 +1,67 @@
+{
+  "name": "nesbus",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/nesbus/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/nesbus/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/nesbus"],
+      "options": {
+        "outputPath": "coverage/libs/nesbus",
+        "jestConfig": "libs/nesbus/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "build": {
+      "executor": "./dist/libs/nx-build-pipe:build",
+      "options": {
+        "task": {
+          "type": "group",
+          "composition": "sequence",
+          "pipe": [
+            {
+              "type": "target",
+              "target": "nesbus:package"
+            },
+            {
+              "type": "target",
+              "target": "nesbus:apiExtractor"
+            }
+          ]
+        }
+      }
+    },
+    "package": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/nesbus",
+        "tsConfig": "libs/nesbus/tsconfig.lib.json",
+        "packageJson": "libs/nesbus/package.json",
+        "main": "libs/nesbus/src/index.ts",
+        "assets": ["libs/nesbus/*.md"],
+        "srcRootForCompilationRoot": "libs/nesbus"
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "syncVersions": false
+      }
+    },
+    "apiExtractor": {
+      "executor": "./dist/libs/nx-api-extractor:build",
+      "options": {
+        "buildTargetName": "package",
+        "baseConfigFile": "./api-extractor.base.json"
+      }
+    }
+  }
+}

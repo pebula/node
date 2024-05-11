@@ -1,4 +1,6 @@
 {
+  "version": 2,
+  "outputCapture": "direct-nodejs",
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
   "title": "Api ExtractorExecutor",
@@ -20,7 +22,7 @@
       "default": null
     }
   },
-  "required": [ ],
+  "required": [],
   "definitions": {
     "configApiExtractor": {
       "type": "object",
@@ -104,8 +106,7 @@
           "description": "Specifies the folder where the temporary report file is written.  The file name portion is determined by the `reportFileName` setting. \nAfter the temporary file is written to disk, it is compared with the file in the `reportFolder`. \nIf they are different, a production build will fail. \nThe path is resolved relative to the folder of the config file that contains the setting; to change this, \nprepend a folder token such as `<projectFolder>`."
         }
       },
-      "required": [
-      ]
+      "required": []
     },
     "configDocModel": {
       "description": "",
@@ -120,8 +121,7 @@
           "description": "The output path for the doc model file.  The file extension should be '.api.json'. \nThe path is resolved relative to the folder of the config file that contains the setting; to change this, \nprepend a folder token such as `<projectFolder>`."
         }
       },
-      "required": [
-      ]
+      "required": []
     },
     "configDtsRollup": {
       "description": "",
@@ -148,8 +148,7 @@
           "description": "When a declaration is trimmed, by default it will be replaced by a code comment such as 'Excluded from this release type: exampleMember'. \nSet 'omitTrimmingComments' to true to remove the declaration completely."
         }
       },
-      "required": [
-      ]
+      "required": []
     },
     "configTsdocMetadata": {
       "description": "",
@@ -164,8 +163,7 @@
           "description": "Specifies where the TSDoc metadata file should be written. \nThe path is resolved relative to the folder of the config file that contains the setting; to change this, \nprepend a folder token such as `<projectFolder>`. \nThe default value is `<lookup>`, which causes the path to be automatically inferred from the `tsdocMetadata`, \n`typings` or `main` fields of the project's package.json.  If none of these fields are set, the lookup \nfalls back to `tsdoc-metadata.json` in the package folder."
         }
       },
-      "required": [
-      ]
+      "required": []
     },
     "extractorMessagesConfig": {
       "description": "",
@@ -199,13 +197,7 @@
       "properties": {
         "logLevel": {
           "type": "string",
-          "enum": [
-            "error",
-            "warning",
-            "info",
-            "verbose",
-            "none"
-          ],
+          "enum": ["error", "warning", "info", "verbose", "none"],
           "description": "Specifies whether the message should be written to the the tool's output log. \nNote that the `addToApiReportFile` property may supersede this option."
         },
         "addToApiReportFile": {

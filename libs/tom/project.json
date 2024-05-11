@@ -1,0 +1,72 @@
+{
+  "name": "tom",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/tom/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/tom/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/tom"],
+      "options": {
+        "outputPath": "coverage/libs/tom",
+        "jestConfig": "libs/tom/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "build": {
+      "executor": "./dist/libs/nx-build-pipe:build",
+      "options": {
+        "task": {
+          "type": "group",
+          "composition": "sequence",
+          "pipe": [
+            {
+              "type": "target",
+              "target": "tom:package"
+            }
+          ]
+        }
+      }
+    },
+    "package": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/tom",
+        "tsConfig": "libs/tom/tsconfig.lib.json",
+        "packageJson": "libs/tom/package.json",
+        "main": "libs/tom/src/index.ts",
+        "assets": ["libs/tom/*.md"],
+        "srcRootForCompilationRoot": "libs/tom"
+      }
+    },
+    "benchmark": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "./node_modules/.bin/ts-node -r tsconfig-paths/register -P ./tsconfig.base.json -O \"{ \\\"module\\\": \\\"commonjs\\\", \\\"resolveJsonModule\\\": true }\" libs/tom/benchmarks/index.ts"
+        ],
+        "parallel": false
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "syncVersions": false
+      }
+    },
+    "apiExtractor": {
+      "executor": "./dist/libs/nx-api-extractor:build",
+      "options": {
+        "buildTargetName": "package",
+        "baseConfigFile": "./api-extractor.base.json"
+      }
+    }
+  }
+}

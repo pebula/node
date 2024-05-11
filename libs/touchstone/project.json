@@ -1,0 +1,97 @@
+{
+  "name": "touchstone",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/touchstone/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/touchstone/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/touchstone"],
+      "options": {
+        "outputPath": "coverage/libs/touchstone",
+        "jestConfig": "libs/touchstone/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "build": {
+      "executor": "./dist/libs/nx-build-pipe:build",
+      "options": {
+        "task": {
+          "type": "group",
+          "composition": "sequence",
+          "pipe": [
+            {
+              "type": "target",
+              "target": "touchstone:package"
+            },
+            {
+              "type": "target",
+              "target": "touchstone:apiExtractor"
+            }
+          ]
+        }
+      }
+    },
+    "package": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/touchstone",
+        "tsConfig": "libs/touchstone/tsconfig.lib.json",
+        "packageJson": "libs/touchstone/package.json",
+        "main": "libs/touchstone/src/index.ts",
+        "assets": ["libs/touchstone/*.md"],
+        "srcRootForCompilationRoot": "libs/touchstone"
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "syncVersions": false
+      }
+    },
+    "apiExtractor": {
+      "executor": "./dist/libs/nx-api-extractor:build",
+      "options": {
+        "buildTargetName": "package",
+        "baseConfigFile": "./api-extractor.base.json"
+      }
+    },
+    "benchmark": {
+      "executor": "./dist/libs/nx-build-pipe:build",
+      "options": {
+        "task": {
+          "type": "group",
+          "composition": "sequence",
+          "pipe": [
+            {
+              "name": "installPackages",
+              "type": "runCommand",
+              "options": {
+                "cwd": "./libs/touchstone/benchmarks",
+                "commands": ["yarn"],
+                "parallel": false
+              }
+            },
+            {
+              "name": "runBenchmark",
+              "type": "runCommand",
+              "options": {
+                "commands": [
+                  "./node_modules/.bin/ts-node -r tsconfig-paths/register -P ./tsconfig.base.json -O \"{ \\\"module\\\": \\\"commonjs\\\", \\\"resolveJsonModule\\\": true }\" libs/touchstone/benchmarks/src/index.ts"
+                ],
+                "parallel": false
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

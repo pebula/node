@@ -1,0 +1,34 @@
+{
+  "name": "docs-decorate",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/docs/decorate/src",
+  "targets": {
+    "gh-pages": {
+      "executor": "./dist/libs/nx-build-pipe:build",
+      "options": {
+        "task": {
+          "type": "fromFile",
+          "path": "apps/docs/gh-pages.js",
+          "args": ["decorate"]
+        },
+        "env": {
+          "GH_PAGES_BUILD": true
+        }
+      }
+    },
+    "build": {
+      "executor": "@nx-plus/docusaurus:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/docs/decorate"
+      }
+    },
+    "serve": {
+      "executor": "@nx-plus/docusaurus:dev-server",
+      "options": {
+        "port": 3000
+      }
+    }
+  }
+}

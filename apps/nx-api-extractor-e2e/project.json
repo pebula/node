@@ -1,0 +1,17 @@
+{
+  "name": "nx-api-extractor-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/nx-api-extractor-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/nx-plugin:e2e",
+      "options": {
+        "target": "nx-api-extractor:build",
+        "npmPackageName": "@pebula/nx-api-extractor",
+        "pluginOutputPath": "dist/libs/nx-api-extractor",
+        "jestConfig": "apps/nx-api-extractor-e2e/jest.config.js"
+      }
+    }
+  }
+}
