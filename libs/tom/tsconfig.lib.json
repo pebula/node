@@ -6,11 +6,17 @@
     "declaration": true,
     "types": ["node"],
     "paths": {
-      "@pebula/tom": ["libs/tom/src/index.ts"], // We need these for secondary packages
+      "@pebula/tom": ["libs/tom/src/index.ts"],
       "@pebula/tom/*": ["libs/tom/*"],
       "@pebula/*": ["dist/libs/*"]
     }
   },
-  "exclude": ["**/*.spec.ts", "jest-setup.ts", "tests/**/*.*", "benchmarks/**/*.*"],
-  "include": [ "**/*.ts" ]
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "jest-setup.ts",
+    "tests/**/*.*",
+    "benchmarks/**/*.*"
+  ],
+  "include": ["**/*.ts"]
 }

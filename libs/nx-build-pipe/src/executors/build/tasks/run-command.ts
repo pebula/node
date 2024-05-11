@@ -1,6 +1,6 @@
 import * as Path from 'path';
 import runCommandImp from '@nrwl/workspace/src/executors/run-commands/run-commands.impl';
-import { validateOptsAgainstSchema } from '@nrwl/tao/src/shared/params';
+import { validateOptsAgainstSchema } from 'nx/src/utils/params';
 import { loadJson, saveJson, ExecutorContext, getTaskGlobalOptions } from '../../utils';
 import { BuildPipeExecutorSchema, BuildPipeRunCommandTask } from '../schema';
 import { Task } from './task.type';

@@ -9,12 +9,16 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/decorate/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/decorate/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/decorate"],
+          "outputs": [
+            "coverage/libs/decorate"
+          ],
           "options": {
             "outputPath": "coverage/libs/decorate",
             "jestConfig": "libs/decorate/jest.config.js",
@@ -37,14 +41,18 @@
           }
         },
         "package": {
-          "builder": "@nrwl/node:package",
-          "outputs": ["{options.outputPath}"],
+          "builder": "@nrwl/js:tsc",
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/libs/decorate",
             "tsConfig": "libs/decorate/tsconfig.lib.json",
             "packageJson": "libs/decorate/package.json",
             "main": "libs/decorate/src/index.ts",
-            "assets": ["libs/decorate/*.md"],
+            "assets": [
+              "libs/decorate/*.md"
+            ],
             "srcRootForCompilationRoot": "libs/decorate"
           }
         },
@@ -74,7 +82,9 @@
             "task": {
               "type": "fromFile",
               "path": "apps/docs/gh-pages.js",
-              "args": ["decorate"]
+              "args": [
+                "decorate"
+              ]
             },
             "env": {
               "GH_PAGES_BUILD": true
@@ -83,7 +93,9 @@
         },
         "build": {
           "builder": "@nx-plus/docusaurus:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/docs/decorate"
           }
@@ -107,7 +119,9 @@
             "task": {
               "type": "fromFile",
               "path": "apps/docs/gh-pages.js",
-              "args": ["goosetyped"]
+              "args": [
+                "goosetyped"
+              ]
             },
             "env": {
               "GH_PAGES_BUILD": true
@@ -116,7 +130,9 @@
         },
         "build": {
           "builder": "@nx-plus/docusaurus:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/docs/goosetyped"
           }
@@ -140,7 +156,9 @@
             "task": {
               "type": "fromFile",
               "path": "apps/docs/gh-pages.js",
-              "args": ["nesbus"]
+              "args": [
+                "nesbus"
+              ]
             },
             "env": {
               "GH_PAGES_BUILD": true
@@ -149,7 +167,9 @@
         },
         "build": {
           "builder": "@nx-plus/docusaurus:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/docs/nesbus"
           }
@@ -173,7 +193,9 @@
             "task": {
               "type": "fromFile",
               "path": "apps/docs/gh-pages.js",
-              "args": ["tom"]
+              "args": [
+                "tom"
+              ]
             },
             "env": {
               "GH_PAGES_BUILD": true
@@ -182,7 +204,9 @@
         },
         "build": {
           "builder": "@nx-plus/docusaurus:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/docs/tom"
           }
@@ -206,7 +230,9 @@
             "task": {
               "type": "fromFile",
               "path": "apps/docs/gh-pages.js",
-              "args": ["touchstone"]
+              "args": [
+                "touchstone"
+              ]
             },
             "env": {
               "GH_PAGES_BUILD": true
@@ -215,7 +241,9 @@
         },
         "build": {
           "builder": "@nx-plus/docusaurus:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/docs/touchstone"
           }
@@ -236,12 +264,16 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/goosetyped/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/goosetyped/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/goosetyped"],
+          "outputs": [
+            "coverage/libs/goosetyped"
+          ],
           "options": {
             "outputPath": "coverage/libs/goosetyped",
             "jestConfig": "libs/goosetyped/jest.config.js",
@@ -273,14 +305,18 @@
           }
         },
         "package": {
-          "builder": "@nrwl/node:package",
-          "outputs": ["{options.outputPath}"],
+          "builder": "@nrwl/js:tsc",
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/libs/goosetyped",
             "tsConfig": "libs/goosetyped/tsconfig.lib.json",
             "packageJson": "libs/goosetyped/package.json",
             "main": "libs/goosetyped/src/index.ts",
-            "assets": ["libs/goosetyped/*.md"],
+            "assets": [
+              "libs/goosetyped/*.md"
+            ],
             "srcRootForCompilationRoot": "libs/goosetyped"
           }
         },
@@ -307,12 +343,16 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/nesbus/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/nesbus/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/nesbus"],
+          "outputs": [
+            "coverage/libs/nesbus"
+          ],
           "options": {
             "outputPath": "coverage/libs/nesbus",
             "jestConfig": "libs/nesbus/jest.config.js",
@@ -339,14 +379,18 @@
           }
         },
         "package": {
-          "builder": "@nrwl/node:package",
-          "outputs": ["{options.outputPath}"],
+          "builder": "@nrwl/js:tsc",
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/libs/nesbus",
             "tsConfig": "libs/nesbus/tsconfig.lib.json",
             "packageJson": "libs/nesbus/package.json",
             "main": "libs/nesbus/src/index.ts",
-            "assets": ["libs/nesbus/*.md"],
+            "assets": [
+              "libs/nesbus/*.md"
+            ],
             "srcRootForCompilationRoot": "libs/nesbus"
           }
         },
@@ -373,12 +417,16 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/nx-api-extractor/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/nx-api-extractor/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/nx-api-extractor"],
+          "outputs": [
+            "coverage/libs/nx-api-extractor"
+          ],
           "options": {
             "outputPath": "coverage/libs/nx-api-extractor",
             "jestConfig": "libs/nx-api-extractor/jest.config.js",
@@ -386,8 +434,10 @@
           }
         },
         "build": {
-          "builder": "@nrwl/node:package",
-          "outputs": ["{options.outputPath}"],
+          "builder": "@nrwl/js:tsc",
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/libs/nx-api-extractor",
             "tsConfig": "libs/nx-api-extractor/tsconfig.lib.json",
@@ -434,12 +484,16 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/nx-build-pipe/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/nx-build-pipe/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/nx-build-pipe"],
+          "outputs": [
+            "coverage/libs/nx-build-pipe"
+          ],
           "options": {
             "outputPath": "coverage/libs/nx-build-pipe",
             "jestConfig": "libs/nx-build-pipe/jest.config.js",
@@ -447,8 +501,10 @@
           }
         },
         "build": {
-          "builder": "@nrwl/node:package",
-          "outputs": ["{options.outputPath}"],
+          "builder": "@nrwl/js:tsc",
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/libs/nx-build-pipe",
             "tsConfig": "libs/nx-build-pipe/tsconfig.lib.json",
@@ -500,12 +556,16 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/tom/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/tom/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/tom"],
+          "outputs": [
+            "coverage/libs/tom"
+          ],
           "options": {
             "outputPath": "coverage/libs/tom",
             "jestConfig": "libs/tom/jest.config.js",
@@ -528,14 +588,18 @@
           }
         },
         "package": {
-          "builder": "@nrwl/node:package",
-          "outputs": ["{options.outputPath}"],
+          "builder": "@nrwl/js:tsc",
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/libs/tom",
             "tsConfig": "libs/tom/tsconfig.lib.json",
             "packageJson": "libs/tom/package.json",
             "main": "libs/tom/src/index.ts",
-            "assets": ["libs/tom/*.md"],
+            "assets": [
+              "libs/tom/*.md"
+            ],
             "srcRootForCompilationRoot": "libs/tom"
           }
         },
@@ -571,12 +635,16 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/touchstone/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/touchstone/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/touchstone"],
+          "outputs": [
+            "coverage/libs/touchstone"
+          ],
           "options": {
             "outputPath": "coverage/libs/touchstone",
             "jestConfig": "libs/touchstone/jest.config.js",
@@ -603,14 +671,18 @@
           }
         },
         "package": {
-          "builder": "@nrwl/node:package",
-          "outputs": ["{options.outputPath}"],
+          "builder": "@nrwl/js:tsc",
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/libs/touchstone",
             "tsConfig": "libs/touchstone/tsconfig.lib.json",
             "packageJson": "libs/touchstone/package.json",
             "main": "libs/touchstone/src/index.ts",
-            "assets": ["libs/touchstone/*.md"],
+            "assets": [
+              "libs/touchstone/*.md"
+            ],
             "srcRootForCompilationRoot": "libs/touchstone"
           }
         },
@@ -639,7 +711,9 @@
                   "type": "runCommand",
                   "options": {
                     "cwd": "./libs/touchstone/benchmarks",
-                    "commands": ["yarn"],
+                    "commands": [
+                      "yarn"
+                    ],
                     "parallel": false
                   }
                 },
@@ -657,68 +731,6 @@
             }
           }
         }
-      }
-    }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/workspace"
-  },
-  "schematics": {
-    "@nrwl/workspace": {
-      "library": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/cypress": {
-      "cypress-project": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/react": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      },
-      "storybook-configuration": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/next": {
-      "application": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/web": {
-      "application": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/node": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/nx-plugin": {
-      "plugin": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/nest": {
-      "application": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/express": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
       }
     }
   }
