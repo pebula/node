@@ -1,12 +1,12 @@
 import { readJson, writeJson, Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { createTreeWithEmptyV1Workspace } from '@nrwl/devkit/testing';
 import { nxApiExtractorInitGenerator } from './init';
 
 describe('nx-api-extractor', () => {
   let tree: Tree;
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace();
+    tree = createTreeWithEmptyV1Workspace();
   });
 
   it('should generate files', async () => {
@@ -23,7 +23,8 @@ describe('nx-api-extractor', () => {
   it('should add dependencies', async () => {
     nxApiExtractorInitGenerator(tree, {});
     const packageJson = readJson(tree, 'package.json');
-    expect(packageJson.devDependencies['@pebula/nx-api-extractor']).toBeDefined();
+    expect(
+      packageJson.devDependencies['@pebula/nx-api-extractor']
+    ).toBeDefined();
   });
-
 });

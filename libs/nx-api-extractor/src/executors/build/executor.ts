@@ -43,7 +43,7 @@ export default async function runExecutor(options: ApiExtractorExecutorSchema, c
     ...baseConfig,
     ...rawExtractorConfig,
     projectFolder: outputFolder,
-    mainEntryPointFilePath: Path.join(outputFolder, packageJson.typings),
+    mainEntryPointFilePath: Path.join(outputFolder, packageJson.types),
   };
 
   if (!configObject.compiler) {

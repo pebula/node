@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   projects: [
     '<rootDir>/libs/decorate',
     '<rootDir>/libs/tom',
