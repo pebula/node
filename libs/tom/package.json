@@ -1,6 +1,7 @@
 {
   "name": "@pebula/tom",
   "version": "0.0.1",
+  "types": "src/index.d.ts",
   "keywords": [
     "typescript",
     "mapper",

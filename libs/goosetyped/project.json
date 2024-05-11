@@ -5,13 +5,13 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/goosetyped/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/goosetyped"],
       "options": {
         "outputPath": "coverage/libs/goosetyped",
@@ -44,12 +44,11 @@
       }
     },
     "package": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/goosetyped",
         "tsConfig": "libs/goosetyped/tsconfig.lib.json",
-        "packageJson": "libs/goosetyped/package.json",
         "main": "libs/goosetyped/src/index.ts",
         "assets": ["libs/goosetyped/*.md"],
         "srcRootForCompilationRoot": "libs/goosetyped"

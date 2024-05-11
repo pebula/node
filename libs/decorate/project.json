@@ -5,13 +5,13 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/decorate/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/decorate"],
       "options": {
         "outputPath": "coverage/libs/decorate",
@@ -35,12 +35,11 @@
       }
     },
     "package": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/decorate",
         "tsConfig": "libs/decorate/tsconfig.lib.json",
-        "packageJson": "libs/decorate/package.json",
         "main": "libs/decorate/src/index.ts",
         "assets": ["libs/decorate/*.md"],
         "srcRootForCompilationRoot": "libs/decorate"

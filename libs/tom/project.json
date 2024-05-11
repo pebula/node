@@ -5,13 +5,13 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/tom/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/tom"],
       "options": {
         "outputPath": "coverage/libs/tom",
@@ -35,12 +35,11 @@
       }
     },
     "package": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/tom",
         "tsConfig": "libs/tom/tsconfig.lib.json",
-        "packageJson": "libs/tom/package.json",
         "main": "libs/tom/src/index.ts",
         "assets": ["libs/tom/*.md"],
         "srcRootForCompilationRoot": "libs/tom"

@@ -1,5 +1,5 @@
 import * as FS from 'fs';
-import { TargetConfiguration } from '@nrwl/devkit';
+import { TargetConfiguration } from '@nx/devkit';
 import { IConfigFile } from '@microsoft/api-extractor';
 import * as dotProp from 'dot-prop';
 
@@ -25,14 +25,20 @@ export interface ApiExtractorConfigTokens {
   sourceSourceRoot: string;
 }
 
-export function updateTokens(config: IConfigFile, tokenMap: ApiExtractorConfigTokens) {
-  const tokens = Object.keys(tokenMap).map( t => [new RegExp(`<${t}>`, 'g'), tokenMap[t]]) as Array<[RegExp, string]>;
+export function updateTokens(
+  config: IConfigFile,
+  tokenMap: ApiExtractorConfigTokens
+) {
+  const tokens = Object.keys(tokenMap).map((t) => [
+    new RegExp(`<${t}>`, 'g'),
+    tokenMap[t],
+  ]) as Array<[RegExp, string]>;
   for (const path of TOKENIZED_PATH_PROPS) {
     const value = dotProp.get(config, path);
     if (typeof value === 'string') {
       let newValue = value;
       for (const [regExp, repValue] of tokens) {
-        newValue = newValue.replace(regExp, repValue)
+        newValue = newValue.replace(regExp, repValue);
       }
       if (newValue !== value) {
         dotProp.set(config, path, newValue);
@@ -42,11 +48,16 @@ export function updateTokens(config: IConfigFile, tokenMap: ApiExtractorConfigTo
 }
 
 export function loadJson(p: string): any {
-  return JSON.parse(FS.readFileSync(p, { encoding: 'utf-8'}));
+  return JSON.parse(FS.readFileSync(p, { encoding: 'utf-8' }));
 }
 
-export function getOutputFolder(targetConfig: TargetConfiguration, configurationName?: string) {
-  const output = targetConfig.configurations?.[configurationName || '']?.outputPath || targetConfig.options?.outputPath;
+export function getOutputFolder(
+  targetConfig: TargetConfiguration,
+  configurationName?: string
+) {
+  const output =
+    targetConfig.configurations?.[configurationName || '']?.outputPath ||
+    targetConfig.options?.outputPath;
 
   if (!output) {
     throw new Error('Could not locate output folder destination.');
@@ -63,14 +74,14 @@ export function getOutputFolder(targetConfig: TargetConfiguration, configuration
 }
 
 export function cleanConfig(config: Partial<IConfigFile>) {
-  const keyCount = (o: any, count: number) =>  o && Object.keys(o).length === count;
+  const keyCount = (o: any, count: number) =>
+    o && Object.keys(o).length === count;
 
   for (const key of ['apiReport', 'docModel', 'dtsRollup', 'tsdocMetadata']) {
     if (keyCount(config[key], 0)) {
       delete config[key];
     }
   }
-
 
   if (keyCount(config.compiler, 1)) {
     if (keyCount(config.compiler.overrideTsconfig, 0)) {
@@ -82,7 +93,11 @@ export function cleanConfig(config: Partial<IConfigFile>) {
 
   if (config.messages) {
     const messages = config.messages;
-    for (const key of ['compilerMessageReporting', 'extractorMessageReporting', 'tsdocMessageReporting']) {
+    for (const key of [
+      'compilerMessageReporting',
+      'extractorMessageReporting',
+      'tsdocMessageReporting',
+    ]) {
       if (keyCount(messages[key], 0)) {
         delete messages[key];
       }

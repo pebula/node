@@ -2,7 +2,6 @@
   "version": 2,
   "outputCapture": "direct-nodejs",
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "title": "Build executor",
   "description": "",
   "type": "object",
@@ -28,7 +27,9 @@
       "description": "Object added to the env manually, note that this is loaded for every pipe. If you have child pipe executors either set each one or set a single setup at the root."
     }
   },
-  "required": ["task"],
+  "required": [
+    "task"
+  ],
   "definitions": {
     "buildPipeTask": {
       "oneOf": [
@@ -55,11 +56,16 @@
         },
         "type": {
           "type": "string",
-          "enum": ["group"]
+          "enum": [
+            "group"
+          ]
         },
         "composition": {
           "type": "string",
-          "enum": ["parallel", "sequence"],
+          "enum": [
+            "parallel",
+            "sequence"
+          ],
           "default": "sequence"
         },
         "pipe": {
@@ -69,7 +75,10 @@
           }
         }
       },
-      "required": ["type", "pipe"]
+      "required": [
+        "type",
+        "pipe"
+      ]
     },
     "buildPipeTargetTask": {
       "type": "object",
@@ -80,7 +89,9 @@
         },
         "type": {
           "type": "string",
-          "enum": ["target"]
+          "enum": [
+            "target"
+          ]
         },
         "target": {
           "type": "string"
@@ -90,7 +101,10 @@
           "additionalProperties": true
         }
       },
-      "required": ["type", "target"]
+      "required": [
+        "type",
+        "target"
+      ]
     },
     "buildPipeFromFileTask": {
       "type": "object",
@@ -101,7 +115,9 @@
         },
         "type": {
           "type": "string",
-          "enum": ["fromFile"]
+          "enum": [
+            "fromFile"
+          ]
         },
         "path": {
           "description": " Path to the file to load, relative to the workspace root.",
@@ -119,7 +135,10 @@
           "additionalProperties": true
         }
       },
-      "required": ["type", "path"]
+      "required": [
+        "type",
+        "path"
+      ]
     },
     "buildPipeRunCommandTask": {
       "type": "object",
@@ -130,15 +149,20 @@
         },
         "type": {
           "type": "string",
-          "enum": ["runCommand"]
+          "enum": [
+            "runCommand"
+          ]
         },
         "options": {
           "type": "object",
-          "$comment": "../../../../../../node_modules/@nrwl/workspace/src/executors/run-commands/schema.json",
+          "$comment": "../../../../../../node_modules/nx/src/executors/run-commands/schema.json",
           "additionalProperties": true
         }
       },
-      "required": ["type", "options"]
+      "required": [
+        "type",
+        "options"
+      ]
     }
   }
 }

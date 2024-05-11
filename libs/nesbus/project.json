@@ -5,13 +5,13 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/nesbus/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/nesbus"],
       "options": {
         "outputPath": "coverage/libs/nesbus",
@@ -39,12 +39,11 @@
       }
     },
     "package": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/nesbus",
         "tsConfig": "libs/nesbus/tsconfig.lib.json",
-        "packageJson": "libs/nesbus/package.json",
         "main": "libs/nesbus/src/index.ts",
         "assets": ["libs/nesbus/*.md"],
         "srcRootForCompilationRoot": "libs/nesbus"

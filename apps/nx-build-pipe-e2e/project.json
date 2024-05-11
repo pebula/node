@@ -5,13 +5,14 @@
   "sourceRoot": "apps/nx-build-pipe-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nrwl/nx-plugin:e2e",
+      "executor": "@nx/jest:jest",
       "options": {
-        "target": "nx-build-pipe:build",
         "npmPackageName": "@pebula/nx-build-pipe",
         "pluginOutputPath": "dist/libs/nx-build-pipe",
-        "jestConfig": "apps/nx-build-pipe-e2e/jest.config.js"
-      }
+        "jestConfig": "apps/nx-build-pipe-e2e/jest.config.js",
+        "runInBand": true
+      },
+      "dependsOn": ["nx-build-pipe:build"]
     }
   }
 }

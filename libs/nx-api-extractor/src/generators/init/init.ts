@@ -5,7 +5,7 @@ import {
   addDependenciesToPackageJson,
   convertNxGenerator,
   stripIndents,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 
 const apiExtractorVersion = '^7.13.2';
 
@@ -81,4 +81,6 @@ export function nxApiExtractorInitGenerator(tree: Tree, schema: any) {
 
 export default nxApiExtractorInitGenerator;
 
-export const nxApiExtractorInitSchematic = convertNxGenerator(nxApiExtractorInitGenerator);
+export const nxApiExtractorInitSchematic = convertNxGenerator(
+  nxApiExtractorInitGenerator
+);

@@ -1,4 +1,4 @@
-import type { RunCommandsBuilderOptions } from '@nrwl/workspace/src/executors/run-commands/run-commands.impl';
+import type { RunCommandsBuilderOptions } from '@nx/workspace/src/executors/run-commands/run-commands.impl';
 
 /* Define Tasks */
 export interface BuildPipeTask<T extends string, TOptions> {
@@ -12,14 +12,16 @@ export interface BuildPipeGroupTask extends BuildPipeTask<'group', never> {
   pipe: Array<BuildPipeTasks>;
 }
 
-export interface BuildPipeTargetTask<TOptions = any> extends BuildPipeTask<'target', TOptions> {
+export interface BuildPipeTargetTask<TOptions = any>
+  extends BuildPipeTask<'target', TOptions> {
   /**
    * Target reference string formatted as "<PROJECT>:<TARGET>:<CONFIGURATION>?"
    */
   target: string;
 }
 
-export interface BuildPipeFromFileTask<TOptions = any> extends BuildPipeTask<'fromFile', TOptions> {
+export interface BuildPipeFromFileTask<TOptions = any>
+  extends BuildPipeTask<'fromFile', TOptions> {
   /**
    * Path to the file to load, relative to the workspace root.
    *
@@ -33,8 +35,8 @@ export interface BuildPipeFromFileTask<TOptions = any> extends BuildPipeTask<'fr
   args?: string[];
 }
 
-export interface BuildPipeRunCommandTask<TOptions = any> extends BuildPipeTask<'runCommand', RunCommandsBuilderOptions> {
-}
+export interface BuildPipeRunCommandTask<TOptions = any>
+  extends BuildPipeTask<'runCommand', RunCommandsBuilderOptions> {}
 
 export type BuildPipeTasks =
   | BuildPipeGroupTask

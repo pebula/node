@@ -4,7 +4,7 @@ import {
   readJson,
   runNxCommandAsync,
   uniq,
-} from '@nrwl/nx-plugin/testing';
+} from '@nx/plugin/testing';
 describe('nx-api-extractor e2e', () => {
   it('should create nx-api-extractor', async (done) => {
     const plugin = uniq('nx-api-extractor');

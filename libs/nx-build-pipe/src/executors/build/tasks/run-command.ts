@@ -1,5 +1,5 @@
 import * as Path from 'path';
-import runCommandImp from '@nrwl/workspace/src/executors/run-commands/run-commands.impl';
+import runCommandImp from 'nx/src/executors/run-commands/run-commands.impl';
 import { validateOptsAgainstSchema } from 'nx/src/utils/params';
 import { loadJson, saveJson, ExecutorContext, getTaskGlobalOptions } from '../../utils';
 import { BuildPipeExecutorSchema, BuildPipeRunCommandTask } from '../schema';
@@ -17,10 +17,9 @@ function verifySchema(options: BuildPipeExecutorSchema, context: ExecutorContext
 
       const refFile = Path.isAbsolute(_refFile)
         ? Path.resolve(context.root, `node_modules`, _refFile)
-        : Path.resolve(__dirname, '..', _refFile)
-      ;
-
-      schema.definitions.buildPipeRunCommandTask.properties.options = loadJson(refFile);
+        : Path.resolve(__dirname, '..', _refFile);
+      schema.definitions.buildPipeRunCommandTask.properties.options =
+        loadJson(refFile);
       saveJson(Path.join(__dirname, '..', 'schema.json'), schema);
       modified = true;
       validateOptsAgainstSchema(options, schema);

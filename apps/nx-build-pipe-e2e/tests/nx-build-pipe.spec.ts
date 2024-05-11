@@ -4,7 +4,7 @@ import {
   readJson,
   runNxCommandAsync,
   uniq,
-} from '@nrwl/nx-plugin/testing';
+} from '@nx/plugin/testing';
 describe('nx-build-pipe e2e', () => {
   it('should create nx-build-pipe', async (done) => {
     const plugin = uniq('nx-build-pipe');

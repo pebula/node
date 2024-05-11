@@ -1,6 +1,7 @@
 {
   "name": "@pebula/goosetyped",
   "version": "1.0.0-mongoose8.3",
+  "types": "src/index.d.ts",
   "dependencies": {
     "reflect-metadata": "^0.1.13"
   },
