@@ -33,7 +33,7 @@ function verifySchema(options: BuildPipeExecutorSchema, context: ExecutorContext
 export const runCommand: Task<'runCommand'> & { verifySchema(options: BuildPipeExecutorSchema, context: ExecutorContext): void; } = {
   type: 'runCommand',
   async execute(task: BuildPipeRunCommandTask, context: ExecutorContext): Promise<{ success: boolean }> {
-    return runCommandImp({ ...getTaskGlobalOptions(task, context), ...task.options});
+    return runCommandImp({ ...getTaskGlobalOptions(task, context), ...task.options}, context);
   },
   verifySchema,
 };

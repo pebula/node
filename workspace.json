@@ -1,171 +1,6 @@
 {
   "version": 1,
   "projects": {
-    "docs-decorate": {
-      "projectType": "application",
-      "root": "apps/docs/decorate",
-      "sourceRoot": "apps/docs/decorate/src",
-      "architect": {
-        "gh-pages": {
-          "builder": "./dist/libs/nx-build-pipe:build",
-          "options": {
-            "task": {
-              "type": "fromFile",
-              "path": "apps/docs/gh-pages.js",
-              "args": [ "decorate" ]
-            },
-            "env": {
-              "GH_PAGES_BUILD": true
-            }
-          }
-        },
-        "build": {
-          "builder": "@nx-plus/docusaurus:browser",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/docs/decorate"
-          }
-        },
-        "serve": {
-          "builder": "@nx-plus/docusaurus:dev-server",
-          "options": {
-            "port": 3000
-          }
-        }
-      }
-    },
-    "docs-tom": {
-      "projectType": "application",
-      "root": "apps/docs/tom",
-      "sourceRoot": "apps/docs/tom/src",
-      "architect": {
-        "gh-pages": {
-          "builder": "./dist/libs/nx-build-pipe:build",
-          "options": {
-            "task": {
-              "type": "fromFile",
-              "path": "apps/docs/gh-pages.js",
-              "args": [ "tom" ]
-            },
-            "env": {
-              "GH_PAGES_BUILD": true
-            }
-          }
-        },
-        "build": {
-          "builder": "@nx-plus/docusaurus:browser",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/docs/tom"
-          }
-        },
-        "serve": {
-          "builder": "@nx-plus/docusaurus:dev-server",
-          "options": {
-            "port": 3000
-          }
-        }
-      }
-    },
-    "docs-goosetyped": {
-      "projectType": "application",
-      "root": "apps/docs/goosetyped",
-      "sourceRoot": "apps/docs/goosetyped/src",
-      "architect": {
-        "gh-pages": {
-          "builder": "./dist/libs/nx-build-pipe:build",
-          "options": {
-            "task": {
-              "type": "fromFile",
-              "path": "apps/docs/gh-pages.js",
-              "args": [ "goosetyped" ]
-            },
-            "env": {
-              "GH_PAGES_BUILD": true
-            }
-          }
-        },
-        "build": {
-          "builder": "@nx-plus/docusaurus:browser",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/docs/goosetyped"
-          }
-        },
-        "serve": {
-          "builder": "@nx-plus/docusaurus:dev-server",
-          "options": {
-            "port": 3000
-          }
-        }
-      }
-    },
-    "docs-touchstone": {
-      "projectType": "application",
-      "root": "apps/docs/touchstone",
-      "sourceRoot": "apps/docs/touchstone/src",
-      "architect": {
-        "gh-pages": {
-          "builder": "./dist/libs/nx-build-pipe:build",
-          "options": {
-            "task": {
-              "type": "fromFile",
-              "path": "apps/docs/gh-pages.js",
-              "args": [ "touchstone" ]
-            },
-            "env": {
-              "GH_PAGES_BUILD": true
-            }
-          }
-        },
-        "build": {
-          "builder": "@nx-plus/docusaurus:browser",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/docs/touchstone"
-          }
-        },
-        "serve": {
-          "builder": "@nx-plus/docusaurus:dev-server",
-          "options": {
-            "port": 3000
-          }
-        }
-      }
-    },
-    "docs-nesbus": {
-      "projectType": "application",
-      "root": "apps/docs/nesbus",
-      "sourceRoot": "apps/docs/nesbus/src",
-      "architect": {
-        "gh-pages": {
-          "builder": "./dist/libs/nx-build-pipe:build",
-          "options": {
-            "task": {
-              "type": "fromFile",
-              "path": "apps/docs/gh-pages.js",
-              "args": [ "nesbus" ]
-            },
-            "env": {
-              "GH_PAGES_BUILD": true
-            }
-          }
-        },
-        "build": {
-          "builder": "@nx-plus/docusaurus:browser",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/docs/nesbus"
-          }
-        },
-        "serve": {
-          "builder": "@nx-plus/docusaurus:dev-server",
-          "options": {
-            "port": 3000
-          }
-        }
-      }
-    },
     "decorate": {
       "root": "libs/decorate",
       "sourceRoot": "libs/decorate/src",
@@ -228,169 +63,167 @@
         }
       }
     },
-    "tom": {
-      "root": "libs/tom",
-      "sourceRoot": "libs/tom/src",
-      "projectType": "library",
+    "docs-decorate": {
+      "projectType": "application",
+      "root": "apps/docs/decorate",
+      "sourceRoot": "apps/docs/decorate/src",
       "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/tom/**/*.ts"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/tom"],
-          "options": {
-            "outputPath": "coverage/libs/tom",
-            "jestConfig": "libs/tom/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "build": {
+        "gh-pages": {
           "builder": "./dist/libs/nx-build-pipe:build",
           "options": {
             "task": {
-              "type": "group",
-              "composition": "sequence",
-              "pipe": [
-                {
-                  "type": "target",
-                  "target": "tom:package"
-                }
-              ]
+              "type": "fromFile",
+              "path": "apps/docs/gh-pages.js",
+              "args": ["decorate"]
+            },
+            "env": {
+              "GH_PAGES_BUILD": true
             }
           }
         },
-        "package": {
-          "builder": "@nrwl/node:package",
+        "build": {
+          "builder": "@nx-plus/docusaurus:browser",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "dist/libs/tom",
-            "tsConfig": "libs/tom/tsconfig.lib.json",
-            "packageJson": "libs/tom/package.json",
-            "main": "libs/tom/src/index.ts",
-            "assets": ["libs/tom/*.md"],
-            "srcRootForCompilationRoot": "libs/tom"
+            "outputPath": "dist/apps/docs/decorate"
           }
         },
-        "benchmark": {
-          "builder": "@nrwl/workspace:run-commands",
+        "serve": {
+          "builder": "@nx-plus/docusaurus:dev-server",
           "options": {
-            "commands": [
-              "./node_modules/.bin/ts-node -r tsconfig-paths/register -P ./tsconfig.base.json -O \"{ \\\"module\\\": \\\"commonjs\\\", \\\"resolveJsonModule\\\": true }\" libs/tom/benchmarks/index.ts"
-            ],
-            "parallel": false
-          }
-        },
-        "version": {
-          "builder": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": false
-          }
-        },
-        "apiExtractor": {
-          "builder": "./dist/libs/nx-api-extractor:build",
-          "options": {
-            "buildTargetName": "package",
-            "baseConfigFile": "./api-extractor.base.json"
+            "port": 3000
           }
         }
       }
     },
-    "touchstone": {
-      "root": "libs/touchstone",
-      "sourceRoot": "libs/touchstone/src",
-      "projectType": "library",
+    "docs-goosetyped": {
+      "projectType": "application",
+      "root": "apps/docs/goosetyped",
+      "sourceRoot": "apps/docs/goosetyped/src",
       "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
+        "gh-pages": {
+          "builder": "./dist/libs/nx-build-pipe:build",
           "options": {
-            "lintFilePatterns": ["libs/touchstone/**/*.ts"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/touchstone"],
-          "options": {
-            "outputPath": "coverage/libs/touchstone",
-            "jestConfig": "libs/touchstone/jest.config.js",
-            "passWithNoTests": true
+            "task": {
+              "type": "fromFile",
+              "path": "apps/docs/gh-pages.js",
+              "args": ["goosetyped"]
+            },
+            "env": {
+              "GH_PAGES_BUILD": true
+            }
           }
         },
         "build": {
-          "builder": "./dist/libs/nx-build-pipe:build",
-          "options": {
-            "task": {
-              "type": "group",
-              "composition": "sequence",
-              "pipe": [
-                {
-                  "type": "target",
-                  "target": "touchstone:package"
-                },
-                {
-                  "type": "target",
-                  "target": "touchstone:apiExtractor"
-                }
-              ]
-            }
-          }
-        },
-        "package": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nx-plus/docusaurus:browser",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "dist/libs/touchstone",
-            "tsConfig": "libs/touchstone/tsconfig.lib.json",
-            "packageJson": "libs/touchstone/package.json",
-            "main": "libs/touchstone/src/index.ts",
-            "assets": ["libs/touchstone/*.md"],
-            "srcRootForCompilationRoot": "libs/touchstone"
+            "outputPath": "dist/apps/docs/goosetyped"
           }
         },
-        "version": {
-          "builder": "@jscutlery/semver:version",
+        "serve": {
+          "builder": "@nx-plus/docusaurus:dev-server",
           "options": {
-            "syncVersions": false
+            "port": 3000
           }
-        },
-        "apiExtractor": {
-          "builder": "./dist/libs/nx-api-extractor:build",
-          "options": {
-            "buildTargetName": "package",
-            "baseConfigFile": "./api-extractor.base.json"
-          }
-        },
-        "benchmark": {
+        }
+      }
+    },
+    "docs-nesbus": {
+      "projectType": "application",
+      "root": "apps/docs/nesbus",
+      "sourceRoot": "apps/docs/nesbus/src",
+      "architect": {
+        "gh-pages": {
           "builder": "./dist/libs/nx-build-pipe:build",
           "options": {
             "task": {
-              "type": "group",
-              "composition": "sequence",
-              "pipe": [
-                {
-                  "name": "installPackages",
-                  "type": "runCommand",
-                  "options": {
-                    "cwd": "./libs/touchstone/benchmarks",
-                    "commands": ["yarn"],
-                    "parallel": false
-                  }
-                },
-                {
-                  "name": "runBenchmark",
-                  "type": "runCommand",
-                  "options": {
-                    "commands": [
-                      "./node_modules/.bin/ts-node -r tsconfig-paths/register -P ./tsconfig.base.json -O \"{ \\\"module\\\": \\\"commonjs\\\", \\\"resolveJsonModule\\\": true }\" libs/touchstone/benchmarks/src/index.ts"
-                    ],
-                    "parallel": false
-                  }
-                }
-              ]
+              "type": "fromFile",
+              "path": "apps/docs/gh-pages.js",
+              "args": ["nesbus"]
+            },
+            "env": {
+              "GH_PAGES_BUILD": true
             }
+          }
+        },
+        "build": {
+          "builder": "@nx-plus/docusaurus:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/docs/nesbus"
+          }
+        },
+        "serve": {
+          "builder": "@nx-plus/docusaurus:dev-server",
+          "options": {
+            "port": 3000
+          }
+        }
+      }
+    },
+    "docs-tom": {
+      "projectType": "application",
+      "root": "apps/docs/tom",
+      "sourceRoot": "apps/docs/tom/src",
+      "architect": {
+        "gh-pages": {
+          "builder": "./dist/libs/nx-build-pipe:build",
+          "options": {
+            "task": {
+              "type": "fromFile",
+              "path": "apps/docs/gh-pages.js",
+              "args": ["tom"]
+            },
+            "env": {
+              "GH_PAGES_BUILD": true
+            }
+          }
+        },
+        "build": {
+          "builder": "@nx-plus/docusaurus:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/docs/tom"
+          }
+        },
+        "serve": {
+          "builder": "@nx-plus/docusaurus:dev-server",
+          "options": {
+            "port": 3000
+          }
+        }
+      }
+    },
+    "docs-touchstone": {
+      "projectType": "application",
+      "root": "apps/docs/touchstone",
+      "sourceRoot": "apps/docs/touchstone/src",
+      "architect": {
+        "gh-pages": {
+          "builder": "./dist/libs/nx-build-pipe:build",
+          "options": {
+            "task": {
+              "type": "fromFile",
+              "path": "apps/docs/gh-pages.js",
+              "args": ["touchstone"]
+            },
+            "env": {
+              "GH_PAGES_BUILD": true
+            }
+          }
+        },
+        "build": {
+          "builder": "@nx-plus/docusaurus:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/docs/touchstone"
+          }
+        },
+        "serve": {
+          "builder": "@nx-plus/docusaurus:dev-server",
+          "options": {
+            "port": 3000
           }
         }
       }
@@ -655,6 +488,173 @@
             "npmPackageName": "@pebula/nx-build-pipe",
             "pluginOutputPath": "dist/libs/nx-build-pipe",
             "jestConfig": "apps/nx-build-pipe-e2e/jest.config.js"
+          }
+        }
+      }
+    },
+    "tom": {
+      "root": "libs/tom",
+      "sourceRoot": "libs/tom/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/tom/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/tom"],
+          "options": {
+            "outputPath": "coverage/libs/tom",
+            "jestConfig": "libs/tom/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "./dist/libs/nx-build-pipe:build",
+          "options": {
+            "task": {
+              "type": "group",
+              "composition": "sequence",
+              "pipe": [
+                {
+                  "type": "target",
+                  "target": "tom:package"
+                }
+              ]
+            }
+          }
+        },
+        "package": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/tom",
+            "tsConfig": "libs/tom/tsconfig.lib.json",
+            "packageJson": "libs/tom/package.json",
+            "main": "libs/tom/src/index.ts",
+            "assets": ["libs/tom/*.md"],
+            "srcRootForCompilationRoot": "libs/tom"
+          }
+        },
+        "benchmark": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "./node_modules/.bin/ts-node -r tsconfig-paths/register -P ./tsconfig.base.json -O \"{ \\\"module\\\": \\\"commonjs\\\", \\\"resolveJsonModule\\\": true }\" libs/tom/benchmarks/index.ts"
+            ],
+            "parallel": false
+          }
+        },
+        "version": {
+          "builder": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "apiExtractor": {
+          "builder": "./dist/libs/nx-api-extractor:build",
+          "options": {
+            "buildTargetName": "package",
+            "baseConfigFile": "./api-extractor.base.json"
+          }
+        }
+      }
+    },
+    "touchstone": {
+      "root": "libs/touchstone",
+      "sourceRoot": "libs/touchstone/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/touchstone/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/touchstone"],
+          "options": {
+            "outputPath": "coverage/libs/touchstone",
+            "jestConfig": "libs/touchstone/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "./dist/libs/nx-build-pipe:build",
+          "options": {
+            "task": {
+              "type": "group",
+              "composition": "sequence",
+              "pipe": [
+                {
+                  "type": "target",
+                  "target": "touchstone:package"
+                },
+                {
+                  "type": "target",
+                  "target": "touchstone:apiExtractor"
+                }
+              ]
+            }
+          }
+        },
+        "package": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/touchstone",
+            "tsConfig": "libs/touchstone/tsconfig.lib.json",
+            "packageJson": "libs/touchstone/package.json",
+            "main": "libs/touchstone/src/index.ts",
+            "assets": ["libs/touchstone/*.md"],
+            "srcRootForCompilationRoot": "libs/touchstone"
+          }
+        },
+        "version": {
+          "builder": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "apiExtractor": {
+          "builder": "./dist/libs/nx-api-extractor:build",
+          "options": {
+            "buildTargetName": "package",
+            "baseConfigFile": "./api-extractor.base.json"
+          }
+        },
+        "benchmark": {
+          "builder": "./dist/libs/nx-build-pipe:build",
+          "options": {
+            "task": {
+              "type": "group",
+              "composition": "sequence",
+              "pipe": [
+                {
+                  "name": "installPackages",
+                  "type": "runCommand",
+                  "options": {
+                    "cwd": "./libs/touchstone/benchmarks",
+                    "commands": ["yarn"],
+                    "parallel": false
+                  }
+                },
+                {
+                  "name": "runBenchmark",
+                  "type": "runCommand",
+                  "options": {
+                    "commands": [
+                      "./node_modules/.bin/ts-node -r tsconfig-paths/register -P ./tsconfig.base.json -O \"{ \\\"module\\\": \\\"commonjs\\\", \\\"resolveJsonModule\\\": true }\" libs/touchstone/benchmarks/src/index.ts"
+                    ],
+                    "parallel": false
+                  }
+                }
+              ]
+            }
           }
         }
       }

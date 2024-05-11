@@ -19,14 +19,14 @@
     "baseUrl": ".",
     "composite": true,
     "paths": {
+      "@pebula/*": ["libs/*"],
       "@pebula/decorate": ["libs/decorate/src/index.ts"],
-      "@pebula/tom": ["libs/tom/src/index.ts"],
-      "@pebula/touchstone": ["libs/touchstone/src/index.ts"],
       "@pebula/goosetyped": ["libs/goosetyped/src/index.ts"],
       "@pebula/nesbus": ["libs/nesbus/src/index.ts"],
       "@pebula/nx-api-extractor": ["libs/nx-api-extractor/src/index.ts"],
       "@pebula/nx-build-pipe": ["libs/nx-build-pipe/src/index.ts"],
-      "@pebula/*": ["libs/*"]
+      "@pebula/tom": ["libs/tom/src/index.ts"],
+      "@pebula/touchstone": ["libs/touchstone/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
