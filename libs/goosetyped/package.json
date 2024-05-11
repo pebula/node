@@ -1,14 +1,21 @@
 {
   "name": "@pebula/goosetyped",
-  "version": "0.2.0",
+  "version": "1.0.0-mongoose8.3",
+  "dependencies": {
+    "reflect-metadata": "^0.1.13"
+  },
   "peerDependencies": {
-    "mongodb": "^3.3.5",
-    "mongoose": "~5.12.1"
+    "mongodb": "^6.6.1",
+    "mongoose": "^8.3.4"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "typescript",
     "mongoose",
-    "types"
+    "types",
+    "mongodb"
   ],
   "repository": {
     "type": "git",

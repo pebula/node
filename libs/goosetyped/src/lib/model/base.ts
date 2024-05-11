@@ -1,10 +1,11 @@
 // tslint:disable: max-classes-per-file
-import { Model, Types, Schema } from 'mongoose';
+import { Model, DiscriminatorOptions, Schema } from 'mongoose';
 import { CTOR_INVOKED, GT_LOCAL_INFO, GT_SUB_DOCUMENT, GT_DOCUMENT, GT_DISCRIMINATOR_ROOT } from './constants';
 import { findSchemaContainerOfChildDiscriminator, hasInstance } from './utils';
 import { syncModelInstance } from './sync';
 import { GtLocalInfo } from './local-info';
 import { Ctor } from '../utils/types';
+import { resolveModelName } from '../utils';
 
 export class GtModelContainer extends Model {
   static get localInfo(): GtLocalInfo { return this[GT_LOCAL_INFO]; }
@@ -25,6 +26,13 @@ export class GtModelContainer extends Model {
 
   static [Symbol.hasInstance](instance: any): boolean {
     return hasInstance.call(this, instance) || this[GT_LOCAL_INFO].container.schema.schemaExtends(instance.$__schema || instance.schema);
+  }
+
+  static discriminator<T, D extends T>(this: Ctor<T>, name: Ctor<D>, schema: Schema, keyOrOptions: DiscriminatorOptions | DiscriminatorOptions['value']): Model<D>;
+  static discriminator<T, D extends T = T>(this: Ctor<T>, name: string, schema: Schema<D>, keyOrOptions: DiscriminatorOptions | DiscriminatorOptions['value']): Model<D>;
+  static discriminator<T, D extends T = T>(this: Ctor<T>, name: string | Ctor<D>, schema: Schema | Schema<D>, keyOrOptions: DiscriminatorOptions | DiscriminatorOptions['value']): Model<D> {
+    console.log(`MODEL: [${this.name}] used as based for discriminator ${resolveModelName(name)}`);
+    return super.discriminator<D>(name as any, schema, keyOrOptions);
   }
 
   constructor(doc?: any) {

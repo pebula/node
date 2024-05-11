@@ -4,7 +4,11 @@
     "module": "commonjs",
     "outDir": "../../dist/out-tsc",
     "declaration": true,
-    "types": ["node", "jest"]
+    "types": ["node", "jest"],
+    "sourceMap": null,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+
   },
   "exclude": ["**/*.spec.ts", "jest-setup.ts", "tests/**/*.*", "benchmarks/**/*.*"],
   "include": ["**/*.ts"]

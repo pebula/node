@@ -171,6 +171,25 @@ export interface ModelExtensions<TQueryHelpers = {},
 
   //#endregion
 
+//#region findOne
+
+  findOne<T, ResultDoc = M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>(this: Ctor<T>, 
+                                                                                             filter: M.FilterQuery<T>,
+                                                                                             projection: M.ProjectionType<T> | null | undefined,
+                                                                                             options: M.QueryOptions<T> & { lean: true }
+                                                                                            ): DocumentQuery<M.GetLeanResultType<T, T, 'findOne'> | null,
+                                                                                                             ResultDoc,
+                                                                                                             TQueryHelpers,
+                                                                                                             T,
+                                                                                                             'findOne'> & TQueryHelpers;
+  findOne<T, ResultDoc = M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>(this: Ctor<T>, filter?: M.FilterQuery<T>,
+                                                                                             projection?: M.ProjectionType<T> | null,
+                                                                                             options?: M.QueryOptions<T> | null): DocumentQuery<ResultDoc | null, ResultDoc, TQueryHelpers, T, 'findOne'> & TQueryHelpers;
+  findOne<T, ResultDoc = M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>(this: Ctor<T>, filter?: M.FilterQuery<T>, projection?: M.ProjectionType<T> | null): DocumentQuery<ResultDoc | null, ResultDoc, TQueryHelpers, T, 'findOne'> & TQueryHelpers;
+  findOne<T, ResultDoc = M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>(this: Ctor<T>, filter?: M.FilterQuery<T>): DocumentQuery<ResultDoc | null, ResultDoc, TQueryHelpers, T, 'findOne'> & TQueryHelpers;
+
+//#endregion
+
   /** Adds a `$where` clause to this query */
   $where<T>(this: Ctor<T>, argument: string | Function): DocumentQuery<Array<M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>, M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>, TQueryHelpers, T, 'find'> & TQueryHelpers;
 

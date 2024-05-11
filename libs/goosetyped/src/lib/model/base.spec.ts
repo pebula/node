@@ -360,6 +360,7 @@ describe('goosetyped', () => {
         kind: 'PickupSupplierInfo',
         supplyDate: new Date(),
         subDocument: {
+          infoId: "abc",
           someValue: 'test',
         },
       };

@@ -1,5 +1,5 @@
 import { Schema, SchemaTypeOptions, Model, Document } from 'mongoose';
-import { Ctor } from '../../utils';
+import { Ctor, resolveModelName } from '../../utils';
 import { GtSchemaContainer } from '../../store';
 import { SCHEMA_CONTAINER } from './symbol';
 import { DocumentArrayPath, EmbeddedDocumentStatic, CoreDocumentArray } from '../../mongoose.extend';
@@ -84,6 +84,7 @@ export class GtDocumentArrayPath extends (Schema.Types.DocumentArray as any as C
   }
 
   discriminator<U extends Document>(name: string, schema: Schema, value?: string): Model<U> {
+    console.log(`ARRDOC: [${resolveModelName(this[SCHEMA_CONTAINER].localInfo.cls)}] used as based for discriminator ${resolveModelName(name)}`);
     const created = extendEmbeddedDocument(super.discriminator(name, schema, value));
     return this.casterConstructor.discriminators[name] = created as any;
   }

@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import { EmbeddedDocument } from '../mongoose.extend';
 import { GtSchemaContainer } from '../store';
-import { createModelName } from '../utils';
 import { GtColumnMetadata } from '../metadata';
 import { GT_DISCRIMINATOR_ROOT, GT_LOCAL_INFO } from './constants';
 import { ensureInstanceOf } from './utils';
@@ -35,6 +34,11 @@ export class GtLocalInfo {
     // discriminator, but not me... thus i'm a child
     if (root && root !== target)
       this.discriminator = { type: 'child', root: root.localInfo };
+  }
+
+  hasProp(column: GtColumnMetadata | string)
+  {
+    return this.props.has(typeof column === 'string' ? column : column.key);
   }
 
   addProp(info: GtLocalPropInfo): void {
