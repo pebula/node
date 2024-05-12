@@ -4,7 +4,7 @@
 
 ## ServiceBusManagementAadTokenCredentials.subscriptionId property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 subscriptionId: string;

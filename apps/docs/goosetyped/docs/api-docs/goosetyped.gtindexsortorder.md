@@ -4,8 +4,8 @@
 
 ## GtIndexSortOrder type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type GtIndexSortOrder = 'asc' | 'desc';
+export type GtIndexSortOrder = 'asc' | 'desc';
 ```

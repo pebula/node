@@ -4,10 +4,10 @@
 
 ## SuiteResetEvent interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SuiteResetEvent extends BaseEvent<'reset'> 
 ```
-<b>Extends:</b> BaseEvent&lt;'reset'&gt;
+**Extends:** BaseEvent&lt;'reset'&gt;
 

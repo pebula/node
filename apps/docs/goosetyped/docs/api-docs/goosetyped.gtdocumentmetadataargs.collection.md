@@ -6,7 +6,7 @@
 
 The collection name in the database Optional: When not set, induced from model name
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 collection?: string;

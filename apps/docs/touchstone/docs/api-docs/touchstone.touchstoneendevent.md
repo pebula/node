@@ -4,7 +4,7 @@
 
 ## TouchStoneEndEvent interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface TouchStoneEndEvent 
@@ -12,8 +12,59 @@ export interface TouchStoneEndEvent
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [results](./touchstone.touchstoneendevent.results.md) | [SuiteResult](./touchstone.suiteresult.md)<!-- -->\[\] |  |
-|  [type](./touchstone.touchstoneendevent.type.md) | 'touchStoneEnd' |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[results](./touchstone.touchstoneendevent.results.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SuiteResult](./touchstone.suiteresult.md)<!-- -->\[\]
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[type](./touchstone.touchstoneendevent.type.md)
+
+
+</td><td>
+
+
+</td><td>
+
+'touchStoneEnd'
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

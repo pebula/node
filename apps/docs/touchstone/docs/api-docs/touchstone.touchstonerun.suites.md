@@ -4,7 +4,7 @@
 
 ## TouchStoneRun.suites property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 suites?: string | string[] | RegExp | RegExp[] | ((name: string) => boolean);

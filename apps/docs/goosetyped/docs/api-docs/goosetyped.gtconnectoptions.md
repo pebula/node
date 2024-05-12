@@ -4,7 +4,7 @@
 
 ## GtConnectOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GtConnectOptions 
@@ -12,8 +12,65 @@ export interface GtConnectOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [beforeCompile](./goosetyped.gtconnectoptions.beforecompile.md) | (handler: [GtBeforeCompileModelHandler](./goosetyped.gtbeforecompilemodelhandler.md)<!-- -->) =&gt; void | A handler invoked before compiling the model, providing the schema so you can perform final adjustments. |
-|  [compileAt](./goosetyped.gtconnectoptions.compileat.md) | 'immediate' \| 'connected' | When to compile the model.<!-- -->- immediate: When the connection object is resolved from the factory function (which does not necessarily mean it is connected) - connected: When the connection status changes to connected (if the connection is already connected this is equivalent to "immediate") |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[beforeCompile?](./goosetyped.gtconnectoptions.beforecompile.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(handler: [GtBeforeCompileModelHandler](./goosetyped.gtbeforecompilemodelhandler.md)<!-- -->) =&gt; void
+
+
+</td><td>
+
+_(Optional)_ A handler invoked before compiling the model, providing the schema so you can perform final adjustments.
+
+
+</td></tr>
+<tr><td>
+
+[compileAt?](./goosetyped.gtconnectoptions.compileat.md)
+
+
+</td><td>
+
+
+</td><td>
+
+'immediate' \| 'connected'
+
+
+</td><td>
+
+_(Optional)_ When to compile the model.
+
+- immediate: When the connection object is resolved from the factory function (which does not necessarily mean it is connected) - connected: When the connection status changes to connected (if the connection is already connected this is equivalent to "immediate")
+
+
+</td></tr>
+</tbody></table>

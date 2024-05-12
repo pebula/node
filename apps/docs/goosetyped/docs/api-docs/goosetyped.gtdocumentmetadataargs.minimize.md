@@ -6,7 +6,7 @@
 
 See  https://mongoosejs.com/docs/guide.html\#minimize
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 minimize?: boolean;

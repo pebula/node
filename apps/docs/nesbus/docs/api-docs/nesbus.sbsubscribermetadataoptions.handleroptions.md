@@ -4,7 +4,7 @@
 
 ## SbSubscriberMetadataOptions.handlerOptions property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 handlerOptions?: MessageHandlerOptions;

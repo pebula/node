@@ -4,8 +4,8 @@
 
 ## SbTopic type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type SbTopic = Partial<Omit<TopicDetails, 'topicName'>>;
+export type SbTopic = Partial<Omit<TopicDetails, 'topicName'>>;
 ```

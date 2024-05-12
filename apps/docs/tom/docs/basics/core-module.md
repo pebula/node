@@ -3,7 +3,7 @@ id: core-module
 title: Core Module
 sidebar_label: 1. Core Module
 ---
-import DocLink from '@site-shared/theme/DocLink';
+import { DocLink } from '@doc-components';
 
 The core module, `@pebula/tom` provides no user functionality by itself.  
 `@pebula/tom` contains the core logic, tools and constructs on which all other modules build meaningful functionalities.

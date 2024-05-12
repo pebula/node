@@ -4,8 +4,8 @@
 
 ## SbRule type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type SbRule = Partial<Omit<RuleDetails, 'createdOn'>>;
+export type SbRule = Partial<Omit<RuleDetails, 'createdOn'>>;
 ```

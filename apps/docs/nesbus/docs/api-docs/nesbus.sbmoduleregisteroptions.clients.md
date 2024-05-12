@@ -6,7 +6,7 @@
 
 A list of client configuration objects or a NestJS ValueProvider/FactoryProvider that resolves to a list of client configuration objects.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 clients?: SbClientOptions[] | Omit<ValueProvider, 'provide'> | Omit<FactoryProvider, 'provide'>;

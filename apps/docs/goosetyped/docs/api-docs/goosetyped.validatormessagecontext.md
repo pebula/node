@@ -4,7 +4,7 @@
 
 ## ValidatorMessageContext interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ValidatorMessageContext 
@@ -12,9 +12,76 @@ export interface ValidatorMessageContext
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [path](./goosetyped.validatormessagecontext.path.md) | string |  |
-|  [reason](./goosetyped.validatormessagecontext.reason.md) | string \| Error |  |
-|  [value](./goosetyped.validatormessagecontext.value.md) | any |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[path](./goosetyped.validatormessagecontext.path.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[reason](./goosetyped.validatormessagecontext.reason.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| Error
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[value](./goosetyped.validatormessagecontext.value.md)
+
+
+</td><td>
+
+
+</td><td>
+
+any
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

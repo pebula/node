@@ -4,7 +4,7 @@
 
 ## ServiceBusTokenProviderCredentials.tokenProvider property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 tokenProvider: TokenProvider;

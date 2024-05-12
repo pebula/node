@@ -4,52 +4,374 @@
 
 ## touchstone package
 
-## Classes
+## Abstract Classes
 
-|  Class | Description |
-|  --- | --- |
-|  [SimpleConsoleReporter](./touchstone.simpleconsolereporter.md) |  |
+<table><thead><tr><th>
+
+Abstract Class
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[SimpleConsoleReporter](./touchstone.simpleconsolereporter.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
 
 ## Functions
 
-|  Function | Description |
-|  --- | --- |
-|  [touchStone()](./touchstone.touchstone.md) |  |
+<table><thead><tr><th>
+
+Function
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[Case(metadata)](./touchstone.case.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[Mixin(m1, m2, m3, m4, m5, m6, mn)](./touchstone.mixin.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[Mixin(mixins)](./touchstone.mixin_1.md)
+
+
+</td><td>
+
+Class mixin factory used for design-time and run-time.
+
+When using mixin, multiple classes can be used to compose a single class that is returned with the composed functionally but also with the composed design time type.
+
+Since JS does not support multi-inheritance we need to copy all the class members, both levels, static and instance. This means that:
+
+- There is NO prototype chain! - Mixin constructors DOES NOT run.
+
+Loosing the prototype chain means we loose all of the reflected metadata (i.e. decorators) that exists on each mixin type including the proto-chain in each mixin type. To workaround this, we will also run special logic that manually aggregate the reflected metadata from all of the mixins and push it as reflected metadata of new class returned. This includes typescript design time metadata created when decorators are used and metadata produced by this library. If things overlap, the last mixin wins!
+
+The return class comes fresh and clean with NO prototype chain (other then Object) and with the aggregated functionality of all mixins.
+
+You can then use this class directly or extend it.
+
+```typescript
+class MyClass extends Mixin(Jump, Walk, Eat) {
+}
+```
+Since MyClass extends the mixed in class directly it will not include it as part of the prototype chain hence all reflected metadata will propagate to MyClass.
+
+&gt; Note that full metadata reflection of mixins is possible only when they are decorated with decorated create by `DecoratorDomain`<!-- -->. If not, reflected metadata from properties (flat, no descriptors) is lost since we don't know the property names to query for.
+
+
+</td></tr>
+<tr><td>
+
+[OnAbort()](./touchstone.onabort.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[OnCaseComplete()](./touchstone.oncasecomplete.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[OnComplete()](./touchstone.oncomplete.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[OnError()](./touchstone.onerror.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[OnReset()](./touchstone.onreset.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[OnStart()](./touchstone.onstart.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[OnTouchStoneEnd()](./touchstone.ontouchstoneend.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[OnTouchStoneStart()](./touchstone.ontouchstonestart.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[Suite(metadata)](./touchstone.suite.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[touchStone()](./touchstone.touchstone.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[TouchStone(metadata)](./touchstone.touchstone.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
 
 ## Interfaces
 
-|  Interface | Description |
-|  --- | --- |
-|  [BenchmarkOptions](./touchstone.benchmarkoptions.md) |  |
-|  [CaseCompleteEvent](./touchstone.casecompleteevent.md) |  |
-|  [CaseMetadataArgs](./touchstone.casemetadataargs.md) |  |
-|  [CaseResult](./touchstone.caseresult.md) |  |
-|  [CaseStats](./touchstone.casestats.md) | An object of stats including mean, margin or error, and standard deviation.  https://benchmarkjs.com/docs\#prototype\_stats |
-|  [SuiteAbortEvent](./touchstone.suiteabortevent.md) |  |
-|  [SuiteCompleteEvent](./touchstone.suitecompleteevent.md) |  |
-|  [SuiteErrorEvent](./touchstone.suiteerrorevent.md) |  |
-|  [SuiteMetadataArgs](./touchstone.suitemetadataargs.md) |  |
-|  [SuiteResetEvent](./touchstone.suiteresetevent.md) |  |
-|  [SuiteResult](./touchstone.suiteresult.md) |  |
-|  [SuiteStartEvent](./touchstone.suitestartevent.md) |  |
-|  [TouchStoneEndEvent](./touchstone.touchstoneendevent.md) |  |
-|  [TouchStoneMetadataArgs](./touchstone.touchstonemetadataargs.md) |  |
-|  [TouchStoneRun](./touchstone.touchstonerun.md) |  |
-|  [TouchStoneStartEvent](./touchstone.touchstonestartevent.md) |  |
+<table><thead><tr><th>
 
-## Variables
+Interface
 
-|  Variable | Description |
-|  --- | --- |
-|  [Case](./touchstone.case.md) |  |
-|  [OnAbort](./touchstone.onabort.md) |  |
-|  [OnCaseComplete](./touchstone.oncasecomplete.md) |  |
-|  [OnComplete](./touchstone.oncomplete.md) |  |
-|  [OnError](./touchstone.onerror.md) |  |
-|  [OnReset](./touchstone.onreset.md) |  |
-|  [OnStart](./touchstone.onstart.md) |  |
-|  [OnTouchStoneEnd](./touchstone.ontouchstoneend.md) |  |
-|  [OnTouchStoneStart](./touchstone.ontouchstonestart.md) |  |
-|  [Suite](./touchstone.suite.md) |  |
-|  [TouchStone](./touchstone.touchstone.md) |  |
 
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[BenchmarkOptions](./touchstone.benchmarkoptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[CaseCompleteEvent](./touchstone.casecompleteevent.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[CaseMetadataArgs](./touchstone.casemetadataargs.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[CaseResult](./touchstone.caseresult.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[CaseStats](./touchstone.casestats.md)
+
+
+</td><td>
+
+An object of stats including mean, margin or error, and standard deviation.  https://benchmarkjs.com/docs\#prototype\_stats
+
+
+</td></tr>
+<tr><td>
+
+[SuiteAbortEvent](./touchstone.suiteabortevent.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SuiteCompleteEvent](./touchstone.suitecompleteevent.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SuiteErrorEvent](./touchstone.suiteerrorevent.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SuiteMetadataArgs](./touchstone.suitemetadataargs.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SuiteResetEvent](./touchstone.suiteresetevent.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SuiteResult](./touchstone.suiteresult.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SuiteStartEvent](./touchstone.suitestartevent.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[TouchStoneEndEvent](./touchstone.touchstoneendevent.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[TouchStoneMetadataArgs](./touchstone.touchstonemetadataargs.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[TouchStoneRun](./touchstone.touchstonerun.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[TouchStoneStartEvent](./touchstone.touchstonestartevent.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+
+## Namespaces
+
+<table><thead><tr><th>
+
+Namespace
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[Mixin](./touchstone.mixin.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

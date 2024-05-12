@@ -4,7 +4,7 @@
 
 ## mapSchemaType() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function mapSchemaType(runtimeType: any, metadata: GtSchemaTypeMetadataArgs): void;
@@ -12,12 +12,52 @@ export declare function mapSchemaType(runtimeType: any, metadata: GtSchemaTypeMe
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  runtimeType | any |  |
-|  metadata | [GtSchemaTypeMetadataArgs](./goosetyped.gtschematypemetadataargs.md) |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+runtimeType
+
+
+</td><td>
+
+any
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+metadata
+
+
+</td><td>
+
+[GtSchemaTypeMetadataArgs](./goosetyped.gtschematypemetadataargs.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 void
 

@@ -4,10 +4,10 @@
 
 ## SbTopicEntityProvision interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SbTopicEntityProvision extends SbEntityProvision<SbTopic> 
 ```
-<b>Extends:</b> SbEntityProvision&lt;[SbTopic](./nesbus.sbtopic.md)<!-- -->&gt;
+**Extends:** SbEntityProvision&lt;[SbTopic](./nesbus.sbtopic.md)<!-- -->&gt;
 

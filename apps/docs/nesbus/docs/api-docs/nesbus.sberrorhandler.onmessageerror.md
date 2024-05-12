@@ -4,7 +4,7 @@
 
 ## SbErrorHandler.onMessageError() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 abstract onMessageError(event: SbMessageErrorEvent): Promise<void>;
@@ -12,11 +12,38 @@ abstract onMessageError(event: SbMessageErrorEvent): Promise<void>;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  event | [SbMessageErrorEvent](./nesbus.sbmessageerrorevent.md) |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+event
+
+
+</td><td>
+
+[SbMessageErrorEvent](./nesbus.sbmessageerrorevent.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 Promise&lt;void&gt;
 

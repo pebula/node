@@ -6,7 +6,7 @@
 
 Define how the forward queue/topic is provisioned ("forwardTo") &gt; Relevant only when "forwardTo" has a value.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 forward?: SbLinkedEntityProvisionOption;

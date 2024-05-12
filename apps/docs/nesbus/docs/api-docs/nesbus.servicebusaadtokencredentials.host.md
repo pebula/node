@@ -4,9 +4,9 @@
 
 ## ServiceBusAadTokenCredentials.host property
 
-Fully qualified domain name for ServiceBus. Most likely, {<!-- -->yournamespace<!-- -->}<!-- -->.servicebus.windows.net
+Fully qualified domain name for ServiceBus. Most likely, &lt;<!-- -->yournamespace<!-- -->&gt;<!-- -->.servicebus.windows.net
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 host: string;

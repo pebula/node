@@ -4,7 +4,7 @@
 
 ## SimpleConsoleReporter.onSimpleConsoleReporterFinalize() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onSimpleConsoleReporterFinalize(event: TouchStoneEndEvent): void;
@@ -12,11 +12,38 @@ onSimpleConsoleReporterFinalize(event: TouchStoneEndEvent): void;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  event | [TouchStoneEndEvent](./touchstone.touchstoneendevent.md) |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+event
+
+
+</td><td>
+
+[TouchStoneEndEvent](./touchstone.touchstoneendevent.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 void
 

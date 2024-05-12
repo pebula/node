@@ -3,7 +3,7 @@ id: schema
 title: Schema
 sidebar_label: 2. Schema
 ---
-import ExtRelativeLink from '@site-shared/theme/ExtRelativeLink';
+import { ExtRelativeLink } from '@doc-components';
 
 A schema is a collection of metadata objects that describe the structure of a type/class/object.
 

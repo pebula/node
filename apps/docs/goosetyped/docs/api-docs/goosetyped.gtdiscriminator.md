@@ -4,12 +4,12 @@
 
 ## GtDiscriminator() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function GtDiscriminator(): PropertyDecoratorOf<string>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 [PropertyDecoratorOf](./goosetyped.propertydecoratorof.md)<!-- -->&lt;string&gt;
 

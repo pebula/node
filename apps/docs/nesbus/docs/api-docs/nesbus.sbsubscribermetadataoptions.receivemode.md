@@ -4,7 +4,7 @@
 
 ## SbSubscriberMetadataOptions.receiveMode property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 receiveMode: ReceiveMode;

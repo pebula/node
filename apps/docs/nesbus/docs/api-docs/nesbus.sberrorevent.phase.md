@@ -4,7 +4,7 @@
 
 ## SbErrorEvent.phase property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly phase: 'verify' | 'register' | 'listening';

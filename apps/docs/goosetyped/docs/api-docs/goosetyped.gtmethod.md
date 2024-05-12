@@ -4,12 +4,12 @@
 
 ## GtMethod() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function GtMethod(): MethodDecorator;
 ```
-<b>Returns:</b>
+**Returns:**
 
 MethodDecorator
 

@@ -4,16 +4,53 @@
 
 ## SbManagementClientAtomOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SbManagementClientAtomOptions extends SbConnectionOptions<ServiceBusConnectionStringCredentials, ServiceBusAtomManagementClientOptions> 
 ```
-<b>Extends:</b> SbConnectionOptions&lt;[ServiceBusConnectionStringCredentials](./nesbus.servicebusconnectionstringcredentials.md)<!-- -->, ServiceBusAtomManagementClientOptions&gt;
+**Extends:** SbConnectionOptions&lt;[ServiceBusConnectionStringCredentials](./nesbus.servicebusconnectionstringcredentials.md)<!-- -->, ServiceBusAtomManagementClientOptions&gt;
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [defaults](./nesbus.sbmanagementclientatomoptions.defaults.md) | [SbManagementDefaultsAdapter](./nesbus.sbmanagementdefaultsadapter.md) |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[defaults?](./nesbus.sbmanagementclientatomoptions.defaults.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SbManagementDefaultsAdapter](./nesbus.sbmanagementdefaultsadapter.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>

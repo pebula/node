@@ -4,7 +4,7 @@
 
 ## CaseResult.hzSamples property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 hzSamples: number[];

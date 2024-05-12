@@ -6,7 +6,7 @@
 
 When true, will not create and `_id` when creating a new object This is equivalent to setting the `_id` property to false in the `Schema` options.  https://mongoosejs.com/docs/guide.html\#\_id
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 noId?: boolean;

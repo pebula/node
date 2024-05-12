@@ -4,7 +4,7 @@
 
 ## GtPluginMetadataArgs interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GtPluginMetadataArgs<T = any> 
@@ -12,14 +12,77 @@ export interface GtPluginMetadataArgs<T = any>
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [options](./goosetyped.gtpluginmetadataargs.options.md) | T |  |
+<table><thead><tr><th>
+
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[options?](./goosetyped.gtpluginmetadataargs.options.md)
+
+
+</td><td>
+
+
+</td><td>
+
+T
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
 
 ## Methods
 
-|  Method | Description |
-|  --- | --- |
-|  [plugin(schema, options)](./goosetyped.gtpluginmetadataargs.plugin.md) |  |
-|  [plugin(schema)](./goosetyped.gtpluginmetadataargs.plugin_1.md) |  |
+<table><thead><tr><th>
 
+Method
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[plugin(schema, options)](./goosetyped.gtpluginmetadataargs.plugin.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[plugin(schema)](./goosetyped.gtpluginmetadataargs.plugin_1.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

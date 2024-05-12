@@ -8,7 +8,7 @@ When to compile the model.
 
 - immediate: When the connection object is resolved from the factory function (which does not necessarily mean it is connected) - connected: When the connection status changes to connected (if the connection is already connected this is equivalent to "immediate")
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 compileAt?: 'immediate' | 'connected';

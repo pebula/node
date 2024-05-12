@@ -1,9 +1,4 @@
 {
-  "cSpell.words": [
-    "codegen",
-    "nesbus",
-    "outdent",
-    "pojo",
-    "serializers"
-  ]
+  "cSpell.words": ["codegen", "nesbus", "outdent", "pojo", "serializers"],
+  "eslint.validate": ["json"]
 }

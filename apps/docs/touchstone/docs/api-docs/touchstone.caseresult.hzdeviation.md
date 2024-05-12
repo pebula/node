@@ -4,7 +4,7 @@
 
 ## CaseResult.hzDeviation property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 hzDeviation: number;

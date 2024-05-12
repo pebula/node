@@ -4,7 +4,7 @@
 
 ## SimpleConsoleReporter.onSimpleConsoleReporterError() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onSimpleConsoleReporterError(event: SuiteErrorEvent): void;
@@ -12,11 +12,38 @@ onSimpleConsoleReporterError(event: SuiteErrorEvent): void;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  event | [SuiteErrorEvent](./touchstone.suiteerrorevent.md) |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+event
+
+
+</td><td>
+
+[SuiteErrorEvent](./touchstone.suiteerrorevent.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 void
 

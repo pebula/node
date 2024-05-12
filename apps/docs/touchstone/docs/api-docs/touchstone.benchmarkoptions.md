@@ -4,7 +4,7 @@
 
 ## BenchmarkOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface BenchmarkOptions 
@@ -12,11 +12,120 @@ export interface BenchmarkOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [delay](./touchstone.benchmarkoptions.delay.md) | number | The delay between test cycles (secs). |
-|  [initCount](./touchstone.benchmarkoptions.initcount.md) | number | The default number of times to execute a test on a benchmark’s first cycle. |
-|  [maxTime](./touchstone.benchmarkoptions.maxtime.md) | number | The maximum time a benchmark is allowed to run before finishing (secs). |
-|  [minSamples](./touchstone.benchmarkoptions.minsamples.md) | number | The minimum sample size required to perform statistical analysis. |
-|  [minTime](./touchstone.benchmarkoptions.mintime.md) | number | The time needed to reduce the percent uncertainty of measurement to 1% (secs). |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[delay?](./touchstone.benchmarkoptions.delay.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The delay between test cycles (secs).
+
+
+</td></tr>
+<tr><td>
+
+[initCount?](./touchstone.benchmarkoptions.initcount.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The default number of times to execute a test on a benchmark’s first cycle.
+
+
+</td></tr>
+<tr><td>
+
+[maxTime?](./touchstone.benchmarkoptions.maxtime.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The maximum time a benchmark is allowed to run before finishing (secs).
+
+
+</td></tr>
+<tr><td>
+
+[minSamples?](./touchstone.benchmarkoptions.minsamples.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The minimum sample size required to perform statistical analysis.
+
+
+</td></tr>
+<tr><td>
+
+[minTime?](./touchstone.benchmarkoptions.mintime.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The time needed to reduce the percent uncertainty of measurement to 1% (secs).
+
+
+</td></tr>
+</tbody></table>

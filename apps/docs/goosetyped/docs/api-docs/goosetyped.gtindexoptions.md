@@ -4,7 +4,7 @@
 
 ## GtIndexOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GtIndexOptions 
@@ -12,10 +12,101 @@ export interface GtIndexOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [background](./goosetyped.gtindexoptions.background.md) | boolean | Wether to run the indexing process in the background or not  true |
-|  [sparse](./goosetyped.gtindexoptions.sparse.md) | boolean \| any | Declares a sparse index. |
-|  [text](./goosetyped.gtindexoptions.text.md) | boolean \| any | Declares a full text index. |
-|  [unique](./goosetyped.gtindexoptions.unique.md) | boolean \| any | Declares an unique index. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[background?](./goosetyped.gtindexoptions.background.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ Wether to run the indexing process in the background or not  true
+
+
+</td></tr>
+<tr><td>
+
+[sparse?](./goosetyped.gtindexoptions.sparse.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean \| any
+
+
+</td><td>
+
+_(Optional)_ Declares a sparse index.
+
+
+</td></tr>
+<tr><td>
+
+[text?](./goosetyped.gtindexoptions.text.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean \| any
+
+
+</td><td>
+
+_(Optional)_ Declares a full text index.
+
+
+</td></tr>
+<tr><td>
+
+[unique?](./goosetyped.gtindexoptions.unique.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean \| any
+
+
+</td><td>
+
+_(Optional)_ Declares an unique index.
+
+
+</td></tr>
+</tbody></table>

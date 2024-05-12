@@ -4,7 +4,7 @@
 
 ## SbRuleEntityProvision.ruleName property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 ruleName: string;

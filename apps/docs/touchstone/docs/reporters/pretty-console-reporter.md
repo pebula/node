@@ -7,11 +7,11 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 The `PrettyConsoleReporter` is a modern CLI console reporter with colors, indentation, spinner and other nice things...
 
-|               |                                                                                     |
-|---------------|-------------------------------------------------------------------------------------|
-| Import        | import { PrettyConsoleReporter } from '@pebula/touchstone/reporters/pretty-console' |
-| Dependencies  | ora, chalk                                                                          |
-| Configuration | No                                                                                  |
+|               |                                                                                       |
+|---------------|---------------------------------------------------------------------------------------|
+| Import        | `import { PrettyConsoleReporter } from '@pebula/touchstone/reporters/pretty-console'` |
+| Dependencies  | ora, chalk                                                                            |
+| Configuration | No                                                                                    |
 
 ```typescript
 import { TouchStone } from '@pebula/touchstone';

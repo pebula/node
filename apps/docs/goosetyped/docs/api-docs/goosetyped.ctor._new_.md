@@ -4,7 +4,7 @@
 
 ## Ctor.(new)
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 new (...args: any[]): T;
@@ -12,11 +12,38 @@ new (...args: any[]): T;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  args | any\[\] |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+args
+
+
+</td><td>
+
+any\[\]
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 T
 

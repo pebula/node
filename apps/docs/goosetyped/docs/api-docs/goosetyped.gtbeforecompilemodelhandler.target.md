@@ -4,7 +4,7 @@
 
 ## GtBeforeCompileModelHandler.target property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 target: Ctor<any>;

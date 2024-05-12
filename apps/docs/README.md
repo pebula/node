@@ -11,17 +11,56 @@ Each application is configured to run within a **baseRef** url path to allow all
 To generate a new docusaurus application use the **NX** generate command to execute the docusaurus generator:
 
 ```bash
-yarn nx generate @nx-plus/docusaurus:app --name=<LIB_NAME> --directory=docs --no-interactive
+npx create-docusaurus@latest <LIB_NAME> classic apps/docs/ -t -s -p yarn
 ```
 
 Replace `<LIB_NAME>` with your library name.  
-For example, if the library name is `decorate` we will execute:
+For example, if the library name is `goosetyped` we will execute:
 
 ```bash
-yarn nx generate @nx-plus/docusaurus:app --name=decorate --directory=docs --no-interactive
+npx create-docusaurus@latest goosetyped classic apps/docs/ -t -s -p yarn
 ```
 
 Almost ready, now we need to modify the configuration and update the project to follow some conventions...
+
+### Update `package.json`
+
+Update `name` property from `<LIB_NAME>` to `docs-<LIB_NAME>`, e.g. `docs-goosetyped`
+
+Add the `nx` target:
+
+```json
+{
+  "nx": {
+    "namedInputs": {
+      "default": ["{projectRoot}/**/*", "sharedGlobals"],
+      "production": [
+        "default",
+        "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)"
+      ]
+    },
+    "targets": {
+      "build": {
+        "inputs": [
+          "{projectRoot}/docs/*.(md|mdx)",
+          "{projectRoot}/docs/**/*.(md|mdx)"
+        ],
+        "outputs": ["{options.outputPath}"]
+      },
+      "serve": {
+        "inputs": [
+          "{projectRoot}/docs/*.(md|mdx)",
+          "{projectRoot}/docs/**/*.(md|mdx)"
+        ],
+        "outputs": ["{options.outputPath}"]
+      }
+    },
+    "includedScripts": ["start", "serve", "build"]
+  }
+}
+```
+
+In `tsconfig.json` change extends to `"extends": "../tsconfig"`
 
 ### Update implicit dependencies
 
@@ -138,7 +177,7 @@ Add the following architect target to the architect array in `workspace.json`:
 
 ```json
   "gh-pages": {
-    "builder": "./dist/libs/nx-build-pipe:build",
+    "builder": "@pebula/nx-build-pipe:build",
     "options": {
       "task": {
         "type": "fromFile",

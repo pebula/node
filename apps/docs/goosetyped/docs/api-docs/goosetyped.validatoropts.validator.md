@@ -4,7 +4,7 @@
 
 ## ValidatorOpts.validator property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 validator: ValidatorFn<T>;

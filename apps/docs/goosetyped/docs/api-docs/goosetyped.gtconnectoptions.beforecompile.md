@@ -6,7 +6,7 @@
 
 A handler invoked before compiling the model, providing the schema so you can perform final adjustments.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 beforeCompile?: (handler: GtBeforeCompileModelHandler) => void;

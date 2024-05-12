@@ -6,7 +6,7 @@
 
 Returns the list of enums registered for a `path` in a Model / Resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getEnum<T>(cls: Ctor<T>, path: keyof T): string[];
@@ -14,12 +14,52 @@ export declare function getEnum<T>(cls: Ctor<T>, path: keyof T): string[];
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  cls | [Ctor](./goosetyped.ctor.md)<!-- -->&lt;T&gt; |  |
-|  path | keyof T |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+cls
+
+
+</td><td>
+
+[Ctor](./goosetyped.ctor.md)<!-- -->&lt;T&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+path
+
+
+</td><td>
+
+keyof T
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 string\[\]
 

@@ -10,7 +10,7 @@ If an entity reference is not provided, the default reference is the entity used
 
 &gt; You can also provide a clientId to look the entity in.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resolveClient(emitterReference?: SbEmitterRef): SbEmitterImp | undefined;
@@ -18,11 +18,40 @@ resolveClient(emitterReference?: SbEmitterRef): SbEmitterImp | undefined;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  emitterReference | [SbEmitterRef](./nesbus.sbemitterref.md) |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+emitterReference
+
+
+</td><td>
+
+[SbEmitterRef](./nesbus.sbemitterref.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 [SbEmitterImp](./nesbus.sbemitterimp.md) \| undefined
 

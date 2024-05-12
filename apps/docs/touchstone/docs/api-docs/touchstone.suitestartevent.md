@@ -4,10 +4,10 @@
 
 ## SuiteStartEvent interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SuiteStartEvent extends BaseEvent<'start'> 
 ```
-<b>Extends:</b> BaseEvent&lt;'start'&gt;
+**Extends:** BaseEvent&lt;'start'&gt;
 

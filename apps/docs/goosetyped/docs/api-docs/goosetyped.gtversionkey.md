@@ -4,12 +4,12 @@
 
 ## GtVersionKey() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function GtVersionKey<T = number>(): PropertyDecoratorOf<T>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 [PropertyDecoratorOf](./goosetyped.propertydecoratorof.md)<!-- -->&lt;T&gt;
 

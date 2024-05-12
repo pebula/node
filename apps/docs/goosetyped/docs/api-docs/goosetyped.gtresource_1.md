@@ -4,7 +4,7 @@
 
 ## GtResource() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function GtResource<T1, C1>(m1: C1 & Ctor<T1>): Ctor<SubDocument & T1> & Resource & C1;
@@ -12,11 +12,38 @@ export declare function GtResource<T1, C1>(m1: C1 & Ctor<T1>): Ctor<SubDocument 
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  m1 | C1 &amp; [Ctor](./goosetyped.ctor.md)<!-- -->&lt;T1&gt; |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+m1
+
+
+</td><td>
+
+C1 &amp; [Ctor](./goosetyped.ctor.md)<!-- -->&lt;T1&gt;
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 [Ctor](./goosetyped.ctor.md)<!-- -->&lt;[SubDocument](./goosetyped.subdocument.md) &amp; T1&gt; &amp; [Resource](./goosetyped.resource.md) &amp; C1
 

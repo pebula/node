@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `ServiceBusModule` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(discoveryFactory: SbDiscoveryFactoryService, errorHandler?: SbErrorHandler, metadataHelper?: any, clientOptions?: SbClientOptions[], serverOptions?: SbServerOptions[]);
@@ -14,11 +14,98 @@ constructor(discoveryFactory: SbDiscoveryFactoryService, errorHandler?: SbErrorH
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  discoveryFactory | SbDiscoveryFactoryService |  |
-|  errorHandler | [SbErrorHandler](./nesbus.sberrorhandler.md) |  |
-|  metadataHelper | any |  |
-|  clientOptions | SbClientOptions\[\] |  |
-|  serverOptions | [SbServerOptions](./nesbus.sbserveroptions.md)<!-- -->\[\] |  |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+discoveryFactory
+
+
+</td><td>
+
+SbDiscoveryFactoryService
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+errorHandler
+
+
+</td><td>
+
+[SbErrorHandler](./nesbus.sberrorhandler.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+metadataHelper
+
+
+</td><td>
+
+any
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+clientOptions
+
+
+</td><td>
+
+SbClientOptions\[\]
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+serverOptions
+
+
+</td><td>
+
+[SbServerOptions](./nesbus.sbserveroptions.md)<!-- -->\[\]
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>

@@ -4,7 +4,7 @@
 
 ## SbErrorEvent class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class SbErrorEvent 
@@ -12,15 +12,116 @@ export declare class SbErrorEvent
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(phase, options, error)](./nesbus.sberrorevent._constructor_.md) |  | Constructs a new instance of the <code>SbErrorEvent</code> class |
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(phase, options, error)](./nesbus.sberrorevent._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Constructs a new instance of the `SbErrorEvent` class
+
+
+</td></tr>
+</tbody></table>
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [error](./nesbus.sberrorevent.error.md) |  | Error \| MessagingError |  |
-|  [options](./nesbus.sberrorevent.options.md) |  | [SbQueueMetadataOptions](./nesbus.sbqueuemetadataoptions.md) \| [SbSubscriptionMetadataOptions](./nesbus.sbsubscriptionmetadataoptions.md) |  |
-|  [phase](./nesbus.sberrorevent.phase.md) |  | 'verify' \| 'register' \| 'listening' |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[error](./nesbus.sberrorevent.error.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+Error \| MessagingError
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[options](./nesbus.sberrorevent.options.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[SbQueueMetadataOptions](./nesbus.sbqueuemetadataoptions.md) \| [SbSubscriptionMetadataOptions](./nesbus.sbsubscriptionmetadataoptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[phase](./nesbus.sberrorevent.phase.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+'verify' \| 'register' \| 'listening'
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

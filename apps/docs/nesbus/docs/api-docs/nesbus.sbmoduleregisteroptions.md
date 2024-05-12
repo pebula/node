@@ -4,7 +4,7 @@
 
 ## SbModuleRegisterOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SbModuleRegisterOptions 
@@ -12,10 +12,101 @@ export interface SbModuleRegisterOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [clients](./nesbus.sbmoduleregisteroptions.clients.md) | SbClientOptions\[\] \| Omit&lt;ValueProvider, 'provide'&gt; \| Omit&lt;FactoryProvider, 'provide'&gt; | A list of client configuration objects or a NestJS ValueProvider/FactoryProvider that resolves to a list of client configuration objects. |
-|  [metaFactoryProvider](./nesbus.sbmoduleregisteroptions.metafactoryprovider.md) | Omit&lt;Exclude&lt;Provider, Type&lt;any&gt;&gt;, 'provide'&gt; \| Type&lt;any&gt; | An optional providers that when set resolves to the value injected to the metadata factory function, when used. |
-|  [providers](./nesbus.sbmoduleregisteroptions.providers.md) | Provider\[\] |  |
-|  [servers](./nesbus.sbmoduleregisteroptions.servers.md) | [SbServerOptions](./nesbus.sbserveroptions.md)<!-- -->\[\] \| Omit&lt;ValueProvider, 'provide'&gt; \| Omit&lt;FactoryProvider, 'provide'&gt; | A list of server configuration objects or a NestJS ValueProvider/FactoryProvider that resolves to a list of server configuration objects. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[clients?](./nesbus.sbmoduleregisteroptions.clients.md)
+
+
+</td><td>
+
+
+</td><td>
+
+SbClientOptions\[\] \| Omit&lt;ValueProvider, 'provide'&gt; \| Omit&lt;FactoryProvider, 'provide'&gt;
+
+
+</td><td>
+
+_(Optional)_ A list of client configuration objects or a NestJS ValueProvider/FactoryProvider that resolves to a list of client configuration objects.
+
+
+</td></tr>
+<tr><td>
+
+[metaFactoryProvider?](./nesbus.sbmoduleregisteroptions.metafactoryprovider.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Omit&lt;Exclude&lt;Provider, Type&lt;any&gt;&gt;, 'provide'&gt; \| Type&lt;any&gt;
+
+
+</td><td>
+
+_(Optional)_ An optional providers that when set resolves to the value injected to the metadata factory function, when used.
+
+
+</td></tr>
+<tr><td>
+
+[providers?](./nesbus.sbmoduleregisteroptions.providers.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Provider\[\]
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[servers](./nesbus.sbmoduleregisteroptions.servers.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SbServerOptions](./nesbus.sbserveroptions.md)<!-- -->\[\] \| Omit&lt;ValueProvider, 'provide'&gt; \| Omit&lt;FactoryProvider, 'provide'&gt;
+
+
+</td><td>
+
+A list of server configuration objects or a NestJS ValueProvider/FactoryProvider that resolves to a list of server configuration objects.
+
+
+</td></tr>
+</tbody></table>

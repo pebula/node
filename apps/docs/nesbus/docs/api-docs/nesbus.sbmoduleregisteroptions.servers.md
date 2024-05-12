@@ -6,7 +6,7 @@
 
 A list of server configuration objects or a NestJS ValueProvider/FactoryProvider that resolves to a list of server configuration objects.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 servers: SbServerOptions[] | Omit<ValueProvider, 'provide'> | Omit<FactoryProvider, 'provide'>;

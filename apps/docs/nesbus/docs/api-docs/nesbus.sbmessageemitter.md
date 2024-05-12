@@ -6,10 +6,10 @@
 
 Represents an object that can be used (directly or indirectly) to emit messages to service bus. This can be either a directly emitting object or a reference that is used to resolve a directly emitting object.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type SbMessageEmitter = SbEmitterRef | SbEmitterImp;
+export type SbMessageEmitter = SbEmitterRef | SbEmitterImp;
 ```
-<b>References:</b> [SbEmitterRef](./nesbus.sbemitterref.md)<!-- -->, [SbEmitterImp](./nesbus.sbemitterimp.md)
+**References:** [SbEmitterRef](./nesbus.sbemitterref.md)<!-- -->, [SbEmitterImp](./nesbus.sbemitterimp.md)
 

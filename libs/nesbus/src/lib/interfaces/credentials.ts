@@ -5,7 +5,7 @@ import { ServiceBusClient, TokenProvider } from '@azure/service-bus';
 export interface ServiceBusAadTokenCredentials {
   /**
    * Fully qualified domain name for ServiceBus.
-   * Most likely, {yournamespace}.servicebus.windows.net
+   * Most likely, \<yournamespace>.servicebus.windows.net
    */
   host: string;
   /**

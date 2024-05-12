@@ -4,7 +4,7 @@
 
 ## ServiceBusConnectionStringCredentials.connectionString property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 connectionString: string;

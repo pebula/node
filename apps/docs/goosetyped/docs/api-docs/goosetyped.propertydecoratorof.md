@@ -4,8 +4,8 @@
 
 ## PropertyDecoratorOf type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type PropertyDecoratorOf<T> = <Z extends Partial<Record<K, T>>, K extends string>(target: Z, key: K) => void;
+export type PropertyDecoratorOf<T> = <Z extends Partial<Record<K, T>>, K extends string>(target: Z, key: K) => void;
 ```

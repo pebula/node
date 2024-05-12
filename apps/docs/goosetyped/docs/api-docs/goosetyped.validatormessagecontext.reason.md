@@ -4,7 +4,7 @@
 
 ## ValidatorMessageContext.reason property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 reason: string | Error;

@@ -4,7 +4,7 @@
 
 ## ValidatorOpts interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ValidatorOpts<T = any> 
@@ -12,8 +12,61 @@ export interface ValidatorOpts<T = any>
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [message](./goosetyped.validatoropts.message.md) | string \| ((props: [ValidatorMessageContext](./goosetyped.validatormessagecontext.md)<!-- -->) =&gt; string) |  |
-|  [validator](./goosetyped.validatoropts.validator.md) | [ValidatorFn](./goosetyped.validatorfn.md)<!-- -->&lt;T&gt; |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[message?](./goosetyped.validatoropts.message.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| ((props: [ValidatorMessageContext](./goosetyped.validatormessagecontext.md)<!-- -->) =&gt; string)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[validator](./goosetyped.validatoropts.validator.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[ValidatorFn](./goosetyped.validatorfn.md)<!-- -->&lt;T&gt;
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

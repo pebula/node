@@ -4,7 +4,7 @@
 
 ## SbSubscriptionMetadataOptions.topicName property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 topicName: string;

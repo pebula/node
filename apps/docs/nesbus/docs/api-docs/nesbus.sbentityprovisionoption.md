@@ -4,8 +4,8 @@
 
 ## SbEntityProvisionOption type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type SbEntityProvisionOption<T extends SbEntityProvision<any>> = SgEntityProvisionType | T;
+export type SbEntityProvisionOption<T extends SbEntityProvision<any>> = SgEntityProvisionType | T;
 ```

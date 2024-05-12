@@ -4,7 +4,7 @@
 
 ## SbServerOptions.client property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 client: SbConnectionOptions<SbCredentials, ServiceBusClientOptions>;

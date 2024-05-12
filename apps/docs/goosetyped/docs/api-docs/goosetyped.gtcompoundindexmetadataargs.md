@@ -4,7 +4,7 @@
 
 ## GtCompoundIndexMetadataArgs interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GtCompoundIndexMetadataArgs 
@@ -12,8 +12,61 @@ export interface GtCompoundIndexMetadataArgs
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [indices](./goosetyped.gtcompoundindexmetadataargs.indices.md) | { \[indexName: string\]: [GtIndexSortOrder](./goosetyped.gtindexsortorder.md)<!-- -->; } |  |
-|  [options](./goosetyped.gtcompoundindexmetadataargs.options.md) | [GtIndexOptions](./goosetyped.gtindexoptions.md) |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[indices](./goosetyped.gtcompoundindexmetadataargs.indices.md)
+
+
+</td><td>
+
+
+</td><td>
+
+\{ \[indexName: string\]: [GtIndexSortOrder](./goosetyped.gtindexsortorder.md)<!-- -->; }
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[options?](./goosetyped.gtcompoundindexmetadataargs.options.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[GtIndexOptions](./goosetyped.gtindexoptions.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>

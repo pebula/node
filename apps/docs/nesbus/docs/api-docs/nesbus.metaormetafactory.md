@@ -4,8 +4,8 @@
 
 ## MetaOrMetaFactory type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type MetaOrMetaFactory<T> = T | ((helper?: any) => (T | Promise<T>));
+export type MetaOrMetaFactory<T> = T | ((helper?: any) => (T | Promise<T>));
 ```

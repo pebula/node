@@ -4,7 +4,7 @@
 
 ## SbEmitterMetadataOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SbEmitterMetadataOptions 
@@ -12,8 +12,63 @@ export interface SbEmitterMetadataOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [clientId](./nesbus.sbemittermetadataoptions.clientid.md) | string | The unique id of the client that this emitter should use as the underlying emitter. This should match the client name defined in <code>SgClientOptions.name</code>.<!-- -->By default <code>SgClientOptions.name</code> is not set, which is the identifier for the default client. A multi-client environment is not required in most of the scenarios, if that is the case do not set this value. |
-|  [name](./nesbus.sbemittermetadataoptions.name.md) | string |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[clientId?](./nesbus.sbemittermetadataoptions.clientid.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ The unique id of the client that this emitter should use as the underlying emitter. This should match the client name defined in `SgClientOptions.name`<!-- -->.
+
+By default `SgClientOptions.name` is not set, which is the identifier for the default client. A multi-client environment is not required in most of the scenarios, if that is the case do not set this value.
+
+
+</td></tr>
+<tr><td>
+
+[name](./nesbus.sbemittermetadataoptions.name.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

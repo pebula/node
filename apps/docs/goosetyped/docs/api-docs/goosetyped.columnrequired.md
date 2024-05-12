@@ -4,8 +4,8 @@
 
 ## ColumnRequired type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type ColumnRequired = boolean | string | (() => boolean) | [() => boolean, string];
+export type ColumnRequired = boolean | string | (() => boolean) | [() => boolean, string];
 ```

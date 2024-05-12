@@ -2,10 +2,14 @@
 
 [Home](./index.md) &gt; [@pebula/touchstone](./touchstone.md) &gt; [OnReset](./touchstone.onreset.md)
 
-## OnReset variable
+## OnReset() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 OnReset: () => <Z extends Partial<Record<K, (args_0: SuiteResetEvent) => void>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: SuiteResetEvent) => void>) => void | TypedPropertyDescriptor<(args_0: SuiteResetEvent) => void>
 ```
+**Returns:**
+
+&lt;Z extends Partial&lt;Record&lt;K, (args\_0: [SuiteResetEvent](./touchstone.suiteresetevent.md)<!-- -->) =&gt; void&gt;&gt;, K extends string&gt;(target: Z, key: K, descriptor: TypedPropertyDescriptor&lt;(args\_0: [SuiteResetEvent](./touchstone.suiteresetevent.md)<!-- -->) =&gt; void&gt;) =&gt; void \| TypedPropertyDescriptor&lt;(args\_0: [SuiteResetEvent](./touchstone.suiteresetevent.md)<!-- -->) =&gt; void&gt;
+

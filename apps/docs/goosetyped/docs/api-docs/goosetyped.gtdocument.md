@@ -4,19 +4,48 @@
 
 ## GtDocument() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare function GtDocument(metadata?: GtDocumentMetadataArgs): ClassDecoratorOf<Document, Model>;
+export declare function GtDocument(metadata?: GtDocumentMetadataArgs): ClassDecoratorOf<Document, ModelExtensions>;
 ```
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  metadata | [GtDocumentMetadataArgs](./goosetyped.gtdocumentmetadataargs.md) |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
 
-[ClassDecoratorOf](./goosetyped.classdecoratorof.md)<!-- -->&lt;Document, [Model](./goosetyped.model.md)<!-- -->&gt;
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+metadata
+
+
+</td><td>
+
+[GtDocumentMetadataArgs](./goosetyped.gtdocumentmetadataargs.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
+
+[ClassDecoratorOf](./goosetyped.classdecoratorof.md)<!-- -->&lt;Document, [ModelExtensions](./goosetyped.modelextensions.md)<!-- -->&gt;
 

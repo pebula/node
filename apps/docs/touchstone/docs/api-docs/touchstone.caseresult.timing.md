@@ -6,7 +6,7 @@
 
 An object of timing data including cycle, elapsed, period, start, and stop.  https://benchmarkjs.com/docs\#prototype\_times
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 timing: Times;

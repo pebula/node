@@ -6,7 +6,7 @@
 
 The minimum sample size required to perform statistical analysis.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 minSamples?: number;

@@ -4,7 +4,7 @@
 
 ## SbSubscriberMetadataOptions.sessionOptions property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 sessionOptions?: SessionReceiverOptions;

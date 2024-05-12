@@ -6,7 +6,7 @@
 
 The time needed to reduce the percent uncertainty of measurement to 1% (secs).
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 minTime?: number;

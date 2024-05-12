@@ -3,7 +3,7 @@ id: introduction
 title: Introduction
 sidebar_label: 1. Introduction
 ---
-import ExtRelativeLink from '@site-shared/theme/ExtRelativeLink';
+import { ExtRelativeLink } from '@doc-components';
 
 **touchstone** is a metadata-driven benchmarking framework, built on top of [benchmark.js](https://benchmarkjs.com/)
 

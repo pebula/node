@@ -8,7 +8,7 @@ How handlers are registers in service bus. - sequence: register one after the ot
 
 The default value is parallel
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 registerHandlers?: 'sequence' | 'parallel';

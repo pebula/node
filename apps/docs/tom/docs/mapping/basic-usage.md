@@ -3,7 +3,7 @@ id: basic-usage
 title: Basic Usage
 sidebar_label: 2. Basic Usage
 ---
-import DocLink from '@site-shared/theme/DocLink';
+import { DocLink } from '@doc-components';
 
 ```typescript
 import { defineClassMapping, getMapper } from '@pebula/tom/mapping';

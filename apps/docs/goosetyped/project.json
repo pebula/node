@@ -1,33 +1,105 @@
 {
   "name": "docs-goosetyped",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "application",
   "sourceRoot": "apps/docs/goosetyped/src",
+  "projectType": "app",
+  "tags": ["docs", "api-documenter"],
   "targets": {
-    "gh-pages": {
-      "executor": "./dist/libs/nx-build-pipe:build",
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/docs/goosetyped/**/*.{ts,tsx,js,jsx}",
+          "apps/docs/goosetyped/package.json"
+        ]
+      }
+    },
+    "api-documents": {
+      "executor": "@pebula/nx-build-pipe:build",
       "options": {
         "task": {
-          "type": "fromFile",
-          "path": "apps/docs/gh-pages.js",
-          "args": ["goosetyped"]
-        },
-        "env": {
-          "GH_PAGES_BUILD": true
+          "type": "group",
+          "composition": "sequence",
+          "pipe": [
+            {
+              "type": "target",
+              "target": "goosetyped:build"
+            },
+            {
+              "name": "api-documenter",
+              "type": "runCommand",
+              "options": {
+                "command": "api-documenter generate -i ./dist/libs/goosetyped -o {projectRoot}/docs/api-docs"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "start": {
+      "executor": "@pebula/nx-build-pipe:build",
+      "options": {
+        "task": {
+          "type": "group",
+          "composition": "sequence",
+          "pipe": [
+            {
+              "name": "start",
+              "type": "runCommand",
+              "options": {
+                "command": "yarn start",
+                "cwd": "{projectRoot}"
+              }
+            }
+          ]
         }
       }
     },
     "build": {
-      "executor": "@nx-plus/docusaurus:browser",
+      "executor": "@pebula/nx-build-pipe:build",
+      "inputs": [
+        "{projectRoot}/docs/*.(md|mdx)",
+        "{projectRoot}/docs/**/*.(md|mdx)"
+      ],
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/docs/goosetyped"
+        "task": {
+          "type": "group",
+          "composition": "sequence",
+          "pipe": [
+            {
+              "name": "start",
+              "type": "runCommand",
+              "options": {
+                "command": "yarn build",
+                "cwd": "{projectRoot}"
+              }
+            }
+          ]
+        }
       }
     },
     "serve": {
-      "executor": "@nx-plus/docusaurus:dev-server",
+      "executor": "@pebula/nx-build-pipe:build",
       "options": {
-        "port": 3000
+        "task": {
+          "type": "group",
+          "composition": "sequence",
+          "pipe": [
+            {
+              "type": "target",
+              "target": "docs-goosetyped:build"
+            },
+            {
+              "name": "start",
+              "type": "runCommand",
+              "options": {
+                "command": "yarn serve",
+                "cwd": "{projectRoot}"
+              }
+            }
+          ]
+        }
       }
     }
   }

@@ -6,10 +6,10 @@
 
 A type helper that strips away all members of the mongoose Document instance from the type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type StripDoc<T extends Document, TExcept extends keyof Document = never> = Subtract<T, Omit<Document, TExcept>>;
+export type StripDoc<T extends Document, TExcept extends keyof Document = never> = Subtract<T, Omit<Document, TExcept>>;
 ```
 
 ## Example
@@ -27,6 +27,5 @@ const m: StripDoc<Message>; // now m has only "myMethod" & "text" but not "id"
 
 // Since "id" also exists in Document, to include it we need to exclude it from the strip.
 const m: StripDoc<Message, 'id'>; // now m has "id", "myMethod" & "text"
-
 ```
 

@@ -6,7 +6,7 @@
 
 An object of stats including mean, margin or error, and standard deviation.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 stats: CaseStats;

@@ -4,17 +4,72 @@
 
 ## SbQueueEntityProvision interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SbQueueEntityProvision extends SbEntityProvision<SbQueue> 
 ```
-<b>Extends:</b> SbEntityProvision&lt;[SbQueue](./nesbus.sbqueue.md)<!-- -->&gt;
+**Extends:** SbEntityProvision&lt;[SbQueue](./nesbus.sbqueue.md)<!-- -->&gt;
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [deadLetter](./nesbus.sbqueueentityprovision.deadletter.md) | SbLinkedEntityProvisionOption | Define how the dead letter queue/topic is provisioned ("forwardDeadLetteredMessagesTo") &gt; Relevant only when "forwardDeadLetteredMessagesTo" has a value. |
-|  [forward](./nesbus.sbqueueentityprovision.forward.md) | SbLinkedEntityProvisionOption | Define how the forward queue/topic is provisioned ("forwardTo") &gt; Relevant only when "forwardTo" has a value. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[deadLetter?](./nesbus.sbqueueentityprovision.deadletter.md)
+
+
+</td><td>
+
+
+</td><td>
+
+SbLinkedEntityProvisionOption
+
+
+</td><td>
+
+_(Optional)_ Define how the dead letter queue/topic is provisioned ("forwardDeadLetteredMessagesTo") &gt; Relevant only when "forwardDeadLetteredMessagesTo" has a value.
+
+
+</td></tr>
+<tr><td>
+
+[forward?](./nesbus.sbqueueentityprovision.forward.md)
+
+
+</td><td>
+
+
+</td><td>
+
+SbLinkedEntityProvisionOption
+
+
+</td><td>
+
+_(Optional)_ Define how the forward queue/topic is provisioned ("forwardTo") &gt; Relevant only when "forwardTo" has a value.
+
+
+</td></tr>
+</tbody></table>

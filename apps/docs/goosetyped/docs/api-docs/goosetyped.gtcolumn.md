@@ -4,7 +4,7 @@
 
 ## GtColumn() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function GtColumn<T = any>(metadata?: GtColumnMetadataArgs<T>): PropertyDecoratorOf<any>;
@@ -12,11 +12,40 @@ export declare function GtColumn<T = any>(metadata?: GtColumnMetadataArgs<T>): P
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  metadata | [GtColumnMetadataArgs](./goosetyped.gtcolumnmetadataargs.md)<!-- -->&lt;T&gt; |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+metadata
+
+
+</td><td>
+
+[GtColumnMetadataArgs](./goosetyped.gtcolumnmetadataargs.md)<!-- -->&lt;T&gt;
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 [PropertyDecoratorOf](./goosetyped.propertydecoratorof.md)<!-- -->&lt;any&gt;
 

@@ -4,7 +4,7 @@
 
 ## GtColumnMetadataArgs interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GtColumnMetadataArgs<T> 
@@ -12,14 +12,189 @@ export interface GtColumnMetadataArgs<T>
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [default](./goosetyped.gtcolumnmetadataargs.default.md) | T \| ((...args: any\[\]) =&gt; T) | Sets a default value or value for the path. If the value is a function, the return value of the function is used as the default. https://mongoosejs.com/docs/api/schematypeoptions.html\#schematypeoptions\_SchemaTypeOptions-default |
-|  [enum](./goosetyped.gtcolumnmetadataargs.enum.md) | string\[\] \| number\[\] \| object |  |
-|  [immutable](./goosetyped.gtcolumnmetadataargs.immutable.md) | boolean | Defines this path as immutable. Mongoose prevents you from changing immutable paths unless the parent document has isNew: true. https://mongoosejs.com/docs/api.html\#schematype\_SchemaType-immutable |
-|  [required](./goosetyped.gtcolumnmetadataargs.required.md) | [ColumnRequired](./goosetyped.columnrequired.md) | If true adds a required validator for this property https://mongoosejs.com/docs/api/schematypeoptions.html\#schematypeoptions\_SchemaTypeOptions-required |
-|  [select](./goosetyped.gtcolumnmetadataargs.select.md) | boolean | Set to true if this path should always be included in the results, false if it should be excluded by default. This setting can be overridden at the query level. https://mongoosejs.com/docs/api/schematype.html\#schematype\_SchemaType-select |
-|  [skipVersioning](./goosetyped.gtcolumnmetadataargs.skipversioning.md) | boolean | Allows excluding paths from versioning (i.e., the internal revision will not be incremented even if these paths are updated). DO NOT do this unless you know what you're doing. For sub-documents, include this on the parent document using the fully qualified path.<!-- -->You can also use the dedicated decorator <code>@SkipVersioning()</code>  https://mongoosejs.com/docs/4.x/docs/guide.html\#skipVersioning |
-|  [type](./goosetyped.gtcolumnmetadataargs.type.md) | Schema \| typeof SchemaType \| (() =&gt; [Type](./goosetyped.type.md)<!-- -->&lt;any, any&gt;) | Set's the type used by this column. |
-|  [validate](./goosetyped.gtcolumnmetadataargs.validate.md) | [Validator](./goosetyped.validator.md) | Adds validator(s) for this document path. Validators always receive the value to validate as their first argument and must return Boolean. Returning false means validation failed. https://mongoosejs.com/docs/api.html\#schematype\_SchemaType-validate |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[default?](./goosetyped.gtcolumnmetadataargs.default.md)
+
+
+</td><td>
+
+
+</td><td>
+
+T \| ((...args: any\[\]) =&gt; T)
+
+
+</td><td>
+
+_(Optional)_ Sets a default value or value for the path. If the value is a function, the return value of the function is used as the default.
+
+ https://mongoosejs.com/docs/api/schematypeoptions.html\#schematypeoptions\_SchemaTypeOptions-default
+
+
+</td></tr>
+<tr><td>
+
+[enum?](./goosetyped.gtcolumnmetadataargs.enum.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\] \| number\[\] \| object
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[immutable?](./goosetyped.gtcolumnmetadataargs.immutable.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ Defines this path as immutable. Mongoose prevents you from changing immutable paths unless the parent document has isNew: true.
+
+ https://mongoosejs.com/docs/api.html\#schematype\_SchemaType-immutable
+
+
+</td></tr>
+<tr><td>
+
+[required?](./goosetyped.gtcolumnmetadataargs.required.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[ColumnRequired](./goosetyped.columnrequired.md)
+
+
+</td><td>
+
+_(Optional)_ If true adds a required validator for this property
+
+ https://mongoosejs.com/docs/api/schematypeoptions.html\#schematypeoptions\_SchemaTypeOptions-required
+
+
+</td></tr>
+<tr><td>
+
+[select?](./goosetyped.gtcolumnmetadataargs.select.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ Set to true if this path should always be included in the results, false if it should be excluded by default. This setting can be overridden at the query level.
+
+ https://mongoosejs.com/docs/api/schematype.html\#schematype\_SchemaType-select
+
+
+</td></tr>
+<tr><td>
+
+[skipVersioning?](./goosetyped.gtcolumnmetadataargs.skipversioning.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ Allows excluding paths from versioning (i.e., the internal revision will not be incremented even if these paths are updated). DO NOT do this unless you know what you're doing. For sub-documents, include this on the parent document using the fully qualified path.
+
+You can also use the dedicated decorator `@SkipVersioning()`  https://mongoosejs.com/docs/4.x/docs/guide.html\#skipVersioning
+
+
+</td></tr>
+<tr><td>
+
+[type?](./goosetyped.gtcolumnmetadataargs.type.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Schema \| typeof SchemaType \| (() =&gt; [Type](./goosetyped.type.md)<!-- -->&lt;any, any&gt;)
+
+
+</td><td>
+
+_(Optional)_ Set's the type used by this column.
+
+
+</td></tr>
+<tr><td>
+
+[validate?](./goosetyped.gtcolumnmetadataargs.validate.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Validator](./goosetyped.validator.md)
+
+
+</td><td>
+
+_(Optional)_ Adds validator(s) for this document path. Validators always receive the value to validate as their first argument and must return Boolean. Returning false means validation failed.
+
+ https://mongoosejs.com/docs/api.html\#schematype\_SchemaType-validate
+
+
+</td></tr>
+</tbody></table>

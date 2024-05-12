@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `SbContext` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(args: SbContextArgs<T>);
@@ -14,7 +14,34 @@ constructor(args: SbContextArgs<T>);
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  args | [SbContextArgs](./nesbus.sbcontextargs.md)<!-- -->&lt;T&gt; |  |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+args
+
+
+</td><td>
+
+[SbContextArgs](./nesbus.sbcontextargs.md)<!-- -->&lt;T&gt;
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

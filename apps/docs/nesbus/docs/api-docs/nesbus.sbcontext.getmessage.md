@@ -4,12 +4,12 @@
 
 ## SbContext.getMessage() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getMessage(): ServiceBusMessage;
 ```
-<b>Returns:</b>
+**Returns:**
 
 ServiceBusMessage
 

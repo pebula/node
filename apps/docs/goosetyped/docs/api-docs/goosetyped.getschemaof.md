@@ -6,7 +6,7 @@
 
 Returns the mongoose schema for the provided Model / Resource
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getSchemaOf<T>(modelClass: Ctor<T>): Schema | undefined;
@@ -14,11 +14,38 @@ export declare function getSchemaOf<T>(modelClass: Ctor<T>): Schema | undefined;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  modelClass | [Ctor](./goosetyped.ctor.md)<!-- -->&lt;T&gt; |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+modelClass
+
+
+</td><td>
+
+[Ctor](./goosetyped.ctor.md)<!-- -->&lt;T&gt;
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 Schema \| undefined
 

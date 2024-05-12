@@ -4,17 +4,68 @@
 
 ## SbRuleEntityProvision interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SbRuleEntityProvision extends SbEntityProvision<SbRule> 
 ```
-<b>Extends:</b> SbEntityProvision&lt;[SbRule](./nesbus.sbrule.md)<!-- -->&gt;
+**Extends:** SbEntityProvision&lt;[SbRule](./nesbus.sbrule.md)<!-- -->&gt;
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [params](./nesbus.sbruleentityprovision.params.md) | [SbRule](./nesbus.sbrule.md) |  |
-|  [ruleName](./nesbus.sbruleentityprovision.rulename.md) | string |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[params](./nesbus.sbruleentityprovision.params.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SbRule](./nesbus.sbrule.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[ruleName](./nesbus.sbruleentityprovision.rulename.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

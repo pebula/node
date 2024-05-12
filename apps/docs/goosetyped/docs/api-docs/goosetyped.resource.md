@@ -4,7 +4,7 @@
 
 ## Resource interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface Resource<T = unknown> 
@@ -12,16 +12,111 @@ export interface Resource<T = unknown>
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [\[GT\_SUB\_DOCUMENT\]](./goosetyped.resource._gt_sub_document_.md) | boolean |  |
-|  [prototype](./goosetyped.resource.prototype.md) | [SubDocument](./goosetyped.subdocument.md) &amp; T |  |
-|  [schema](./goosetyped.resource.schema.md) | Schema |  |
+<table><thead><tr><th>
+
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[\[GT\_SUB\_DOCUMENT\]](./goosetyped.resource._gt_sub_document_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[prototype](./goosetyped.resource.prototype.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SubDocument](./goosetyped.subdocument.md) &amp; T
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[schema](./goosetyped.resource.schema.md)
+
+
+</td><td>
+
+
+</td><td>
+
+M.Schema
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
 
 ## Methods
 
-|  Method | Description |
-|  --- | --- |
-|  [(new)(doc)](./goosetyped.resource._new_.md) |  |
-|  [ctor(this, doc)](./goosetyped.resource.ctor.md) | Like <code>create()</code> but without the save, replaces the constructor. Useful when you want to create a new instance from a base discriminator class |
+<table><thead><tr><th>
 
+Method
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(new)(doc)](./goosetyped.resource._new_.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[ctor(this, doc)](./goosetyped.resource.ctor.md)
+
+
+</td><td>
+
+Like `create()` but without the save, replaces the constructor. Useful when you want to create a new instance from a base discriminator class
+
+
+</td></tr>
+</tbody></table>

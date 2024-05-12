@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `SbErrorEvent` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(phase: 'verify' | 'register' | 'listening', options: SbQueueMetadataOptions | SbSubscriptionMetadataOptions, error: Error | MessagingError);
@@ -14,9 +14,62 @@ constructor(phase: 'verify' | 'register' | 'listening', options: SbQueueMetadata
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  phase | 'verify' \| 'register' \| 'listening' |  |
-|  options | [SbQueueMetadataOptions](./nesbus.sbqueuemetadataoptions.md) \| [SbSubscriptionMetadataOptions](./nesbus.sbsubscriptionmetadataoptions.md) |  |
-|  error | Error \| MessagingError |  |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+phase
+
+
+</td><td>
+
+'verify' \| 'register' \| 'listening'
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+options
+
+
+</td><td>
+
+[SbQueueMetadataOptions](./nesbus.sbqueuemetadataoptions.md) \| [SbSubscriptionMetadataOptions](./nesbus.sbsubscriptionmetadataoptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+error
+
+
+</td><td>
+
+Error \| MessagingError
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

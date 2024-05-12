@@ -4,7 +4,7 @@
 
 ## GtBeforeCompileModelHandler interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GtBeforeCompileModelHandler 
@@ -12,8 +12,59 @@ export interface GtBeforeCompileModelHandler
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [schema](./goosetyped.gtbeforecompilemodelhandler.schema.md) | mongoose.Schema |  |
-|  [target](./goosetyped.gtbeforecompilemodelhandler.target.md) | [Ctor](./goosetyped.ctor.md)<!-- -->&lt;any&gt; |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[schema](./goosetyped.gtbeforecompilemodelhandler.schema.md)
+
+
+</td><td>
+
+
+</td><td>
+
+mongoose.Schema
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[target](./goosetyped.gtbeforecompilemodelhandler.target.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Ctor](./goosetyped.ctor.md)<!-- -->&lt;any&gt;
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

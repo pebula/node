@@ -4,7 +4,7 @@
 
 ## SuiteResult.cases property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 cases: CaseResult[];

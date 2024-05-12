@@ -8,7 +8,7 @@ Defines this path as immutable. Mongoose prevents you from changing immutable pa
 
  https://mongoosejs.com/docs/api.html\#schematype\_SchemaType-immutable
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 immutable?: boolean;

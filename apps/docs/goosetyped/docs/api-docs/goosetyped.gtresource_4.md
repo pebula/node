@@ -4,7 +4,7 @@
 
 ## GtResource() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function GtResource<T1, C1, T2, C2, T3, C3, T4, C4>(m1: C1 & Ctor<T1>, m2: C2 & Ctor<T2>, m3: C3 & Ctor<T3>, m4: C4 & Ctor<T4>): Ctor<SubDocument & T1 & T2 & T3 & T4> & Resource & C1 & C2 & C3 & C4;
@@ -12,14 +12,80 @@ export declare function GtResource<T1, C1, T2, C2, T3, C3, T4, C4>(m1: C1 & Ctor
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  m1 | C1 &amp; [Ctor](./goosetyped.ctor.md)<!-- -->&lt;T1&gt; |  |
-|  m2 | C2 &amp; [Ctor](./goosetyped.ctor.md)<!-- -->&lt;T2&gt; |  |
-|  m3 | C3 &amp; [Ctor](./goosetyped.ctor.md)<!-- -->&lt;T3&gt; |  |
-|  m4 | C4 &amp; [Ctor](./goosetyped.ctor.md)<!-- -->&lt;T4&gt; |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+m1
+
+
+</td><td>
+
+C1 &amp; [Ctor](./goosetyped.ctor.md)<!-- -->&lt;T1&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+m2
+
+
+</td><td>
+
+C2 &amp; [Ctor](./goosetyped.ctor.md)<!-- -->&lt;T2&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+m3
+
+
+</td><td>
+
+C3 &amp; [Ctor](./goosetyped.ctor.md)<!-- -->&lt;T3&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+m4
+
+
+</td><td>
+
+C4 &amp; [Ctor](./goosetyped.ctor.md)<!-- -->&lt;T4&gt;
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 [Ctor](./goosetyped.ctor.md)<!-- -->&lt;[SubDocument](./goosetyped.subdocument.md) &amp; T1 &amp; T2 &amp; T3 &amp; T4&gt; &amp; [Resource](./goosetyped.resource.md) &amp; C1 &amp; C2 &amp; C3 &amp; C4
 

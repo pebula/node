@@ -4,10 +4,10 @@
 
 ## DocumentArray class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class DocumentArray<T extends Document> extends Types.DocumentArray<T> 
 ```
-<b>Extends:</b> Types.DocumentArray&lt;T&gt;
+**Extends:** Types.DocumentArray&lt;T&gt;
 

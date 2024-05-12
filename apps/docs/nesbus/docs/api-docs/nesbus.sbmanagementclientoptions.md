@@ -4,7 +4,7 @@
 
 ## SbManagementClientOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SbManagementClientOptions 

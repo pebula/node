@@ -4,7 +4,7 @@
 
 ## SbIntercept() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function SbIntercept(...interceptors: Array<SbInterceptor | Type<SbInterceptor>>): <T extends Record<K, OperatorFunction<SbContext<keyof import("../interfaces").SbSubscriberTypeMap>, any>>, K extends string>(target: T, key: K) => void;
@@ -12,11 +12,38 @@ export declare function SbIntercept(...interceptors: Array<SbInterceptor | Type<
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  interceptors | Array&lt;[SbInterceptor](./nesbus.sbinterceptor.md) \| Type&lt;[SbInterceptor](./nesbus.sbinterceptor.md)<!-- -->&gt;&gt; |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+interceptors
+
+
+</td><td>
+
+Array&lt;[SbInterceptor](./nesbus.sbinterceptor.md) \| Type&lt;[SbInterceptor](./nesbus.sbinterceptor.md)<!-- -->&gt;&gt;
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 &lt;T extends Record&lt;K, OperatorFunction&lt;[SbContext](./nesbus.sbcontext.md)<!-- -->&lt;keyof import("../interfaces").SbSubscriberTypeMap&gt;, any&gt;&gt;, K extends string&gt;(target: T, key: K) =&gt; void
 

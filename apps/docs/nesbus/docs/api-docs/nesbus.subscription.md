@@ -6,7 +6,7 @@
 
 Subscribes to incoming events from a topic
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function Subscription<T = false>(metadata: MetaOrMetaFactory<SbSubscriptionMetadataOptions>): PropOrMethodDecorator<T, MethodDecorator>;
@@ -14,11 +14,38 @@ export declare function Subscription<T = false>(metadata: MetaOrMetaFactory<SbSu
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  metadata | [MetaOrMetaFactory](./nesbus.metaormetafactory.md)<!-- -->&lt;[SbSubscriptionMetadataOptions](./nesbus.sbsubscriptionmetadataoptions.md)<!-- -->&gt; |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+metadata
+
+
+</td><td>
+
+[MetaOrMetaFactory](./nesbus.metaormetafactory.md)<!-- -->&lt;[SbSubscriptionMetadataOptions](./nesbus.sbsubscriptionmetadataoptions.md)<!-- -->&gt;
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 PropOrMethodDecorator&lt;T, MethodDecorator&gt;
 

@@ -4,12 +4,12 @@
 
 ## ServiceBusModule.onModuleDestroy() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onModuleDestroy(): Promise<void>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

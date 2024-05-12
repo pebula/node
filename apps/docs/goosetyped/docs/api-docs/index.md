@@ -6,7 +6,24 @@
 
 ## Packages
 
-|  Package | Description |
-|  --- | --- |
-|  [@pebula/goosetyped](./goosetyped.md) |  |
+<table><thead><tr><th>
 
+Package
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[@pebula/goosetyped](./goosetyped.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

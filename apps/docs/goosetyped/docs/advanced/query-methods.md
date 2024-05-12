@@ -3,7 +3,7 @@ id: query-methods
 title: Query Methods / Helpers
 sidebar_label: 4. Query Methods / Helpers
 ---
-import MongooseDocsLink from '@site-shared/theme/MongooseDocsLink';
+import { MongooseDocsLink } from '@doc-components';
 
 # WIP
 

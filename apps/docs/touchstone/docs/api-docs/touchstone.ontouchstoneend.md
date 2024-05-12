@@ -2,10 +2,14 @@
 
 [Home](./index.md) &gt; [@pebula/touchstone](./touchstone.md) &gt; [OnTouchStoneEnd](./touchstone.ontouchstoneend.md)
 
-## OnTouchStoneEnd variable
+## OnTouchStoneEnd() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 OnTouchStoneEnd: () => <Z extends Partial<Record<K, (args_0: TouchStoneEndEvent) => any>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: TouchStoneEndEvent) => any>) => void | TypedPropertyDescriptor<(args_0: TouchStoneEndEvent) => any>
 ```
+**Returns:**
+
+&lt;Z extends Partial&lt;Record&lt;K, (args\_0: [TouchStoneEndEvent](./touchstone.touchstoneendevent.md)<!-- -->) =&gt; any&gt;&gt;, K extends string&gt;(target: Z, key: K, descriptor: TypedPropertyDescriptor&lt;(args\_0: [TouchStoneEndEvent](./touchstone.touchstoneendevent.md)<!-- -->) =&gt; any&gt;) =&gt; void \| TypedPropertyDescriptor&lt;(args\_0: [TouchStoneEndEvent](./touchstone.touchstoneendevent.md)<!-- -->) =&gt; any&gt;
+

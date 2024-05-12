@@ -4,7 +4,7 @@
 
 ## CaseMetadataArgs interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface CaseMetadataArgs 
@@ -12,9 +12,92 @@ export interface CaseMetadataArgs
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [benchmarkOptions](./touchstone.casemetadataargs.benchmarkoptions.md) | [BenchmarkOptions](./touchstone.benchmarkoptions.md) | The default benchmark options for the <code>Case</code>.<!-- -->\#\# Options resolution process:<!-- -->For each <code>Case</code> select the options by merging the following objects (first one wins):<!-- -->- Use options defined on the Case (WE ARE HERE) - Use options defined on the Suite - Use options defined for the entire run - Use the default options defined by the library (static) |
-|  [name](./touchstone.casemetadataargs.name.md) | string | The name of the performance test. This is not mandatory, if not set the method name is used. |
-|  [variants](./touchstone.casemetadataargs.variants.md) | Array&lt;Required&lt;Omit&lt;[CaseMetadataArgs](./touchstone.casemetadataargs.md)<!-- -->, 'variants'&gt;&gt;&gt; | A list of variants that will run in the suite, each as a separate case. I.E. run the same method as a new case but with a different benchmark configuration set.<!-- -->&gt; Note that each variant must have a unique name across the entire suite and must not match the original name or any other variant name for this method and other methods within the Suite.<!-- -->&gt; Note that filters apply on each variant like it will on any regular case. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[benchmarkOptions?](./touchstone.casemetadataargs.benchmarkoptions.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[BenchmarkOptions](./touchstone.benchmarkoptions.md)
+
+
+</td><td>
+
+_(Optional)_ The default benchmark options for the `Case`<!-- -->.
+
+\#\# Options resolution process:
+
+For each `Case` select the options by merging the following objects (first one wins):
+
+- Use options defined on the Case (WE ARE HERE) - Use options defined on the Suite - Use options defined for the entire run - Use the default options defined by the library (static)
+
+
+</td></tr>
+<tr><td>
+
+[name?](./touchstone.casemetadataargs.name.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ The name of the performance test. This is not mandatory, if not set the method name is used.
+
+
+</td></tr>
+<tr><td>
+
+[variants?](./touchstone.casemetadataargs.variants.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Array&lt;Required&lt;Omit&lt;[CaseMetadataArgs](./touchstone.casemetadataargs.md)<!-- -->, 'variants'&gt;&gt;&gt;
+
+
+</td><td>
+
+_(Optional)_ A list of variants that will run in the suite, each as a separate case. I.E. run the same method as a new case but with a different benchmark configuration set.
+
+&gt; Note that each variant must have a unique name across the entire suite and must not match the original name or any other variant name for this method and other methods within the Suite.
+
+&gt; Note that filters apply on each variant like it will on any regular case.
+
+
+</td></tr>
+</tbody></table>

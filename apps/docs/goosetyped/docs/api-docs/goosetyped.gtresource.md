@@ -4,12 +4,12 @@
 
 ## GtResource() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function GtResource(): Ctor<SubDocument> & Resource;
 ```
-<b>Returns:</b>
+**Returns:**
 
 [Ctor](./goosetyped.ctor.md)<!-- -->&lt;[SubDocument](./goosetyped.subdocument.md)<!-- -->&gt; &amp; [Resource](./goosetyped.resource.md)
 

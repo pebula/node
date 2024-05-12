@@ -4,7 +4,7 @@
 
 ## SbEmitterImp.send() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 send(message: SendableMessageInfo): Promise<void>;
@@ -12,11 +12,38 @@ send(message: SendableMessageInfo): Promise<void>;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  message | SendableMessageInfo |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+message
+
+
+</td><td>
+
+SendableMessageInfo
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 Promise&lt;void&gt;
 

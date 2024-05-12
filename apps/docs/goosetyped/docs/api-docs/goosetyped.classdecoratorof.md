@@ -4,10 +4,10 @@
 
 ## ClassDecoratorOf type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type ClassDecoratorOf<TInstance, TStatic = any> = (target: Type<TInstance, TStatic>) => any;
+export type ClassDecoratorOf<TInstance, TStatic = any> = (target: Type<TInstance, TStatic>) => any;
 ```
-<b>References:</b> [Type](./goosetyped.type.md)
+**References:** [Type](./goosetyped.type.md)
 

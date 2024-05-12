@@ -4,16 +4,53 @@
 
 ## GtSubDocumentMetadataArgs interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GtSubDocumentMetadataArgs extends GtSchemaMetadataArgs 
 ```
-<b>Extends:</b> GtSchemaMetadataArgs
+**Extends:** GtSchemaMetadataArgs
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [noId](./goosetyped.gtsubdocumentmetadataargs.noid.md) | boolean | When true, will not create and <code>_id</code> when creating a new object This is equivalent to setting the <code>_id</code> property to false in the <code>Schema</code> options.  https://mongoosejs.com/docs/guide.html\#\_id |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[noId?](./goosetyped.gtsubdocumentmetadataargs.noid.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ When true, will not create and `_id` when creating a new object This is equivalent to setting the `_id` property to false in the `Schema` options.  https://mongoosejs.com/docs/guide.html\#\_id
+
+
+</td></tr>
+</tbody></table>

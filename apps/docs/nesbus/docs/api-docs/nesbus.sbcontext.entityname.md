@@ -6,12 +6,12 @@
 
 The entity name used to identify subscription/queue in service bus
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 entityName(): string;
 ```
-<b>Returns:</b>
+**Returns:**
 
 string
 

@@ -4,19 +4,110 @@
 
 ## SbTopicSubscriptionEntityProvision interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SbTopicSubscriptionEntityProvision extends SbEntityProvision<SbSubscription> 
 ```
-<b>Extends:</b> SbEntityProvision&lt;[SbSubscription](./nesbus.sbsubscription.md)<!-- -->&gt;
+**Extends:** SbEntityProvision&lt;[SbSubscription](./nesbus.sbsubscription.md)<!-- -->&gt;
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [deadLetter](./nesbus.sbtopicsubscriptionentityprovision.deadletter.md) | SbLinkedEntityProvisionOption | Define how the dead letter topic is provisioned ("forwardDeadLetteredMessagesTo") &gt; Relevant only when "forwardDeadLetteredMessagesTo" has a value. |
-|  [forward](./nesbus.sbtopicsubscriptionentityprovision.forward.md) | SbLinkedEntityProvisionOption | Define how the forward queue/topic is provisioned ("forwardTo") &gt; Relevant only when "forwardTo" has a value. |
-|  [rules](./nesbus.sbtopicsubscriptionentityprovision.rules.md) | [SbRuleEntityProvision](./nesbus.sbruleentityprovision.md)<!-- -->\[\] \| ((topicName: string, subscriptionName: string) =&gt; [SbRuleEntityProvision](./nesbus.sbruleentityprovision.md)<!-- -->\[\]) | A list of rules (actions/filters) to apply to the subscription or, a function that results a list of rules dynamically. |
-|  [topic](./nesbus.sbtopicsubscriptionentityprovision.topic.md) | [SbEntityProvisionOption](./nesbus.sbentityprovisionoption.md)<!-- -->&lt;[SbTopicEntityProvision](./nesbus.sbtopicentityprovision.md)<!-- -->&gt; | Define how the topic for this subscription is provisioned. Unlike "deadLetter", the default behavior is "skip" as it is usually the role of the topic's owner to create it. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[deadLetter?](./nesbus.sbtopicsubscriptionentityprovision.deadletter.md)
+
+
+</td><td>
+
+
+</td><td>
+
+SbLinkedEntityProvisionOption
+
+
+</td><td>
+
+_(Optional)_ Define how the dead letter topic is provisioned ("forwardDeadLetteredMessagesTo") &gt; Relevant only when "forwardDeadLetteredMessagesTo" has a value.
+
+
+</td></tr>
+<tr><td>
+
+[forward?](./nesbus.sbtopicsubscriptionentityprovision.forward.md)
+
+
+</td><td>
+
+
+</td><td>
+
+SbLinkedEntityProvisionOption
+
+
+</td><td>
+
+_(Optional)_ Define how the forward queue/topic is provisioned ("forwardTo") &gt; Relevant only when "forwardTo" has a value.
+
+
+</td></tr>
+<tr><td>
+
+[rules?](./nesbus.sbtopicsubscriptionentityprovision.rules.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SbRuleEntityProvision](./nesbus.sbruleentityprovision.md)<!-- -->\[\] \| ((topicName: string, subscriptionName: string) =&gt; [SbRuleEntityProvision](./nesbus.sbruleentityprovision.md)<!-- -->\[\])
+
+
+</td><td>
+
+_(Optional)_ A list of rules (actions/filters) to apply to the subscription or, a function that results a list of rules dynamically.
+
+
+</td></tr>
+<tr><td>
+
+[topic?](./nesbus.sbtopicsubscriptionentityprovision.topic.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SbEntityProvisionOption](./nesbus.sbentityprovisionoption.md)<!-- -->&lt;[SbTopicEntityProvision](./nesbus.sbtopicentityprovision.md)<!-- -->&gt;
+
+
+</td><td>
+
+_(Optional)_ Define how the topic for this subscription is provisioned. Unlike "deadLetter", the default behavior is "skip" as it is usually the role of the topic's owner to create it.
+
+
+</td></tr>
+</tbody></table>

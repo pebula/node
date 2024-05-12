@@ -6,7 +6,7 @@
 
 Subscribes to incoming events from a queue
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function Queue<T = false>(metadata: MetaOrMetaFactory<SbQueueMetadataOptions>): PropOrMethodDecorator<T, MethodDecorator>;
@@ -14,11 +14,38 @@ export declare function Queue<T = false>(metadata: MetaOrMetaFactory<SbQueueMeta
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  metadata | [MetaOrMetaFactory](./nesbus.metaormetafactory.md)<!-- -->&lt;[SbQueueMetadataOptions](./nesbus.sbqueuemetadataoptions.md)<!-- -->&gt; |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+metadata
+
+
+</td><td>
+
+[MetaOrMetaFactory](./nesbus.metaormetafactory.md)<!-- -->&lt;[SbQueueMetadataOptions](./nesbus.sbqueuemetadataoptions.md)<!-- -->&gt;
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 PropOrMethodDecorator&lt;T, MethodDecorator&gt;
 

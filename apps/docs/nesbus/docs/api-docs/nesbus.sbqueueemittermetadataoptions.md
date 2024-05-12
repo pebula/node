@@ -4,16 +4,53 @@
 
 ## SbQueueEmitterMetadataOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SbQueueEmitterMetadataOptions extends SbEmitterMetadataOptions 
 ```
-<b>Extends:</b> [SbEmitterMetadataOptions](./nesbus.sbemittermetadataoptions.md)
+**Extends:** [SbEmitterMetadataOptions](./nesbus.sbemittermetadataoptions.md)
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [provision](./nesbus.sbqueueemittermetadataoptions.provision.md) | [SbEntityProvisionOption](./nesbus.sbentityprovisionoption.md)<!-- -->&lt;[SbQueueEntityProvision](./nesbus.sbqueueentityprovision.md)<!-- -->&gt; |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[provision?](./nesbus.sbqueueemittermetadataoptions.provision.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SbEntityProvisionOption](./nesbus.sbentityprovisionoption.md)<!-- -->&lt;[SbQueueEntityProvision](./nesbus.sbqueueentityprovision.md)<!-- -->&gt;
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>

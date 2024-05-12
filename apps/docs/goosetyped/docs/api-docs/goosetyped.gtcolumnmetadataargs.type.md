@@ -6,7 +6,7 @@
 
 Set's the type used by this column.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 type?: Schema | typeof SchemaType | (() => Type<any, any>);

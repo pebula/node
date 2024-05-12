@@ -8,7 +8,7 @@ Set to true if this path should always be included in the results, false if it s
 
  https://mongoosejs.com/docs/api/schematype.html\#schematype\_SchemaType-select
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 select?: boolean;

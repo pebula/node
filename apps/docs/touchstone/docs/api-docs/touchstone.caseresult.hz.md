@@ -6,7 +6,7 @@
 
 The number of executions per second. (Operations Per Second)  https://benchmarkjs.com/docs\#prototype\_hz
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 hz: number;

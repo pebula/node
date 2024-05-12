@@ -6,18 +6,85 @@
 
 An object of stats including mean, margin or error, and standard deviation.  https://benchmarkjs.com/docs\#prototype\_stats
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface CaseStats extends Stats 
 ```
-<b>Extends:</b> Stats
+**Extends:** Stats
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [max](./touchstone.casestats.max.md) | number |  |
-|  [median](./touchstone.casestats.median.md) | number |  |
-|  [min](./touchstone.casestats.min.md) | number |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[max](./touchstone.casestats.max.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[median](./touchstone.casestats.median.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[min](./touchstone.casestats.min.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

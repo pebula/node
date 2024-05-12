@@ -4,7 +4,7 @@
 
 ## SbModuleRegisterOptions.providers property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 providers?: Provider[];

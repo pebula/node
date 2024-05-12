@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `SbMessageErrorEvent` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(options: SbQueueMetadataOptions | SbSubscriptionMetadataOptions, error: Error);
@@ -14,8 +14,48 @@ constructor(options: SbQueueMetadataOptions | SbSubscriptionMetadataOptions, err
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  options | [SbQueueMetadataOptions](./nesbus.sbqueuemetadataoptions.md) \| [SbSubscriptionMetadataOptions](./nesbus.sbsubscriptionmetadataoptions.md) |  |
-|  error | Error |  |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+options
+
+
+</td><td>
+
+[SbQueueMetadataOptions](./nesbus.sbqueuemetadataoptions.md) \| [SbSubscriptionMetadataOptions](./nesbus.sbsubscriptionmetadataoptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+error
+
+
+</td><td>
+
+Error
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

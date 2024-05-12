@@ -4,24 +4,190 @@
 
 ## GtDocumentMetadataArgs interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GtDocumentMetadataArgs extends GtSchemaMetadataArgs 
 ```
-<b>Extends:</b> GtSchemaMetadataArgs
+**Extends:** GtSchemaMetadataArgs
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [autoCreate](./goosetyped.gtdocumentmetadataargs.autocreate.md) | boolean | See  https://mongoosejs.com/docs/guide.html\#autoCreate |
-|  [autoIndex](./goosetyped.gtdocumentmetadataargs.autoindex.md) | boolean | See  https://mongoosejs.com/docs/guide.html\#autoIndex |
-|  [bufferCommands](./goosetyped.gtdocumentmetadataargs.buffercommands.md) | boolean | See  https://mongoosejs.com/docs/guide.html\#bufferCommands |
-|  [capped](./goosetyped.gtdocumentmetadataargs.capped.md) | boolean \| number \| { size?: number; max?: number; autoIndexId?: boolean; } | See  https://mongoosejs.com/docs/guide.html\#capped |
-|  [collation](./goosetyped.gtdocumentmetadataargs.collation.md) | mongodb.CollationDocument | See  https://mongoosejs.com/docs/guide.html\#collation |
-|  [collection](./goosetyped.gtdocumentmetadataargs.collection.md) | string | The collection name in the database Optional: When not set, induced from model name |
-|  [connectionId](./goosetyped.gtdocumentmetadataargs.connectionid.md) | string | The connection id to use when registering the model. If a connection id is not defined (default behavior) then the model is registered using the default connection.<!-- -->Use <code>addConnection</code> to add a new connection to the connection pool available for models.<!-- -->If at the time of creating the model the connection does not exists, it will "wait" for the connection to be added. |
-|  [minimize](./goosetyped.gtdocumentmetadataargs.minimize.md) | boolean | See  https://mongoosejs.com/docs/guide.html\#minimize |
-|  [skipInit](./goosetyped.gtdocumentmetadataargs.skipinit.md) | boolean | Whether to skip initialization Optional: When not set, default's to false<!-- -->Note that this refer to the skipInit from mongoose. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[autoCreate?](./goosetyped.gtdocumentmetadataargs.autocreate.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ See  https://mongoosejs.com/docs/guide.html\#autoCreate
+
+
+</td></tr>
+<tr><td>
+
+[autoIndex?](./goosetyped.gtdocumentmetadataargs.autoindex.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ See  https://mongoosejs.com/docs/guide.html\#autoIndex
+
+
+</td></tr>
+<tr><td>
+
+[bufferCommands?](./goosetyped.gtdocumentmetadataargs.buffercommands.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ See  https://mongoosejs.com/docs/guide.html\#bufferCommands
+
+
+</td></tr>
+<tr><td>
+
+[capped?](./goosetyped.gtdocumentmetadataargs.capped.md)
+
+
+</td><td>
+
+
+</td><td>
+
+\`boolean \| number \| \{ size?: number; max?: number; autoIndexId?: boolean; }\`
+
+
+</td><td>
+
+_(Optional)_ See  https://mongoosejs.com/docs/guide.html\#capped
+
+
+</td></tr>
+<tr><td>
+
+[collation?](./goosetyped.gtdocumentmetadataargs.collation.md)
+
+
+</td><td>
+
+
+</td><td>
+
+mongodb.CollationOptions
+
+
+</td><td>
+
+_(Optional)_ See  https://mongoosejs.com/docs/guide.html\#collation
+
+
+</td></tr>
+<tr><td>
+
+[collection?](./goosetyped.gtdocumentmetadataargs.collection.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ The collection name in the database Optional: When not set, induced from model name
+
+
+</td></tr>
+<tr><td>
+
+[connectionId?](./goosetyped.gtdocumentmetadataargs.connectionid.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ The connection id to use when registering the model. If a connection id is not defined (default behavior) then the model is registered using the default connection.
+
+Use `addConnection` to add a new connection to the connection pool available for models.
+
+If at the time of creating the model the connection does not exists, it will "wait" for the connection to be added.
+
+
+</td></tr>
+<tr><td>
+
+[minimize?](./goosetyped.gtdocumentmetadataargs.minimize.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ See  https://mongoosejs.com/docs/guide.html\#minimize
+
+
+</td></tr>
+</tbody></table>

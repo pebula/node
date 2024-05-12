@@ -4,16 +4,51 @@
 
 ## SuiteCompleteEvent interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SuiteCompleteEvent extends BaseEvent<'complete'> 
 ```
-<b>Extends:</b> BaseEvent&lt;'complete'&gt;
+**Extends:** BaseEvent&lt;'complete'&gt;
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [result](./touchstone.suitecompleteevent.result.md) | [CaseResult](./touchstone.caseresult.md)<!-- -->\[\] |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[result](./touchstone.suitecompleteevent.result.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[CaseResult](./touchstone.caseresult.md)<!-- -->\[\]
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

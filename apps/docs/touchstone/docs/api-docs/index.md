@@ -6,7 +6,24 @@
 
 ## Packages
 
-|  Package | Description |
-|  --- | --- |
-|  [@pebula/touchstone](./touchstone.md) |  |
+<table><thead><tr><th>
 
+Package
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[@pebula/touchstone](./touchstone.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

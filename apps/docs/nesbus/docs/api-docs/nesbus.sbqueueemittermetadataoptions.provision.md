@@ -4,7 +4,7 @@
 
 ## SbQueueEmitterMetadataOptions.provision property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 provision?: SbEntityProvisionOption<SbQueueEntityProvision>;
