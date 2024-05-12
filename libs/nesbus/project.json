@@ -5,18 +5,14 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/nesbus/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/nesbus"],
       "options": {
         "outputPath": "coverage/libs/nesbus",
-        "jestConfig": "libs/nesbus/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/nesbus/jest.config.ts"
       }
     },
     "build": {

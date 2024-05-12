@@ -5,18 +5,14 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/tom/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/tom"],
       "options": {
         "outputPath": "coverage/libs/tom",
-        "jestConfig": "libs/tom/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/tom/jest.config.ts"
       }
     },
     "build": {

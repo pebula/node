@@ -10,7 +10,8 @@
         "npmPackageName": "@pebula/nx-build-pipe",
         "pluginOutputPath": "dist/libs/nx-build-pipe",
         "jestConfig": "apps/nx-build-pipe-e2e/jest.config.js",
-        "runInBand": true
+        "runInBand": true,
+        "passWithNoTests": false
       },
       "dependsOn": ["nx-build-pipe:build"]
     }

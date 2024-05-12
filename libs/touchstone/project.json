@@ -5,18 +5,14 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/touchstone/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/touchstone"],
       "options": {
         "outputPath": "coverage/libs/touchstone",
-        "jestConfig": "libs/touchstone/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/touchstone/jest.config.ts"
       }
     },
     "build": {
