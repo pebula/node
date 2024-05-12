@@ -3,16 +3,12 @@ import {
   GtLocalProp,
   ObjectId,
   GtResource, GtModel,
-  GtVersionKey,
   GtDocument, GtSubDocument,
   GtColumn,
   GtDiscriminator,
   GtTimestampCreated,
   GtTimestampUpdated,
   GtIndex,
-  GtToJSON,
-  DocumentArray,
-  GtInitHook, GtSaveHook,
 } from '../../src/index';
 
 export enum SupplierDeliveryType {

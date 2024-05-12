@@ -1,4 +1,3 @@
-// tslint:disable: no-empty
 import { getMemberType, getMethodParamTypes, getMethodReturnType, getCtorParamTypes } from './decorators';
 
 const TestDecor = () => (target: any, key?: any, descriptor?: any) => {};

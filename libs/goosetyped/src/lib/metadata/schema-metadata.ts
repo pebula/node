@@ -71,7 +71,7 @@ export class GtSubDocumentMetadata extends GtSchemaMetadata {
 
       // Because we create the schema empty and define the options later we end up with an _id path automatically
       // added by mongoose since the default option for _id is true... we also need to remove it.
-      if (!!container.schema.path('_id')) {
+      if (container.schema.path('_id')) {
         container.schema.remove('_id');
       }
       container.setSchemaOptions('id', false);

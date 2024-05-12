@@ -1,4 +1,3 @@
-// tslint:disable: ban-types
 import { Type } from './types';
 
 export function getMemberType<T = any>(target: object | Function, key: string | symbol): Type<T, any> {

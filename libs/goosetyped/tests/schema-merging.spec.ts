@@ -1,4 +1,4 @@
-import { initMongoConnection, checkDocumentAfterCreate, checkSubDocumentAfterCreate } from './utils';
+import { initMongoConnection } from './utils';
 // tslint:disable: max-classes-per-file
 import {
   GtLocalProp,
@@ -82,7 +82,7 @@ describe('E2E Tests', () => {
   describe('Schema Merging', () => {
 
     it('mongoose generated sub document class should reflect the declared class', async () => {
-      const entityRef = new Instrucions({
+      new Instrucions({
         delivery: new EmailRecipient({
           entity: new EntityRef({
             refId: "a-b-c-d",

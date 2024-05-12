@@ -7,7 +7,14 @@
       "parserOptions": {
         "project": ["libs/goosetyped/tsconfig.*?.json"]
       },
-      "rules": {}
+      "rules": {
+        "prefer-spread": 0,
+        "no-prototype-builtins": 0,
+        "@typescript-eslint/no-explicit-any": 0,
+        "@typescript-eslint/ban-types": 0,
+        "@typescript-eslint/no-unused-vars": 0,
+        "@typescript-eslint/no-empty-function": 0
+      }
     },
     {
       "files": ["*.ts", "*.tsx"],
@@ -16,6 +23,13 @@
     {
       "files": ["*.js", "*.jsx"],
       "rules": {}
+    },
+    {
+      "files": ["*.json"],
+      "parser": "jsonc-eslint-parser",
+      "rules": {
+        "@nx/dependency-checks": "error"
+      }
     }
   ]
 }

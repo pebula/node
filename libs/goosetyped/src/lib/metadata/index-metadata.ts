@@ -1,5 +1,3 @@
-// tslint:disable: max-classes-per-file
-// tslint:disable: ban-types
 import { GtSingleIndexMetadataArgs, GtCompoundIndexMetadataArgs } from '../interfaces';
 import { GtSchemaContainer } from '../store';
 
