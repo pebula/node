@@ -6,7 +6,7 @@
 
 Registers a connection with GooseTyped to be used to compile Models registered under the same connection Id.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function addConnection(connectionId: string, connectionFactory: () => (mongoose.Connection | Promise<mongoose.Connection>), connectOptions?: GtConnectOptions): Promise<unknown>;
@@ -14,13 +14,72 @@ export declare function addConnection(connectionId: string, connectionFactory: (
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  connectionId | string | A unique id for this connection, will be used to find models with matching connectionId's. |
-|  connectionFactory | () =&gt; (mongoose.Connection \| Promise&lt;mongoose.Connection&gt;) | A function that returns a mongoose connection or a Promise for a mongoose connection. The connection does not have to be alive. |
-|  connectOptions | [GtConnectOptions](./goosetyped.gtconnectoptions.md) |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+connectionId
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+A unique id for this connection, will be used to find models with matching connectionId's.
+
+
+</td></tr>
+<tr><td>
+
+connectionFactory
+
+
+</td><td>
+
+() =&gt; (mongoose.Connection \| Promise&lt;mongoose.Connection&gt;)
+
+
+</td><td>
+
+A function that returns a mongoose connection or a Promise for a mongoose connection. The connection does not have to be alive.
+
+
+</td></tr>
+<tr><td>
+
+connectOptions
+
+
+</td><td>
+
+[GtConnectOptions](./goosetyped.gtconnectoptions.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 Promise&lt;unknown&gt;
 

@@ -4,17 +4,70 @@
 
 ## SbSubscriptionMetadataOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SbSubscriptionMetadataOptions extends SbSubscriberMetadataOptions 
 ```
-<b>Extends:</b> [SbSubscriberMetadataOptions](./nesbus.sbsubscribermetadataoptions.md)
+**Extends:** [SbSubscriberMetadataOptions](./nesbus.sbsubscribermetadataoptions.md)
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [provision](./nesbus.sbsubscriptionmetadataoptions.provision.md) | [SbEntityProvisionOption](./nesbus.sbentityprovisionoption.md)<!-- -->&lt;[SbTopicSubscriptionEntityProvision](./nesbus.sbtopicsubscriptionentityprovision.md)<!-- -->&gt; |  |
-|  [topicName](./nesbus.sbsubscriptionmetadataoptions.topicname.md) | string |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[provision?](./nesbus.sbsubscriptionmetadataoptions.provision.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SbEntityProvisionOption](./nesbus.sbentityprovisionoption.md)<!-- -->&lt;[SbTopicSubscriptionEntityProvision](./nesbus.sbtopicsubscriptionentityprovision.md)<!-- -->&gt;
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[topicName](./nesbus.sbsubscriptionmetadataoptions.topicname.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

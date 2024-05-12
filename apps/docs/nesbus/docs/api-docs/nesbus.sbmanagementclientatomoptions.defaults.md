@@ -4,7 +4,7 @@
 
 ## SbManagementClientAtomOptions.defaults property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 defaults?: SbManagementDefaultsAdapter;

@@ -6,7 +6,7 @@
 
 Indicates (when truthy) if the current case is a variant case. If truthy, the actual value represents the name of the root case which it is a variant of.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 variantParent?: string;

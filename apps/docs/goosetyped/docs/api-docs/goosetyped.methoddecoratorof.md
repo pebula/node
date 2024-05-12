@@ -4,8 +4,8 @@
 
 ## MethodDecoratorOf type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type MethodDecoratorOf<TArgs extends [any] | [any, any] | [any, any, any] | [any, any, any, any] | [any, any, any, any, any] | [any, any, any, any, any, any] | [any, any, any, any, any, any, any] = never, TReturn = void> = <Z extends Partial<Record<K, (...args: TArgs) => TReturn>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(...args: TArgs) => TReturn>) => TypedPropertyDescriptor<(...args: TArgs) => TReturn> | void;
+export type MethodDecoratorOf<TArgs extends [any] | [any, any] | [any, any, any] | [any, any, any, any] | [any, any, any, any, any] | [any, any, any, any, any, any] | [any, any, any, any, any, any, any] = never, TReturn = void> = <Z extends Partial<Record<K, (...args: TArgs) => TReturn>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(...args: TArgs) => TReturn>) => TypedPropertyDescriptor<(...args: TArgs) => TReturn> | void;
 ```

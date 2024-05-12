@@ -12,7 +12,7 @@ For each `Case` select the options by merging the following objects (first one w
 
 - Use options defined on the Case (WE ARE HERE) - Use options defined on the Suite - Use options defined for the entire run - Use the default options defined by the library (static)
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 benchmarkOptions?: BenchmarkOptions;

@@ -4,7 +4,7 @@
 
 ## SbMessageErrorEvent class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class SbMessageErrorEvent 
@@ -12,14 +12,97 @@ export declare class SbMessageErrorEvent
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(options, error)](./nesbus.sbmessageerrorevent._constructor_.md) |  | Constructs a new instance of the <code>SbMessageErrorEvent</code> class |
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(options, error)](./nesbus.sbmessageerrorevent._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Constructs a new instance of the `SbMessageErrorEvent` class
+
+
+</td></tr>
+</tbody></table>
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [error](./nesbus.sbmessageerrorevent.error.md) |  | Error |  |
-|  [options](./nesbus.sbmessageerrorevent.options.md) |  | [SbQueueMetadataOptions](./nesbus.sbqueuemetadataoptions.md) \| [SbSubscriptionMetadataOptions](./nesbus.sbsubscriptionmetadataoptions.md) |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[error](./nesbus.sbmessageerrorevent.error.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+Error
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[options](./nesbus.sbmessageerrorevent.options.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[SbQueueMetadataOptions](./nesbus.sbqueuemetadataoptions.md) \| [SbSubscriptionMetadataOptions](./nesbus.sbsubscriptionmetadataoptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

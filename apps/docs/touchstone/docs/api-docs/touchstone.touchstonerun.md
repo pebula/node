@@ -4,7 +4,7 @@
 
 ## TouchStoneRun interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface TouchStoneRun 
@@ -12,9 +12,88 @@ export interface TouchStoneRun
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [benchmarkOptions](./touchstone.touchstonerun.benchmarkoptions.md) | [BenchmarkOptions](./touchstone.benchmarkoptions.md) | The default benchmark options for the entire run.<!-- -->\#\# Options resolution process:<!-- -->For each <code>Case</code> select the options by merging the following objects (first one wins):<!-- -->- Use options defined on the Case - Use options defined on the Suite - Use options defined for the entire run (WE ARE HERE) - Use the default options defined by the library (static) |
-|  [cases](./touchstone.touchstonerun.cases.md) | string \| string\[\] \| RegExp \| RegExp\[\] \| ((name: string, suiteName: string) =&gt; boolean) |  |
-|  [suites](./touchstone.touchstonerun.suites.md) | string \| string\[\] \| RegExp \| RegExp\[\] \| ((name: string) =&gt; boolean) |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[benchmarkOptions?](./touchstone.touchstonerun.benchmarkoptions.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[BenchmarkOptions](./touchstone.benchmarkoptions.md)
+
+
+</td><td>
+
+_(Optional)_ The default benchmark options for the entire run.
+
+\#\# Options resolution process:
+
+For each `Case` select the options by merging the following objects (first one wins):
+
+- Use options defined on the Case - Use options defined on the Suite - Use options defined for the entire run (WE ARE HERE) - Use the default options defined by the library (static)
+
+
+</td></tr>
+<tr><td>
+
+[cases?](./touchstone.touchstonerun.cases.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| string\[\] \| RegExp \| RegExp\[\] \| ((name: string, suiteName: string) =&gt; boolean)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[suites?](./touchstone.touchstonerun.suites.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| string\[\] \| RegExp \| RegExp\[\] \| ((name: string) =&gt; boolean)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>

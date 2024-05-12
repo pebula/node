@@ -10,10 +10,10 @@ Note that if you're using unique client name you can also provide the specific c
 
 Type (topic/queue) is irrelevant because in any case two identical entities can not share the same name event if they are of different type.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type SbEmitterRef = SbEmitterMetadataOptions;
+export type SbEmitterRef = SbEmitterMetadataOptions;
 ```
-<b>References:</b> [SbEmitterMetadataOptions](./nesbus.sbemittermetadataoptions.md)
+**References:** [SbEmitterMetadataOptions](./nesbus.sbemittermetadataoptions.md)
 

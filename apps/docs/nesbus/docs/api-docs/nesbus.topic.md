@@ -2,12 +2,50 @@
 
 [Home](./index.md) &gt; [@pebula/nesbus](./nesbus.md) &gt; [Topic](./nesbus.topic.md)
 
-## Topic variable
+## Topic() function
 
 Subscribes to incoming events from a topic
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 Topic: (metadata: MetaOrMetaFactory<SbTopicMetadataOptions>) => PropertyDecorator
 ```
+
+## Parameters
+
+<table><thead><tr><th>
+
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+metadata
+
+
+</td><td>
+
+[MetaOrMetaFactory](./nesbus.metaormetafactory.md)<!-- -->&lt;[SbTopicMetadataOptions](./nesbus.sbtopicmetadataoptions.md)<!-- -->&gt;
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
+
+PropertyDecorator
+

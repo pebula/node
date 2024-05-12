@@ -4,8 +4,8 @@
 
 ## SbCorrelationFilter type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type SbCorrelationFilter = Partial<CorrelationFilter>;
+export type SbCorrelationFilter = Partial<CorrelationFilter>;
 ```

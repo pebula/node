@@ -2,12 +2,50 @@
 
 [Home](./index.md) &gt; [@pebula/nesbus](./nesbus.md) &gt; [QueueEmitter](./nesbus.queueemitter.md)
 
-## QueueEmitter variable
+## QueueEmitter() function
 
 Subscribes to incoming events from a queue
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 QueueEmitter: (metadata: MetaOrMetaFactory<SbQueueEmitterMetadataOptions>) => PropertyDecorator
 ```
+
+## Parameters
+
+<table><thead><tr><th>
+
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+metadata
+
+
+</td><td>
+
+[MetaOrMetaFactory](./nesbus.metaormetafactory.md)<!-- -->&lt;[SbQueueEmitterMetadataOptions](./nesbus.sbqueueemittermetadataoptions.md)<!-- -->&gt;
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
+
+PropertyDecorator
+

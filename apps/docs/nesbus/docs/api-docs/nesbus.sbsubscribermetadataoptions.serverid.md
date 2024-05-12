@@ -8,7 +8,7 @@ The unique id of the server that this emitter should use as the underlying liste
 
 By default `SgServerOptions.name` is not set, which is the identifier for the default server. A multi-server environment is not required in most of the scenarios, if that is the case do not set this value.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 serverId?: string;

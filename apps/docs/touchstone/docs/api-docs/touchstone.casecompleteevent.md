@@ -4,16 +4,51 @@
 
 ## CaseCompleteEvent interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface CaseCompleteEvent extends BaseEvent<'caseComplete'> 
 ```
-<b>Extends:</b> BaseEvent&lt;'caseComplete'&gt;
+**Extends:** BaseEvent&lt;'caseComplete'&gt;
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [caseResult](./touchstone.casecompleteevent.caseresult.md) | [CaseResult](./touchstone.caseresult.md) |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[caseResult](./touchstone.casecompleteevent.caseresult.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[CaseResult](./touchstone.caseresult.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

@@ -6,7 +6,7 @@
 
 Returns the discriminator keys for the provided Model / Resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getDiscriminatorKeysOf(modelClass: Ctor<any>): string[];
@@ -14,11 +14,38 @@ export declare function getDiscriminatorKeysOf(modelClass: Ctor<any>): string[];
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  modelClass | [Ctor](./goosetyped.ctor.md)<!-- -->&lt;any&gt; |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+modelClass
+
+
+</td><td>
+
+[Ctor](./goosetyped.ctor.md)<!-- -->&lt;any&gt;
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 string\[\]
 

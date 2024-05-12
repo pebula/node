@@ -4,7 +4,7 @@
 
 ## ServiceBusManagementAadTokenCredentials.resourceGroupName property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resourceGroupName: string;

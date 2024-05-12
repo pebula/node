@@ -8,7 +8,7 @@ Allows excluding paths from versioning (i.e., the internal revision will not be 
 
 You can also use the dedicated decorator `@SkipVersioning()`  https://mongoosejs.com/docs/4.x/docs/guide.html\#skipVersioning
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 skipVersioning?: boolean;

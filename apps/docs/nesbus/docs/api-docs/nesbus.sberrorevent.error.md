@@ -4,7 +4,7 @@
 
 ## SbErrorEvent.error property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly error: Error | MessagingError;

@@ -10,7 +10,7 @@ If the user provision defines a function for the rules it will be fired first an
 
 The rules from the user's provision is passed to this function and the result from this function will be used as the resolved rules for the subscription. I.E., for pass-through make sure you return the \`<!-- -->providedRules array.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onNewSubscriptionRules?(topicName: string, subscriptionName: string, providedRules: SbRuleEntityProvision[], subscriptionProvision: SbTopicSubscriptionEntityProvision): SbRuleEntityProvision[];
@@ -18,14 +18,88 @@ onNewSubscriptionRules?(topicName: string, subscriptionName: string, providedRul
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  topicName | string | The name of the topic grandparent |
-|  subscriptionName | string | The name of subscription parent |
-|  providedRules | [SbRuleEntityProvision](./nesbus.sbruleentityprovision.md)<!-- -->\[\] | The list of rules defined by the user |
-|  subscriptionProvision | [SbTopicSubscriptionEntityProvision](./nesbus.sbtopicsubscriptionentityprovision.md) | The provision of the subscription created |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+topicName
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The name of the topic grandparent
+
+
+</td></tr>
+<tr><td>
+
+subscriptionName
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The name of subscription parent
+
+
+</td></tr>
+<tr><td>
+
+providedRules
+
+
+</td><td>
+
+[SbRuleEntityProvision](./nesbus.sbruleentityprovision.md)<!-- -->\[\]
+
+
+</td><td>
+
+The list of rules defined by the user
+
+
+</td></tr>
+<tr><td>
+
+subscriptionProvision
+
+
+</td><td>
+
+[SbTopicSubscriptionEntityProvision](./nesbus.sbtopicsubscriptionentityprovision.md)
+
+
+</td><td>
+
+The provision of the subscription created
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 [SbRuleEntityProvision](./nesbus.sbruleentityprovision.md)<!-- -->\[\]
 

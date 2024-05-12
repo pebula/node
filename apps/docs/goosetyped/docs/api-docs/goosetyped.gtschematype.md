@@ -4,7 +4,7 @@
 
 ## GtSchemaType() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function GtSchemaType(metadata: GtSchemaTypeMetadataArgs): ClassDecorator;
@@ -12,11 +12,38 @@ export declare function GtSchemaType(metadata: GtSchemaTypeMetadataArgs): ClassD
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  metadata | [GtSchemaTypeMetadataArgs](./goosetyped.gtschematypemetadataargs.md) |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+metadata
+
+
+</td><td>
+
+[GtSchemaTypeMetadataArgs](./goosetyped.gtschematypemetadataargs.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 ClassDecorator
 

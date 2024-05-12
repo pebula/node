@@ -3,11 +3,11 @@
  *
  * To run, execute from the WORKSPACE ROOT directory:
  *
- * node ./apps/docs/.init-docusaurus-lunr-search.js APP_NAME
+ * node ./apps/docs-v2/.init-docusaurus-lunr-search.js APP_NAME
  *
  * Example:
  *
- * node ./apps/docs/.init-docusaurus-lunr-search.js tom
+ * node ./apps/docs-v2/.init-docusaurus-lunr-search.js tom
  */
 const FS = require('fs');
 const { spawn } = require('child_process');
@@ -25,7 +25,7 @@ if (!FS.statSync(fullAppPath).isDirectory()) {
   throw new Error(`Invalid application name "${appName}", must point to a directory`);
 }
 
-spawn(`${process.cwd()}/node_modules/.bin/docusaurus`, ['swizzle', 'docusaurus-lunr-search', 'SearchBar', `./apps/docs/${appName}`,  '--danger'], {
+spawn(`${process.cwd()}/node_modules/.bin/docusaurus`, ['swizzle', '@docusaurus/theme-classic', 'SearchBar', `./apps/docs/${appName}`,  '-e', '-t', '--danger'], {
   stdio: 'inherit',
   cwd: process.cwd(),
 });

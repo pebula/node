@@ -2,10 +2,14 @@
 
 [Home](./index.md) &gt; [@pebula/touchstone](./touchstone.md) &gt; [OnAbort](./touchstone.onabort.md)
 
-## OnAbort variable
+## OnAbort() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 OnAbort: () => <Z extends Partial<Record<K, (args_0: SuiteAbortEvent) => void>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: SuiteAbortEvent) => void>) => void | TypedPropertyDescriptor<(args_0: SuiteAbortEvent) => void>
 ```
+**Returns:**
+
+&lt;Z extends Partial&lt;Record&lt;K, (args\_0: [SuiteAbortEvent](./touchstone.suiteabortevent.md)<!-- -->) =&gt; void&gt;&gt;, K extends string&gt;(target: Z, key: K, descriptor: TypedPropertyDescriptor&lt;(args\_0: [SuiteAbortEvent](./touchstone.suiteabortevent.md)<!-- -->) =&gt; void&gt;) =&gt; void \| TypedPropertyDescriptor&lt;(args\_0: [SuiteAbortEvent](./touchstone.suiteabortevent.md)<!-- -->) =&gt; void&gt;
+

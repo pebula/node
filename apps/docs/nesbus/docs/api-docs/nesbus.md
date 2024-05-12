@@ -6,69 +6,484 @@
 
 ## Classes
 
-|  Class | Description |
-|  --- | --- |
-|  [SbContext](./nesbus.sbcontext.md) |  |
-|  [SbErrorEvent](./nesbus.sberrorevent.md) |  |
-|  [SbErrorHandler](./nesbus.sberrorhandler.md) |  |
-|  [SbMessageErrorEvent](./nesbus.sbmessageerrorevent.md) |  |
-|  [ServiceBusModule](./nesbus.servicebusmodule.md) |  |
+<table><thead><tr><th>
+
+Class
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[SbContext](./nesbus.sbcontext.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbErrorEvent](./nesbus.sberrorevent.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbMessageErrorEvent](./nesbus.sbmessageerrorevent.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[ServiceBusModule](./nesbus.servicebusmodule.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+
+## Abstract Classes
+
+<table><thead><tr><th>
+
+Abstract Class
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[SbErrorHandler](./nesbus.sberrorhandler.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
 
 ## Functions
 
-|  Function | Description |
-|  --- | --- |
-|  [createSbServer(serverId)](./nesbus.createsbserver.md) | Create or returns and existing server.<!-- -->This is for use on the <code>strategy</code> property option when creating a microservice. |
-|  [Queue(metadata)](./nesbus.queue.md) | Subscribes to incoming events from a queue |
-|  [SbIntercept(interceptors)](./nesbus.sbintercept.md) |  |
-|  [Subscription(metadata)](./nesbus.subscription.md) | Subscribes to incoming events from a topic |
+<table><thead><tr><th>
+
+Function
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[createSbServer(serverId)](./nesbus.createsbserver.md)
+
+
+</td><td>
+
+Create or returns and existing server.
+
+This is for use on the `strategy` property option when creating a microservice.
+
+
+</td></tr>
+<tr><td>
+
+[Queue(metadata)](./nesbus.queue.md)
+
+
+</td><td>
+
+Subscribes to incoming events from a queue
+
+
+</td></tr>
+<tr><td>
+
+[QueueEmitter(metadata)](./nesbus.queueemitter.md)
+
+
+</td><td>
+
+Subscribes to incoming events from a queue
+
+
+</td></tr>
+<tr><td>
+
+[SbIntercept(interceptors)](./nesbus.sbintercept.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[Subscription(metadata)](./nesbus.subscription.md)
+
+
+</td><td>
+
+Subscribes to incoming events from a topic
+
+
+</td></tr>
+<tr><td>
+
+[Topic(metadata)](./nesbus.topic.md)
+
+
+</td><td>
+
+Subscribes to incoming events from a topic
+
+
+</td></tr>
+</tbody></table>
 
 ## Interfaces
 
-|  Interface | Description |
-|  --- | --- |
-|  [SbEmitterImp](./nesbus.sbemitterimp.md) | Represents an object that can emit service bus message. (I.E a service bus <code>Sender</code>) |
-|  [SbEmitterMetadataOptions](./nesbus.sbemittermetadataoptions.md) |  |
-|  [SbInterceptor](./nesbus.sbinterceptor.md) |  |
-|  [SbManagementClientAtomOptions](./nesbus.sbmanagementclientatomoptions.md) |  |
-|  [SbManagementClientOptions](./nesbus.sbmanagementclientoptions.md) |  |
-|  [SbManagementDefaultsAdapter](./nesbus.sbmanagementdefaultsadapter.md) |  |
-|  [SbModuleRegisterOptions](./nesbus.sbmoduleregisteroptions.md) |  |
-|  [SbQueueEmitterMetadataOptions](./nesbus.sbqueueemittermetadataoptions.md) |  |
-|  [SbQueueEntityProvision](./nesbus.sbqueueentityprovision.md) |  |
-|  [SbQueueMetadataOptions](./nesbus.sbqueuemetadataoptions.md) |  |
-|  [SbRuleEntityProvision](./nesbus.sbruleentityprovision.md) |  |
-|  [SbServerOptions](./nesbus.sbserveroptions.md) |  |
-|  [SbSubscriberMetadataOptions](./nesbus.sbsubscribermetadataoptions.md) |  |
-|  [SbSubscriptionMetadataOptions](./nesbus.sbsubscriptionmetadataoptions.md) |  |
-|  [SbTopicEntityProvision](./nesbus.sbtopicentityprovision.md) |  |
-|  [SbTopicMetadataOptions](./nesbus.sbtopicmetadataoptions.md) |  |
-|  [SbTopicSubscriptionEntityProvision](./nesbus.sbtopicsubscriptionentityprovision.md) |  |
-|  [ServiceBusAadTokenCredentials](./nesbus.servicebusaadtokencredentials.md) |  |
-|  [ServiceBusConnectionStringCredentials](./nesbus.servicebusconnectionstringcredentials.md) |  |
-|  [ServiceBusManagementAadTokenCredentials](./nesbus.servicebusmanagementaadtokencredentials.md) |  |
-|  [ServiceBusTokenProviderCredentials](./nesbus.servicebustokenprovidercredentials.md) |  |
+<table><thead><tr><th>
 
-## Variables
+Interface
 
-|  Variable | Description |
-|  --- | --- |
-|  [QueueEmitter](./nesbus.queueemitter.md) | Subscribes to incoming events from a queue |
-|  [Topic](./nesbus.topic.md) | Subscribes to incoming events from a topic |
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[SbEmitterImp](./nesbus.sbemitterimp.md)
+
+
+</td><td>
+
+Represents an object that can emit service bus message. (I.E a service bus `Sender`<!-- -->)
+
+
+</td></tr>
+<tr><td>
+
+[SbEmitterMetadataOptions](./nesbus.sbemittermetadataoptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbInterceptor](./nesbus.sbinterceptor.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbManagementClientAtomOptions](./nesbus.sbmanagementclientatomoptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbManagementClientOptions](./nesbus.sbmanagementclientoptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbManagementDefaultsAdapter](./nesbus.sbmanagementdefaultsadapter.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbModuleRegisterOptions](./nesbus.sbmoduleregisteroptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbQueueEmitterMetadataOptions](./nesbus.sbqueueemittermetadataoptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbQueueEntityProvision](./nesbus.sbqueueentityprovision.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbQueueMetadataOptions](./nesbus.sbqueuemetadataoptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbRuleEntityProvision](./nesbus.sbruleentityprovision.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbServerOptions](./nesbus.sbserveroptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbSubscriberMetadataOptions](./nesbus.sbsubscribermetadataoptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbSubscriptionMetadataOptions](./nesbus.sbsubscriptionmetadataoptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbTopicEntityProvision](./nesbus.sbtopicentityprovision.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbTopicMetadataOptions](./nesbus.sbtopicmetadataoptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbTopicSubscriptionEntityProvision](./nesbus.sbtopicsubscriptionentityprovision.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[ServiceBusAadTokenCredentials](./nesbus.servicebusaadtokencredentials.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[ServiceBusConnectionStringCredentials](./nesbus.servicebusconnectionstringcredentials.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[ServiceBusManagementAadTokenCredentials](./nesbus.servicebusmanagementaadtokencredentials.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[ServiceBusTokenProviderCredentials](./nesbus.servicebustokenprovidercredentials.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
 
 ## Type Aliases
 
-|  Type Alias | Description |
-|  --- | --- |
-|  [MetaOrMetaFactory](./nesbus.metaormetafactory.md) |  |
-|  [SbContextArgs](./nesbus.sbcontextargs.md) |  |
-|  [SbCorrelationFilter](./nesbus.sbcorrelationfilter.md) |  |
-|  [SbEmitterRef](./nesbus.sbemitterref.md) | A Reference to an existing client emitter. This is basically a query to get the service bus <code>Sender</code> instance for the client registered at the queue / topic name.<!-- -->Note that if you're using unique client name you can also provide the specific client id to target.<!-- -->Type (topic/queue) is irrelevant because in any case two identical entities can not share the same name event if they are of different type. |
-|  [SbEntityProvisionOption](./nesbus.sbentityprovisionoption.md) |  |
-|  [SbMessageEmitter](./nesbus.sbmessageemitter.md) | Represents an object that can be used (directly or indirectly) to emit messages to service bus. This can be either a directly emitting object or a reference that is used to resolve a directly emitting object. |
-|  [SbQueue](./nesbus.sbqueue.md) |  |
-|  [SbRule](./nesbus.sbrule.md) |  |
-|  [SbSqlFilter](./nesbus.sbsqlfilter.md) |  |
-|  [SbSubscription](./nesbus.sbsubscription.md) |  |
-|  [SbTopic](./nesbus.sbtopic.md) |  |
+<table><thead><tr><th>
 
+Type Alias
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[MetaOrMetaFactory](./nesbus.metaormetafactory.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbContextArgs](./nesbus.sbcontextargs.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbCorrelationFilter](./nesbus.sbcorrelationfilter.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbEmitterRef](./nesbus.sbemitterref.md)
+
+
+</td><td>
+
+A Reference to an existing client emitter. This is basically a query to get the service bus `Sender` instance for the client registered at the queue / topic name.
+
+Note that if you're using unique client name you can also provide the specific client id to target.
+
+Type (topic/queue) is irrelevant because in any case two identical entities can not share the same name event if they are of different type.
+
+
+</td></tr>
+<tr><td>
+
+[SbEntityProvisionOption](./nesbus.sbentityprovisionoption.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbMessageEmitter](./nesbus.sbmessageemitter.md)
+
+
+</td><td>
+
+Represents an object that can be used (directly or indirectly) to emit messages to service bus. This can be either a directly emitting object or a reference that is used to resolve a directly emitting object.
+
+
+</td></tr>
+<tr><td>
+
+[SbQueue](./nesbus.sbqueue.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbRule](./nesbus.sbrule.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbSqlFilter](./nesbus.sbsqlfilter.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbSubscription](./nesbus.sbsubscription.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SbTopic](./nesbus.sbtopic.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

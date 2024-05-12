@@ -10,7 +10,7 @@ with each case represented as a bar.
 
 |               |                                                                                     |
 |---------------|-------------------------------------------------------------------------------------|
-| Import        | import { VegaLiteReporter } from '@pebula/touchstone/reporters/vega-lite'           |
+| Import        | `import { VegaLiteReporter } from '@pebula/touchstone/reporters/vega-lite'`        |
 | Dependencies  | canvas, vega, vega-lite                                                             |
 | Configuration | **Required**                                                                        |
 

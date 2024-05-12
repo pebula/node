@@ -1,6 +1,9 @@
 // Code from: https://github.com/yannickglt/nx-github-build/blob/master/tools/scripts/run-many.js
 // https://medium.com/emoteev-blog/10x-faster-ci-with-nx-and-github-actions-9a51fc4e82a6
-const execSync = require('child_process').execSync;
+const execSync = require('node:child_process').execSync;
+const os = require('node:os');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const target = process.argv[2];
 const jobIndex = Number(process.argv[3]);
@@ -18,16 +21,17 @@ function normalizeRef(ref) {
 if (headRef !== baseRef) {
   nxArgs.push(`--head=${normalizeRef(headRef)}`);
   nxArgs.push(`--base=${normalizeRef(baseRef)}`);
-} else {
-  nxArgs.push('--all');
 }
 
-const affected = execSync(
-  `npx nx print-affected --target=${target} ${nxArgs.join(' ')}`
-).toString('utf-8');
-const array = JSON.parse(affected)
-  .tasks.map((t) => t.target.project)
-  .filter(p => !p.startsWith('docs-'))
+const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), `${target}-`));
+execSync(`npx nx affected -t ${target} ${nxArgs.join(' ')} --exclude='!tag:release,tag:plugin' --graph ${path.join(tempDir, 'g.json')}`);
+const graph = JSON.parse(fs.readFileSync(path.join(tempDir, 'g.json'), { encoding: 'utf-8' }));
+execSync(`npx rimraf ${tempDir}`);
+
+const array = graph
+  .tasks
+  .roots
+  .map(r => graph.tasks.tasks[r].target.project)
   .slice()
   .sort();
 

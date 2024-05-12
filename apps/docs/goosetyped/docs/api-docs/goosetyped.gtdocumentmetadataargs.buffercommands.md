@@ -6,7 +6,7 @@
 
 See  https://mongoosejs.com/docs/guide.html\#bufferCommands
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 bufferCommands?: boolean;

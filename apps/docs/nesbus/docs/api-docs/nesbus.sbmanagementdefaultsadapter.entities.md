@@ -4,7 +4,7 @@
 
 ## SbManagementDefaultsAdapter.entities property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 entities?: {

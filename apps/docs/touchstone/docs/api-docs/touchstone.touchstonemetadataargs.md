@@ -4,7 +4,7 @@
 
 ## TouchStoneMetadataArgs interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface TouchStoneMetadataArgs 
@@ -12,9 +12,88 @@ export interface TouchStoneMetadataArgs
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [manualRun](./touchstone.touchstonemetadataargs.manualrun.md) | boolean | When true, will not run automatically, instead it will wait for manual execution. |
-|  [name](./touchstone.touchstonemetadataargs.name.md) | string | The name of the touchstone configuration. This is not mandatory, if not set the class name is used.<!-- -->You can ues this value to filter configurations. |
-|  [onAutoRunEnd](./touchstone.touchstonemetadataargs.onautorunend.md) | 'processExit' \| 'ignore' \| ((err?: Error) =&gt; void) | The action to when auto run (<code>manualRun</code> is not true) has finished.<!-- -->- processExit: Exist the process - ignore: Do nothing - Function: Invoke a handler function processExist |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[manualRun?](./touchstone.touchstonemetadataargs.manualrun.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ When true, will not run automatically, instead it will wait for manual execution.
+
+
+</td></tr>
+<tr><td>
+
+[name?](./touchstone.touchstonemetadataargs.name.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ The name of the touchstone configuration. This is not mandatory, if not set the class name is used.
+
+You can ues this value to filter configurations.
+
+
+</td></tr>
+<tr><td>
+
+[onAutoRunEnd?](./touchstone.touchstonemetadataargs.onautorunend.md)
+
+
+</td><td>
+
+
+</td><td>
+
+'processExit' \| 'ignore' \| ((err?: Error) =&gt; void)
+
+
+</td><td>
+
+_(Optional)_ The action to when auto run (`manualRun` is not true) has finished.
+
+- processExit: Exist the process - ignore: Do nothing - Function: Invoke a handler function
+
+ processExist
+
+
+</td></tr>
+</tbody></table>

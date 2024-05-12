@@ -4,7 +4,7 @@
 
 ## Resource.prototype property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 prototype: SubDocument & T;

@@ -6,7 +6,7 @@
 
 Define how the topic for this subscription is provisioned. Unlike "deadLetter", the default behavior is "skip" as it is usually the role of the topic's owner to create it.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 topic?: SbEntityProvisionOption<SbTopicEntityProvision>;

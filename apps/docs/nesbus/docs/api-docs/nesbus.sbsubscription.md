@@ -4,8 +4,8 @@
 
 ## SbSubscription type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type SbSubscription = Partial<Omit<SubscriptionDetails, 'subscriptionName' | 'topicName'>>;
+export type SbSubscription = Partial<Omit<SubscriptionDetails, 'subscriptionName' | 'topicName'>>;
 ```

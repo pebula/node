@@ -10,7 +10,7 @@ Use `addConnection` to add a new connection to the connection pool available for
 
 If at the time of creating the model the connection does not exists, it will "wait" for the connection to be added.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 connectionId?: string;

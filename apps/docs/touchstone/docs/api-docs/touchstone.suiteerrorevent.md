@@ -4,16 +4,51 @@
 
 ## SuiteErrorEvent interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SuiteErrorEvent extends BaseEvent<'error'> 
 ```
-<b>Extends:</b> BaseEvent&lt;'error'&gt;
+**Extends:** BaseEvent&lt;'error'&gt;
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [error](./touchstone.suiteerrorevent.error.md) | Error |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[error](./touchstone.suiteerrorevent.error.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Error
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

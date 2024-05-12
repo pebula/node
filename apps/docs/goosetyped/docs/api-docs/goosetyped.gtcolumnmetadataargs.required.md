@@ -8,7 +8,7 @@ If true adds a required validator for this property
 
  https://mongoosejs.com/docs/api/schematypeoptions.html\#schematypeoptions\_SchemaTypeOptions-required
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 required?: ColumnRequired;

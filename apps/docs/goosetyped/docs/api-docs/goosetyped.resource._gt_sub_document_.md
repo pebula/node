@@ -4,7 +4,7 @@
 
 ## Resource.\[GT\_SUB\_DOCUMENT\] property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 [GT_SUB_DOCUMENT]: boolean;

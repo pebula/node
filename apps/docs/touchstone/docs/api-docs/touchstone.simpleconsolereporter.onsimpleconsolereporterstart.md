@@ -4,7 +4,7 @@
 
 ## SimpleConsoleReporter.onSimpleConsoleReporterStart() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onSimpleConsoleReporterStart(event: SuiteStartEvent): void;
@@ -12,11 +12,38 @@ onSimpleConsoleReporterStart(event: SuiteStartEvent): void;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  event | [SuiteStartEvent](./touchstone.suitestartevent.md) |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+event
+
+
+</td><td>
+
+[SuiteStartEvent](./touchstone.suitestartevent.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 void
 

@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/tom/src",
   "projectType": "library",
+  "tags": ["release"],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
@@ -22,7 +23,7 @@
       }
     },
     "build": {
-      "executor": "./dist/libs/nx-build-pipe:build",
+      "executor": "@pebula/nx-build-pipe:build",
       "options": {
         "task": {
           "type": "group",
@@ -63,7 +64,7 @@
       }
     },
     "apiExtractor": {
-      "executor": "./dist/libs/nx-api-extractor:build",
+      "executor": "@pebula/nx-api-extractor:build",
       "options": {
         "buildTargetName": "package",
         "baseConfigFile": "./api-extractor.base.json"

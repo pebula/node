@@ -4,24 +4,105 @@
 
 ## ServiceBusModule class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class ServiceBusModule implements OnModuleInit, OnModuleDestroy 
 ```
-<b>Implements:</b> OnModuleInit, OnModuleDestroy
+**Implements:** OnModuleInit, OnModuleDestroy
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(discoveryFactory, errorHandler, metadataHelper, clientOptions, serverOptions)](./nesbus.servicebusmodule._constructor_.md) |  | Constructs a new instance of the <code>ServiceBusModule</code> class |
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(discoveryFactory, errorHandler, metadataHelper, clientOptions, serverOptions)](./nesbus.servicebusmodule._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Constructs a new instance of the `ServiceBusModule` class
+
+
+</td></tr>
+</tbody></table>
 
 ## Methods
 
-|  Method | Modifiers | Description |
-|  --- | --- | --- |
-|  [onModuleDestroy()](./nesbus.servicebusmodule.onmoduledestroy.md) |  |  |
-|  [onModuleInit()](./nesbus.servicebusmodule.onmoduleinit.md) |  |  |
-|  [register(options)](./nesbus.servicebusmodule.register.md) | <code>static</code> | Register a service bus server/s that will be used as the underlying resources to generate <code>Queue</code> &amp; <code>Subscription</code> listeners.<!-- -->You can provide multiple server configurations, however make sure that each of them has a unique name. Note that not setting a name is a unique name by itself. |
+<table><thead><tr><th>
 
+Method
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[onModuleDestroy()](./nesbus.servicebusmodule.onmoduledestroy.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[onModuleInit()](./nesbus.servicebusmodule.onmoduleinit.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[register(options)](./nesbus.servicebusmodule.register.md)
+
+
+</td><td>
+
+`static`
+
+
+</td><td>
+
+Register a service bus server/s that will be used as the underlying resources to generate `Queue` &amp; `Subscription` listeners.
+
+You can provide multiple server configurations, however make sure that each of them has a unique name. Note that not setting a name is a unique name by itself.
+
+
+</td></tr>
+</tbody></table>

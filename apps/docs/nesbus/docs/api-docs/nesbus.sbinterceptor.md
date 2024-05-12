@@ -4,7 +4,7 @@
 
 ## SbInterceptor interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SbInterceptor<T = any, R = any> 
@@ -12,7 +12,24 @@ export interface SbInterceptor<T = any, R = any>
 
 ## Methods
 
-|  Method | Description |
-|  --- | --- |
-|  [intercept(context, next)](./nesbus.sbinterceptor.intercept.md) |  |
+<table><thead><tr><th>
 
+Method
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[intercept(context, next)](./nesbus.sbinterceptor.intercept.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

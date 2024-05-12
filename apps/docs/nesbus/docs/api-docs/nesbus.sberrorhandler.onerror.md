@@ -4,7 +4,7 @@
 
 ## SbErrorHandler.onError() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 abstract onError(event: SbErrorEvent): Promise<void>;
@@ -12,11 +12,38 @@ abstract onError(event: SbErrorEvent): Promise<void>;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  event | [SbErrorEvent](./nesbus.sberrorevent.md) |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+event
+
+
+</td><td>
+
+[SbErrorEvent](./nesbus.sberrorevent.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 Promise&lt;void&gt;
 

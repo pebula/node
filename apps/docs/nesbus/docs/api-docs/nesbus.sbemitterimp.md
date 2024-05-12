@@ -6,7 +6,7 @@
 
 Represents an object that can emit service bus message. (I.E a service bus `Sender`<!-- -->)
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SbEmitterImp 
@@ -14,7 +14,24 @@ export interface SbEmitterImp
 
 ## Methods
 
-|  Method | Description |
-|  --- | --- |
-|  [send(message)](./nesbus.sbemitterimp.send.md) |  |
+<table><thead><tr><th>
 
+Method
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[send(message)](./nesbus.sbemitterimp.send.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

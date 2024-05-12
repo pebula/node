@@ -10,7 +10,7 @@ A list of variants that will run in the suite, each as a separate case. I.E. run
 
 &gt; Note that filters apply on each variant like it will on any regular case.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 variants?: Array<Required<Omit<CaseMetadataArgs, 'variants'>>>;

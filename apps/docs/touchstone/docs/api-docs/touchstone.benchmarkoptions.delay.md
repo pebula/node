@@ -6,7 +6,7 @@
 
 The delay between test cycles (secs).
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 delay?: number;

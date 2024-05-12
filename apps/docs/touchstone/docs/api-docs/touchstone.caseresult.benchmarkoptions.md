@@ -6,7 +6,7 @@
 
 The benchmark options used to run this case.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 benchmarkOptions: BenchmarkOptions;

@@ -4,12 +4,12 @@
 
 ## SbContext.getData() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getData<TBody = any>(): TBody;
 ```
-<b>Returns:</b>
+**Returns:**
 
 TBody
 

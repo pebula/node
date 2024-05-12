@@ -12,7 +12,7 @@ Note that the name most be unique across all running instances (runtime scoped, 
 
 If a duplicate name is detected the process will throw.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 name?: string;

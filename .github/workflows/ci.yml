@@ -13,7 +13,6 @@ env:
   SERVICEBUS_CONNECTION_STRING: ${{ secrets.SERVICEBUS_CONNECTION_STRING }}
 
 jobs:
-
   install-deps:
     runs-on: ubuntu-latest
     steps:
@@ -108,11 +107,11 @@ jobs:
     needs: distributed-task
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/setup-node@v1
-      with:
-        node-version: 20
-    - name: Coveralls Finished
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.github_token }}
-        parallel-finished: true
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 20
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          parallel-finished: true

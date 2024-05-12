@@ -4,7 +4,7 @@
 
 ## SbServerOptions.management property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 management?: SbManagementClientOptions[keyof SbManagementClientOptions];

@@ -8,7 +8,7 @@ Create or returns and existing server.
 
 This is for use on the `strategy` property option when creating a microservice.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function createSbServer(serverId?: string): SbServer;
@@ -16,11 +16,40 @@ export declare function createSbServer(serverId?: string): SbServer;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  serverId | string |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+serverId
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 SbServer
 

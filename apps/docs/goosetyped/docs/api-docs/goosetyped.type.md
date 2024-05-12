@@ -4,10 +4,10 @@
 
 ## Type type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type Type<TInstance, TStatic> = Ctor<TInstance> & TStatic;
+export type Type<TInstance, TStatic> = Ctor<TInstance> & TStatic;
 ```
-<b>References:</b> [Ctor](./goosetyped.ctor.md)
+**References:** [Ctor](./goosetyped.ctor.md)
 

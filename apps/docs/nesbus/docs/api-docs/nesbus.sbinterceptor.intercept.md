@@ -4,7 +4,7 @@
 
 ## SbInterceptor.intercept() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 intercept(context: SbContext, next: CallHandler<T>): Observable<R> | Promise<Observable<R>>;
@@ -12,12 +12,52 @@ intercept(context: SbContext, next: CallHandler<T>): Observable<R> | Promise<Obs
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  context | [SbContext](./nesbus.sbcontext.md) |  |
-|  next | CallHandler&lt;T&gt; |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+context
+
+
+</td><td>
+
+[SbContext](./nesbus.sbcontext.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+next
+
+
+</td><td>
+
+CallHandler&lt;T&gt;
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 Observable&lt;R&gt; \| Promise&lt;Observable&lt;R&gt;&gt;
 

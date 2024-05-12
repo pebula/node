@@ -4,7 +4,7 @@
 
 ## GtPluginMetadataArgs.plugin() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 plugin(schema: mongoose.Schema, options: T): void;
@@ -12,12 +12,52 @@ plugin(schema: mongoose.Schema, options: T): void;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  schema | mongoose.Schema |  |
-|  options | T |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+schema
+
+
+</td><td>
+
+mongoose.Schema
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+options
+
+
+</td><td>
+
+T
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 void
 

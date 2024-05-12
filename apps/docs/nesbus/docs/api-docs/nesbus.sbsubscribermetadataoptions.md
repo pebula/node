@@ -4,7 +4,7 @@
 
 ## SbSubscriberMetadataOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SbSubscriberMetadataOptions 
@@ -12,11 +12,118 @@ export interface SbSubscriberMetadataOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [handlerOptions](./nesbus.sbsubscribermetadataoptions.handleroptions.md) | MessageHandlerOptions |  |
-|  [name](./nesbus.sbsubscribermetadataoptions.name.md) | string |  |
-|  [receiveMode](./nesbus.sbsubscribermetadataoptions.receivemode.md) | ReceiveMode |  |
-|  [serverId](./nesbus.sbsubscribermetadataoptions.serverid.md) | string | The unique id of the server that this emitter should use as the underlying listener. This should match the server name defined in <code>SgServerOptions.name</code>.<!-- -->By default <code>SgServerOptions.name</code> is not set, which is the identifier for the default server. A multi-server environment is not required in most of the scenarios, if that is the case do not set this value. |
-|  [sessionOptions](./nesbus.sbsubscribermetadataoptions.sessionoptions.md) | SessionReceiverOptions |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[handlerOptions?](./nesbus.sbsubscribermetadataoptions.handleroptions.md)
+
+
+</td><td>
+
+
+</td><td>
+
+MessageHandlerOptions
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[name](./nesbus.sbsubscribermetadataoptions.name.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[receiveMode](./nesbus.sbsubscribermetadataoptions.receivemode.md)
+
+
+</td><td>
+
+
+</td><td>
+
+ReceiveMode
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[serverId?](./nesbus.sbsubscribermetadataoptions.serverid.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ The unique id of the server that this emitter should use as the underlying listener. This should match the server name defined in `SgServerOptions.name`<!-- -->.
+
+By default `SgServerOptions.name` is not set, which is the identifier for the default server. A multi-server environment is not required in most of the scenarios, if that is the case do not set this value.
+
+
+</td></tr>
+<tr><td>
+
+[sessionOptions?](./nesbus.sbsubscribermetadataoptions.sessionoptions.md)
+
+
+</td><td>
+
+
+</td><td>
+
+SessionReceiverOptions
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>

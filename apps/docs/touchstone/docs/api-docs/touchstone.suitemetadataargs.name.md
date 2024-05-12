@@ -6,7 +6,7 @@
 
 The name of the suite. This is not mandatory, if not set the class name is used.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 name?: string;

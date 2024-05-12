@@ -6,7 +6,7 @@
 
 Declares an unique index.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 unique?: boolean | any;

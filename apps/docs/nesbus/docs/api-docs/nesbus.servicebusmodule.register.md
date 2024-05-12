@@ -8,7 +8,7 @@ Register a service bus server/s that will be used as the underlying resources to
 
 You can provide multiple server configurations, however make sure that each of them has a unique name. Note that not setting a name is a unique name by itself.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static register(options: SbModuleRegisterOptions): DynamicModule;
@@ -16,11 +16,38 @@ static register(options: SbModuleRegisterOptions): DynamicModule;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  options | [SbModuleRegisterOptions](./nesbus.sbmoduleregisteroptions.md) |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+options
+
+
+</td><td>
+
+[SbModuleRegisterOptions](./nesbus.sbmoduleregisteroptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 DynamicModule
 

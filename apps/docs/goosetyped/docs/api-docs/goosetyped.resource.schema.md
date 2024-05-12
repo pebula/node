@@ -4,8 +4,8 @@
 
 ## Resource.schema property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-schema: Schema;
+schema: M.Schema;
 ```

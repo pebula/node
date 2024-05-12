@@ -4,7 +4,7 @@
 
 ## GtIndex() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function GtIndex(metadata: GtCompoundIndexMetadataArgs): ClassDecorator;
@@ -12,11 +12,38 @@ export declare function GtIndex(metadata: GtCompoundIndexMetadataArgs): ClassDec
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  metadata | [GtCompoundIndexMetadataArgs](./goosetyped.gtcompoundindexmetadataargs.md) |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+metadata
+
+
+</td><td>
+
+[GtCompoundIndexMetadataArgs](./goosetyped.gtcompoundindexmetadataargs.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 ClassDecorator
 

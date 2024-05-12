@@ -4,7 +4,7 @@
 
 ## CaseCompleteEvent.caseResult property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 caseResult: CaseResult;

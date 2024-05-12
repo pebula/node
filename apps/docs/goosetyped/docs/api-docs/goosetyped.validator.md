@@ -6,10 +6,10 @@
 
  https://mongoosejs.com/docs/api.html\#schematype\_SchemaType-validate
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type Validator = RegExp | ValidatorFn | ValidatorOpts | ValidatorOpts[];
+export type Validator = RegExp | ValidatorFn | ValidatorOpts | ValidatorOpts[];
 ```
-<b>References:</b> [ValidatorFn](./goosetyped.validatorfn.md)<!-- -->, [ValidatorOpts](./goosetyped.validatoropts.md)
+**References:** [ValidatorFn](./goosetyped.validatorfn.md)<!-- -->, [ValidatorOpts](./goosetyped.validatoropts.md)
 

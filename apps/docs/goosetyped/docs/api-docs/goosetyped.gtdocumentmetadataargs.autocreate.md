@@ -6,7 +6,7 @@
 
 See  https://mongoosejs.com/docs/guide.html\#autoCreate
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 autoCreate?: boolean;

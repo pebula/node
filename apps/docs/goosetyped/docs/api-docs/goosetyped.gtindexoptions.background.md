@@ -6,7 +6,7 @@
 
 Wether to run the indexing process in the background or not  true
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 background?: boolean;

@@ -4,12 +4,12 @@
 
 ## ServiceBusModule.onModuleInit() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onModuleInit(): Promise<void>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

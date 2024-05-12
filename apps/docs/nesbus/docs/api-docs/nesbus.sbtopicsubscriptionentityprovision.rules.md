@@ -6,7 +6,7 @@
 
 A list of rules (actions/filters) to apply to the subscription or, a function that results a list of rules dynamically.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 rules?: SbRuleEntityProvision[] | ((topicName: string, subscriptionName: string) => SbRuleEntityProvision[]);

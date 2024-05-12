@@ -4,7 +4,7 @@
 
 ## ServiceBusTokenProviderCredentials interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ServiceBusTokenProviderCredentials 
@@ -12,8 +12,59 @@ export interface ServiceBusTokenProviderCredentials
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [host](./nesbus.servicebustokenprovidercredentials.host.md) | string |  |
-|  [tokenProvider](./nesbus.servicebustokenprovidercredentials.tokenprovider.md) | TokenProvider |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[host](./nesbus.servicebustokenprovidercredentials.host.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[tokenProvider](./nesbus.servicebustokenprovidercredentials.tokenprovider.md)
+
+
+</td><td>
+
+
+</td><td>
+
+TokenProvider
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

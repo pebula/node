@@ -4,8 +4,8 @@
 
 ## ValidatorFn type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type ValidatorFn<T = any> = (value: T) => boolean | Promise<boolean>;
+export type ValidatorFn<T = any> = (value: T) => boolean | Promise<boolean>;
 ```

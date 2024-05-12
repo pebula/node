@@ -6,7 +6,7 @@
 
 The default number of times to execute a test on a benchmark’s first cycle.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 initCount?: number;

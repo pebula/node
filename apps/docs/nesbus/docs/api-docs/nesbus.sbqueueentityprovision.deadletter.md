@@ -6,7 +6,7 @@
 
 Define how the dead letter queue/topic is provisioned ("forwardDeadLetteredMessagesTo") &gt; Relevant only when "forwardDeadLetteredMessagesTo" has a value.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 deadLetter?: SbLinkedEntityProvisionOption;

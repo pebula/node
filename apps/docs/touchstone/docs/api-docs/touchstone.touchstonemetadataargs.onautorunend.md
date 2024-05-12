@@ -10,7 +10,7 @@ The action to when auto run (`manualRun` is not true) has finished.
 
  processExist
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onAutoRunEnd?: 'processExit' | 'ignore' | ((err?: Error) => void);

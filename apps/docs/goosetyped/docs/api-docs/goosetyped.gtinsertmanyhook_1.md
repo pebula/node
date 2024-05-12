@@ -4,7 +4,7 @@
 
 ## GtInsertManyHook() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function GtInsertManyHook(stage: 'pre'): StaticMethodDecoratorOf<never, any>;
@@ -12,11 +12,38 @@ export declare function GtInsertManyHook(stage: 'pre'): StaticMethodDecoratorOf<
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  stage | 'pre' |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+stage
+
+
+</td><td>
+
+'pre'
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 [StaticMethodDecoratorOf](./goosetyped.staticmethoddecoratorof.md)<!-- -->&lt;never, any&gt;
 

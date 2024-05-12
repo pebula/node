@@ -4,8 +4,8 @@
 
 ## SbContextArgs type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type SbContextArgs<T extends keyof SbSubscriberTypeMap = keyof SbSubscriberTypeMap> = [SbSubscriberMetadata<T>, ServiceBusMessage];
+export type SbContextArgs<T extends keyof SbSubscriberTypeMap = keyof SbSubscriberTypeMap> = [SbSubscriberMetadata<T>, ServiceBusMessage];
 ```

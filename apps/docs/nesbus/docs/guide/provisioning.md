@@ -5,8 +5,7 @@ sidebar_label: 6. Provisioning
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import AzureDocsLink from '@site-shared/theme/AzureDocsLink';
-import ApiDocsLink from '@site-shared/theme/ApiDocsLink';
+import { AzureDocsLink, ApiDocsLink } from '@doc-components';
 
 Provisioning adds management capabilities over your service bus entities.
 

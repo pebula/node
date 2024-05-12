@@ -4,7 +4,7 @@
 
 ## SbErrorEvent.options property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly options: SbQueueMetadataOptions | SbSubscriptionMetadataOptions;

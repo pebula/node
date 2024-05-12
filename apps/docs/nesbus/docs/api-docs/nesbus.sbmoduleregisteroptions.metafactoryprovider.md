@@ -6,7 +6,7 @@
 
 An optional providers that when set resolves to the value injected to the metadata factory function, when used.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 metaFactoryProvider?: Omit<Exclude<Provider, Type<any>>, 'provide'> | Type<any>;

@@ -6,12 +6,12 @@
 
 Return all Models / Resources registered in GooseTyped
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare function findModels(): Array<Model | Resource>;
+export declare function findModels(): Array<Model<any> | Resource>;
 ```
-<b>Returns:</b>
+**Returns:**
 
-Array&lt;[Model](./goosetyped.model.md) \| [Resource](./goosetyped.resource.md)<!-- -->&gt;
+Array&lt;Model&lt;any&gt; \| [Resource](./goosetyped.resource.md)<!-- -->&gt;
 

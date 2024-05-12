@@ -6,7 +6,7 @@
 
 See  https://mongoosejs.com/docs/guide.html\#autoIndex
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 autoIndex?: boolean;

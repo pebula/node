@@ -4,8 +4,8 @@
 
 ## SbSqlFilter type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type SbSqlFilter = Partial<Omit<SqlFilter, 'sqlParameters'>>;
+export type SbSqlFilter = Partial<Omit<SqlFilter, 'sqlParameters'>>;
 ```

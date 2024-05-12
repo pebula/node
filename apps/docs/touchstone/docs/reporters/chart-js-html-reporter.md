@@ -7,11 +7,11 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 The `ChartJsHtmlReporter` is a charting reporter which outputs an HTML file that uses the `CharJS` charting library.
 
-|               |                                                                                  |
-|---------------|----------------------------------------------------------------------------------|
-| Import        | import { ChartJsHtmlReporter } from '@pebula/touchstone/reporters/chart-js-html' |
-| Dependencies  | None                                                                             |
-| Configuration | Optional                                                                         |
+|               |                                                                                    |
+|---------------|------------------------------------------------------------------------------------|
+| Import        | `import { ChartJsHtmlReporter } from '@pebula/touchstone/reporters/chart-js-html'` |
+| Dependencies  | None                                                                               |
+| Configuration | Optional                                                                           |
 
 ## Configuration
 

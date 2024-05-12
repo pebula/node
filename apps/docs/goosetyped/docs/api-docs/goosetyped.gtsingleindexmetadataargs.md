@@ -4,7 +4,7 @@
 
 ## GtSingleIndexMetadataArgs interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GtSingleIndexMetadataArgs 
@@ -12,8 +12,61 @@ export interface GtSingleIndexMetadataArgs
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [options](./goosetyped.gtsingleindexmetadataargs.options.md) | [GtIndexOptions](./goosetyped.gtindexoptions.md) |  |
-|  [sort](./goosetyped.gtsingleindexmetadataargs.sort.md) | [GtIndexSortOrder](./goosetyped.gtindexsortorder.md) |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[options?](./goosetyped.gtsingleindexmetadataargs.options.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[GtIndexOptions](./goosetyped.gtindexoptions.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[sort](./goosetyped.gtsingleindexmetadataargs.sort.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[GtIndexSortOrder](./goosetyped.gtindexsortorder.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

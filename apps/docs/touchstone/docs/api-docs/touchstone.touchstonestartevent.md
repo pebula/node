@@ -4,7 +4,7 @@
 
 ## TouchStoneStartEvent interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface TouchStoneStartEvent 
@@ -12,7 +12,42 @@ export interface TouchStoneStartEvent
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [type](./touchstone.touchstonestartevent.type.md) | 'touchStoneStart' |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[type](./touchstone.touchstonestartevent.type.md)
+
+
+</td><td>
+
+
+</td><td>
+
+'touchStoneStart'
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

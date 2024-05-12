@@ -4,22 +4,88 @@
 
 ## GtQuery() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare function GtQuery<Q1, Q2, Q3, Q4>(Q1: Ctor<Q1>, Q2: Ctor<Q2>, Q3: Ctor<Q3>, Q4: Ctor<Q4>): <T, C>(Cls: Ctor<Document & T> & Model & C) => Ctor<Document & T> & C & Model<Q1 & Q2 & Q3 & Q4>;
+export declare function GtQuery<Q1, Q2, Q3, Q4>(Q1: Ctor<Q1>, Q2: Ctor<Q2>, Q3: Ctor<Q3>, Q4: Ctor<Q4>): <T, C>(Cls: Ctor<Document & T> & ModelExtensions & C) => Ctor<Document & T> & C & ModelExtensions<Q1 & Q2 & Q3 & Q4>;
 ```
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  Q1 | [Ctor](./goosetyped.ctor.md)<!-- -->&lt;Q1&gt; |  |
-|  Q2 | [Ctor](./goosetyped.ctor.md)<!-- -->&lt;Q2&gt; |  |
-|  Q3 | [Ctor](./goosetyped.ctor.md)<!-- -->&lt;Q3&gt; |  |
-|  Q4 | [Ctor](./goosetyped.ctor.md)<!-- -->&lt;Q4&gt; |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
 
-&lt;T, C&gt;(Cls: [Ctor](./goosetyped.ctor.md)<!-- -->&lt;Document &amp; T&gt; &amp; [Model](./goosetyped.model.md) &amp; C) =&gt; [Ctor](./goosetyped.ctor.md)<!-- -->&lt;Document &amp; T&gt; &amp; C &amp; [Model](./goosetyped.model.md)<!-- -->&lt;Q1 &amp; Q2 &amp; Q3 &amp; Q4&gt;
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+Q1
+
+
+</td><td>
+
+[Ctor](./goosetyped.ctor.md)<!-- -->&lt;Q1&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+Q2
+
+
+</td><td>
+
+[Ctor](./goosetyped.ctor.md)<!-- -->&lt;Q2&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+Q3
+
+
+</td><td>
+
+[Ctor](./goosetyped.ctor.md)<!-- -->&lt;Q3&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+Q4
+
+
+</td><td>
+
+[Ctor](./goosetyped.ctor.md)<!-- -->&lt;Q4&gt;
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
+
+&lt;T, C&gt;(Cls: [Ctor](./goosetyped.ctor.md)<!-- -->&lt;Document &amp; T&gt; &amp; [ModelExtensions](./goosetyped.modelextensions.md) &amp; C) =&gt; [Ctor](./goosetyped.ctor.md)<!-- -->&lt;Document &amp; T&gt; &amp; C &amp; [ModelExtensions](./goosetyped.modelextensions.md)<!-- -->&lt;Q1 &amp; Q2 &amp; Q3 &amp; Q4&gt;
 

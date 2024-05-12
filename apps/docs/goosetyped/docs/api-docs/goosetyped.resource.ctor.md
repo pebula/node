@@ -6,7 +6,7 @@
 
 Like `create()` but without the save, replaces the constructor. Useful when you want to create a new instance from a base discriminator class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 ctor<T extends SubDocument>(this: Ctor<T>, doc: Partial<T>): T;
@@ -14,12 +14,52 @@ ctor<T extends SubDocument>(this: Ctor<T>, doc: Partial<T>): T;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  this | [Ctor](./goosetyped.ctor.md)<!-- -->&lt;T&gt; |  |
-|  doc | Partial&lt;T&gt; |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+this
+
+
+</td><td>
+
+[Ctor](./goosetyped.ctor.md)<!-- -->&lt;T&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+doc
+
+
+</td><td>
+
+Partial&lt;T&gt;
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 T
 

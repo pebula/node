@@ -4,7 +4,7 @@
 
 ## GtInitHook() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function GtInitHook(stage: 'pre' | 'post'): MethodDecoratorOf<never, void>;
@@ -12,11 +12,38 @@ export declare function GtInitHook(stage: 'pre' | 'post'): MethodDecoratorOf<nev
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  stage | 'pre' \| 'post' |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+stage
+
+
+</td><td>
+
+'pre' \| 'post'
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 [MethodDecoratorOf](./goosetyped.methoddecoratorof.md)<!-- -->&lt;never, void&gt;
 

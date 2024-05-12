@@ -4,10 +4,10 @@
 
 ## ObjectId class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class ObjectId extends String 
 ```
-<b>Extends:</b> String
+**Extends:** String
 

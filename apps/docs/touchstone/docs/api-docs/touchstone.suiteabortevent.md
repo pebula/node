@@ -4,10 +4,10 @@
 
 ## SuiteAbortEvent interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SuiteAbortEvent extends BaseEvent<'abort'> 
 ```
-<b>Extends:</b> BaseEvent&lt;'abort'&gt;
+**Extends:** BaseEvent&lt;'abort'&gt;
 

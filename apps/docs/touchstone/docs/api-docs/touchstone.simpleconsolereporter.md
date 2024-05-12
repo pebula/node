@@ -4,7 +4,7 @@
 
 ## SimpleConsoleReporter class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare abstract class SimpleConsoleReporter 
@@ -12,11 +12,80 @@ export declare abstract class SimpleConsoleReporter
 
 ## Methods
 
-|  Method | Modifiers | Description |
-|  --- | --- | --- |
-|  [onSimpleConsoleReporterComplete(event)](./touchstone.simpleconsolereporter.onsimpleconsolereportercomplete.md) |  |  |
-|  [onSimpleConsoleReporterCycle(event)](./touchstone.simpleconsolereporter.onsimpleconsolereportercycle.md) |  |  |
-|  [onSimpleConsoleReporterError(event)](./touchstone.simpleconsolereporter.onsimpleconsolereportererror.md) |  |  |
-|  [onSimpleConsoleReporterFinalize(event)](./touchstone.simpleconsolereporter.onsimpleconsolereporterfinalize.md) |  |  |
-|  [onSimpleConsoleReporterStart(event)](./touchstone.simpleconsolereporter.onsimpleconsolereporterstart.md) |  |  |
+<table><thead><tr><th>
 
+Method
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[onSimpleConsoleReporterComplete(event)](./touchstone.simpleconsolereporter.onsimpleconsolereportercomplete.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[onSimpleConsoleReporterCycle(event)](./touchstone.simpleconsolereporter.onsimpleconsolereportercycle.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[onSimpleConsoleReporterError(event)](./touchstone.simpleconsolereporter.onsimpleconsolereportererror.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[onSimpleConsoleReporterFinalize(event)](./touchstone.simpleconsolereporter.onsimpleconsolereporterfinalize.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[onSimpleConsoleReporterStart(event)](./touchstone.simpleconsolereporter.onsimpleconsolereporterstart.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

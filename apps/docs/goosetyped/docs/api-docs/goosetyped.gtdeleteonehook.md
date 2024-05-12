@@ -4,7 +4,7 @@
 
 ## GtDeleteOneHook() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function GtDeleteOneHook(stage: 'pre' | 'post'): MethodDecoratorOf<never, any>;
@@ -12,11 +12,38 @@ export declare function GtDeleteOneHook(stage: 'pre' | 'post'): MethodDecoratorO
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  stage | 'pre' \| 'post' |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+stage
+
+
+</td><td>
+
+'pre' \| 'post'
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 [MethodDecoratorOf](./goosetyped.methoddecoratorof.md)<!-- -->&lt;never, any&gt;
 

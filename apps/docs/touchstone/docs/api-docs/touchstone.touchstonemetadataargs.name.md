@@ -8,7 +8,7 @@ The name of the touchstone configuration. This is not mandatory, if not set the 
 
 You can ues this value to filter configurations.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 name?: string;

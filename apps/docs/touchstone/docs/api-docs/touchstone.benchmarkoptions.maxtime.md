@@ -6,7 +6,7 @@
 
 The maximum time a benchmark is allowed to run before finishing (secs).
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 maxTime?: number;

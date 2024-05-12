@@ -6,8 +6,8 @@
 
 See  https://mongoosejs.com/docs/guide.html\#collation
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-collation?: mongodb.CollationDocument;
+collation?: mongodb.CollationOptions;
 ```

@@ -2,12 +2,52 @@
 
 [Home](./index.md) &gt; [@pebula/touchstone](./touchstone.md) &gt; [TouchStone](./touchstone.touchstone.md)
 
-## TouchStone variable
+## TouchStone() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 TouchStone: (metadata?: TouchStoneMetadataArgs) => ClassDecoratorOf<TouchStoneRun & {
     [key: string]: any;
-}, unknown>
+}>
 ```
+
+## Parameters
+
+<table><thead><tr><th>
+
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+metadata
+
+
+</td><td>
+
+[TouchStoneMetadataArgs](./touchstone.touchstonemetadataargs.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
+
+ClassDecoratorOf&lt;[TouchStoneRun](./touchstone.touchstonerun.md) &amp; \{ \[key: string\]: any; }&gt;
+

@@ -8,7 +8,7 @@ The unique id of the client that this emitter should use as the underlying emitt
 
 By default `SgClientOptions.name` is not set, which is the identifier for the default client. A multi-client environment is not required in most of the scenarios, if that is the case do not set this value.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 clientId?: string;

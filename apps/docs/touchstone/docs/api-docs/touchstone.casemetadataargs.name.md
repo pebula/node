@@ -6,7 +6,7 @@
 
 The name of the performance test. This is not mandatory, if not set the method name is used.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 name?: string;

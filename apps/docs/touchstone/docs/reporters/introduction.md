@@ -3,7 +3,7 @@ id: introduction
 title: Introduction
 sidebar_label: 1. Introduction
 ---
-import DocLink from '@site-shared/theme/DocLink';
+import { DocLink } from '@doc-components';
 
 Reporters are used to output the statistics and result of the suite/s, case/s and other metadata collected in the benchmarking process.
 

@@ -4,7 +4,7 @@
 
 ## TouchStoneRun.cases property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 cases?: string | string[] | RegExp | RegExp[] | ((name: string, suiteName: string) => boolean);

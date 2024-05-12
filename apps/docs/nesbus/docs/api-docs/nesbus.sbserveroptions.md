@@ -4,7 +4,7 @@
 
 ## SbServerOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SbServerOptions 
@@ -12,11 +12,126 @@ export interface SbServerOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [client](./nesbus.sbserveroptions.client.md) | SbConnectionOptions&lt;SbCredentials, ServiceBusClientOptions&gt; |  |
-|  [logger](./nesbus.sbserveroptions.logger.md) | LoggerService |  |
-|  [management](./nesbus.sbserveroptions.management.md) | SbManagementClientOptions\[keyof SbManagementClientOptions\] |  |
-|  [name](./nesbus.sbserveroptions.name.md) | string | A unique name given to this server which allow subscriber filter and other paring capabilities. When not set, the server is defined as the default server used for all events defined without filtering.<!-- -->Additionally, the name is used to pair server &amp; client together to allow sharing of resources (connections/senders/receivers). Since by default all names are empty, all servers &amp; clients are shared.<!-- -->Note that the name most be unique across all running instances (runtime scoped, not NestJS application scope) This means that only one default (empty name) server is allowed.<!-- -->If a duplicate name is detected the process will throw. |
-|  [registerHandlers](./nesbus.sbserveroptions.registerhandlers.md) | 'sequence' \| 'parallel' | How handlers are registers in service bus. - sequence: register one after the other - parallel: register all at once<!-- -->The default value is parallel |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[client](./nesbus.sbserveroptions.client.md)
+
+
+</td><td>
+
+
+</td><td>
+
+SbConnectionOptions&lt;SbCredentials, ServiceBusClientOptions&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[logger?](./nesbus.sbserveroptions.logger.md)
+
+
+</td><td>
+
+
+</td><td>
+
+LoggerService
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[management?](./nesbus.sbserveroptions.management.md)
+
+
+</td><td>
+
+
+</td><td>
+
+SbManagementClientOptions\[keyof SbManagementClientOptions\]
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[name?](./nesbus.sbserveroptions.name.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ A unique name given to this server which allow subscriber filter and other paring capabilities. When not set, the server is defined as the default server used for all events defined without filtering.
+
+Additionally, the name is used to pair server &amp; client together to allow sharing of resources (connections/senders/receivers). Since by default all names are empty, all servers &amp; clients are shared.
+
+Note that the name most be unique across all running instances (runtime scoped, not NestJS application scope) This means that only one default (empty name) server is allowed.
+
+If a duplicate name is detected the process will throw.
+
+
+</td></tr>
+<tr><td>
+
+[registerHandlers?](./nesbus.sbserveroptions.registerhandlers.md)
+
+
+</td><td>
+
+
+</td><td>
+
+'sequence' \| 'parallel'
+
+
+</td><td>
+
+_(Optional)_ How handlers are registers in service bus. - sequence: register one after the other - parallel: register all at once
+
+The default value is parallel
+
+
+</td></tr>
+</tbody></table>

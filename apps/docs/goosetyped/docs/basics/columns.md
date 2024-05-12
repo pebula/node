@@ -3,7 +3,7 @@ id: columns
 title: Columns
 sidebar_label: 2. Columns
 ---
-import ApiDocsLink from '@site-shared/theme/ApiDocsLink';
+import { ApiDocsLink } from '@doc-components';
 
 Columns are the building blocks of every model.
 
@@ -49,7 +49,7 @@ export class Customer extends GtModel() {
 }
 ```
 
-You can review all of the metadata options in the API docs for <ApiDocsLink type="interface" symbol="GtColumnMetadataArgs">GtColumnMetadataArgs<T\></ApiDocsLink>.
+You can review all of the metadata options in the API docs for <ApiDocsLink type="interface" symbol="GtColumnMetadataArgs">GtColumnMetadataArgs\<T></ApiDocsLink>.
 
 ## Column Type
 

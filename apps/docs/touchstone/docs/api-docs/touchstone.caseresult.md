@@ -4,7 +4,7 @@
 
 ## CaseResult interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface CaseResult 
@@ -12,14 +12,171 @@ export interface CaseResult
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [benchmarkOptions](./touchstone.caseresult.benchmarkoptions.md) | [BenchmarkOptions](./touchstone.benchmarkoptions.md) | The benchmark options used to run this case. |
-|  [hz](./touchstone.caseresult.hz.md) | number | The number of executions per second. (Operations Per Second)  https://benchmarkjs.com/docs\#prototype\_hz |
-|  [hzDeviation](./touchstone.caseresult.hzdeviation.md) | number |  |
-|  [hzSamples](./touchstone.caseresult.hzsamples.md) | number\[\] |  |
-|  [name](./touchstone.caseresult.name.md) | string |  |
-|  [stats](./touchstone.caseresult.stats.md) | [CaseStats](./touchstone.casestats.md) | An object of stats including mean, margin or error, and standard deviation. |
-|  [timing](./touchstone.caseresult.timing.md) | Times | An object of timing data including cycle, elapsed, period, start, and stop.  https://benchmarkjs.com/docs\#prototype\_times |
-|  [variantParent](./touchstone.caseresult.variantparent.md) | string | Indicates (when truthy) if the current case is a variant case. If truthy, the actual value represents the name of the root case which it is a variant of. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[benchmarkOptions](./touchstone.caseresult.benchmarkoptions.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[BenchmarkOptions](./touchstone.benchmarkoptions.md)
+
+
+</td><td>
+
+The benchmark options used to run this case.
+
+
+</td></tr>
+<tr><td>
+
+[hz](./touchstone.caseresult.hz.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+The number of executions per second. (Operations Per Second)  https://benchmarkjs.com/docs\#prototype\_hz
+
+
+</td></tr>
+<tr><td>
+
+[hzDeviation](./touchstone.caseresult.hzdeviation.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[hzSamples](./touchstone.caseresult.hzsamples.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number\[\]
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[name](./touchstone.caseresult.name.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[stats](./touchstone.caseresult.stats.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[CaseStats](./touchstone.casestats.md)
+
+
+</td><td>
+
+An object of stats including mean, margin or error, and standard deviation.
+
+
+</td></tr>
+<tr><td>
+
+[timing](./touchstone.caseresult.timing.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Times
+
+
+</td><td>
+
+An object of timing data including cycle, elapsed, period, start, and stop.  https://benchmarkjs.com/docs\#prototype\_times
+
+
+</td></tr>
+<tr><td>
+
+[variantParent?](./touchstone.caseresult.variantparent.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ Indicates (when truthy) if the current case is a variant case. If truthy, the actual value represents the name of the root case which it is a variant of.
+
+
+</td></tr>
+</tbody></table>

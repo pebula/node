@@ -6,97 +6,729 @@
 
 ## Classes
 
-|  Class | Description |
-|  --- | --- |
-|  [DocumentArray](./goosetyped.documentarray.md) |  |
-|  [ObjectId](./goosetyped.objectid.md) |  |
+<table><thead><tr><th>
+
+Class
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[DocumentArray](./goosetyped.documentarray.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[ObjectId](./goosetyped.objectid.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
 
 ## Functions
 
-|  Function | Description |
-|  --- | --- |
-|  [addConnection(connectionId, connectionFactory, connectOptions)](./goosetyped.addconnection.md) | Registers a connection with GooseTyped to be used to compile Models registered under the same connection Id. |
-|  [findModels()](./goosetyped.findmodels.md) | Return all Models / Resources registered in GooseTyped |
-|  [getDiscriminatorKeyFor(modelClass)](./goosetyped.getdiscriminatorkeyfor.md) | Returns the discriminator key for the provided Model / Resource. Only valid for discriminator implementation, thr base class will not yield a value. |
-|  [getDiscriminatorKeysOf(modelClass)](./goosetyped.getdiscriminatorkeysof.md) | Returns the discriminator keys for the provided Model / Resource. |
-|  [getEnum(cls, path)](./goosetyped.getenum.md) | Returns the list of enums registered for a <code>path</code> in a Model / Resource. |
-|  [getSchemaOf(modelClass)](./goosetyped.getschemaof.md) | Returns the mongoose schema for the provided Model / Resource |
-|  [GtColumn(metadata)](./goosetyped.gtcolumn.md) |  |
-|  [GtDeleteOneHook(stage)](./goosetyped.gtdeleteonehook.md) |  |
-|  [GtDiscriminator()](./goosetyped.gtdiscriminator.md) |  |
-|  [GtDocument(metadata)](./goosetyped.gtdocument.md) |  |
-|  [GtIndex(metadata)](./goosetyped.gtindex.md) |  |
-|  [GtIndex(metadata)](./goosetyped.gtindex_1.md) |  |
-|  [GtInitHook(stage)](./goosetyped.gtinithook.md) |  |
-|  [GtInsertManyHook(stage)](./goosetyped.gtinsertmanyhook.md) |  |
-|  [GtInsertManyHook(stage)](./goosetyped.gtinsertmanyhook_1.md) |  |
-|  [GtLocalProp()](./goosetyped.gtlocalprop.md) |  |
-|  [GtMethod()](./goosetyped.gtmethod.md) |  |
-|  [GtModel()](./goosetyped.gtmodel.md) |  |
-|  [GtModel(m1)](./goosetyped.gtmodel_1.md) |  |
-|  [GtModel(m1, m2)](./goosetyped.gtmodel_2.md) |  |
-|  [GtModel(m1, m2, m3)](./goosetyped.gtmodel_3.md) |  |
-|  [GtModel(m1, m2, m3, m4)](./goosetyped.gtmodel_4.md) |  |
-|  [GtModel(m1, m2, m3, m4, m5)](./goosetyped.gtmodel_5.md) |  |
-|  [GtPlugin(metadata)](./goosetyped.gtplugin.md) |  |
-|  [GtQuery(QH)](./goosetyped.gtquery.md) |  |
-|  [GtQuery(Q1, Q2)](./goosetyped.gtquery_1.md) |  |
-|  [GtQuery(Q1, Q2, Q3)](./goosetyped.gtquery_2.md) |  |
-|  [GtQuery(Q1, Q2, Q3, Q4)](./goosetyped.gtquery_3.md) |  |
-|  [GtRemoveHook(stage)](./goosetyped.gtremovehook.md) |  |
-|  [GtResource()](./goosetyped.gtresource.md) |  |
-|  [GtResource(m1)](./goosetyped.gtresource_1.md) |  |
-|  [GtResource(m1, m2)](./goosetyped.gtresource_2.md) |  |
-|  [GtResource(m1, m2, m3)](./goosetyped.gtresource_3.md) |  |
-|  [GtResource(m1, m2, m3, m4)](./goosetyped.gtresource_4.md) |  |
-|  [GtResource(m1, m2, m3, m4, m5)](./goosetyped.gtresource_5.md) |  |
-|  [GtSaveHook(stage)](./goosetyped.gtsavehook.md) |  |
-|  [GtSchemaType(metadata)](./goosetyped.gtschematype.md) |  |
-|  [GtSkipVersioning()](./goosetyped.gtskipversioning.md) |  |
-|  [GtSubDocument(metadata)](./goosetyped.gtsubdocument.md) |  |
-|  [GtTimestampCreated()](./goosetyped.gttimestampcreated.md) |  |
-|  [GtTimestampUpdated()](./goosetyped.gttimestampupdated.md) |  |
-|  [GtToJSON(config)](./goosetyped.gttojson.md) | A decorator for <code>toJSON</code> with a prototype bound implementation for the <code>transform</code> function.<!-- -->Note that it recommended to avoid using a transform function (through schema options) or a transform method through this decorator and instead apply a transformation by overriding the <code>toJSON</code>. Call the super method and apply changed to the returned value, this is much better then using an out of context transformer. https://mongoosejs.com/docs/4.x/docs/guide.html\#toJSON |
-|  [GtToObject(config)](./goosetyped.gttoobject.md) | A decorator for <code>toObject</code> with a prototype bound implementation for the <code>transform</code> function.<!-- -->Note that it recommended to avoid using a transform function (through schema options) or a transform method through this decorator and instead apply a transformation by overriding the <code>toObject</code>. Call the super method and apply changed to the returned value, this is much better then using an out of context transformer. https://mongoosejs.com/docs/4.x/docs/guide.html\#toObject |
-|  [GtUpdateOneHook(stage)](./goosetyped.gtupdateonehook.md) |  |
-|  [GtValidateHook(stage)](./goosetyped.gtvalidatehook.md) |  |
-|  [GtVersionKey()](./goosetyped.gtversionkey.md) |  |
-|  [mapSchemaType(runtimeType, metadata)](./goosetyped.mapschematype.md) |  |
+<table><thead><tr><th>
+
+Function
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[addConnection(connectionId, connectionFactory, connectOptions)](./goosetyped.addconnection.md)
+
+
+</td><td>
+
+Registers a connection with GooseTyped to be used to compile Models registered under the same connection Id.
+
+
+</td></tr>
+<tr><td>
+
+[findModels()](./goosetyped.findmodels.md)
+
+
+</td><td>
+
+Return all Models / Resources registered in GooseTyped
+
+
+</td></tr>
+<tr><td>
+
+[getDiscriminatorKeyFor(modelClass)](./goosetyped.getdiscriminatorkeyfor.md)
+
+
+</td><td>
+
+Returns the discriminator key for the provided Model / Resource. Only valid for discriminator implementation, thr base class will not yield a value.
+
+
+</td></tr>
+<tr><td>
+
+[getDiscriminatorKeysOf(modelClass)](./goosetyped.getdiscriminatorkeysof.md)
+
+
+</td><td>
+
+Returns the discriminator keys for the provided Model / Resource.
+
+
+</td></tr>
+<tr><td>
+
+[getEnum(cls, path)](./goosetyped.getenum.md)
+
+
+</td><td>
+
+Returns the list of enums registered for a `path` in a Model / Resource.
+
+
+</td></tr>
+<tr><td>
+
+[getSchemaOf(modelClass)](./goosetyped.getschemaof.md)
+
+
+</td><td>
+
+Returns the mongoose schema for the provided Model / Resource
+
+
+</td></tr>
+<tr><td>
+
+[GtColumn(metadata)](./goosetyped.gtcolumn.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtDeleteOneHook(stage)](./goosetyped.gtdeleteonehook.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtDiscriminator()](./goosetyped.gtdiscriminator.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtDocument(metadata)](./goosetyped.gtdocument.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtIndex(metadata)](./goosetyped.gtindex.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtIndex(metadata)](./goosetyped.gtindex_1.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtInitHook(stage)](./goosetyped.gtinithook.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtInsertManyHook(stage)](./goosetyped.gtinsertmanyhook.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtInsertManyHook(stage)](./goosetyped.gtinsertmanyhook_1.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtLocalProp()](./goosetyped.gtlocalprop.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtMethod()](./goosetyped.gtmethod.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtModel(m1, m2, m3, m4, m5)](./goosetyped.gtmodel.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtPlugin(metadata)](./goosetyped.gtplugin.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtQuery(QH)](./goosetyped.gtquery.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtQuery(Q1, Q2)](./goosetyped.gtquery_1.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtQuery(Q1, Q2, Q3)](./goosetyped.gtquery_2.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtQuery(Q1, Q2, Q3, Q4)](./goosetyped.gtquery_3.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtRemoveHook(stage)](./goosetyped.gtremovehook.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtResource()](./goosetyped.gtresource.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtResource(m1)](./goosetyped.gtresource_1.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtResource(m1, m2)](./goosetyped.gtresource_2.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtResource(m1, m2, m3)](./goosetyped.gtresource_3.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtResource(m1, m2, m3, m4)](./goosetyped.gtresource_4.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtResource(m1, m2, m3, m4, m5)](./goosetyped.gtresource_5.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtSaveHook(stage)](./goosetyped.gtsavehook.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtSchemaType(metadata)](./goosetyped.gtschematype.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtSkipVersioning()](./goosetyped.gtskipversioning.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtSubDocument(metadata)](./goosetyped.gtsubdocument.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtTimestampCreated()](./goosetyped.gttimestampcreated.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtTimestampUpdated()](./goosetyped.gttimestampupdated.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtToJSON(config)](./goosetyped.gttojson.md)
+
+
+</td><td>
+
+A decorator for `toJSON` with a prototype bound implementation for the `transform` function.
+
+Note that it recommended to avoid using a transform function (through schema options) or a transform method through this decorator and instead apply a transformation by overriding the `toJSON`<!-- -->. Call the super method and apply changed to the returned value, this is much better then using an out of context transformer.
+
+ https://mongoosejs.com/docs/4.x/docs/guide.html\#toJSON
+
+
+</td></tr>
+<tr><td>
+
+[GtToObject(config)](./goosetyped.gttoobject.md)
+
+
+</td><td>
+
+A decorator for `toObject` with a prototype bound implementation for the `transform` function.
+
+Note that it recommended to avoid using a transform function (through schema options) or a transform method through this decorator and instead apply a transformation by overriding the `toObject`<!-- -->. Call the super method and apply changed to the returned value, this is much better then using an out of context transformer.
+
+ https://mongoosejs.com/docs/4.x/docs/guide.html\#toObject
+
+
+</td></tr>
+<tr><td>
+
+[GtUpdateOneHook(stage)](./goosetyped.gtupdateonehook.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtValidateHook(stage)](./goosetyped.gtvalidatehook.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtVersionKey()](./goosetyped.gtversionkey.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[mapSchemaType(runtimeType, metadata)](./goosetyped.mapschematype.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
 
 ## Interfaces
 
-|  Interface | Description |
-|  --- | --- |
-|  [Ctor](./goosetyped.ctor.md) |  |
-|  [GtBeforeCompileModelHandler](./goosetyped.gtbeforecompilemodelhandler.md) |  |
-|  [GtColumnMetadataArgs](./goosetyped.gtcolumnmetadataargs.md) |  |
-|  [GtCompoundIndexMetadataArgs](./goosetyped.gtcompoundindexmetadataargs.md) |  |
-|  [GtConnectOptions](./goosetyped.gtconnectoptions.md) |  |
-|  [GtDocumentMetadataArgs](./goosetyped.gtdocumentmetadataargs.md) |  |
-|  [GtIndexOptions](./goosetyped.gtindexoptions.md) |  |
-|  [GtPluginMetadataArgs](./goosetyped.gtpluginmetadataargs.md) |  |
-|  [GtSingleIndexMetadataArgs](./goosetyped.gtsingleindexmetadataargs.md) |  |
-|  [GtSubDocumentMetadataArgs](./goosetyped.gtsubdocumentmetadataargs.md) |  |
-|  [Model](./goosetyped.model.md) |  |
-|  [Resource](./goosetyped.resource.md) |  |
-|  [SubDocument](./goosetyped.subdocument.md) |  |
-|  [ValidatorMessageContext](./goosetyped.validatormessagecontext.md) |  |
-|  [ValidatorOpts](./goosetyped.validatoropts.md) |  |
+<table><thead><tr><th>
+
+Interface
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[Ctor](./goosetyped.ctor.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtBeforeCompileModelHandler](./goosetyped.gtbeforecompilemodelhandler.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtColumnMetadataArgs](./goosetyped.gtcolumnmetadataargs.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtCompoundIndexMetadataArgs](./goosetyped.gtcompoundindexmetadataargs.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtConnectOptions](./goosetyped.gtconnectoptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtDocumentMetadataArgs](./goosetyped.gtdocumentmetadataargs.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtIndexOptions](./goosetyped.gtindexoptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtPluginMetadataArgs](./goosetyped.gtpluginmetadataargs.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtSingleIndexMetadataArgs](./goosetyped.gtsingleindexmetadataargs.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtSubDocumentMetadataArgs](./goosetyped.gtsubdocumentmetadataargs.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[ModelExtensions](./goosetyped.modelextensions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[Resource](./goosetyped.resource.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SubDocument](./goosetyped.subdocument.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[ValidatorMessageContext](./goosetyped.validatormessagecontext.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[ValidatorOpts](./goosetyped.validatoropts.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
 
 ## Type Aliases
 
-|  Type Alias | Description |
-|  --- | --- |
-|  [ClassDecoratorOf](./goosetyped.classdecoratorof.md) |  |
-|  [ColumnRequired](./goosetyped.columnrequired.md) |  |
-|  [GtIndexSortOrder](./goosetyped.gtindexsortorder.md) |  |
-|  [GtSchemaTypeMetadataArgs](./goosetyped.gtschematypemetadataargs.md) |  |
-|  [MethodDecoratorOf](./goosetyped.methoddecoratorof.md) |  |
-|  [PropertyDecoratorOf](./goosetyped.propertydecoratorof.md) |  |
-|  [StaticMethodDecoratorOf](./goosetyped.staticmethoddecoratorof.md) |  |
-|  [StripDoc](./goosetyped.stripdoc.md) | A type helper that strips away all members of the mongoose Document instance from the type |
-|  [StripDoColumns](./goosetyped.stripdocolumns.md) | A type helper that strips away all members of the mongoose Document instance from the type as well as all methods. |
-|  [Type](./goosetyped.type.md) |  |
-|  [Validator](./goosetyped.validator.md) |  https://mongoosejs.com/docs/api.html\#schematype\_SchemaType-validate |
-|  [ValidatorFn](./goosetyped.validatorfn.md) |  |
+<table><thead><tr><th>
 
+Type Alias
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[ClassDecoratorOf](./goosetyped.classdecoratorof.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[ColumnRequired](./goosetyped.columnrequired.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtIndexSortOrder](./goosetyped.gtindexsortorder.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[GtSchemaTypeMetadataArgs](./goosetyped.gtschematypemetadataargs.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[MethodDecoratorOf](./goosetyped.methoddecoratorof.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[PropertyDecoratorOf](./goosetyped.propertydecoratorof.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[StaticMethodDecoratorOf](./goosetyped.staticmethoddecoratorof.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[StripDoc](./goosetyped.stripdoc.md)
+
+
+</td><td>
+
+A type helper that strips away all members of the mongoose Document instance from the type
+
+
+</td></tr>
+<tr><td>
+
+[StripDoColumns](./goosetyped.stripdocolumns.md)
+
+
+</td><td>
+
+A type helper that strips away all members of the mongoose Document instance from the type as well as all methods.
+
+
+</td></tr>
+<tr><td>
+
+[Type](./goosetyped.type.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[Validator](./goosetyped.validator.md)
+
+
+</td><td>
+
+ https://mongoosejs.com/docs/api.html\#schematype\_SchemaType-validate
+
+
+</td></tr>
+<tr><td>
+
+[ValidatorFn](./goosetyped.validatorfn.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

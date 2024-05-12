@@ -4,7 +4,7 @@
 
 ## CaseStats.median property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 median: number;

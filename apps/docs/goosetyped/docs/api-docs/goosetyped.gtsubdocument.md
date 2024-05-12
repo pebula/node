@@ -4,7 +4,7 @@
 
 ## GtSubDocument() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function GtSubDocument(metadata?: GtSubDocumentMetadataArgs): ClassDecoratorOf<any, Resource>;
@@ -12,11 +12,40 @@ export declare function GtSubDocument(metadata?: GtSubDocumentMetadataArgs): Cla
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  metadata | [GtSubDocumentMetadataArgs](./goosetyped.gtsubdocumentmetadataargs.md) |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+metadata
+
+
+</td><td>
+
+[GtSubDocumentMetadataArgs](./goosetyped.gtsubdocumentmetadataargs.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 [ClassDecoratorOf](./goosetyped.classdecoratorof.md)<!-- -->&lt;any, [Resource](./goosetyped.resource.md)<!-- -->&gt;
 

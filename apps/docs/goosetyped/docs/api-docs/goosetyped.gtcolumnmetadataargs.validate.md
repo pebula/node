@@ -8,7 +8,7 @@ Adds validator(s) for this document path. Validators always receive the value to
 
  https://mongoosejs.com/docs/api.html\#schematype\_SchemaType-validate
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 validate?: Validator;

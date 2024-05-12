@@ -6,7 +6,7 @@
 
 When true, will not run automatically, instead it will wait for manual execution.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 manualRun?: boolean;

@@ -1,0 +1,43 @@
+import React from 'react';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import styles from './styles.module.css';
+
+function typeToSegment(type: string) {
+  switch (type) {
+    case 'schema':
+      return 'guide';
+    case 'schemaType':
+      return 'SchemaTypes';
+    case 'connection':
+      return 'Connections';
+    case 'model':
+      return 'Models';
+    case 'document':
+      return 'Documents';
+    case 'subDocument':
+      return 'subdocs';
+    case 'query':
+      return 'Queries';
+    case 'validation':
+      return 'Validation';
+    case 'middleware':
+      return 'Middleware';
+    case 'populate':
+      return 'Populate';
+    case 'discriminator':
+      return 'Discriminators';
+    case 'plugins':
+      return 'Plugins';
+  }
+  throw new Error(`Unknown link segment type ${type}`);
+}
+
+export function MongooseDocsLink(props: React.PropsWithChildren<{ type: string; hash: string; display: string; }>) {
+  const context = useDocusaurusContext();
+  const { type, hash, display } = props;
+
+  const href = `${context.siteConfig.customFields!.mongooseDocsUrl}/${typeToSegment(type).toLowerCase()}.html${hash ? '#' + hash : ''}`;
+  return <a href={href} target="_blank">{ props.children || display || hash || ''}</a>;
+}
+
+export default MongooseDocsLink;

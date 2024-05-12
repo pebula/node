@@ -6,7 +6,7 @@ sidebar_label: 4. Decorator API Class Mixins
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ExtRelativeLink from '@site-shared/theme/ExtRelativeLink';
+import { ExtRelativeLink } from '@doc-components';
 
 In the previous page we create one big decorator API class with all of our plugins inside.  
 This is not extensible enough, we want to be able to populate our API with predefined plugins which we can share, install etc...

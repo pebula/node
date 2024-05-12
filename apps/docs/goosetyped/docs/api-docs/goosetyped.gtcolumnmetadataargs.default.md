@@ -8,7 +8,7 @@ Sets a default value or value for the path. If the value is a function, the retu
 
  https://mongoosejs.com/docs/api/schematypeoptions.html\#schematypeoptions\_SchemaTypeOptions-default
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 default?: T | ((...args: any[]) => T);

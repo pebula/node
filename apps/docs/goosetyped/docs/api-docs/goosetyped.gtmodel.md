@@ -4,12 +4,112 @@
 
 ## GtModel() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare function GtModel(): Ctor<Document> & Model;
+export declare function GtModel<T1, C1, T2, C2, T3, C3, T4, C4, T5, C5>(m1?: C1 & Ctor<T1>, m2?: C2 & Ctor<T2>, m3?: C3 & Ctor<T3>, m4?: C4 & Ctor<T4>, m5?: C5 & Ctor<T5>): Ctor<Document<any, any, T1 & T2 & T3 & T4 & T5> & T1 & T2 & T3 & T4 & T5> & ModelExtensions<{}, {}, {}, any>;
 ```
-<b>Returns:</b>
 
-[Ctor](./goosetyped.ctor.md)<!-- -->&lt;Document&gt; &amp; [Model](./goosetyped.model.md)
+## Parameters
+
+<table><thead><tr><th>
+
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+m1
+
+
+</td><td>
+
+C1 &amp; [Ctor](./goosetyped.ctor.md)<!-- -->&lt;T1&gt;
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+m2
+
+
+</td><td>
+
+C2 &amp; [Ctor](./goosetyped.ctor.md)<!-- -->&lt;T2&gt;
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+m3
+
+
+</td><td>
+
+C3 &amp; [Ctor](./goosetyped.ctor.md)<!-- -->&lt;T3&gt;
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+m4
+
+
+</td><td>
+
+C4 &amp; [Ctor](./goosetyped.ctor.md)<!-- -->&lt;T4&gt;
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+m5
+
+
+</td><td>
+
+C5 &amp; [Ctor](./goosetyped.ctor.md)<!-- -->&lt;T5&gt;
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
+
+[Ctor](./goosetyped.ctor.md)<!-- -->&lt;Document&lt;any, any, T1 &amp; T2 &amp; T3 &amp; T4 &amp; T5&gt; &amp; T1 &amp; T2 &amp; T3 &amp; T4 &amp; T5&gt; &amp; [ModelExtensions](./goosetyped.modelextensions.md)<!-- -->&lt;{}, {}, {}, any&gt;
 

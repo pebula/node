@@ -4,8 +4,8 @@
 
 ## SbQueue type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type SbQueue = Partial<Omit<QueueDetails, 'queueName'>>;
+export type SbQueue = Partial<Omit<QueueDetails, 'queueName'>>;
 ```

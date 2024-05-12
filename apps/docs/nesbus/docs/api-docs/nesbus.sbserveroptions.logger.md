@@ -4,7 +4,7 @@
 
 ## SbServerOptions.logger property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 logger?: LoggerService;

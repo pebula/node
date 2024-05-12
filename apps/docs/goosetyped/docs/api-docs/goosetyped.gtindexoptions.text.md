@@ -6,7 +6,7 @@
 
 Declares a full text index.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 text?: boolean | any;

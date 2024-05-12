@@ -1,33 +1,83 @@
 {
   "name": "docs-tom",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "application",
   "sourceRoot": "apps/docs/tom/src",
+  "projectType": "app",
+  "tags": ["docs"],
   "targets": {
-    "gh-pages": {
-      "executor": "./dist/libs/nx-build-pipe:build",
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/docs/tom/**/*.{ts,tsx,js,jsx}",
+          "apps/docs/tom/package.json"
+        ]
+      }
+    },
+    "start": {
+      "executor": "@pebula/nx-build-pipe:build",
       "options": {
         "task": {
-          "type": "fromFile",
-          "path": "apps/docs/gh-pages.js",
-          "args": ["tom"]
-        },
-        "env": {
-          "GH_PAGES_BUILD": true
+          "type": "group",
+          "composition": "sequence",
+          "pipe": [
+            {
+              "name": "start",
+              "type": "runCommand",
+              "options": {
+                "command": "yarn start",
+                "cwd": "{projectRoot}"
+              }
+            }
+          ]
         }
       }
     },
     "build": {
-      "executor": "@nx-plus/docusaurus:browser",
+      "executor": "@pebula/nx-build-pipe:build",
+      "inputs": [
+        "{projectRoot}/docs/*.(md|mdx)",
+        "{projectRoot}/docs/**/*.(md|mdx)"
+      ],
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/docs/tom"
+        "task": {
+          "type": "group",
+          "composition": "sequence",
+          "pipe": [
+            {
+              "name": "start",
+              "type": "runCommand",
+              "options": {
+                "command": "yarn build",
+                "cwd": "{projectRoot}"
+              }
+            }
+          ]
+        }
       }
     },
     "serve": {
-      "executor": "@nx-plus/docusaurus:dev-server",
+      "executor": "@pebula/nx-build-pipe:build",
       "options": {
-        "port": 3000
+        "task": {
+          "type": "group",
+          "composition": "sequence",
+          "pipe": [
+            {
+              "type": "target",
+              "target": "docs-tom:build"
+            },
+            {
+              "name": "start",
+              "type": "runCommand",
+              "options": {
+                "command": "yarn serve",
+                "cwd": "{projectRoot}"
+              }
+            }
+          ]
+        }
       }
     }
   }

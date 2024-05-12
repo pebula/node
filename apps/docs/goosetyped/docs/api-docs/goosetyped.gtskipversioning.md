@@ -4,12 +4,12 @@
 
 ## GtSkipVersioning() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function GtSkipVersioning(): PropertyDecorator;
 ```
-<b>Returns:</b>
+**Returns:**
 
 PropertyDecorator
 

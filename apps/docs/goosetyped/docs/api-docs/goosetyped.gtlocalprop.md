@@ -4,12 +4,12 @@
 
 ## GtLocalProp() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function GtLocalProp(): PropertyDecorator;
 ```
-<b>Returns:</b>
+**Returns:**
 
 PropertyDecorator
 

@@ -4,18 +4,85 @@
 
 ## ServiceBusManagementAadTokenCredentials interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ServiceBusManagementAadTokenCredentials extends ServiceBusAadTokenCredentials 
 ```
-<b>Extends:</b> [ServiceBusAadTokenCredentials](./nesbus.servicebusaadtokencredentials.md)
+**Extends:** [ServiceBusAadTokenCredentials](./nesbus.servicebusaadtokencredentials.md)
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [namespace](./nesbus.servicebusmanagementaadtokencredentials.namespace.md) | string |  |
-|  [resourceGroupName](./nesbus.servicebusmanagementaadtokencredentials.resourcegroupname.md) | string |  |
-|  [subscriptionId](./nesbus.servicebusmanagementaadtokencredentials.subscriptionid.md) | string |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[namespace](./nesbus.servicebusmanagementaadtokencredentials.namespace.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[resourceGroupName](./nesbus.servicebusmanagementaadtokencredentials.resourcegroupname.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[subscriptionId](./nesbus.servicebusmanagementaadtokencredentials.subscriptionid.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

@@ -4,7 +4,7 @@
 
 ## ServiceBusConnectionStringCredentials interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ServiceBusConnectionStringCredentials 
@@ -12,7 +12,42 @@ export interface ServiceBusConnectionStringCredentials
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [connectionString](./nesbus.servicebusconnectionstringcredentials.connectionstring.md) | string |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[connectionString](./nesbus.servicebusconnectionstringcredentials.connectionstring.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

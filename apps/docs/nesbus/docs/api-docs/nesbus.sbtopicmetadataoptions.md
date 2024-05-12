@@ -4,16 +4,53 @@
 
 ## SbTopicMetadataOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SbTopicMetadataOptions extends SbEmitterMetadataOptions 
 ```
-<b>Extends:</b> [SbEmitterMetadataOptions](./nesbus.sbemittermetadataoptions.md)
+**Extends:** [SbEmitterMetadataOptions](./nesbus.sbemittermetadataoptions.md)
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [provision](./nesbus.sbtopicmetadataoptions.provision.md) | [SbEntityProvisionOption](./nesbus.sbentityprovisionoption.md)<!-- -->&lt;[SbTopicEntityProvision](./nesbus.sbtopicentityprovision.md)<!-- -->&gt; |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[provision?](./nesbus.sbtopicmetadataoptions.provision.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SbEntityProvisionOption](./nesbus.sbentityprovisionoption.md)<!-- -->&lt;[SbTopicEntityProvision](./nesbus.sbtopicentityprovision.md)<!-- -->&gt;
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>

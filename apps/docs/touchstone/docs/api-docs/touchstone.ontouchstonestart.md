@@ -2,10 +2,14 @@
 
 [Home](./index.md) &gt; [@pebula/touchstone](./touchstone.md) &gt; [OnTouchStoneStart](./touchstone.ontouchstonestart.md)
 
-## OnTouchStoneStart variable
+## OnTouchStoneStart() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 OnTouchStoneStart: () => <Z extends Partial<Record<K, (args_0: TouchStoneStartEvent) => any>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(args_0: TouchStoneStartEvent) => any>) => void | TypedPropertyDescriptor<(args_0: TouchStoneStartEvent) => any>
 ```
+**Returns:**
+
+&lt;Z extends Partial&lt;Record&lt;K, (args\_0: [TouchStoneStartEvent](./touchstone.touchstonestartevent.md)<!-- -->) =&gt; any&gt;&gt;, K extends string&gt;(target: Z, key: K, descriptor: TypedPropertyDescriptor&lt;(args\_0: [TouchStoneStartEvent](./touchstone.touchstonestartevent.md)<!-- -->) =&gt; any&gt;) =&gt; void \| TypedPropertyDescriptor&lt;(args\_0: [TouchStoneStartEvent](./touchstone.touchstonestartevent.md)<!-- -->) =&gt; any&gt;
+

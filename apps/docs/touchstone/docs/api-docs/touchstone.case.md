@@ -2,10 +2,50 @@
 
 [Home](./index.md) &gt; [@pebula/touchstone](./touchstone.md) &gt; [Case](./touchstone.case.md)
 
-## Case variable
+## Case() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 Case: (metadata?: CaseMetadataArgs) => <Z extends Partial<Record<K, (() => any) | ((...args: any) => any)>>, K extends string>(target: Z, key: K, descriptor: TypedPropertyDescriptor<(() => any) | ((...args: any) => any)>) => void | TypedPropertyDescriptor<(() => any) | ((...args: any) => any)>
 ```
+
+## Parameters
+
+<table><thead><tr><th>
+
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+metadata
+
+
+</td><td>
+
+[CaseMetadataArgs](./touchstone.casemetadataargs.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
+
+&lt;Z extends Partial&lt;Record&lt;K, (() =&gt; any) \| ((...args: any) =&gt; any)&gt;&gt;, K extends string&gt;(target: Z, key: K, descriptor: TypedPropertyDescriptor&lt;(() =&gt; any) \| ((...args: any) =&gt; any)&gt;) =&gt; void \| TypedPropertyDescriptor&lt;(() =&gt; any) \| ((...args: any) =&gt; any)&gt;
+

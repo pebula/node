@@ -6,7 +6,7 @@
 
 Declares a sparse index.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 sparse?: boolean | any;

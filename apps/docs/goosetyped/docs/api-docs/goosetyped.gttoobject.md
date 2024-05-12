@@ -10,7 +10,7 @@ Note that it recommended to avoid using a transform function (through schema opt
 
  https://mongoosejs.com/docs/4.x/docs/guide.html\#toObject
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function GtToObject(config?: Omit<mongoose.ToObjectOptions, 'transform'>): MethodDecoratorOf<[any, any]>;
@@ -18,11 +18,40 @@ export declare function GtToObject(config?: Omit<mongoose.ToObjectOptions, 'tran
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  config | Omit&lt;mongoose.ToObjectOptions, 'transform'&gt; |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+config
+
+
+</td><td>
+
+Omit&lt;mongoose.ToObjectOptions, 'transform'&gt;
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 [MethodDecoratorOf](./goosetyped.methoddecoratorof.md)<!-- -->&lt;\[any, any\]&gt;
 

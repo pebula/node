@@ -4,7 +4,7 @@
 
 ## GtSingleIndexMetadataArgs.sort property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 sort: GtIndexSortOrder;

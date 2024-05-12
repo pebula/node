@@ -4,7 +4,7 @@
 
 ## Resource.(new)
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 new (doc?: any): SubDocument & T;
@@ -12,11 +12,40 @@ new (doc?: any): SubDocument & T;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  doc | any |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+doc
+
+
+</td><td>
+
+any
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 [SubDocument](./goosetyped.subdocument.md) &amp; T
 

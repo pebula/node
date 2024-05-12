@@ -6,10 +6,10 @@
 
 A type helper that strips away all members of the mongoose Document instance from the type as well as all methods.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type StripDoColumns<T extends Document, TExcept extends keyof Document = never> = Pick<T, SetDifference<NonFunctionKeys<T>, Exclude<keyof Document, TExcept>>>;
+export type StripDoColumns<T extends Document, TExcept extends keyof Document = never> = Pick<T, SetDifference<NonFunctionKeys<T>, Exclude<keyof Document, TExcept>>>;
 ```
 
 ## Example
@@ -27,6 +27,5 @@ const m: StripDoColumns<Message>; // now m has only "text" but not "id"
 
 // Since "id" also exists in Document, to include it we need to exclude it from the strip.
 const m: StripDoColumns<Message, 'id'>; // now m has "id" & "text"
-
 ```
 

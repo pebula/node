@@ -4,7 +4,7 @@
 
 ## GtPlugin() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function GtPlugin(metadata: GtPluginMetadataArgs): ClassDecorator;
@@ -12,11 +12,38 @@ export declare function GtPlugin(metadata: GtPluginMetadataArgs): ClassDecorator
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  metadata | [GtPluginMetadataArgs](./goosetyped.gtpluginmetadataargs.md) |  |
+<table><thead><tr><th>
 
-<b>Returns:</b>
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+metadata
+
+
+</td><td>
+
+[GtPluginMetadataArgs](./goosetyped.gtpluginmetadataargs.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
 
 ClassDecorator
 

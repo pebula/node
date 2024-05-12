@@ -4,7 +4,7 @@
 
 ## GtColumnMetadataArgs.enum property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 enum?: string[] | number[] | object;
