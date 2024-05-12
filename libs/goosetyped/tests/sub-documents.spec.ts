@@ -7,8 +7,6 @@ import {
   Customer,
   CustomerGenderType,
   PhoneComm,
-  EmailComm,
-  ResidenceComm,
 } from './domain';
 
 describe('E2E Tests', () => {

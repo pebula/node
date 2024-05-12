@@ -5,7 +5,13 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nx/eslint:lint"
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/goosetyped/**/*.{ts,tsx,js,jsx}",
+          "libs/goosetyped/package.json"
+        ]
+      }
     },
     "test": {
       "executor": "@nx/jest:jest",

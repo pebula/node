@@ -1,4 +1,3 @@
-// tslint:disable: max-classes-per-file
 import { Schema, SchemaType } from 'mongoose';
 import { isSchemaInstance, isContainerResolveType, getMongoSchemaFromResolvedType } from './utils';
 

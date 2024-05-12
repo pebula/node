@@ -1,4 +1,3 @@
-// tslint:disable: max-classes-per-file
 import { Schema } from 'mongoose';
 import { SchemaTestExplorer } from '../../../testing';
 import { GtColumn, GtSubDocument } from '../decorators';

@@ -1,4 +1,3 @@
-// tslint:disable: ban-types
 import { Model } from 'mongoose';
 import { safeConstructor, Ctor } from '../utils';
 import { GtSchemaContainer } from './schema-container';

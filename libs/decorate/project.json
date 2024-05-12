@@ -5,7 +5,13 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nx/eslint:lint"
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/decorate/**/*.{ts,tsx,js,jsx}",
+          "libs/decorate/package.json"
+        ]
+      }
     },
     "test": {
       "executor": "@nx/jest:jest",

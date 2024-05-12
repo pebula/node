@@ -17,7 +17,7 @@ import { Ctor, resolveModelName, getBaseClass } from '../utils';
 import { GtDocumentArrayPath, GtSubdocumentPath, Schema, createEmbeddedContainerForType } from '../model/containers';
 import { GtModelCompilationError } from '../errors';
 import { isFunction } from '../utils/misc';
-import { GT_BASED_ON, GT_DISCRIMINATOR_ROOT } from '../model/constants';
+import { GT_DISCRIMINATOR_ROOT } from '../model/constants';
 import { GtModelContainer, GtResourceContainer } from '../model/base';
 
 const BUILT = Symbol('BUILT');
@@ -130,7 +130,7 @@ export class GtSchemaContainer<TInstance extends mongoose.Document = mongoose.Do
   setMetadata<T>(type: SchemaAwareMetadataClass<T>,
                  metadataOptions: T,
                  decoratorArgs: { target: object | Function; key?: string | symbol; descriptor?: PropertyDescriptor }): Function | void {
-    if (!!this.model) {
+    if (this.model) {
       throw new Error('Invalid decorator order, you must set all decorators before the `@GtSchema()` decorator.');
     }
 

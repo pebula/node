@@ -5,7 +5,13 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nx/eslint:lint"
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/touchstone/**/*.{ts,tsx,js,jsx}",
+          "libs/touchstone/package.json"
+        ]
+      }
     },
     "test": {
       "executor": "@nx/jest:jest",

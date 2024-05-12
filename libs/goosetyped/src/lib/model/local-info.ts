@@ -43,7 +43,7 @@ export class GtLocalInfo {
 
   addProp(info: GtLocalPropInfo): void {
     this.props.set(info.key, info);
-    if (!!info.embedded) {
+    if (info.embedded) {
       this.embeddedColumns.set(info.key, info.embedded);
     }
   }
@@ -80,7 +80,7 @@ export class GtLocalInfo {
 
     const { get, set } = descriptor;
     if (!this.props.get(key).columnMeta.isContainer) {
-      function newSet(source) { // tslint:disable-line: only-arrow-functions object-literal-shorthand
+      function newSet(source) {
         if (!source) { // we don't mind "falsy" values because we're always in the context of embedded columns.
           set.call(this, source);
         } else {

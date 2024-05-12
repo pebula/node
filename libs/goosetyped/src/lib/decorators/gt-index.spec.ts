@@ -1,4 +1,3 @@
-// tslint:disable: max-classes-per-file
 import { metadataDecoratorSpy } from '../../../testing';
 import { GtIndexMetadata } from '../metadata';
 import { GtIndex } from './gt-index';
@@ -18,8 +17,8 @@ describe('goosetyped', () => {
     it('should register a compound column index using GtIndex with metadata', () => {
       const metadata = {
         indices: {
-          column1: 'asc' as 'asc',
-          column2: 'desc' as 'desc',
+          column1: 'asc' as const,
+          column2: 'desc' as const,
         },
       };
 
@@ -34,7 +33,7 @@ describe('goosetyped', () => {
     });
 
     it('should register a single column index using GtIndex with metadata', () => {
-      const metadata = { sort: 'asc' as 'asc' };
+      const metadata = { sort: 'asc' as const };
       class TestModel {
         @GtIndex(metadata)
         column: string;

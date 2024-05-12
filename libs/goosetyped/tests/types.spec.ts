@@ -1,4 +1,3 @@
-// tslint:disable: max-classes-per-file
 import {
   GtModel, GtResource,
   GtDocument, GtSubDocument,
@@ -116,7 +115,7 @@ describe('E2E Tests', () => {
       @GtDocument()
       class P1Model extends BaseModel {
         @GtColumn({})
-        prop1: string = 'prop1';
+        prop1 = 'prop1';
 
         @GtColumn({})
         val1: string;
@@ -125,7 +124,7 @@ describe('E2E Tests', () => {
       @GtDocument()
       class P2Model extends BaseModel {
         @GtColumn({})
-        prop2: string = 'prop2';
+        prop2 = 'prop2';
 
         @GtColumn({})
         val2: string;
