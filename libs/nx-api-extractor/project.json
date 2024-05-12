@@ -5,18 +5,14 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/nx-api-extractor/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/nx-api-extractor"],
       "options": {
         "outputPath": "coverage/libs/nx-api-extractor",
-        "jestConfig": "libs/nx-api-extractor/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/nx-api-extractor/jest.config.ts"
       }
     },
     "build": {

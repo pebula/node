@@ -5,18 +5,14 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/goosetyped/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/goosetyped"],
       "options": {
         "outputPath": "coverage/libs/goosetyped",
-        "jestConfig": "libs/goosetyped/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/goosetyped/jest.config.ts"
       },
       "configuration": {
         "liveDb": {
