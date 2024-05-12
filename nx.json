@@ -1,7 +1,4 @@
 {
-  "affected": {
-    "defaultBase": "main"
-  },
   "generators": {
     "@nrwl/cypress": {
       "cypress-project": {
@@ -105,5 +102,7 @@
       "cache": true
     }
   },
-  "parallel": 3
+  "parallel": 3,
+  "useInferencePlugins": false,
+  "defaultBase": "main"
 }
