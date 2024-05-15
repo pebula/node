@@ -1,5 +1,4 @@
 // Code from: https://yonatankra.com/how-to-create-a-workspace-coverage-report-in-nrwl-nx-monorepo/
-
 const glob = require('glob');
 const fs = require('fs');
 const path = require('path');

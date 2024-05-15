@@ -4,7 +4,7 @@ import { BuildPipeTask, BuildPipeFromFileTask } from '../schema';
 import { runTask } from './task.run';
 import { Task } from './task.type';
 
-const LOADERS: Record<string, (path: string) => BuildPipeTask<any, any>> = {
+const LOADERS: Record<string, (path: string) => BuildPipeTask<any, any> | false> = {
   '.js': require,
   '.json': loadJson,
 }
@@ -28,15 +28,19 @@ export const fromFile: Task<'fromFile'> = {
           process.argv.splice(2, args.length, ...originalArgs)
         };
       } else {
-        return () => {};
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        return () => { };
       }
     }
 
     try {
-      const unModify = modifyArgs(task.args || []);
+      const args = task.args || task.options?.args || context.rootOptions?.taskOptions?.[task.name]?.args || [];
+      const unModify = modifyArgs(args);
       const dynamicTask = loader(filePath);
       unModify();
       if (!dynamicTask) {
+        if (dynamicTask === false)
+          return { success: true };
         throw new Error(`Invalid task loaded from file "${task.path}"`);
       }
       return runTask(dynamicTask, context);

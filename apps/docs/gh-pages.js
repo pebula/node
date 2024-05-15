@@ -44,7 +44,7 @@ const ghPagesTask = (appName) => {
             type: 'runCommand',
             options: {
               commands: [
-                `./node_modules/.bin/api-documenter markdown -i ./dist/libs/${appName}  -o ./apps/docs-v2/${appName}/docs/api-docs`
+                `./node_modules/.bin/api-documenter markdown -i ./dist/libs/${appName}  -o ./apps/docs/${appName}/docs/api-docs`
               ],
               parallel: false
             }
@@ -62,7 +62,7 @@ const ghPagesTask = (appName) => {
       name: "build package",
       type: "runCommand",
       options: {
-        commands: [`yarn nx run ${appName}:package --with-deps`],
+        commands: [`npx nx run ${appName}:package --with-deps`],
         parallel: false
       }
     },
@@ -72,7 +72,7 @@ const ghPagesTask = (appName) => {
       name: "build package",
       type: "runCommand",
       options: {
-        commands: [`yarn nx build docs-v2-${appName} --outputPath=dist/gh-pages/${appName}`],
+        commands: [`npx nx build ${process.env.NX_TASK_TARGET_PROJECT} --outputPath=dist/gh-pages/${appName}`],
         parallel: false
       }
     },
@@ -86,5 +86,8 @@ const ghPagesTask = (appName) => {
     pipe,
   }
 };
+
+if (process.env.NX_TASK_TARGET_TARGET !== 'gh-pages')
+  throw new Error("Must run within a gh-pages executer");
 
 module.exports = ghPagesTask(process.argv[2]);

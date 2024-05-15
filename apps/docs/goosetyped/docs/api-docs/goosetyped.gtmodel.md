@@ -111,5 +111,5 @@ _(Optional)_
 </tbody></table>
 **Returns:**
 
-[Ctor](./goosetyped.ctor.md)<!-- -->&lt;Document&lt;any, any, T1 &amp; T2 &amp; T3 &amp; T4 &amp; T5&gt; &amp; T1 &amp; T2 &amp; T3 &amp; T4 &amp; T5&gt; &amp; [ModelExtensions](./goosetyped.modelextensions.md)<!-- -->&lt;{}, {}, {}, any&gt;
+[Ctor](./goosetyped.ctor.md)<!-- -->&lt;Document&lt;any, any, T1 &amp; T2 &amp; T3 &amp; T4 &amp; T5&gt; &amp; T1 &amp; T2 &amp; T3 &amp; T4 &amp; T5&gt; &amp; [ModelExtensions](./goosetyped.modelextensions.md)<!-- -->&lt;\{}, \{}, \{}, any&gt;
 

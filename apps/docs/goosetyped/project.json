@@ -101,6 +101,15 @@
           ]
         }
       }
+    },
+    "gh-pages": {
+      "options": {
+        "taskOptions": {
+          "gh-pages": {
+            "args": [ "goosetyped" ]
+          }
+        }
+      }
     }
   }
 }

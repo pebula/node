@@ -30,5 +30,5 @@ spawn(`${process.cwd()}/node_modules/.bin/docusaurus`, ['swizzle', '@docusaurus/
   cwd: process.cwd(),
 });
 
-console.log(`Don't forget to add the plugin to ${fullAppPath}/docusaurus.config.js`);
+console.log(`Don't forget to add the plugin to ${fullAppPath}/docusaurus.config.ts`);
 console.log(`Code: require.resolve('docusaurus-lunr-search'),`);

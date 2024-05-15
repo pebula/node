@@ -101,7 +101,7 @@ _(Optional)_ See  https://mongoosejs.com/docs/guide.html\#bufferCommands
 
 </td><td>
 
-\`boolean \| number \| \{ size?: number; max?: number; autoIndexId?: boolean; }\`
+boolean \| number \| \{ size?: number; max?: number; autoIndexId?: boolean; }
 
 
 </td><td>
