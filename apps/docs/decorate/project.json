@@ -79,6 +79,15 @@
           ]
         }
       }
+    },
+    "gh-pages": {
+      "options": {
+        "taskOptions": {
+          "gh-pages": {
+            "args": [ "decorate" ]
+          }
+        }
+      }
     }
   }
 }

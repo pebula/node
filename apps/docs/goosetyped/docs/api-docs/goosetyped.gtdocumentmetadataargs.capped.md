@@ -9,9 +9,9 @@ See  https://mongoosejs.com/docs/guide.html\#capped
 **Signature:**
 
 ```typescript
-capped?: `boolean | number | {
+capped?: boolean | number | {
         size?: number;
         max?: number;
         autoIndexId?: boolean;
-    }`;
+    };
 ```

@@ -99,6 +99,19 @@
       "dependsOn": ["^package"],
       "cache": true
     },
+    "gh-pages": {
+      "executor": "@pebula/nx-build-pipe:build",
+      "options": {
+        "task": {
+          "name": "gh-pages",
+          "type": "fromFile",
+          "path": "apps/docs/gh-pages.js"
+        },
+        "env": {
+          "GH_PAGES_BUILD": true
+        }
+      }
+    },
     "@nx/jest:jest": {
       "cache": true,
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
