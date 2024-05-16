@@ -31,7 +31,6 @@ export class GtModelContainer extends Model {
   static discriminator<T, D extends T>(this: Ctor<T>, name: Ctor<D>, schema: Schema, keyOrOptions: DiscriminatorOptions | DiscriminatorOptions['value']): Model<D>;
   static discriminator<T, D extends T = T>(this: Ctor<T>, name: string, schema: Schema<D>, keyOrOptions: DiscriminatorOptions | DiscriminatorOptions['value']): Model<D>;
   static discriminator<T, D extends T = T>(this: Ctor<T>, name: string | Ctor<D>, schema: Schema | Schema<D>, keyOrOptions: DiscriminatorOptions | DiscriminatorOptions['value']): Model<D> {
-    console.log(`MODEL: [${this.name}] used as based for discriminator ${resolveModelName(name)}`);
     return super.discriminator<D>(name as any, schema, keyOrOptions);
   }
 

@@ -53,14 +53,12 @@ export class Schema<RawDocType = any,
         if (cloned instanceof Schema) {
           Schema.initLocal(cloned as Schema, this.schemaContainer);
           this.directClones.add(cloned);
-          // console.log(`[${this[GT_BASED_ON].name}] cloned created @ ${this.directClones.size - 1}: ${cloned[GT_BASED_ON].name} [${this.$id}, ${cloned.$id}, ${cloned.$originalSchemaId}]`);
         }
         
         return cloned;
     }
 
     discriminator<DisSchema = Schema>(name: string | number, schema: DisSchema): this {
-      console.log(`SCHEMA: [${this[GT_BASED_ON].name}] used as base for discriminator ${resolveModelName(name)}`);
       return super.discriminator(name, schema)
     }
     

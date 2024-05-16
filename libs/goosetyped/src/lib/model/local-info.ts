@@ -56,13 +56,8 @@ export class GtLocalInfo {
   onModelCompiled(): void;
   onModelCompiled(model: mongoose.Model<any>, ...paths: string[]): void; // tslint:disable-line: unified-signatures
   onModelCompiled(model?: mongoose.Model<any>, ...paths: string[]): void {
-    if (!model) {
+    if (!model)
       model = this.container.model;
-      // console.log(`Model: ${this.container.getName()}`);
-    } else {
-      // console.log(`\t${paths.join(' -> ')} Model: ${this.container.getName()}`);
-    }
-
     const modelPrototype = model.prototype;
 
     // Walk on all embedded columns, i.e. user defined classes which are complex objects...
@@ -130,5 +125,14 @@ export class GtLocalInfo {
     // if they both equal, it means that doc was an instance from the user so do bind.
     const bind = propValue === doc;
     syncModelInstance(propValue, embeddedDoc, pLocalInfo, false, bind);
+  }
+
+  /**
+   * Returns the root discriminator local info for this child, only if this is a child discriminator
+   */
+  getRootDiscriminator() {
+    return this.discriminator?.type === 'child'
+      ? this.discriminator.root
+      : undefined;
   }
 }

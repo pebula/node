@@ -1,4 +1,5 @@
 // export * from './containers';
+export * from './document-query';
 export * from './model';
 export * from './mixin';
 

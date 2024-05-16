@@ -1,7 +1,7 @@
 // tslint:disable: max-classes-per-file
-import { Document } from 'mongoose';
+import { Document, Model, HydratedDocument } from 'mongoose';
 import { ModelExtensions, SubDocument, Resource } from './model';
-import { Ctor } from '../utils';
+import { Ctor, ExtractMethod, ExtractProps } from '../utils';
 import * as Base from './base';
 import { gtSchemaStore } from '../store/schema-store';
 
@@ -24,12 +24,12 @@ function mixObjects(base: any, mixins: any[]): void {
   });
 }
 
-export function GtQuery<Q1>(QH: Ctor<Q1>): <T, C>(Cls: Ctor<Document & T> & ModelExtensions & C) => Ctor<Document & T> & C & ModelExtensions<Q1>
-export function GtQuery<Q1, Q2>(Q1: Ctor<Q1>, Q2: Ctor<Q2>): <T, C>(Cls: Ctor<Document & T> & ModelExtensions & C) => Ctor<Document & T> & C & ModelExtensions<Q1 & Q2>
-export function GtQuery<Q1, Q2, Q3>(Q1: Ctor<Q1>, Q2: Ctor<Q2>, Q3: Ctor<Q3>): <T, C>(Cls: Ctor<Document & T> & ModelExtensions & C) => Ctor<Document & T> & C & ModelExtensions<Q1 & Q2 & Q3>
-export function GtQuery<Q1, Q2, Q3, Q4>(Q1: Ctor<Q1>, Q2: Ctor<Q2>, Q3: Ctor<Q3>, Q4: Ctor<Q4>): <T, C>(Cls: Ctor<Document & T> & ModelExtensions & C) => Ctor<Document & T> & C & ModelExtensions<Q1 & Q2 & Q3 & Q4>
-export function GtQuery<QMIXIN>(...mixins: Array<Ctor<QMIXIN>>): <T, C>(Cls: Ctor<Document & T> & ModelExtensions & C) => Ctor<Document & T> & C & ModelExtensions<QMIXIN> {
-  return <T, C>(Cls: Ctor<Document & T> & ModelExtensions & C) => {
+export function GtQuery<Q1>(QH: Ctor<Q1>): <T, C>(Cls: ExtModel<T, C> & C) => Ctor<Document & T> & C & ModelExtensions<Q1>
+export function GtQuery<Q1, Q2>(Q1: Ctor<Q1>, Q2: Ctor<Q2>): <T, C>(Cls: ExtModel<T, C> & C) => Ctor<Document & T> & C & ModelExtensions<Q1 & Q2>
+export function GtQuery<Q1, Q2, Q3>(Q1: Ctor<Q1>, Q2: Ctor<Q2>, Q3: Ctor<Q3>): <T, C>(Cls: ExtModel<T, C> & C) => Ctor<Document & T> & C & ModelExtensions<Q1 & Q2 & Q3>
+export function GtQuery<Q1, Q2, Q3, Q4>(Q1: Ctor<Q1>, Q2: Ctor<Q2>, Q3: Ctor<Q3>, Q4: Ctor<Q4>): <T, C>(Cls: ExtModel<T, C> & C) => Ctor<Document & T> & C & ModelExtensions<Q1 & Q2 & Q3 & Q4>
+export function GtQuery<QMIXIN>(...mixins: Array<Ctor<QMIXIN>>): <T, C>(Cls: ExtModel<T, C> & C) => Ctor<Document & T> & C & ModelExtensions<QMIXIN> {
+  return <T, C>(Cls: ExtModel<T, C> & C) => {
     if (mixins.length > 0) {
       class QueryHelper { }
       mixObjects(QueryHelper.prototype, mixins.map(m => m.prototype));
@@ -39,6 +39,22 @@ export function GtQuery<QMIXIN>(...mixins: Array<Ctor<QMIXIN>>): <T, C>(Cls: Cto
     return Cls as any;
   }
 }
+
+type ThisParameter<T, F> = T extends { (this: infer This): void } ? This : F;
+type AddThisParameter<T, D> = {
+  [K in keyof T]: T[K] extends (...args: infer A) => infer R
+    ? ThisParameter<T[K], unknown> extends unknown
+      ? (this: D, ...args: A) => R
+      : T[K]
+    : T[K];
+};
+
+type M<TI, TC> = Omit<ExtractMethod<Model<TI>>, 'prototype' | 'constructor' | keyof TC | keyof ModelExtensions>;
+type P<TI, TC> = Omit<ExtractProps<Model<TI>>, 'prototype' | 'constructor' | keyof TC | keyof ModelExtensions>;
+
+export type ExtModel<TI, TC> = {
+  new (doc?: Partial<ExtractProps<TI>>, fields?: any | null, options?: boolean | any): HydratedDocument<TI>;
+} & ModelExtensions & M<TI, TC> & P<TI, TC>;
 
 export function GtModel<T1, C1, T2, C2, T3, C3, T4, C4, T5, C5>(m1: C1 & Ctor<T1> = undefined, m2: C2 & Ctor<T2> = undefined, m3: C3 & Ctor<T3> = undefined, m4: C4 & Ctor<T4> = undefined, m5: C5 & Ctor<T5> = undefined) {
   const mixins = [m1, m2, m3, m4, m5].filter(m => !!m);
@@ -50,7 +66,8 @@ export function GtModel<T1, C1, T2, C2, T3, C3, T4, C4, T5, C5>(m1: C1 & Ctor<T1
     gtSchemaStore.getCreate(GtModelContainer).defineMixins(mixins);
   }
 
-  return GtModelContainer as unknown as Ctor<Document<any, any, T1 & T2 & T3 & T4 & T5> & T1 & T2 & T3 & T4 & T5> & ModelExtensions
+  // return GtModelContainer as unknown as Ctor<Document<any, any, T1 & T2 & T3 & T4 & T5> & T1 & T2 & T3 & T4 & T5> & ModelExtensions & M & P
+  return GtModelContainer as unknown as ExtModel<T1 & T2 & T3 & T4 & T5, C1 & C2 & C3 & C4 & C5>;
 }
 
 // mongoose.ObtainDocumentType<T>

@@ -36,9 +36,9 @@ export interface ModelExtensions<TQueryHelpers = {},
 
   init<T>(this: Ctor<T>): Promise<M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>;
 
-  aggregate<R = any, T = never>(this: Ctor<T>, pipeline?: M.PipelineStage[], options?: M.AggregateOptions): M.Aggregate<Array<R>>;
-  aggregate<R = any, T = never>(this: Ctor<T>, pipeline: M.PipelineStage[]): M.Aggregate<Array<R>>;
-                    
+  aggregate<T>(this: Ctor<T>, options?: M.AggregateOptions): M.Aggregate<Array<T>>;
+  aggregate<T = any>(this: Ctor<any>, pipeline: M.PipelineStage[], options?: M.AggregateOptions): M.Aggregate<Array<T>>;
+  
   //#region bulkWrite
 
   /**
