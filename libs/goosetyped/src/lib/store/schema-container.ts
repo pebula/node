@@ -11,7 +11,7 @@ import {
 } from '../metadata';
 import { gtConnectionStore } from '../connection';
 import { GtSchemaStore } from './schema-store';
-import { setSkipVersioning } from './helpers';
+import { isDiscriminator, setSkipVersioning } from './helpers';
 import { GtLocalInfo } from '../model/local-info';
 import { Ctor, resolveModelName, getBaseClass } from '../utils';
 import { GtDocumentArrayPath, GtSubdocumentPath, Schema, createEmbeddedContainerForType } from '../model/containers';
@@ -48,6 +48,7 @@ export class GtSchemaContainer<TInstance extends mongoose.Document = mongoose.Do
       }
     }
 
+    const skipSetSchema = !!isDiscriminator(baseContainer.localInfo.cls);
     for (const baseProp of baseContainer.localInfo.props.values()) {
       const targetProp = targetContainer.localInfo.props.get(baseProp.key);
       if (!targetProp || (owInherited && targetProp.inherited)) {
@@ -59,7 +60,7 @@ export class GtSchemaContainer<TInstance extends mongoose.Document = mongoose.Do
             targetContainer.schema.remove(column.key);
           }
           targetContainer.addColumn(baseProp.columnMeta);
-          targetContainer.applyColumn(baseProp.columnMeta);
+          targetContainer.applyColumn(baseProp.columnMeta, skipSetSchema);
         }
         targetContainer.localInfo.props.get(baseProp.key).inherited = true;
       }
@@ -202,7 +203,7 @@ export class GtSchemaContainer<TInstance extends mongoose.Document = mongoose.Do
 
       for (const column of this.columns.values()) {
         column.resolveType(this.target.prototype);
-        this.applyColumn(column);
+        this.applyColumn(column, false);
       }
 
       for (const [stage, ...args] of this.hooks) {
@@ -213,24 +214,26 @@ export class GtSchemaContainer<TInstance extends mongoose.Document = mongoose.Do
       for (const k of Object.keys(this.modifiedSchemaOptions)) {
         switch (k) {
           case 'discriminatorKey':
-          case 'versionKey':
+          case 'versionKey': {
             const value = this.modifiedSchemaOptions[k] as string;
             if (!this.columns.has(value)) {
               const metadata = new GtColumnMetadata(value, k === 'discriminatorKey' ? { type: () => String } : { type: () => Number }, true);
               metadata.resolveType(this.target.prototype);
-              this.applyColumn(metadata);
+              this.applyColumn(metadata, false);
             }
             break;
-          case 'timestamps':
+          }
+          case 'timestamps': {
             const { createdAt, updatedAt } = this.modifiedSchemaOptions[k] as mongoose.SchemaTimestampsConfig;
             for (const key of [createdAt, updatedAt] as string[]) {
               if (key && !this.columns.has(key)) {
                 const metadata = new GtColumnMetadata(key, { type: () => Date });
                 metadata.resolveType(this.target.prototype);
-                this.applyColumn(metadata);
+                this.applyColumn(metadata, false);
               }
             }
-          break;
+            break;
+          }
         }
       }
 
@@ -252,23 +255,23 @@ export class GtSchemaContainer<TInstance extends mongoose.Document = mongoose.Do
     }
   }
 
-  private applyColumn(column: GtColumnMetadata): void {
-    let knownContainer: GtSchemaContainer;
-
+  private applyColumn(column: GtColumnMetadata, skipSetSchema: boolean): void {
     if (this.localInfo.hasProp(column))
       return;
 
-    if (!column.softColumn) {
-      this.processGlobalOptionsSetInColumnMetadata(column);
+    let knownContainer: GtSchemaContainer;
 
+    if (skipSetSchema) {
+      knownContainer = this.findKnownContainer(column);
+    } else if (!column.softColumn) {
+      this.processGlobalOptionsSetInColumnMetadata(column);
       knownContainer = this.findKnownContainer(column);
       const schema = knownContainer && createEmbeddedContainerForType(knownContainer, column, this.schema) || column.schema;
       this.schema.add({ [column.key]: schema } as any);
-
-      if (knownContainer) {
+      if (knownContainer)
         this.handleNestedDocumentsAndDiscriminators(knownContainer, column);
-      }
     }
+
     this.localInfo.addProp({
       key: column.key,
       embedded: knownContainer ? knownContainer.localInfo : undefined,
@@ -284,13 +287,10 @@ export class GtSchemaContainer<TInstance extends mongoose.Document = mongoose.Do
   }
 
   private compileModel(metadata: GtDocumentMetadata, compiler: mongoose.Connection) {
-    const { discriminator } = this.localInfo;
-    if (discriminator && discriminator.type === 'child') {
-      const model = discriminator.root.container.model;
-      const { schema } = this;
-      return model.discriminator(this.target as any, schema, { clone: false }) as any;
-    }
-    return compiler.model(this.target as any, this.schema, metadata.collection);
+    return this.localInfo
+      .getRootDiscriminator()?.container.model
+      .discriminator(this.target as any, this.schema, { clone: false })
+      || compiler.model(this.target as any, this.schema, metadata.collection);
   }
 
   /**

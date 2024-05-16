@@ -1,6 +1,6 @@
 import * as mongodb from 'mongodb';
 import * as M from 'mongoose';
-import { ModelExtensions } from './model';
+import { ExtModel } from './mixin';
 
 export interface DocumentQuery<ResultType, DocType, THelpers = {}, RawDocType = DocType, QueryOp = 'find'> {
   _mongooseOptions: M.MongooseQueryOptions;
@@ -256,7 +256,7 @@ export interface DocumentQuery<ResultType, DocType, THelpers = {}, RawDocType = 
   mod(val: Array<number>): this;
 
   /** The model this query was created from */
-  model: M.Model<any, any>; // Can't use DocType, causes "Type instantiation is excessively deep"
+  model: ExtModel<DocType, unknown>; // Can't use DocType, causes "Type instantiation is excessively deep"
 
   /**
    * Getter/setter around the current mongoose-specific options for this query
@@ -295,9 +295,9 @@ export interface DocumentQuery<ResultType, DocType, THelpers = {}, RawDocType = 
 
   /** Specifies paths which should be populated with other documents. */
   populate(path: string | string[],
-            select?: string | any,
-            model?: string | M.Model<any, THelpers>,
-            match?: any
+           select?: string | any,
+           model?: string | M.Model<any, THelpers>,
+           match?: any
           ): DocumentQuery<ResultType, DocType, THelpers, RawDocType, QueryOp> & THelpers;
   populate(options: M.PopulateOptions | (M.PopulateOptions | string)[]): DocumentQuery<ResultType, DocType, THelpers, RawDocType, QueryOp> & THelpers;
   populate<Paths>(path: string | string[],

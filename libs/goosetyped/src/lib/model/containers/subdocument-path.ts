@@ -59,7 +59,6 @@ export class GtSubdocumentPath extends (Schema.Types.Subdocument as any as Ctor<
     }
     
     discriminator<U extends Document>(name: string, schema: Schema, value?: string): Model<U> {
-        console.log(`SUBDOC: [${resolveModelName(this.knownContainer.localInfo.cls)}] used as based for discriminator ${resolveModelName(name)}`);
         const created = extendEmbeddedDocument(this, super.discriminator(name, schema, value) as any);
         return this.caster.discriminators[name] = created as any;
     }

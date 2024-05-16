@@ -31,9 +31,10 @@ export {
 export * from './interfaces/mongoose';
 
 export {
+  DocumentQuery,
   GtQuery,
   GtResource, GtModel,
-  Resource, SubDocument, ModelExtensions,
+  Resource, SubDocument, ModelExtensions
 } from './model';
 
 export {
@@ -43,6 +44,7 @@ export {
 
 export {
   getSchemaOf,
+  isDiscriminator,
   getDiscriminatorKeyFor,
   getDiscriminatorKeysOf,
   findModels,

@@ -40,6 +40,11 @@ export function getDiscriminatorKeyFor(modelClass: Ctor<any>): string | undefine
   }
 }
 
+export function isDiscriminator(modelClass: Ctor<any>): 'root' | 'child' | undefined {
+  const container = gtSchemaStore.get(modelClass);
+  return container?.localInfo.discriminator?.type || undefined;
+}
+
 /**
  * Return all Models / Resources registered in GooseTyped
  */

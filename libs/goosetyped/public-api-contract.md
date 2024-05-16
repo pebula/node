@@ -30,6 +30,7 @@
 /// <reference types="mongoose/types/virtuals" />
 
 import { Document as Document_2 } from 'mongoose';
+import { HydratedDocument } from 'mongoose';
 import M from 'mongoose';
 import { Model } from 'mongoose';
 import * as mongodb from 'mongodb';
@@ -60,6 +61,224 @@ export interface Ctor<T> extends Function {
 
 // @public (undocumented)
 export class DocumentArray<T extends Document_2> extends Types.DocumentArray<T> {
+}
+
+// @public (undocumented)
+export interface DocumentQuery<ResultType, DocType, THelpers = {}, RawDocType = DocType, QueryOp = 'find'> {
+    // (undocumented)
+    $where(argument: string | Function): DocumentQuery<Array<DocType>, DocType, THelpers, RawDocType, QueryOp> & THelpers;
+    [Symbol.asyncIterator](): AsyncIterableIterator<mongoose.Unpacked<ResultType>>;
+    // (undocumented)
+    [Symbol.toStringTag]: string;
+    all(path: string, val: Array<any>): this;
+    // (undocumented)
+    all(val: Array<any>): this;
+    allowDiskUse(value: boolean): this;
+    and(array: Array<mongoose.FilterQuery<RawDocType>>): this;
+    batchSize(val: number): this;
+    box(val: any): this;
+    // (undocumented)
+    box(lower: number[], upper: number[]): this;
+    // (undocumented)
+    cast(model: mongoose.Model<any, THelpers> | null, obj: any): mongoose.UpdateQuery<DocType>;
+    catch: Promise<ResultType>['catch'];
+    circle(path: string, area: any): this;
+    // (undocumented)
+    circle(area: any): this;
+    clone(): this;
+    collation(value: mongodb.CollationOptions): this;
+    comment(val: string): this;
+    countDocuments(criteria?: mongoose.FilterQuery<RawDocType>, options?: mongoose.QueryOptions<DocType>): DocumentQuery<number, DocType, THelpers, RawDocType, 'countDocuments'> & THelpers;
+    cursor(options?: mongoose.QueryOptions<DocType>): mongoose.Cursor<mongoose.Unpacked<ResultType>, mongoose.QueryOptions<DocType>>;
+    deleteMany(filter?: mongoose.FilterQuery<RawDocType>, options?: mongoose.QueryOptions<DocType>): DocumentQuery<any, DocType, THelpers, RawDocType, 'deleteMany'> & THelpers;
+    // (undocumented)
+    deleteMany(filter: mongoose.FilterQuery<RawDocType>): DocumentQuery<any, DocType, THelpers, RawDocType, 'deleteMany'> & THelpers;
+    // (undocumented)
+    deleteMany(): DocumentQuery<any, DocType, THelpers, RawDocType, 'deleteMany'> & THelpers;
+    deleteOne(filter?: mongoose.FilterQuery<RawDocType>, options?: mongoose.QueryOptions<DocType>): DocumentQuery<any, DocType, THelpers, RawDocType, 'deleteOne'> & THelpers;
+    // (undocumented)
+    deleteOne(filter: mongoose.FilterQuery<RawDocType>): DocumentQuery<any, DocType, THelpers, RawDocType, 'deleteOne'> & THelpers;
+    // (undocumented)
+    deleteOne(): DocumentQuery<any, DocType, THelpers, RawDocType, 'deleteOne'> & THelpers;
+    distinct<DocKey extends string, ResultType = unknown>(field: DocKey, filter?: mongoose.FilterQuery<RawDocType>): DocumentQuery<Array<DocKey extends keyof DocType ? mongoose.Unpacked<DocType[DocKey]> : ResultType>, DocType, THelpers, RawDocType, 'distinct'> & THelpers;
+    elemMatch<K = string>(path: K, val: any): this;
+    // (undocumented)
+    elemMatch(val: Function | any): this;
+    equals(val: any): this;
+    error(): NativeError | null;
+    // (undocumented)
+    error(val: NativeError | null): this;
+    estimatedDocumentCount(options?: mongoose.QueryOptions<DocType>): DocumentQuery<number, DocType, THelpers, RawDocType, 'estimatedDocumentCount'> & THelpers;
+    exec(): Promise<ResultType>;
+    exists<K = string>(path: K, val: boolean): this;
+    // (undocumented)
+    exists(val: boolean): this;
+    explain(verbose?: mongodb.ExplainVerbosityLike): this;
+    finally: Promise<ResultType>['finally'];
+    find(filter: mongoose.FilterQuery<RawDocType>, projection?: mongoose.ProjectionType<RawDocType> | null, options?: mongoose.QueryOptions<DocType> | null): DocumentQuery<Array<DocType>, DocType, THelpers, RawDocType, 'find'> & THelpers;
+    // (undocumented)
+    find(filter: mongoose.FilterQuery<RawDocType>, projection?: mongoose.ProjectionType<RawDocType> | null): DocumentQuery<Array<DocType>, DocType, THelpers, RawDocType, 'find'> & THelpers;
+    // (undocumented)
+    find(filter: mongoose.FilterQuery<RawDocType>): DocumentQuery<Array<DocType>, DocType, THelpers, RawDocType, 'find'> & THelpers;
+    // (undocumented)
+    find(): DocumentQuery<Array<DocType>, DocType, THelpers, RawDocType, 'find'> & THelpers;
+    findById(id: mongodb.ObjectId | any, projection?: mongoose.ProjectionType<RawDocType> | null, options?: mongoose.QueryOptions<DocType> | null): DocumentQuery<DocType | null, DocType, THelpers, RawDocType, 'findOne'> & THelpers;
+    // (undocumented)
+    findById(id: mongodb.ObjectId | any, projection?: mongoose.ProjectionType<RawDocType> | null): DocumentQuery<DocType | null, DocType, THelpers, RawDocType, 'findOne'> & THelpers;
+    // (undocumented)
+    findById(id: mongodb.ObjectId | any): DocumentQuery<DocType | null, DocType, THelpers, RawDocType, 'findOne'> & THelpers;
+    findByIdAndDelete(id: mongodb.ObjectId | any, options: mongoose.QueryOptions<DocType> & {
+        includeResultMetadata: true;
+    }): DocumentQuery<mongoose.ModifyResult<DocType>, DocType, THelpers, RawDocType, 'findOneAndDelete'> & THelpers;
+    // (undocumented)
+    findByIdAndDelete(id?: mongodb.ObjectId | any, options?: mongoose.QueryOptions<DocType> | null): DocumentQuery<DocType | null, DocType, THelpers, RawDocType, 'findOneAndDelete'> & THelpers;
+    findByIdAndUpdate(id: mongodb.ObjectId | any, update: mongoose.UpdateQuery<RawDocType>, options: mongoose.QueryOptions<DocType> & {
+        includeResultMetadata: true;
+    }): DocumentQuery<mongoose.ModifyResult<DocType>, DocType, THelpers, RawDocType, 'findOneAndUpdate'> & THelpers;
+    // (undocumented)
+    findByIdAndUpdate(id: mongodb.ObjectId | any, update: mongoose.UpdateQuery<RawDocType>, options: mongoose.QueryOptions<DocType> & {
+        upsert: true;
+    } & mongoose.ReturnsNewDoc): DocumentQuery<DocType, DocType, THelpers, RawDocType, 'findOneAndUpdate'> & THelpers;
+    // (undocumented)
+    findByIdAndUpdate(id?: mongodb.ObjectId | any, update?: mongoose.UpdateQuery<RawDocType>, options?: mongoose.QueryOptions<DocType> | null): DocumentQuery<DocType | null, DocType, THelpers, RawDocType, 'findOneAndUpdate'> & THelpers;
+    // (undocumented)
+    findByIdAndUpdate(id: mongodb.ObjectId | any, update: mongoose.UpdateQuery<RawDocType>): DocumentQuery<DocType | null, DocType, THelpers, RawDocType, 'findOneAndUpdate'> & THelpers;
+    findOne(filter?: mongoose.FilterQuery<RawDocType>, projection?: mongoose.ProjectionType<RawDocType> | null, options?: mongoose.QueryOptions<DocType> | null): DocumentQuery<DocType | null, DocType, THelpers, RawDocType, 'findOne'> & THelpers;
+    // (undocumented)
+    findOne(filter?: mongoose.FilterQuery<RawDocType>, projection?: mongoose.ProjectionType<RawDocType> | null): DocumentQuery<DocType | null, DocType, THelpers, RawDocType, 'findOne'> & THelpers;
+    // (undocumented)
+    findOne(filter?: mongoose.FilterQuery<RawDocType>): DocumentQuery<DocType | null, DocType, THelpers, RawDocType, 'findOne'> & THelpers;
+    findOneAndDelete(filter?: mongoose.FilterQuery<RawDocType>, options?: mongoose.QueryOptions | null): DocumentQuery<DocType | null, DocType, THelpers, RawDocType, 'findOneAndDelete'> & THelpers;
+    findOneAndUpdate(filter: mongoose.FilterQuery<RawDocType>, update: mongoose.UpdateQuery<RawDocType>, options: mongoose.QueryOptions & {
+        includeResultMetadata: true;
+    }): DocumentQuery<mongoose.ModifyResult<DocType>, DocType, THelpers, RawDocType, 'findOneAndUpdate'> & THelpers;
+    // (undocumented)
+    findOneAndUpdate(filter: mongoose.FilterQuery<RawDocType>, update: mongoose.UpdateQuery<RawDocType>, options: mongoose.QueryOptions & {
+        upsert: true;
+    } & mongoose.ReturnsNewDoc): DocumentQuery<DocType, DocType, THelpers, RawDocType, 'findOneAndUpdate'> & THelpers;
+    // (undocumented)
+    findOneAndUpdate(filter?: mongoose.FilterQuery<RawDocType>, update?: mongoose.UpdateQuery<RawDocType>, options?: mongoose.QueryOptions<DocType> | null): DocumentQuery<DocType | null, DocType, THelpers, RawDocType, 'findOneAndUpdate'> & THelpers;
+    geometry(object: {
+        type: string;
+        coordinates: any[];
+    }): this;
+    get(path: string): any;
+    getFilter(): mongoose.FilterQuery<DocType>;
+    getOptions(): mongoose.QueryOptions;
+    getPopulatedPaths(): Array<string>;
+    getQuery(): mongoose.FilterQuery<DocType>;
+    getUpdate(): mongoose.UpdateQuery<DocType> | null;
+    gt<K = string>(path: K, val: any): this;
+    // (undocumented)
+    gt(val: number): this;
+    gte<K = string>(path: K, val: any): this;
+    // (undocumented)
+    gte(val: number): this;
+    hint(val: any): this;
+    in<K = string>(path: K, val: any[]): this;
+    // (undocumented)
+    in(val: Array<any>): this;
+    intersects(arg?: any): this;
+    j(val: boolean | null): this;
+    // (undocumented)
+    lean<LeanResultType = mongoose.GetLeanResultType<RawDocType, ResultType, QueryOp>>(val?: boolean | any): DocumentQuery<ResultType extends null ? LeanResultType | null : LeanResultType, DocType, THelpers, RawDocType, QueryOp> & THelpers;
+    limit(val: number): this;
+    lt<K = string>(path: K, val: any): this;
+    // (undocumented)
+    lt(val: number): this;
+    lte<K = string>(path: K, val: any): this;
+    // (undocumented)
+    lte(val: number): this;
+    maxDistance(path: string, val: number): this;
+    // (undocumented)
+    maxDistance(val: number): this;
+    maxTimeMS(ms: number): this;
+    merge(source: mongoose.Query<any, any> | mongoose.FilterQuery<RawDocType> | DocumentQuery<any, any>): this;
+    mod<K = string>(path: K, val: number): this;
+    // (undocumented)
+    mod(val: Array<number>): this;
+    model: ExtModel<DocType, unknown>;
+    mongooseOptions(val?: mongoose.MongooseQueryOptions): mongoose.MongooseQueryOptions;
+    // (undocumented)
+    _mongooseOptions: mongoose.MongooseQueryOptions;
+    ne<K = string>(path: K, val: any): this;
+    // (undocumented)
+    ne(val: any): this;
+    near<K = string>(path: K, val: any): this;
+    // (undocumented)
+    near(val: any): this;
+    nin<K = string>(path: K, val: any[]): this;
+    // (undocumented)
+    nin(val: Array<any>): this;
+    nor(array: Array<mongoose.FilterQuery<RawDocType>>): this;
+    or(array: Array<mongoose.FilterQuery<RawDocType>>): this;
+    orFail(err?: NativeError | (() => NativeError)): DocumentQuery<NonNullable<ResultType>, DocType, THelpers, RawDocType, QueryOp> & THelpers;
+    polygon(path: string, ...coordinatePairs: number[][]): this;
+    // (undocumented)
+    polygon(...coordinatePairs: number[][]): this;
+    populate(path: string | string[], select?: string | any, model?: string | mongoose.Model<any, THelpers>, match?: any): DocumentQuery<ResultType, DocType, THelpers, RawDocType, QueryOp> & THelpers;
+    // (undocumented)
+    populate(options: mongoose.PopulateOptions | (mongoose.PopulateOptions | string)[]): DocumentQuery<ResultType, DocType, THelpers, RawDocType, QueryOp> & THelpers;
+    // (undocumented)
+    populate<Paths>(path: string | string[], select?: string | any, model?: string | mongoose.Model<any, THelpers>, match?: any): DocumentQuery<mongoose.MergePopulatePaths<RawDocType, ResultType, QueryOp, Paths, THelpers>, DocType, THelpers, mongoose.UnpackedIntersection<RawDocType, Paths>, QueryOp> & THelpers;
+    // (undocumented)
+    populate<Paths>(options: mongoose.PopulateOptions | (mongoose.PopulateOptions | string)[]): DocumentQuery<mongoose.MergePopulatePaths<RawDocType, ResultType, QueryOp, Paths, THelpers>, DocType, THelpers, mongoose.UnpackedIntersection<RawDocType, Paths>, QueryOp> & THelpers;
+    post(fn: Function): this;
+    pre(fn: Function): this;
+    projection(fields?: mongoose.ProjectionFields<DocType> | string): mongoose.ProjectionFields<DocType>;
+    // (undocumented)
+    projection(fields: null): null;
+    // (undocumented)
+    projection(): mongoose.ProjectionFields<DocType> | null;
+    read(pref: string | mongodb.ReadPreferenceMode, tags?: any[]): this;
+    readConcern(level: string): this;
+    regex<K = string>(path: K, val: RegExp): this;
+    // (undocumented)
+    regex(val: string | RegExp): this;
+    replaceOne(filter?: mongoose.FilterQuery<RawDocType>, replacement?: DocType | mongoose.AnyObject, options?: mongoose.QueryOptions<DocType> | null): DocumentQuery<any, DocType, THelpers, RawDocType, 'replaceOne'> & THelpers;
+    select<RawDocTypeOverride extends {
+        [P in keyof RawDocType]?: any;
+    } = {}>(arg: string | string[] | Record<string, number | boolean | string | object>): DocumentQuery<mongoose.IfEquals<RawDocTypeOverride, {}, ResultType, ResultType extends any[] ? ResultType extends mongoose.HydratedDocument<any>[] ? mongoose.HydratedDocument<RawDocTypeOverride>[] : RawDocTypeOverride[] : (ResultType extends mongoose.HydratedDocument<any> ? mongoose.HydratedDocument<RawDocTypeOverride> : RawDocTypeOverride) | (null extends ResultType ? null : never)>, DocType, THelpers, mongoose.IfEquals<RawDocTypeOverride, {}, RawDocType, RawDocTypeOverride>, QueryOp> & THelpers;
+    selected(): boolean;
+    selectedExclusively(): boolean;
+    selectedInclusively(): boolean;
+    session(session: mongodb.ClientSession | null): this;
+    set(path: string | Record<string, unknown>, value?: any): this;
+    setOptions(options: mongoose.QueryOptions<DocType>, overwrite?: boolean): this;
+    setQuery(val: mongoose.FilterQuery<RawDocType> | null): void;
+    // (undocumented)
+    setUpdate(update: mongoose.UpdateQuery<RawDocType> | mongoose.UpdateWithAggregationPipeline): void;
+    size<K = string>(path: K, val: number): this;
+    // (undocumented)
+    size(val: number): this;
+    skip(val: number): this;
+    slice(path: string, val: number | Array<number>): this;
+    // (undocumented)
+    slice(val: number | Array<number>): this;
+    sort(arg?: string | {
+        [key: string]: mongoose.SortOrder | {
+            $meta: any;
+        };
+    } | [string, mongoose.SortOrder][] | undefined | null, options?: {
+        override?: boolean;
+    }): this;
+    tailable(bool?: boolean, opts?: {
+        numberOfRetries?: number;
+        tailableRetryInterval?: number;
+    }): this;
+    then: Promise<ResultType>['then'];
+    toConstructor<RetType = typeof mongoose.Query>(): RetType;
+    transform<MappedType>(fn: (doc: ResultType) => MappedType): DocumentQuery<MappedType, DocType, THelpers, RawDocType, QueryOp> & THelpers;
+    updateMany(filter?: mongoose.FilterQuery<RawDocType>, update?: mongoose.UpdateQuery<RawDocType> | mongoose.UpdateWithAggregationPipeline, options?: mongoose.QueryOptions<DocType> | null): DocumentQuery<mongoose.UpdateWriteOpResult, DocType, THelpers, RawDocType, 'updateMany'> & THelpers;
+    updateOne(filter?: mongoose.FilterQuery<RawDocType>, update?: mongoose.UpdateQuery<RawDocType> | mongoose.UpdateWithAggregationPipeline, options?: mongoose.QueryOptions<DocType> | null): DocumentQuery<mongoose.UpdateWriteOpResult, DocType, THelpers, RawDocType, 'updateOne'> & THelpers;
+    w(val: string | number | null): this;
+    where(path: string, val?: any): this;
+    // (undocumented)
+    where(obj: object): this;
+    // (undocumented)
+    where(): this;
+    within(val?: any): this;
+    wtimeout(ms: number): this;
 }
 
 // @public
@@ -124,7 +343,7 @@ export function GtDeleteOneHook(stage: 'pre' | 'post'): MethodDecoratorOf<never,
 export function GtDiscriminator(): PropertyDecoratorOf<string>;
 
 // @public (undocumented)
-export function GtDocument(metadata?: GtDocumentMetadataArgs): ClassDecoratorOf<Document_2, ModelExtensions>;
+export function GtDocument(metadata?: GtDocumentMetadataArgs): ClassDecoratorOf<ExtModel<any, any>>;
 
 // @public (undocumented)
 export interface GtDocumentMetadataArgs extends GtSchemaMetadataArgs {
@@ -175,7 +394,7 @@ export function GtLocalProp(): PropertyDecorator;
 export function GtMethod(): MethodDecorator;
 
 // @public (undocumented)
-export function GtModel<T1, C1, T2, C2, T3, C3, T4, C4, T5, C5>(m1?: C1 & Ctor<T1>, m2?: C2 & Ctor<T2>, m3?: C3 & Ctor<T3>, m4?: C4 & Ctor<T4>, m5?: C5 & Ctor<T5>): Ctor<Document_2<any, any, T1 & T2 & T3 & T4 & T5> & T1 & T2 & T3 & T4 & T5> & ModelExtensions<{}, {}, {}, any>;
+export function GtModel<T1, C1, T2, C2, T3, C3, T4, C4, T5, C5>(m1?: C1 & Ctor<T1>, m2?: C2 & Ctor<T2>, m3?: C3 & Ctor<T3>, m4?: C4 & Ctor<T4>, m5?: C5 & Ctor<T5>): ExtModel<T1 & T2 & T3 & T4 & T5, C1 & C2 & C3 & C4 & C5>;
 
 // @public (undocumented)
 export function GtPlugin(metadata: GtPluginMetadataArgs): ClassDecorator;
@@ -191,16 +410,16 @@ export interface GtPluginMetadataArgs<T = any> {
 }
 
 // @public (undocumented)
-export function GtQuery<Q1>(QH: Ctor<Q1>): <T, C>(Cls: Ctor<Document_2 & T> & ModelExtensions & C) => Ctor<Document_2 & T> & C & ModelExtensions<Q1>;
+export function GtQuery<Q1>(QH: Ctor<Q1>): <T, C>(Cls: ExtModel<T, C> & C) => Ctor<Document_2 & T> & C & ModelExtensions<Q1>;
 
 // @public (undocumented)
-export function GtQuery<Q1, Q2>(Q1: Ctor<Q1>, Q2: Ctor<Q2>): <T, C>(Cls: Ctor<Document_2 & T> & ModelExtensions & C) => Ctor<Document_2 & T> & C & ModelExtensions<Q1 & Q2>;
+export function GtQuery<Q1, Q2>(Q1: Ctor<Q1>, Q2: Ctor<Q2>): <T, C>(Cls: ExtModel<T, C> & C) => Ctor<Document_2 & T> & C & ModelExtensions<Q1 & Q2>;
 
 // @public (undocumented)
-export function GtQuery<Q1, Q2, Q3>(Q1: Ctor<Q1>, Q2: Ctor<Q2>, Q3: Ctor<Q3>): <T, C>(Cls: Ctor<Document_2 & T> & ModelExtensions & C) => Ctor<Document_2 & T> & C & ModelExtensions<Q1 & Q2 & Q3>;
+export function GtQuery<Q1, Q2, Q3>(Q1: Ctor<Q1>, Q2: Ctor<Q2>, Q3: Ctor<Q3>): <T, C>(Cls: ExtModel<T, C> & C) => Ctor<Document_2 & T> & C & ModelExtensions<Q1 & Q2 & Q3>;
 
 // @public (undocumented)
-export function GtQuery<Q1, Q2, Q3, Q4>(Q1: Ctor<Q1>, Q2: Ctor<Q2>, Q3: Ctor<Q3>, Q4: Ctor<Q4>): <T, C>(Cls: Ctor<Document_2 & T> & ModelExtensions & C) => Ctor<Document_2 & T> & C & ModelExtensions<Q1 & Q2 & Q3 & Q4>;
+export function GtQuery<Q1, Q2, Q3, Q4>(Q1: Ctor<Q1>, Q2: Ctor<Q2>, Q3: Ctor<Q3>, Q4: Ctor<Q4>): <T, C>(Cls: ExtModel<T, C> & C) => Ctor<Document_2 & T> & C & ModelExtensions<Q1 & Q2 & Q3 & Q4>;
 
 // @public (undocumented)
 export function GtRemoveHook(stage: 'pre' | 'post'): MethodDecoratorOf<never, any>;
@@ -273,6 +492,9 @@ export function GtValidateHook(stage: 'pre' | 'post'): MethodDecoratorOf<never, 
 export function GtVersionKey<T = number>(): PropertyDecoratorOf<T>;
 
 // @public (undocumented)
+export function isDiscriminator(modelClass: Ctor<any>): 'root' | 'child' | undefined;
+
+// @public (undocumented)
 export function mapSchemaType(runtimeType: any, metadata: GtSchemaTypeMetadataArgs): void;
 
 // @public (undocumented)
@@ -282,9 +504,9 @@ export type MethodDecoratorOf<TArgs extends [any] | [any, any] | [any, any, any]
 export interface ModelExtensions<TQueryHelpers = {}, TInstanceMethods = {}, TVirtuals = {}, TSchema = any> {
     $where<T>(this: Ctor<T>, argument: string | Function): DocumentQuery<Array<M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>>, M.HydratedDocument<T, TVirtuals & TInstanceMethods, TQueryHelpers>, TQueryHelpers, T, 'find'> & TQueryHelpers;
     // (undocumented)
-    aggregate<R = any, T = never>(this: Ctor<T>, pipeline?: M.PipelineStage[], options?: M.AggregateOptions): M.Aggregate<Array<R>>;
+    aggregate<T>(this: Ctor<T>, options?: M.AggregateOptions): M.Aggregate<Array<T>>;
     // (undocumented)
-    aggregate<R = any, T = never>(this: Ctor<T>, pipeline: M.PipelineStage[]): M.Aggregate<Array<R>>;
+    aggregate<T = any>(this: Ctor<any>, pipeline: M.PipelineStage[], options?: M.AggregateOptions): M.Aggregate<Array<T>>;
     bulkSave<T>(this: Ctor<T>, documents: Array<M.Document>, options?: M.MongooseBulkSaveOptions): Promise<mongodb.BulkWriteResult>;
     bulkWrite<T>(this: Ctor<T>, writes: Array<M.AnyBulkWriteOperation<T extends M.Document ? any : (T extends {} ? T : any)>>, options: M.MongooseBulkWriteOptions & {
         ordered: false;
