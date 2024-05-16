@@ -143,6 +143,7 @@
     "projectsRelationship": "independent",
     "releaseTagPattern": "release/{projectName}/{version}",
     "git": {
+      "tag": true,
       "commitMessage": "chore(release): {version}"
     },
     "changelog": {
