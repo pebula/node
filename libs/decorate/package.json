@@ -1,6 +1,6 @@
 {
   "name": "@pebula/decorate",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "types": "src/index.d.ts",
   "keywords": [
     "typescript",
