@@ -139,6 +139,21 @@
   "useInferencePlugins": false,
   "defaultBase": "main",
   "release": {
-    "projects": ["tag:release"]
+    "projects": ["tag:release"],
+    "projectsRelationship": "independent",
+    "releaseTagPattern": "release/{projectName}/{version}",
+    "git": {
+      "commitMessage": "chore(release): {version}"
+    },
+    "changelog": {
+      "projectChangelogs": {
+        "createRelease": "github",
+        "renderOptions": {
+          "authors": false,
+          "commitReferences": true,
+          "versionTitleDate": true
+        }
+      }
+    }
   }
 }
