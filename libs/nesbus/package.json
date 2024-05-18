@@ -1,6 +1,6 @@
 {
   "name": "@pebula/nesbus",
-  "version": "1.0.0",
+  "version": "7.9.4",
   "types": "src/index.d.ts",
   "keywords": [
     "azure",
@@ -11,15 +11,13 @@
     "microservice"
   ],
   "peerDependencies": {
-    "@azure/ms-rest-nodeauth": "^3.0.3",
-    "@azure/arm-servicebus": "^3.2.0",
-    "@azure/core-http": "^1.0.0",
-    "@azure/service-bus": "^1.1.7",
+    "@azure/identity": ">=3 <5",
+    "@azure/service-bus": "7.9.4",
     "@nestjs/common": "^7.0.0",
     "@nestjs/core": "^7.0.0",
     "@nestjs/microservices": "^7.0.5",
     "@nestjs/testing": "^7.0.9",
-    "reflect-metadata": "^0.1.13",
+    "reflect-metadata": "^0.2.2",
     "rxjs": "^6.0.0"
   },
   "repository": {

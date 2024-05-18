@@ -22,7 +22,7 @@ describe('@pebula/nesbus', () => {
 
       const serverOptions: SbServerOptions = {
         client: null,
-        management: createManagement(config.sbConnection().management, config),
+        management: createManagement(config),
         logger: createLogger('EnvSetup'),
       };
 
@@ -81,7 +81,7 @@ describe('@pebula/nesbus', () => {
       it('should delete topic', async () => {
         const queueName = createTmpName();
 
-        let result = await configurator.verifyTopic(queueName, 'verifyCreate');
+        const result = await configurator.verifyTopic(queueName, 'verifyCreate');
         expect(result).toBeTruthy();
 
         let count = 0;

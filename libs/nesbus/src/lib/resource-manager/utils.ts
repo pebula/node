@@ -5,33 +5,25 @@ import { SbServerOptions, SbClientOptions, SbEmitterRef } from '../interfaces';
 import { SbConfigurator, createManagementClientAdapter } from '../management';
 
 export function createServiceBusClient(clientOptions: SbServerOptions['client']): ServiceBusClient {
-  const { credentials, options } = clientOptions;
-  if ('connectionString' in credentials) {
-    return ServiceBusClient.createFromConnectionString(credentials.connectionString, options);
-  }
-  if ('tokenProvider' in credentials) {
-    return ServiceBusClient.createFromTokenProvider(credentials.host, credentials.tokenProvider, options);
-  }
-  if ('credentials' in credentials) {
-    return ServiceBusClient.createFromAadTokenCredentials(credentials.host, credentials.credentials as any, options);
-  }
+  if ('connectionString' in clientOptions)
+    return new ServiceBusClient(clientOptions.connectionString, clientOptions.options)
+
+  if (clientOptions.namespace && clientOptions.credential)
+    return new ServiceBusClient(clientOptions.namespace, clientOptions.credential, clientOptions.options);
+
   throw new Error('Invalid credentials.');
 }
 
 export function createServerConnector(config: SbServerOptions) {
-  if (!config.client || !config.client.credentials) {
+  if (!config.client)
     throw errors.invalidOrMissingConfiguration('SbServerOptions.client', 'Connection credentials are mandatory.');
-  }
 
-  const result: { client: ServiceBusClient, configurator?: SbConfigurator } = {
+  return {
     client: createServiceBusClient(config.client),
+    configurator: config.management
+      ? new SbConfigurator(createManagementClientAdapter(config.management), config)
+      : undefined
   };
-
-  if (config.management) {
-    const managementClient = createManagementClientAdapter(config.management);
-    result.configurator = new SbConfigurator(managementClient, config);
-  }
-  return result;
 }
 
 export function createClientConnector(config: SbClientOptions, server?: SbServer) {

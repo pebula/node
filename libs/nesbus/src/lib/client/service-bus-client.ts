@@ -1,5 +1,5 @@
 import { LoggerService } from '@nestjs/common';
-import { ServiceBusClient, Sender } from '@azure/service-bus';
+import { ServiceBusClient } from '@azure/service-bus';
 import { SbConfigurator } from '../management';
 import { SbClientOptions } from '../interfaces';
 import { SbChannelManager } from '../resource-manager/';
@@ -23,14 +23,14 @@ export class SbClient {
     const { metaOptions } = metadata;
 
     if (this.configurator && !!metaOptions.provision) {
-      await metadata.type === 'queue'
-        ? this.configurator.verifyQueue(metaOptions.name, metaOptions.provision)
-        : this.configurator.verifyTopic(metaOptions.name, metaOptions.provision)
+      metadata.type === 'queue'
+        ? await this.configurator.verifyQueue(metaOptions.name, metaOptions.provision)
+        : await this.configurator.verifyTopic(metaOptions.name, metaOptions.provision)
       ;
     }
 
     const emitter = metadata.type === 'queue'
-      ? this.channelManager.getCreateQuerySender(metaOptions.name)
+      ? this.channelManager.getCreateQueueSender(metaOptions.name)
       : this.channelManager.getCreateTopic(metaOptions.name)
     ;
 
@@ -39,6 +39,6 @@ export class SbClient {
     return emitter;
   }
 
-  async destroy() {
-  }
+  
+  async destroy() {} // eslint-disable-line @typescript-eslint/no-empty-function
 }

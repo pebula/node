@@ -3,9 +3,7 @@ export function createSbClientOptions(name: string, connectionString?: string): 
   return {
     name,
     client: {
-      credentials: {
-        connectionString: connectionString || process.env.SERVICEBUS_CONNECTION_STRING
-      }
+      connectionString: connectionString || process.env.SERVICEBUS_CONNECTION_STRING
     }
   }
 }

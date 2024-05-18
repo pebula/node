@@ -1,16 +1,19 @@
-import { OnMessage, OnError, MessageHandlerOptions, Receiver, SessionReceiver } from '@azure/service-bus';
+import { ServiceBusReceiver, ServiceBusSessionReceiver, ProcessErrorArgs, ServiceBusReceivedMessage, SubscribeOptions } from '@azure/service-bus';
 
 /**
  * The async version for `Receiver.registerMessageHandler` with feedback on the connection status.
  *
  * Remove then https://github.com/Azure/azure-sdk-for-js/issues/7986 is resolved
  */
-export async function registerMessageHandler(receiver: Receiver | SessionReceiver, onMessage: OnMessage, onError: OnError, options?: MessageHandlerOptions) {
+export async function registerMessageHandler(receiver: ServiceBusReceiver | ServiceBusSessionReceiver, 
+                                             onMessage: (message: ServiceBusReceivedMessage) => Promise<void>, 
+                                             onError: (error :ProcessErrorArgs) => Promise<void>, 
+                                             options?: SubscribeOptions) {
   return new Promise<void>( (resolve, reject) => {
     let done = false;
-    const onErrorRouter: OnError = err => {
+    const onErrorRouter = async (err : ProcessErrorArgs) => {
       if (done) {
-        onError(err);
+        await onError(err);
       }
       else {
         done = true;
@@ -20,16 +23,17 @@ export async function registerMessageHandler(receiver: Receiver | SessionReceive
 
     const poll = () => {
       setTimeout(() => {
-        if (receiver.isReceivingMessages()) {
+        // isReceivingMessages() changed to private method in V7, no alternative provided 
+        if ((receiver as any)._isReceivingMessages()) {
           done = true;
           resolve();
         } else if (!done) {
           poll();
         }
-      }, 10);
+      }, 10); 
     };
-
-    receiver.registerMessageHandler(onMessage, onErrorRouter, options);
+    
+    receiver.subscribe({ processMessage: onMessage, processError: onErrorRouter}, options);
     poll();
   });
 }

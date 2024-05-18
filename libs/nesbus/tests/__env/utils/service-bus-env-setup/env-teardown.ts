@@ -1,4 +1,4 @@
-import { SbServerOptions, SbSubscriberMetadataOptions, SbEmitterMetadataOptions, SbSubscriptionMetadataOptions } from '../../../../src';
+import { SbServerOptions, SbSubscriberMetadataOptions, SbEmitterMetadataOptions, SbSubscriptionMetadataOptions } from '../../../../src/lib';
 import { SbConfigurator } from '../../../../src/lib/management/configurator';
 import { createManagementClientAdapter } from '../../../../src/lib/management/adapters';
 import { ConfigService } from '../../server/services/config-service';
@@ -10,7 +10,7 @@ export async function run() {
 
   const serverOptions: SbServerOptions = {
     client: null,
-    management: createManagement(config.sbConnection().management, config),
+    management: createManagement(config),
     logger: createLogger('EnvTeardown'),
   };
 

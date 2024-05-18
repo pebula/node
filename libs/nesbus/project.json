@@ -51,8 +51,7 @@
         "assets": ["libs/nesbus/*.md"],
         "srcRootForCompilationRoot": "libs/nesbus",
         "additionalEntryPoints": [
-          "libs/nesbus/tasks/index.ts",
-          "libs/nesbus/arm-adapter/index.ts"
+          "libs/nesbus/tasks/index.ts"
         ],
         "generateExportsField": true
       }

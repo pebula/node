@@ -1,8 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { createSbServer, SbModuleRegisterOptions } from '@pebula/nesbus';
+import { createSbServer } from '@pebula/nesbus';
 
 import { ModuleMetadata, Provider } from '@nestjs/common/interfaces';
-import { NestBusSharedModule,  createServiceBusModule } from '../server';
+import { NestBusSharedModule, createServiceBusModule } from '../server';
+import { SbClientOptions } from '@pebula/nesbus/src/lib/interfaces';
 
 export class TestModuleFactory {
 
@@ -17,11 +18,11 @@ export class TestModuleFactory {
     exports: [],
   };
 
-  private fn?: (testingModule: TestingModule) => {};
+  private fn?: (testingModule: TestingModule) => unknown;
+  
+  private constructor() { } // eslint-disable-line @typescript-eslint/no-empty-function
 
-  private constructor() { }
-
-  addServiceBusModule(providers?: Provider[], clients?: SbModuleRegisterOptions['clients']): Pick<TestModuleFactory, 'compile' | 'addMetadata'> {
+  addServiceBusModule(providers?: Provider[], clients?: SbClientOptions[]): Pick<TestModuleFactory, 'compile' | 'addMetadata'> {
     const serviceBusModule = createServiceBusModule(providers, clients);
     this.moduleMetadata.imports.push(serviceBusModule);
     return this;

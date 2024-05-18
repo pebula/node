@@ -5,6 +5,7 @@
     "outDir": "../../../../../../dist/out-tsc",
     "declaration": true,
     "types": ["node"],
+    "allowJs": true,
     "plugins": [
       {
         "transform": "typescript-transform-paths"

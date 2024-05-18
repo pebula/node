@@ -1,19 +1,18 @@
-import { ServiceBusClientOptions } from '@azure/service-bus';
+import { ServiceBusAdministrationClientOptions, ServiceBusClientOptions, TokenCredential } from '@azure/service-bus';
 import { LoggerService } from '@nestjs/common';
 
-import { SbCredentials } from './credentials';
-import { SbManagementClientOptions } from './management';
+import { SbManagementDefaultsAdapter } from './management';
 
-export interface SbConnectionOptions<TCredentials, TOptions> {
-  /**
-   * Connection credentials used to authenticate & authorize with service bus.
-   */
-  credentials: TCredentials;
-  /**
-   * Connection specific options
-   */
-  options?: TOptions;
+export interface SbSASCredentials   {
+  connectionString: string;
 }
+
+export interface SbTokenCredentials   {
+  namespace: string;
+  credential?: TokenCredential;
+}
+
+export type SbConnectionOptions<TOptions> = (SbSASCredentials | SbTokenCredentials) & { options?: TOptions; };
 
 export interface SbServerOptions {
   /**
@@ -30,9 +29,9 @@ export interface SbServerOptions {
    */
   name?: string;
 
-  client: SbConnectionOptions<SbCredentials, ServiceBusClientOptions>;
+  client: SbConnectionOptions<ServiceBusClientOptions>;
 
-  management?: SbManagementClientOptions[keyof SbManagementClientOptions];
+  management?: SbConnectionOptions<ServiceBusAdministrationClientOptions> & { defaults: SbManagementDefaultsAdapter; };
 
   /**
    * How handlers are registers in service bus.
@@ -91,9 +90,9 @@ export interface SbClientOptions {
    *
    * See `SbClientOptions.name` for more information.
    */
-  client?: SbConnectionOptions<SbCredentials, ServiceBusClientOptions>;
+  client?: SbConnectionOptions<ServiceBusClientOptions>;
 
-  management?: SbManagementClientOptions[keyof SbManagementClientOptions];
-
+  management?: SbConnectionOptions<ServiceBusAdministrationClientOptions> & { defaults: SbManagementDefaultsAdapter; };
+  
   logger?: LoggerService;
 }

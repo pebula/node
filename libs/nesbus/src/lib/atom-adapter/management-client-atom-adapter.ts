@@ -1,76 +1,76 @@
-// TODO: ON_ATOM_IS_PUBLIC
-// When `@azure/service-bus` will officially release their Atom management client, follow an refactor all
-// TODO with "ON_ATOM_IS_PUBLIC" next to them. See https://github.com/Azure/azure-sdk-for-js/issues/1057
-// ALSO: Make sure to:
-//  - "yarn remove @azure/core-amqp"
-//  - "yearn remove @azure/core-http"
-import { ServiceBusAtomManagementClient } from './atom-client/src/serviceBusAtomManagementClient';
-import { ServiceBusAtomManagementClientOptions } from './atom-client/src/serviceBusAtomManagementClient';
+import { ServiceBusAdministrationClient } from '@azure/service-bus';
 
-import { SbManagementClientAdapter, SbConnectionOptions, ServiceBusConnectionStringCredentials, SbManagementDefaultsAdapter } from '../interfaces';
+import { SbManagementClientAdapter, SbServerOptions } from '../interfaces';
 import { SbQueue, SbTopic, SbSubscription, SbRule } from '../models';
 
-// TODO: ON_ATOM_IS_PUBLIC
-export interface SbManagementClientAtomOptions
-  extends SbConnectionOptions<ServiceBusConnectionStringCredentials, ServiceBusAtomManagementClientOptions> {
-  defaults?: SbManagementDefaultsAdapter;
-}
-
 export class SbManagementClientAtomAdapter implements SbManagementClientAdapter {
-  private readonly managementClient: ServiceBusAtomManagementClient;
+  private readonly managementClient: ServiceBusAdministrationClient;
 
-  constructor(options: SbManagementClientAtomOptions) {
-    const { credentials } = options;
-    this.managementClient = new ServiceBusAtomManagementClient(credentials.connectionString, options.options);
+  constructor(options: SbServerOptions['management']) {
+    this.managementClient = 'connectionString' in options
+      ? new ServiceBusAdministrationClient(options.connectionString, options.options)
+      : new ServiceBusAdministrationClient(options.namespace, options.credential, options.options);
   }
 
   async getQueue(queueName: string) {
-    return await this.managementClient.getQueueDetails(queueName);
+    return this.managementClient.getQueue(queueName);
   }
   async upsertQueue(queueName: string, queue: SbQueue, isNew: boolean) {
-    return isNew
-      ? await this.managementClient.createQueue(queueName, queue)
-      : await this.managementClient.updateQueue(queueName, queue)
-    ;
+    if(isNew) {
+      return this.managementClient.createQueue(queueName, queue);
+    }
+
+    return this.getQueue(queueName).then(existingQueue => 
+      this.managementClient.updateQueue({...existingQueue, ...queue})
+    );
   }
   async deleteQueue(queueName: string) {
     await this.managementClient.deleteQueue(queueName);
   }
 
   async getTopic(topicName: string) {
-    return await this.managementClient.getTopicDetails(topicName);
+    return this.managementClient.getTopic(topicName);
   }
   async upsertTopic(topicName: string, topic: SbTopic, isNew: boolean) {
-    return isNew
-      ? await this.managementClient.createTopic(topicName, topic)
-      : await this.managementClient.updateTopic(topicName, topic)
-    ;
+    if(isNew) {
+      return this.managementClient.createTopic(topicName, topic);
+    }
+    
+    return this.managementClient.getTopic(topicName).then(existingTopic =>
+        this.managementClient.updateTopic({...existingTopic, ...topic})
+    );
   }
   async deleteTopic(topicName: string) {
     await this.managementClient.deleteTopic(topicName);
   }
 
   async getSubscription(topicName: string, subscriptionName: string) {
-    return await this.managementClient.getSubscriptionDetails(topicName, subscriptionName);
+    return this.managementClient.getSubscription(topicName, subscriptionName);
   }
   async upsertSubscription(topicName: string, subscriptionName: string, subscription: SbSubscription, isNew: boolean) {
-    return isNew
-      ? await this.managementClient.createSubscription(topicName, subscriptionName, subscription)
-      : await this.managementClient.updateSubscription(topicName, subscriptionName, subscription)
-    ;
+    if(isNew) {
+      return this.managementClient.createSubscription(topicName, subscriptionName, subscription);
+    }
+    
+    return this.managementClient.getSubscription(topicName, subscriptionName).then(existingSubscription =>
+        this.managementClient.updateSubscription({...existingSubscription, ...subscription})
+    );
   }
   async deleteSubscription(topicName: string, subscriptionName: string) {
     await this.managementClient.deleteSubscription(topicName, subscriptionName);
   }
 
   async getRule(topicName: string, subscriptionName: string, ruleName: string) {
-    return await this.managementClient.getRuleDetails(topicName, subscriptionName, ruleName);
+    return this.managementClient.getRule(topicName, subscriptionName, ruleName);
   }
   async upsertRule(topicName: string, subscriptionName: string, ruleName: string, rule: SbRule, isNew: boolean) {
-    return isNew
-      ? await this.managementClient.createRule(topicName, subscriptionName, ruleName, rule)
-      : await this.managementClient.updateRule(topicName, subscriptionName, ruleName, rule)
-    ;
+    if(isNew) {
+      return this.managementClient.createRule(topicName, subscriptionName, ruleName, rule.filter);
+    }
+    
+    return this.getRule(topicName, subscriptionName, ruleName).then(existingRule =>
+        this.managementClient.updateRule(topicName, subscriptionName, {...existingRule, ...rule})
+    );
   }
   async deleteRule(topicName: string, subscriptionName: string, ruleName: string) {
     await this.managementClient.deleteRule(topicName, subscriptionName, ruleName);

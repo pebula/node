@@ -40,17 +40,6 @@ jobs:
         run: |
           sudo apt install libsdl-pango-dev
           yarn install --pure-lockfile
-      - name: Build local nx plugins
-        if: steps.cache.outputs.cache-hit == 'true'
-        run: |
-          yarn nx build nx-build-pipe
-          yarn nx build nx-api-extractor
-      - name: Cache dist (for nx-build-pipe, etc...)
-        id: cache-build
-        uses: actions/cache@v4
-        with:
-          path: dist
-          key: ${{ runner.os }}-dist-${{ github.sha }}
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         id: setSHAs
         uses: nrwl/nx-set-shas@v4
@@ -85,11 +74,6 @@ jobs:
         with:
           path: node_modules
           key: ${{ env.DEPENDENCIES_CACHE }}-${{ hashFiles('yarn.lock') }}
-      - name: Cache dist (for nx-build-pipe, etc...)
-        uses: actions/cache@v4
-        with:
-          path: dist
-          key: ${{ runner.os }}-dist-${{ github.sha }}
       - name: Cache Nx
         uses: actions/cache@v4
         with:

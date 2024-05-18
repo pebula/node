@@ -4,10 +4,10 @@
 
 ```ts
 
-/// <reference types="node" />
-
+import { AmqpAnnotatedMessage } from '@azure/core-amqp';
 import { BaseRpcContext } from '@nestjs/microservices/ctx-host/base-rpc.context';
 import { CallHandler } from '@nestjs/common';
+import { CorrelationRuleFilter } from '@azure/service-bus';
 import { Ctx } from '@nestjs/microservices';
 import { CustomTransportStrategy } from '@nestjs/microservices';
 import { DynamicModule } from '@nestjs/common';
@@ -15,27 +15,34 @@ import { FactoryProvider } from '@nestjs/common';
 import { InstanceWrapper } from '@nestjs/core/injector/instance-wrapper';
 import { LoggerService } from '@nestjs/common';
 import { MessageHandler } from '@nestjs/microservices';
-import { MessageHandlerOptions } from '@azure/service-bus';
 import { MessagingError } from '@azure/service-bus';
 import { ModulesContainer } from '@nestjs/core';
 import { Observable } from 'rxjs';
 import { OnModuleDestroy } from '@nestjs/common';
 import { OnModuleInit } from '@nestjs/common';
+import { OperationOptionsBase } from '@azure/service-bus';
 import { OperatorFunction } from 'rxjs';
 import { Payload } from '@nestjs/microservices';
 import { Provider } from '@nestjs/common';
-import { ProxySettings } from '@azure/core-http';
-import { ReceiveMode } from '@azure/service-bus';
-import { Receiver } from '@azure/service-bus';
-import { SendableMessageInfo } from '@azure/service-bus';
-import { Sender } from '@azure/service-bus';
+import { QueueProperties } from '@azure/service-bus';
+import { RuleProperties } from '@azure/service-bus';
 import { Server } from '@nestjs/microservices';
+import { ServiceBusAdministrationClientOptions } from '@azure/service-bus';
 import { ServiceBusClient } from '@azure/service-bus';
 import { ServiceBusClientOptions } from '@azure/service-bus';
 import { ServiceBusMessage } from '@azure/service-bus';
-import { SessionReceiver } from '@azure/service-bus';
-import { SessionReceiverOptions } from '@azure/service-bus';
-import { TokenProvider } from '@azure/service-bus';
+import { ServiceBusMessageBatch } from '@azure/service-bus';
+import { ServiceBusReceivedMessage } from '@azure/service-bus';
+import { ServiceBusReceiver } from '@azure/service-bus';
+import { ServiceBusReceiverOptions } from '@azure/service-bus';
+import { ServiceBusSender } from '@azure/service-bus';
+import { ServiceBusSessionReceiver } from '@azure/service-bus';
+import { ServiceBusSessionReceiverOptions } from '@azure/service-bus';
+import { SqlRuleFilter } from '@azure/service-bus';
+import { SubscribeOptions } from '@azure/service-bus';
+import { SubscriptionProperties } from '@azure/service-bus';
+import { TokenCredential } from '@azure/service-bus';
+import { TopicProperties } from '@azure/service-bus';
 import { Type } from '@nestjs/common';
 import { ValueProvider } from '@nestjs/common';
 
@@ -57,27 +64,29 @@ export const QueueEmitter: (metadata: MetaOrMetaFactory<SbQueueEmitterMetadataOp
 
 // @public (undocumented)
 export class SbContext<T extends keyof SbSubscriberTypeMap = keyof SbSubscriberTypeMap> extends BaseRpcContext<SbContextArgs<T>> {
-    constructor(args: SbContextArgs<T>);
+    constructor(args: SbContextArgs<T>, receiver: ServiceBusReceiver | ServiceBusSessionReceiver);
     entityName(): string;
     // (undocumented)
     getData<TBody = any>(): TBody;
     // (undocumented)
-    getMessage(): ServiceBusMessage;
+    getMessage(): ServiceBusReceivedMessage;
+    // (undocumented)
+    getReceiver(): ServiceBusReceiver | ServiceBusSessionReceiver;
     resolveClient(emitterReference?: SbEmitterRef): SbEmitterImp | undefined;
     // (undocumented)
     get type(): T;
 }
 
 // @public (undocumented)
-export type SbContextArgs<T extends keyof SbSubscriberTypeMap = keyof SbSubscriberTypeMap> = [SbSubscriberMetadata<T>, ServiceBusMessage];
+export type SbContextArgs<T extends keyof SbSubscriberTypeMap = keyof SbSubscriberTypeMap> = [SbSubscriberMetadata<T>, ServiceBusReceivedMessage];
 
 // @public (undocumented)
-export type SbCorrelationFilter = Partial<CorrelationFilter>;
+export type SbCorrelationFilter = Partial<CorrelationRuleFilter>;
 
 // @public
 export interface SbEmitterImp {
     // (undocumented)
-    send(message: SendableMessageInfo): Promise<void>;
+    sendMessages(messages: ServiceBusMessage | ServiceBusMessage[] | ServiceBusMessageBatch | AmqpAnnotatedMessage | AmqpAnnotatedMessage[], options?: OperationOptionsBase): Promise<void>;
 }
 
 // @public (undocumented)
@@ -122,16 +131,6 @@ export interface SbInterceptor<T = any, R = any> {
 }
 
 // @public (undocumented)
-export interface SbManagementClientAtomOptions extends SbConnectionOptions<ServiceBusConnectionStringCredentials, ServiceBusAtomManagementClientOptions> {
-    // (undocumented)
-    defaults?: SbManagementDefaultsAdapter;
-}
-
-// @public (undocumented)
-export interface SbManagementClientOptions {
-}
-
-// @public (undocumented)
 export interface SbManagementDefaultsAdapter {
     // (undocumented)
     entities?: {
@@ -164,7 +163,7 @@ export interface SbModuleRegisterOptions {
 }
 
 // @public (undocumented)
-export type SbQueue = Partial<Omit<QueueDetails, 'queueName'>>;
+export type SbQueue = Partial<Omit<QueueProperties, 'name'>>;
 
 // @public (undocumented)
 export interface SbQueueEmitterMetadataOptions extends SbEmitterMetadataOptions {
@@ -185,7 +184,7 @@ export interface SbQueueMetadataOptions extends SbSubscriberMetadataOptions {
 }
 
 // @public (undocumented)
-export type SbRule = Partial<Omit<RuleDetails, 'createdOn'>>;
+export type SbRule = Partial<Omit<RuleProperties, 'createdAt'>>;
 
 // @public (undocumented)
 export interface SbRuleEntityProvision extends SbEntityProvision<SbRule> {
@@ -196,35 +195,45 @@ export interface SbRuleEntityProvision extends SbEntityProvision<SbRule> {
 }
 
 // @public (undocumented)
+export interface SbSASCredentials {
+    // (undocumented)
+    connectionString: string;
+}
+
+// @public (undocumented)
 export interface SbServerOptions {
     // (undocumented)
-    client: SbConnectionOptions<SbCredentials, ServiceBusClientOptions>;
+    client: SbConnectionOptions<ServiceBusClientOptions>;
     // (undocumented)
     logger?: LoggerService;
     // (undocumented)
-    management?: SbManagementClientOptions[keyof SbManagementClientOptions];
+    management?: SbConnectionOptions<ServiceBusAdministrationClientOptions> & {
+        defaults: SbManagementDefaultsAdapter;
+    };
     name?: string;
     registerHandlers?: 'sequence' | 'parallel';
 }
 
 // @public (undocumented)
-export type SbSqlFilter = Partial<Omit<SqlFilter, 'sqlParameters'>>;
+export type SbSqlFilter = Omit<SqlRuleFilter, 'sqlParameters'>;
 
 // @public (undocumented)
 export interface SbSubscriberMetadataOptions {
     // (undocumented)
-    handlerOptions?: MessageHandlerOptions;
+    handlerOptions?: ServiceBusReceiverOptions;
     // (undocumented)
     name: string;
     // (undocumented)
-    receiveMode: ReceiveMode;
+    receiveMode: 'peekLock' | 'receiveAndDelete';
     serverId?: string;
     // (undocumented)
-    sessionOptions?: SessionReceiverOptions;
+    sessionOptions?: ServiceBusSessionReceiverOptions;
+    // (undocumented)
+    subscribeOptions?: SubscribeOptions;
 }
 
 // @public (undocumented)
-export type SbSubscription = Partial<Omit<SubscriptionDetails, 'subscriptionName' | 'topicName'>>;
+export type SbSubscription = Partial<Omit<SubscriptionProperties, 'subscriptionName' | 'topicName'>>;
 
 // @public (undocumented)
 export interface SbSubscriptionMetadataOptions extends SbSubscriberMetadataOptions {
@@ -235,7 +244,15 @@ export interface SbSubscriptionMetadataOptions extends SbSubscriberMetadataOptio
 }
 
 // @public (undocumented)
-export type SbTopic = Partial<Omit<TopicDetails, 'topicName'>>;
+export interface SbTokenCredentials {
+    // (undocumented)
+    credential?: TokenCredential;
+    // (undocumented)
+    namespace: string;
+}
+
+// @public (undocumented)
+export type SbTopic = Partial<Omit<TopicProperties, 'name'>>;
 
 // @public (undocumented)
 export interface SbTopicEntityProvision extends SbEntityProvision<SbTopic> {
@@ -256,28 +273,6 @@ export interface SbTopicSubscriptionEntityProvision extends SbEntityProvision<Sb
 }
 
 // @public (undocumented)
-export interface ServiceBusAadTokenCredentials {
-    credentials: Parameters<typeof ServiceBusClient['createFromAadTokenCredentials']>[1];
-    host: string;
-}
-
-// @public (undocumented)
-export interface ServiceBusConnectionStringCredentials {
-    // (undocumented)
-    connectionString: string;
-}
-
-// @public (undocumented)
-export interface ServiceBusManagementAadTokenCredentials extends ServiceBusAadTokenCredentials {
-    // (undocumented)
-    namespace: string;
-    // (undocumented)
-    resourceGroupName: string;
-    // (undocumented)
-    subscriptionId: string;
-}
-
-// @public (undocumented)
 export class ServiceBusModule implements OnModuleInit, OnModuleDestroy {
     constructor(discoveryFactory: SbDiscoveryFactoryService, errorHandler?: SbErrorHandler, metadataHelper?: any, clientOptions?: SbClientOptions[], serverOptions?: SbServerOptions[]);
     // (undocumented)
@@ -285,14 +280,6 @@ export class ServiceBusModule implements OnModuleInit, OnModuleDestroy {
     // (undocumented)
     onModuleInit(): Promise<void>;
     static register(options: SbModuleRegisterOptions): DynamicModule;
-}
-
-// @public (undocumented)
-export interface ServiceBusTokenProviderCredentials {
-    // (undocumented)
-    host: string;
-    // (undocumented)
-    tokenProvider: TokenProvider;
 }
 
 // @public
