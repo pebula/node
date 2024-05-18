@@ -1,39 +1,33 @@
+import { ServiceBusAdministrationClientOptions, ServiceBusClientOptions } from '@azure/service-bus';
 import { Injectable } from '@nestjs/common';
 import {
   SbManagementDefaultsAdapter,
   SbRuleEntityProvision,
   SbTopicSubscriptionEntityProvision,
   SbRule,
+  SbSASCredentials,
+  SbTokenCredentials,
 } from '@pebula/nesbus';
-
-export type SbConnection = { type: 'connectionString'; sasConnectionString: string; } | {
-  type: 'activeDirectory';
-  host: string;
-  resourceGroupName: string;
-  namespace: string;
-  subscriptionId: string;
-  credentials: {
-    tenantId: string;
-    clientId: string;
-    clientSecret: string;
-  };
-  verifyEntityExistence: boolean;
- }
 
 @Injectable()
 export class ConfigService {
-  sbConnection(): { client: SbConnection; management: SbConnection; } {
-    const sasConnectionString = process.env.SERVICEBUS_CONNECTION_STRING;
-    return {
-      client: {
-        type: 'connectionString',
-        sasConnectionString,
-      },
-      management: {
-        type: 'connectionString',
-        sasConnectionString,
-      }
-    };
+
+  sbClientOptions(): ServiceBusClientOptions | undefined {
+    return;
+  }
+
+  sbManagementOptions(): ServiceBusAdministrationClientOptions | undefined {
+    return;
+  }
+
+  sbConnection(): SbSASCredentials | SbTokenCredentials {
+    if (process.env.SERVICEBUS_CONNECTION_STRING)
+      return { connectionString: process.env.SERVICEBUS_CONNECTION_STRING };
+
+    if (process.env.SERVICEBUS_HOSTNAME)
+      return { namespace: process.env.SERVICEBUS_HOSTNAME };
+
+    throw new Error("Invalid TEST configuration, please set one of the following environment variables:\n\n    - SERVICEBUS_CONNECTION_STRING \n\n    - SERVICEBUS_HOSTNAME (for local develoment, identity based authentication)\n");
   }
 
   sbDefaultsAdapter(): SbManagementDefaultsAdapter {
@@ -47,16 +41,16 @@ export class ConfigService {
         queue: {
           deadLetteringOnMessageExpiration: true,
           maxSizeInMegabytes: 1024,
-          defaultMessageTtl: 'P14D',
+          defaultMessageTimeToLive : 'P14D',
           lockDuration: 'PT5M',
         },
         topic: {
-          defaultMessageTtl: 'P14D',
+          defaultMessageTimeToLive : 'P14D',
           maxSizeInMegabytes: 1024,
         },
         subscription: {
           deadLetteringOnMessageExpiration: true,
-          defaultMessageTtl: 'P14D',
+          defaultMessageTimeToLive : 'P14D',
           lockDuration: 'PT5M',
         },
       },
@@ -74,7 +68,7 @@ export class ConfigService {
         ];
       },
     };
-
+  
     return defaults;
   }
 

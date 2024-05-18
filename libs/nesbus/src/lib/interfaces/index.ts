@@ -1,5 +1,4 @@
 export * from './entity-provision';
-export * from './credentials';
 export * from './options';
 export * from './subscriber-routing';
 export * from './emitter';

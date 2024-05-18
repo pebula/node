@@ -96,7 +96,7 @@ export class SbResourceManager {
     if (isSbEmitterRef(obj)) {
       const channelMgr = this.getChannelManager(obj.clientId);
       if (channelMgr) {
-        return channelMgr.getTopicSender(obj.name) || channelMgr.getQuerySender(obj.name);
+        return channelMgr.getTopicSender(obj.name) || channelMgr.getQueueSender(obj.name);
       }
     } else {
       return obj;
@@ -111,7 +111,7 @@ export class SbResourceManager {
 
   private trySetUniqueResource<T extends ResourceType>(type: T, value: SbResourceGroup[T], groupName?: string): SbResourceGroup {
     const resource = this.getCreateResource(groupName);
-    if (!!resource[type]) {
+    if (resource[type]) {
       throw errors.resourceAlreadyExists(type, groupName);
     }
     resource[type] = value;

@@ -156,7 +156,7 @@ export class SbConfigurator {
   }
   async deleteSubscription(topicName: string, subscriptionName: string) {
     await this.managementClient.deleteSubscription(topicName, subscriptionName);
-    this.sbLogger.log(`Subscription ${topicName}-${subscriptionName} delete.`);
+    this.sbLogger.log(`Subscription ${topicName}-${subscriptionName} de;ete.`);
   }
 
   async verifyRule(topicName: string, subscriptionName: string, provision: SbRuleEntityProvision): Promise<SbRule> {

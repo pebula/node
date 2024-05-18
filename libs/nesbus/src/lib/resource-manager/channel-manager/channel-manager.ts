@@ -1,7 +1,8 @@
-import { Sender, Receiver, ServiceBusClient, ReceiveMode, SessionReceiverOptions, SessionReceiver } from '@azure/service-bus';
+import { ServiceBusSender, ServiceBusReceiver, ServiceBusClient, ServiceBusSessionReceiverOptions, ServiceBusSessionReceiver, ServiceBusReceiverOptions } from '@azure/service-bus';
 
 import { SbResourceGroup } from '../resource-group';
 import { SbChannelManagerContainerStore } from './channel-manager-container-store';
+import { SbQueueMetadataOptions, SbSubscriptionMetadataOptions } from '../../interfaces';
 
 export class SbChannelManager {
   private rxClient: ServiceBusClient;
@@ -28,58 +29,48 @@ export class SbChannelManager {
     this.containers.updateClients(this.rxClient, this.txClient);
   }
 
-  getQueryReceiver(name: string): Receiver | SessionReceiver | undefined {
+  getQueryReceiver(name: string): ServiceBusReceiver | ServiceBusSessionReceiver | undefined {
     const queueContainer = this.containers.findQueue(name);
     if (queueContainer) {
       return queueContainer.receiver;
     }
   }
 
-  getCreateQueryReceiver(name: string, receiveMode: ReceiveMode): Receiver;
-  getCreateQueryReceiver(name: string, receiveMode: ReceiveMode, sessionReceiverOptions: SessionReceiverOptions): SessionReceiver;
-  getCreateQueryReceiver(name: string, receiveMode: ReceiveMode, sessionReceiverOptions?: SessionReceiverOptions): Receiver | SessionReceiver {
-    return this.containers.findQueue(name, true).getCreateReceiver(receiveMode, sessionReceiverOptions);
+  async getCreateQueueReceiver(options: SbQueueMetadataOptions): Promise<ServiceBusReceiver | ServiceBusSessionReceiver> {
+    return this.containers.findQueue(options.name, true).getCreateReceiver(options);
   }
 
-  getQuerySender(name: string): Sender | undefined {
+  getQueueSender(name: string): ServiceBusSender | undefined {
     const queueContainer = this.containers.findQueue(name);
     if (queueContainer) {
       return queueContainer.sender;
     }
   }
 
-  getCreateQuerySender(name: string): Sender {
+  getCreateQueueSender(name: string): ServiceBusSender {
     return this.containers.findQueue(name, true).getCreateSender();
   }
 
-  getTopicSender(name: string): Sender | undefined {
+  getTopicSender(name: string): ServiceBusSender | undefined {
     const topicContainer = this.containers.findTopic(name);
     if (topicContainer) {
       return topicContainer.sender;
     }
   }
 
-  getCreateTopic(topicName: string): Sender {
+  getCreateTopic(topicName: string): ServiceBusSender {
     return this.containers.findTopic(topicName, true).getCreateSender();
   }
 
-  getSubscription(topicName: string, subscriptionName: string): Receiver | SessionReceiver | undefined {
+  getSubscription(topicName: string, subscriptionName: string): ServiceBusReceiver | ServiceBusSessionReceiver | undefined {
     const topicContainer = this.containers.findTopic(topicName);
     if (topicContainer) {
       return topicContainer.getReceiver(subscriptionName);
     }
   }
 
-  getCreateSubscription(topicName: string, subscriptionName: string, receiveMode: ReceiveMode): Receiver;
-  getCreateSubscription(topicName: string,
-                        subscriptionName: string,
-                        receiveMode: ReceiveMode,
-                        sessionReceiverOptions: SessionReceiverOptions): SessionReceiver;
-  getCreateSubscription(topicName: string,
-                        subscriptionName: string, receiveMode: ReceiveMode,
-                        sessionReceiverOptions?: SessionReceiverOptions): Receiver | SessionReceiver {
-    return this.containers.findTopic(topicName, true)
-      .getCreateReceiver(subscriptionName, receiveMode, sessionReceiverOptions);
+  getCreateSubscription(options: SbSubscriptionMetadataOptions):  Promise<ServiceBusReceiver | ServiceBusSessionReceiver> {
+    return this.containers.findTopic(options.topicName, true).getCreateReceiver(options);
   }
 
 }

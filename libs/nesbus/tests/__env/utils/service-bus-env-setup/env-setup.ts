@@ -10,7 +10,7 @@ export async function run() {
 
   const serverOptions: SbServerOptions = {
     client: null,
-    management: createManagement(config.sbConnection().management, config),
+    management: createManagement(config),
     logger: createLogger('EnvSetup'),
   };
 

@@ -1,11 +1,11 @@
 import { Provider } from '@nestjs/common/interfaces';
-import { ApplicationTokenCredentials } from '@azure/ms-rest-nodeauth';
+import { DefaultAzureCredential } from '@azure/identity'
 
 import { ServiceBusModule, SbServerOptions, SbModuleRegisterOptions } from '@pebula/nesbus';
-import { registerArmAdapter } from '@pebula/nesbus/arm-adapter';
 import { NoopLogger } from '../../../../src/lib/noop-logger';
 
 import { ConfigService } from '../services';
+import { SbClientOptions } from '@pebula/nesbus/src/lib/interfaces';
 
 export function createLogger(name: string) {
   // return new Logger(name);
@@ -18,83 +18,61 @@ export function createLogger(name: string) {
   };
 }
 
-export function createClient(client: ReturnType<ConfigService['sbConnection']>['client']): SbServerOptions['client'] {
-  if (client.type === 'connectionString') {
-    return {
-      credentials: {
-        connectionString: client.sasConnectionString,
-      },
-    };
+export function createClient(config: ConfigService): SbServerOptions['client'] {
+  const creds = config.sbConnection();
+  const options = config.sbClientOptions();
+
+  if ('connectionString' in creds) {
+    return { connectionString: creds.connectionString, options };
   } else {
-    return {
-      credentials: {
-        host: client.host,
-        credentials: new ApplicationTokenCredentials(
-          client.credentials.clientId,
-          client.credentials.tenantId,
-          client.credentials.clientSecret,
-        )
-      }
+    return  {
+      namespace: creds.namespace,
+      credential: creds.credential || new DefaultAzureCredential(),
+      options,
     };
   }
 }
 
-export function createManagement(management: ReturnType<ConfigService['sbConnection']>['management'], config: ConfigService): SbServerOptions['management'] {
+export function createManagement(config: ConfigService): SbServerOptions['management'] {
+  const creds = config.sbConnection();
+  const options = config.sbManagementOptions();
   const defaults = config.sbDefaultsAdapter();
-  if (management.type === 'connectionString') {
-    return {
-      credentials: {
-        connectionString: management.sasConnectionString,
-      },
-      defaults,
-    };
+  if ('connectionString' in creds) {
+    return { connectionString: creds.connectionString, options, defaults };
   } else {
-    registerArmAdapter();
     return  {
-      credentials: {
-        host: management.host,
-        resourceGroupName: management.resourceGroupName,
-        namespace: management.namespace,
-        subscriptionId: management.subscriptionId,
-        credentials: new ApplicationTokenCredentials(
-          management.credentials.clientId,
-          management.credentials.tenantId,
-          management.credentials.clientSecret,
-        ),
-      },
+      namespace: creds.namespace,
+      credential: creds.credential || new DefaultAzureCredential(),
+      options,
       defaults,
     };
   }
 }
 
 export function createServerOptions(config: ConfigService) {
-  const { client, management } = config.sbConnection();
   const sbServerOptions: SbServerOptions = {
-    client: createClient(client),
-    management: createManagement(management, config),
+    client: createClient(config),
+    management: createManagement(config),
     registerHandlers: 'sequence',
     logger: NoopLogger.shared, // createLogger('SbServer: default'),
   };
   return [ sbServerOptions ];
 }
 
-export function createServiceBusModule(providers?: Provider[], clients?: SbModuleRegisterOptions['clients']) {
-  if (!clients) {
-    clients = [
-      {
-        logger: NoopLogger.shared, // createLogger('SbClient: default'),
-      },
-    ];
-  }
-  if (!providers) {
-    providers = [];
-  }
+export function createServiceBusModule(providers: Provider[], clientOptions?: SbClientOptions[]) {
+  if (!clientOptions)
+    clientOptions = [];
+  if (clientOptions.length === 0) 
+    clientOptions.push({
+      logger: NoopLogger.shared, // createLogger('SbClient: default'),
+    });
+
   return ServiceBusModule.register({
     servers: {
       useFactory: createServerOptions,
       inject: [ConfigService],
     },
-    clients,
+    clients: clientOptions,
     providers,
   });
 }

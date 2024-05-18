@@ -4,12 +4,12 @@ import { register } from './atom-adapter';
 export { SbContext, SbContextArgs } from './sb-context';
 
 export {
+  SbSASCredentials,
+  SbTokenCredentials,
+
   SbModuleRegisterOptions,
   SbServerOptions,
-  SbManagementClientOptions, SbManagementDefaultsAdapter,
-  ServiceBusAadTokenCredentials, ServiceBusManagementAadTokenCredentials,
-  ServiceBusConnectionStringCredentials,
-  ServiceBusTokenProviderCredentials,
+  SbManagementDefaultsAdapter,
 
   // Emitter Metadata
   SbEmitterMetadataOptions,
@@ -33,8 +33,6 @@ export {
   MetaOrMetaFactory,
   SbMessageEmitter,
 } from './interfaces';
-
-export { SbManagementClientAtomOptions } from './atom-adapter';
 
 export {
   SbQueue,
