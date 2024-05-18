@@ -4,9 +4,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@doc-components": [
-        "../../../libs-dev/doc/components/src"
+      "@pebula/nx-build-pipe": [
+        "../../plugins/nx-build-pipe/src"
       ]
     }
-  }
+  },
+  "references": [
+    {
+      "path": "../../tsconfig.references.json"
+    }
+  ]
 }

@@ -28,7 +28,7 @@
       "@pebula/nx-docusaurus": ["plugins/nx-docusaurus/src/index.ts"],
       "@pebula/tom": ["libs/tom/src/index.ts"],
       "@pebula/touchstone": ["libs/touchstone/src/index.ts"],
-      "doc-components": ["libs-dev/doc/components/src/index.ts"]
+      "@doc-components": ["libs-dev/doc/components/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

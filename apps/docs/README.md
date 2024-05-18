@@ -181,7 +181,7 @@ Add the following architect target to the architect array in `workspace.json`:
     "options": {
       "task": {
         "type": "fromFile",
-        "path": "apps/docs/gh-pages.js",
+        "path": "apps/docs/gh-pages.ts",
         "args": ["decorate"]
       },
       "env": {

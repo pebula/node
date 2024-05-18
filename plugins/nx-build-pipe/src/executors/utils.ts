@@ -15,7 +15,7 @@ export function getTaskGlobalOptions(task: BuildPipeTasks, context: ExecutorCont
   return (task.name && context.rootOptions.taskOptions?.[task.name]) || {};
 }
 
-export function loadJson(p: string): any {
+export function loadJson<T = any>(p: string): T {
   return JSON.parse(FS.readFileSync(p, { encoding: 'utf-8' }));
 }
 

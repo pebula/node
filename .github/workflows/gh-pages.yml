@@ -19,32 +19,28 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.branch || 'main' }}
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
+        id: cache
         with:
           path: node_modules
           key: ${{ env.DEPENDENCIES_CACHE }}-${{ hashFiles('yarn.lock') }}
-      - name: Cache Nx
-        uses: actions/cache@v2
-        with:
-          path: node_modules/.cache/nx
-          key: ${{ env.NX_CACHE }}-${{ hashFiles('yarn.lock') }}-${{ matrix.target }}-${{ matrix.index }}-${{ github.sha }}
-          restore-keys: |
-            ${{ env.NX_CACHE }}-${{ hashFiles('yarn.lock') }}-${{ matrix.target }}-${{ matrix.index }}-
-            ${{ env.NX_CACHE }}-${{ hashFiles('yarn.lock') }}-
-            ${{ env.NX_CACHE }}-
       - name: Install Dependencies
-        run: yarn install
-      - run: nx run-many --target gh-pages --with-deps
-      - uses: JamesIves/github-pages-deploy-action@3.7.1
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          sudo apt install libsdl-pango-dev
+          yarn install --pure-lockfile
+      - run: npx nx run-many --target gh-pages --with-deps
+      - uses: JamesIves/github-pages-deploy-action@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BASE_BRANCH: ${{ github.event.inputs.branch || 'main' }}
-          BRANCH: gh-pages
-          FOLDER: dist/gh-pages
+          token: ${{ secrets.GITHUB_TOKEN }}
+          target-folder: latest
+          clean: true
+          branch: gh-pages
+          folder: dist/gh-pages

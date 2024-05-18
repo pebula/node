@@ -1,12 +1,21 @@
 import * as Path from 'path';
 import { ExecutorContext, loadJson, logger } from '../../utils';
-import { BuildPipeTask, BuildPipeFromFileTask } from '../schema';
+import { BuildPipeFromFileTask, BuildPipeTasks } from '../schema';
 import { runTask } from './task.run';
 import { Task } from './task.type';
 
-const LOADERS: Record<string, (path: string) => BuildPipeTask<any, any> | false> = {
-  '.js': require,
-  '.json': loadJson,
+const LOADERS: Record<string, 'require' | ((path: string) => BuildPipeTasks)> = {
+  '.js': 'require',
+  '.ts': 'require',
+  '.json': loadJson<BuildPipeTasks>,
+};
+
+export type FromFileDynamicResolver = (task: BuildPipeFromFileTask, context: ExecutorContext) => (BuildPipeTasks | false);
+
+async function resolveDynamicTaskFromModule(modulePath: string, task: BuildPipeFromFileTask, context: ExecutorContext): Promise<BuildPipeTasks | false | undefined> {
+  const module = await import(modulePath);
+  const resolver = (typeof module === 'function' ? module : module.default) as unknown as FromFileDynamicResolver;
+  return resolver(task, context);
 }
 
 export const fromFile: Task<'fromFile'> = {
@@ -20,24 +29,11 @@ export const fromFile: Task<'fromFile'> = {
       return { success: false };
     }
 
-    const modifyArgs = (args: string[]) => {
-      if (args?.length > 0) {
-        const originalArgs: string[] = [];
-        originalArgs.push(...process.argv.splice(2, process.argv.length - 2, ...args));
-        return () => {
-          process.argv.splice(2, args.length, ...originalArgs)
-        };
-      } else {
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
-        return () => { };
-      }
-    }
-
     try {
-      const args = task.args || task.options?.args || context.rootOptions?.taskOptions?.[task.name]?.args || [];
-      const unModify = modifyArgs(args);
-      const dynamicTask = loader(filePath);
-      unModify();
+      const dynamicTask = loader === 'require'
+        ? await resolveDynamicTaskFromModule(filePath, task, context)
+        : loader(filePath);
+
       if (!dynamicTask) {
         if (dynamicTask === false)
           return { success: true };

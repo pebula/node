@@ -34,8 +34,9 @@ export interface BuildPipeFromFileTask<TOptions = any>
   args?: string[];
 }
 
-export interface BuildPipeRunCommandTask<TOptions = any>
-  extends BuildPipeTask<'runCommand', RunCommandsOptions> {}
+export interface BuildPipeRunCommandTask<TOptions = any> extends BuildPipeTask<'runCommand', Omit<RunCommandsOptions, '__unparsed__'>> {
+  
+}
 
 export type BuildPipeTasks =
   | BuildPipeGroupTask

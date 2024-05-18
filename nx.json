@@ -105,7 +105,7 @@
         "task": {
           "name": "gh-pages",
           "type": "fromFile",
-          "path": "apps/docs/gh-pages.js"
+          "path": "apps/docs/gh-pages.ts"
         },
         "env": {
           "GH_PAGES_BUILD": true
