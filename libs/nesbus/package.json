@@ -1,6 +1,6 @@
 {
   "name": "@pebula/nesbus",
-  "version": "1.0.0",
+  "version": "7.9.4",
   "types": "src/index.d.ts",
   "keywords": [
     "azure",

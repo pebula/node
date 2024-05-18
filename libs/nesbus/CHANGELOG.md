@@ -1,3 +1,10 @@
+## 7.9.4 (2024-05-18)
+
+
+### 🚀 Features
+
+- **nesbus:** upgrade to @azure/service-bus@^7.9.4 ([0d6d139](https://github.com/pebula/node/commit/0d6d139))
+
 # 1.0.0 (2024-05-16)
 
 
