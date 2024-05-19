@@ -1,4 +1,5 @@
 import PATH from 'node:path';
+import fsExtra from 'fs-extra';
 import { build, clear } from '@docusaurus/core/lib';
 import { ExecutorContext } from '@nx/devkit';
 import { BuildExecutorSchema } from './schema';
@@ -10,7 +11,8 @@ export default async function* runExecutor(options: BuildExecutorSchema, context
   );
 
   try {
-    await clear(projectRoot);
+
+    await fsExtra.remove(PATH.join(context.root, 'node_modules', '.cache', 'webpack'));
     await build(projectRoot, {
       config: options.config,
       locale: options.locale,
