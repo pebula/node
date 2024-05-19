@@ -1,5 +1,5 @@
 import PATH from 'node:path';
-import { build } from '@docusaurus/core/lib';
+import { build, clear } from '@docusaurus/core/lib';
 import { ExecutorContext } from '@nx/devkit';
 import { BuildExecutorSchema } from './schema';
 
@@ -10,6 +10,7 @@ export default async function* runExecutor(options: BuildExecutorSchema, context
   );
 
   try {
+    await clear(projectRoot);
     await build(projectRoot, {
       config: options.config,
       locale: options.locale,

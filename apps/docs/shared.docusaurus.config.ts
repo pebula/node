@@ -190,15 +190,15 @@ export class DocsConfig implements IDocsBaseConfig {
             [
                 async function myPlugin(context, options: Pick<Configuration['resolve'], 'modules' | 'alias'>) {
                     return {
-                    name: 'shared-lib-resolver',
-                    configureWebpack(config, isServer, utils) {
-                        return {
-                        resolve: {
-                            modules: [ "node_modules" ].concat(options.modules || []),
-                            alias: options.alias || {},
-                        },
-                        };
-                    },
+                      name: 'shared-lib-resolver',
+                      configureWebpack(config, isServer, utils) {
+                          return {
+                            resolve: {
+                                modules: [ "node_modules" ].concat(options.modules || []),
+                                alias: options.alias || {},
+                            },
+                          };
+                      },
                     };
                 },
                 {
