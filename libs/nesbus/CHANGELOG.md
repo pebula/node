@@ -1,3 +1,10 @@
+## 7.10.0 (2024-05-19)
+
+
+### 🚀 Features
+
+- **nesbus:** migrate to nestjs 10 ([70c12d8](https://github.com/pebula/node/commit/70c12d8))
+
 ## 7.9.4 (2024-05-18)
 
 

@@ -19,7 +19,6 @@
     "baseUrl": ".",
     "composite": true,
     "paths": {
-      "doc-components": ["libs-dev/doc/components/src/index.ts"],
       "@pebula/*": ["libs/*"],
       "@pebula/decorate": ["libs/decorate/src/index.ts"],
       "@pebula/goosetyped": ["libs/goosetyped/src/index.ts"],
@@ -28,7 +27,8 @@
       "@pebula/nx-build-pipe": ["plugins/nx-build-pipe/src/index.ts"],
       "@pebula/nx-docusaurus": ["plugins/nx-docusaurus/src/index.ts"],
       "@pebula/tom": ["libs/tom/src/index.ts"],
-      "@pebula/touchstone": ["libs/touchstone/src/index.ts"]
+      "@pebula/touchstone": ["libs/touchstone/src/index.ts"],
+      "doc-components": ["libs-dev/doc/components/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
