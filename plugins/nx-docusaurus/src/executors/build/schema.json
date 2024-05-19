@@ -31,6 +31,29 @@
       "type": "boolean",
       "description": "Builds the website in dev mode, including full React error messages. (default: false)",
       "default": false
+    },
+    "nx": {
+      "type": "object",
+      "description": "Builds the website in dev mode, including full React error messages. (default: false)",
+      "properties": {
+        "libraryAlias": {
+          "type": "array",
+          "description": "Automatic project path resolution for nx libraries into the docusaurus application. This is useful to expose a shared component library to be used within MDX files in docusaurus. ",
+          "items": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            ]
+          }
+        }
+      }
     }
   },
   "required": []

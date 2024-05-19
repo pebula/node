@@ -3,7 +3,7 @@ id: indexes
 title: Indexes
 sidebar_label: 1. Indexes
 ---
-import { ApiDocsLink } from '@doc-components';
+import { ApiDocsLink } from 'doc-components';
 
 # WIP
 

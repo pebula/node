@@ -3,7 +3,7 @@ id: back-off
 title: Backoff And Retry
 sidebar_label: 2. Backoff And Retry
 ---
-import { ApiDocsLink } from '@doc-components';
+import { ApiDocsLink } from 'doc-components';
 
 Performs a retry of service bus messages that threw when handled over a pseudo-random, incremental intervals.
 

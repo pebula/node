@@ -7,20 +7,11 @@
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/tom/**/*.{ts,tsx,js,jsx}",
-          "libs/tom/package.json"
-        ]
-      }
+      "options": { }
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/tom"],
-      "options": {
-        "outputPath": "coverage/libs/tom",
-        "jestConfig": "libs/tom/jest.config.ts"
-      }
+      "options": { }
     },
     "build": {
       "executor": "@pebula/nx-build-pipe:build",

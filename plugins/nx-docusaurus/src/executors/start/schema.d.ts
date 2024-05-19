@@ -18,4 +18,5 @@ export interface StartExecutorSchema {
     poll?: boolean | number;
     /** build website without minimizing JS bundles (default: false) */
     noMinify?: boolean;
+    nx?: NxDocusaurusPluginOptions;
 }

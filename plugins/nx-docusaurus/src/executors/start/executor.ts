@@ -1,24 +1,25 @@
-import PATH from 'node:path';
 import { start } from '@docusaurus/core/lib';
 import { ExecutorContext } from '@nx/devkit';
 import { StartExecutorSchema } from './schema';
+import { NxDocusaurusInternalPluginOptions, withSiteConfig } from '../../nx-docusaurus-plugins';
+
+const internalOptions: NxDocusaurusInternalPluginOptions = {
+  cachePlugin: 'workspace'
+};
 
 export default async function* runExecutor(options: StartExecutorSchema, context: ExecutorContext) {
-  const projectRoot = PATH.join(
-    context.root,
-    context.workspace.projects[context.projectName ?? ''].root
-  );
-
   try {
-    await start(projectRoot, {
-      port: options.port?.toString(),
-      host: options.host,
-      config: options.config,
-      hotOnly: options.hotOnly,
-      locale: options.locale,
-      minify: !options.noMinify,
-      open: !options.noOpen,
-      poll: options.poll
+    await withSiteConfig({ internalOptions, options, context }, async ({ projectRoot, docusaurusConfigPath }) => {
+      await start(projectRoot, {
+        port: options.port?.toString(),
+        host: options.host,
+        config: docusaurusConfigPath,
+        hotOnly: options.hotOnly,
+        locale: options.locale,
+        minify: !options.noMinify,
+        open: !options.noOpen,
+        poll: options.poll
+      });
     });
 
     await new Promise<void>((res, rej) => {

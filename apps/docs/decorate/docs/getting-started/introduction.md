@@ -3,7 +3,7 @@ id: introduction
 title: Introduction
 sidebar_label: 1. Introduction
 ---
-import { DocLink } from '@doc-components';
+import { DocLink } from 'doc-components';
 
 **Decorate** is a decorator management tool for metadata driven libraries / applications.
 

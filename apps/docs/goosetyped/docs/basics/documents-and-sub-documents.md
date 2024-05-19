@@ -3,7 +3,7 @@ id: documents-and-sub-documents
 title: Documents And SubDocuments
 sidebar_label: 3. Documents & SubDocuments
 ---
-import { DocLink, ApiDocsLink, MongooseDocsLink } from '@doc-components';
+import { DocLink, ApiDocsLink, MongooseDocsLink } from 'doc-components';
 
 **GooseType** provide support for mongoose's <MongooseDocsLink type="document">Document</MongooseDocsLink> & <MongooseDocsLink type="subDocument">Sub Document</MongooseDocsLink>
 

@@ -3,7 +3,7 @@ id: introduction
 title: Introduction
 sidebar_label: 1. Introduction
 ---
-import { DocLink } from '@doc-components';
+import { DocLink } from 'doc-components';
 
 **NesBus** (Nest / Service Bus) is a microservice extension for **NestJS** that adds support for Azure Service Bus within **NestJS** in a
 simple and intuitive way.

@@ -3,7 +3,7 @@ id: utilities
 title: Utilities
 sidebar_label: Utilities
 ---
-import { ApiDocsLink } from '@doc-components';
+import { ApiDocsLink } from 'doc-components';
 
 ## getSchemaOf
 

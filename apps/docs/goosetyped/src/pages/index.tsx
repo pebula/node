@@ -5,7 +5,7 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import { CodeSnippet } from "@doc-components";
+import { CodeSnippet } from "doc-components";
 import styles from './index.module.css';
 
 const nativeCode = `/* customer.ts */

@@ -7,12 +7,7 @@
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": [
-          "apps/docs/tom/**/*.{ts,tsx,js,jsx}",
-          "apps/docs/tom/package.json"
-        ]
-      }
+      "options": { }
     },
     "start": {
       "executor": "@pebula/nx-docusaurus:start",
@@ -20,25 +15,11 @@
     },
     "build": {
       "executor": "@pebula/nx-docusaurus:build",
-      "inputs": [
-        "{projectRoot}/docs/*.(md|mdx)",
-        "{projectRoot}/docs/**/*.(md|mdx)"
-      ],
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/gh-pages/{projectName}"
-      }
+      "options": { }
     },
     "serve": {
       "executor": "@pebula/nx-docusaurus:serve",
-      "inputs": [
-        "{projectRoot}/docs/*.(md|mdx)",
-        "{projectRoot}/docs/**/*.(md|mdx)"
-      ],
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/gh-pages/{projectName}"
-      }
+      "options": { }
     },
     "gh-pages": {
       "options": {

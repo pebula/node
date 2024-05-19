@@ -136,10 +136,41 @@
         }
       }
     },
+    "@pebula/nx-docusaurus:build": {
+      "inputs": ["production", "^production"],
+      "outputs": ["{options.outputPath}"],
+      "dependsOn": ["^build"],
+      "cache": true,
+      "options": {
+        "outputPath": "dist/gh-pages/{projectName}",
+        "nx": {
+          "libraryAlias": [ "doc-components" ]
+        }
+      }
+    },
+    "@pebula/nx-docusaurus:serve": {
+      "cache": false,
+      "options": {
+        "outputPath": "dist/gh-pages/{projectName}",
+        "nx": {
+          "libraryAlias": [ "doc-components" ]
+        }
+      }
+    },
+    "@pebula/nx-docusaurus:start": {
+      "options": {
+        "nx": {
+          "libraryAlias": [ "doc-components" ]
+        }
+      }
+    },
     "@nx/jest:jest": {
       "cache": true,
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
+      "outputs": ["{options.outputPath}"],
       "options": {
+        "outputPath": "{workspaceRoot}/coverage/{projectRoot}",
+        "jestConfig": "{projectRoot}/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -151,7 +182,13 @@
     },
     "@nx/eslint:lint": {
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
-      "cache": true
+      "cache": true,
+      "options": {
+        "lintFilePatterns": [
+          "{projectRoot}/**/*.{ts,tsx,js,jsx}",
+          "{projectRoot}/package.json"
+        ]
+      }
     },
     "@nx/js:tsc": {
       "cache": true,

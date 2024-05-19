@@ -19,7 +19,7 @@
     "baseUrl": ".",
     "composite": true,
     "paths": {
-      "@doc-components": ["libs-dev/doc/components/src/index.ts"],
+      "doc-components": ["libs-dev/doc/components/src/index.ts"],
       "@pebula/*": ["libs/*"],
       "@pebula/decorate": ["libs/decorate/src/index.ts"],
       "@pebula/goosetyped": ["libs/goosetyped/src/index.ts"],

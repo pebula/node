@@ -10,4 +10,5 @@ export interface BuildExecutorSchema {
     noMinify?: boolean;
     /** Builds the website in dev mode, including full React error messages. (default: false) */
     dev?: boolean;
+    nx?: NxDocusaurusPluginOptions;
 }

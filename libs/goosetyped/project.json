@@ -7,25 +7,11 @@
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/goosetyped/**/*.{ts,tsx,js,jsx}",
-          "libs/goosetyped/package.json"
-        ]
-      }
+      "options": { }
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/goosetyped"],
-      "options": {
-        "outputPath": "coverage/libs/goosetyped",
-        "jestConfig": "libs/goosetyped/jest.config.ts"
-      },
-      "configuration": {
-        "liveDb": {
-          "jestConfig": "libs/goosetyped/jest.config.livedb.js"
-        }
-      }
+      "options": { }
     },
     "build": {
       "executor": "@pebula/nx-build-pipe:build",

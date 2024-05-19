@@ -4,7 +4,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import { CodeSnippet } from "@doc-components";
+import { CodeSnippet } from "doc-components";
 import styles from './index.module.css';
 
 const exampleCode = `import { Suite, Case } from '@pebula/touchstone';

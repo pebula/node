@@ -3,7 +3,7 @@ id: mapping-introduction
 title: Mapping Introduction
 sidebar_label: 1. Introduction
 ---
-import { ExtRelativeLink } from '@doc-components';
+import { ExtRelativeLink } from 'doc-components';
 
 ## TBD
 

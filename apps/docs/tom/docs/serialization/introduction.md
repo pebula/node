@@ -3,7 +3,7 @@ id: serialization-introduction
 title: Serialization Introduction
 sidebar_label: 1. Introduction
 ---
-import { ExtRelativeLink } from '@doc-components';
+import { ExtRelativeLink } from 'doc-components';
 
 ## TBD
 

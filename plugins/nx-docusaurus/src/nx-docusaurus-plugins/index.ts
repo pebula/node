@@ -1,0 +1,2 @@
+export { NxDocusaurusPluginOptions, NxProjectPathMapping, NxDocusaurusInternalPluginOptions } from './nx-docusaurus-plugin-options';
+export { SiteConfigCacheRecord, withSiteConfig } from './docusaurus-config-cache';

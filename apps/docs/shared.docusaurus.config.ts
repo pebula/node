@@ -1,10 +1,7 @@
-import PATH from 'node:path';
-import { visit } from 'unist-util-visit';
-import {themes as prismThemes} from 'prism-react-renderer';
-import type { Configuration } from 'webpack';
 import type { Config, PluginConfig } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
-
+import { visit } from 'unist-util-visit';
+import {themes as prismThemes} from 'prism-react-renderer';
 export interface IDocsBaseConfig {
     readonly dirName: string;
     readonly org: string;
@@ -186,28 +183,7 @@ export class DocsConfig implements IDocsBaseConfig {
 
     private plugins() {
         return [
-            require.resolve('docusaurus-lunr-search'),
-            [
-                async function myPlugin(context, options: Pick<Configuration['resolve'], 'modules' | 'alias'>) {
-                    return {
-                      name: 'shared-lib-resolver',
-                      configureWebpack(config, isServer, utils) {
-                          return {
-                            resolve: {
-                                modules: [ "node_modules" ].concat(options.modules || []),
-                                alias: options.alias || {},
-                            },
-                          };
-                      },
-                    };
-                },
-                {
-                    modules: [],
-                    alias: {
-                        '@doc-components': PATH.join(__dirname, '..', '..', 'libs-dev', 'doc', 'components', 'src'),
-                    },
-                }
-            ]
+            require.resolve('docusaurus-lunr-search')
         ] satisfies PluginConfig[];
     }
 }
