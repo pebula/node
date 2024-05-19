@@ -17,7 +17,7 @@ function compileRoute(routeInstructions: RouteToCommit) {
   const dynamicRefs: number[] = [];
   const interceptors = rawInterceptors.map( (interceptor, index) => {
     if (typeof interceptor === 'function') {
-      const interceptorWrapper = instanceWrapper.host.injectables.get(interceptor.name);
+      const interceptorWrapper = instanceWrapper.host.injectables.get(interceptor) ?? instanceWrapper.host.injectables.get(interceptor.name);
       const isStatic = interceptorWrapper.isDependencyTreeStatic();
       if (!isStatic) {
         dynamicRefs.push(index);

@@ -1,5 +1,4 @@
 import { OperatorFunction } from 'rxjs';
-import { MessagingError } from '@azure/service-bus';
 import { InstanceWrapper } from '@nestjs/core/injector/instance-wrapper';
 import { MessageHandler } from '@nestjs/microservices';
 

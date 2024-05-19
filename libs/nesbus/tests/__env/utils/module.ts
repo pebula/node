@@ -53,7 +53,7 @@ export class TestModuleFactory {
     }
     const app = testingModule.createNestApplication();
     app.connectMicroservice({ strategy: createSbServer() });
-    await app.startAllMicroservicesAsync();
+    await app.startAllMicroservices();
 
     await app.listen(port);
 
