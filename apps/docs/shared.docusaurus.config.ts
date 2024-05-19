@@ -71,7 +71,7 @@ export class DocsConfig implements IDocsBaseConfig {
             title: this.title,
             tagline: this.tagline,
             url: `https://${this.org}.github.io`,
-            baseUrl: process.env.GH_PAGES_BUILD ? `/${this.repo}/${this.package}/` : '/',
+            baseUrl: process.env.GH_PAGES_BUILD ? `/${this.repo}/docs-${this.package}/` : '/',
             favicon: 'img/favicon.ico',
             organizationName: this.org,
             projectName: this.package,

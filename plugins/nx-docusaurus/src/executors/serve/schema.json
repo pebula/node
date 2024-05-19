@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "version": 2,
+  "title": "Serve executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "port": {
+      "type": "number",
+      "description": "use specified port (default: 3000)",
+      "default": 3000
+    },
+    "host": {
+      "type": "string",
+      "description": "use specified host (default: localhost)",
+      "default": "localhost"
+    },
+    "config": {
+      "type": "string",
+      "description": "path to Docusaurus config file (default: `[siteDir]/docusaurus.config.js`)"
+    },
+    "noOpen": {
+      "type": "boolean",
+      "description": "do not open page in the browser (default: false)",
+      "default": false
+    },
+    "build": {
+      "type": "boolean",
+      "description": "build website before serving (default: false)",
+      "default": false
+    },
+    "outputPath": {
+      "type": "string",
+      "description": "the full path for the new output directory, relative to the current workspace (default: build)"
+    }
+  },
+  "required": []
+}

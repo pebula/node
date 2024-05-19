@@ -4,9 +4,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@pebula/nx-build-pipe": [
-        "../../plugins/nx-build-pipe/src"
-      ]
+      "@pebula/nx-build-pipe": [ "../../plugins/nx-build-pipe/src" ],
+      "@pebula/nx-docusaurus": [ "../../plugins/nx-docusaurus/src" ]
     }
   },
   "references": [

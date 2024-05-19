@@ -71,7 +71,7 @@ const createTaskDefinitions: FromFileDynamicResolver = (task, context) => {
       name: "build package",
       type: "runCommand",
       options: {
-        commands: [`npx nx build ${appName} --out-dir=${PATH.join(context.root, 'dist', 'gh-pages', libName)}`],
+        commands: [`npx nx build ${appName}`],
         parallel: false
       }
     } satisfies BuildPipeRunCommandTask,

@@ -37,45 +37,29 @@
       }
     },
     "start": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "yarn start",
-        "cwd": "{projectRoot}"
-      }
+      "executor": "@pebula/nx-docusaurus:start",
+      "options": { }
     },
     "build": {
-      "executor": "nx:run-commands",
+      "executor": "@pebula/nx-docusaurus:build",
       "inputs": [
         "{projectRoot}/docs/*.(md|mdx)",
         "{projectRoot}/docs/**/*.(md|mdx)"
       ],
       "outputs": ["{options.outputPath}"],
       "options": {
-        "command": "yarn build",
-        "cwd": "{projectRoot}"
+        "outputPath": "dist/gh-pages/{projectName}"
       }
     },
     "serve": {
-      "executor": "@pebula/nx-build-pipe:build",
+      "executor": "@pebula/nx-docusaurus:serve",
+      "inputs": [
+        "{projectRoot}/docs/*.(md|mdx)",
+        "{projectRoot}/docs/**/*.(md|mdx)"
+      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
-        "task": {
-          "type": "group",
-          "composition": "sequence",
-          "pipe": [
-            {
-              "type": "target",
-              "target": "docs-goosetyped:build"
-            },
-            {
-              "name": "start",
-              "type": "runCommand",
-              "options": {
-                "command": "yarn serve",
-                "cwd": "{projectRoot}"
-              }
-            }
-          ]
-        }
+        "outputPath": "dist/gh-pages/{projectName}"
       }
     },
     "gh-pages": {
