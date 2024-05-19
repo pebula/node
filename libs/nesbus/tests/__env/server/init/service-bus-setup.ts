@@ -1,7 +1,7 @@
 import { Provider } from '@nestjs/common/interfaces';
 import { DefaultAzureCredential } from '@azure/identity'
 
-import { ServiceBusModule, SbServerOptions, SbModuleRegisterOptions } from '@pebula/nesbus';
+import { ServiceBusModule, SbServerOptions } from '@pebula/nesbus';
 import { NoopLogger } from '../../../../src/lib/noop-logger';
 
 import { ConfigService } from '../services';
