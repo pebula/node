@@ -36,7 +36,7 @@ jobs:
         run: |
           sudo apt install libsdl-pango-dev
           yarn install --pure-lockfile
-      - run: npx nx run-many --target gh-pages --with-deps
+      - run: npx nx run-many --target gh-pages --parallel 1
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
