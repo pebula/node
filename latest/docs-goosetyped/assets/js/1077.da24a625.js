@@ -1,0 +1,1 @@
+(self.webpackChunkdocs_goosetyped=self.webpackChunkdocs_goosetyped||[]).push([[1077],{2027:(s,e,o)=>{"use strict";o.d(e,{A:()=>d});var c=o(89);const d=c},167:()=>{}}]);
