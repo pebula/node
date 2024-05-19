@@ -47,12 +47,11 @@ const createTaskDefinitions: FromFileDynamicResolver = (task, context) => {
   if (!project)
     throw new Error('Invalid configuration, could not find executing project');
 
-  const hasApiDocs = 'api-documents' in project.targets;
-
   const libName = args[0];
-  if (!hasApiDocs && !libName)
+  if (!libName)
     throw new Error('Library name is missing, please ensure you set the args param');
 
+  const hasApiDocs = 'api-documents' in project.targets;
   const buildCmd = hasApiDocs
     ? `${appName}:api-documents`
     : `${libName}:package`;
@@ -72,7 +71,7 @@ const createTaskDefinitions: FromFileDynamicResolver = (task, context) => {
       name: "build package",
       type: "runCommand",
       options: {
-        commands: [`npx nx build ${appName} --out-dir=${PATH.join(context.root, 'dist', 'gh-pages', appName)}`],
+        commands: [`npx nx build ${appName} --out-dir=${PATH.join(context.root, 'dist', 'gh-pages', libName)}`],
         parallel: false
       }
     } satisfies BuildPipeRunCommandTask,
