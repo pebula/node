@@ -95,6 +95,30 @@
       "dependsOn": ["^build"],
       "cache": true
     },
+    "build-package": {
+      "executor": "@pebula/nx-build-pipe:build",
+      "inputs": ["production", "^production"],
+      "dependsOn": ["^build"],
+      "cache": true,
+      "options": {
+        "task": {
+          "type": "group",
+          "composition": "sequence",
+          "pipe": [
+            {
+              "type": "target",
+              "target": "package",
+              "runAsCmd": true
+            },
+            {
+              "type": "target",
+              "target": "apiExtractor",
+              "skipIfNotExist": true
+            }
+          ]
+        }
+      }
+    },
     "package": {
       "dependsOn": ["^package"],
       "cache": true

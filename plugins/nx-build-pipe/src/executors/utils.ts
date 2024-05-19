@@ -3,7 +3,7 @@ import { logger as _logger, ExecutorContext as _ExecutorContext } from '@nx/devk
 import { BuildPipeExecutorSchema, BuildPipeTasks } from './build/schema';
 
 export interface ExecutorContext extends _ExecutorContext {
-  rootOptions: BuildPipeExecutorSchema;
+  rootOptions: BuildPipeExecutorSchema & { $parent?: BuildPipeExecutorSchema };
 }
 
 /**

@@ -20,10 +20,11 @@ registerTask(target);
 registerTask(runCommand);
 registerTask(fromFile);
 
-function normalize(options: BuildPipeExecutorSchema) {
-  if (!options.taskOptions) {
-    options.taskOptions = {};
-  }
+function normalize(options: ExecutorContext['rootOptions'], parent?: BuildPipeExecutorSchema): ExecutorContext['rootOptions'] {
+  const rootOptions: ExecutorContext['rootOptions'] = { taskOptions: {}, ...options };
+  if (parent)
+    rootOptions.$parent = options;
+  return rootOptions;
 }
 
 export default async function runExecutor(options: BuildPipeExecutorSchema, context: ExecutorContext) {
@@ -34,8 +35,7 @@ export default async function runExecutor(options: BuildPipeExecutorSchema, cont
     }
 
     runCommand.verifySchema(options, context);
-    normalize(options);
-    context.rootOptions = options;
+    context.rootOptions = normalize(options, context.rootOptions);
     const result = await runTask(options.task, context);
     return result;
   } catch (err) {

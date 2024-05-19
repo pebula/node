@@ -26,21 +26,12 @@
       "executor": "@pebula/nx-build-pipe:build",
       "options": {
         "task": {
-          "type": "group",
-          "composition": "sequence",
-          "pipe": [
-            {
-              "type": "target",
-              "target": "touchstone:package"
-            },
-            {
-              "type": "target",
-              "target": "touchstone:apiExtractor"
-            }
-          ]
+          "type": "target",
+          "target": "build-package"
         }
       }
     },
+    "build-package": { },
     "package": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
@@ -50,12 +41,6 @@
         "main": "libs/touchstone/src/index.ts",
         "assets": ["libs/touchstone/*.md"],
         "srcRootForCompilationRoot": "libs/touchstone"
-      }
-    },
-    "version": {
-      "executor": "@jscutlery/semver:version",
-      "options": {
-        "syncVersions": false
       }
     },
     "apiExtractor": {

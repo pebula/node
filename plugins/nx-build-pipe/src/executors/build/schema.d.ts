@@ -11,12 +11,22 @@ export interface BuildPipeGroupTask extends BuildPipeTask<'group', never> {
   pipe: Array<BuildPipeTasks>;
 }
 
-export interface BuildPipeTargetTask<TOptions = any>
-  extends BuildPipeTask<'target', TOptions> {
+export interface BuildPipeTargetTask<TOptions = any> extends BuildPipeTask<'target', TOptions> {
   /**
    * Target reference string formatted as "<PROJECT>:<TARGET>:<CONFIGURATION>?"
    */
   target: string;
+
+  /**
+   * If true will execute the target as a command line (run-command) instead of inside the process.
+   */
+  runAsCmd?: boolean;
+
+  /**
+   * If true will not throw when the target does not exist
+   */
+  skipIfNotExist?: boolean;
+
 }
 
 export interface BuildPipeFromFileTask<TOptions = any>

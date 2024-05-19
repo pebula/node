@@ -26,17 +26,12 @@
       "executor": "@pebula/nx-build-pipe:build",
       "options": {
         "task": {
-          "type": "group",
-          "composition": "sequence",
-          "pipe": [
-            {
-              "type": "target",
-              "target": "tom:package"
-            }
-          ]
+          "type": "target",
+          "target": "build-package"
         }
       }
     },
+    "build-package": { },
     "package": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
@@ -55,19 +50,6 @@
           "./node_modules/.bin/ts-node -r tsconfig-paths/register -P ./tsconfig.base.json -O \"{ \\\"module\\\": \\\"commonjs\\\", \\\"resolveJsonModule\\\": true }\" libs/tom/benchmarks/index.ts"
         ],
         "parallel": false
-      }
-    },
-    "version": {
-      "executor": "@jscutlery/semver:version",
-      "options": {
-        "syncVersions": false
-      }
-    },
-    "apiExtractor": {
-      "executor": "@pebula/nx-api-extractor:build",
-      "options": {
-        "buildTargetName": "package",
-        "baseConfigFile": "./api-extractor.base.json"
       }
     }
   }

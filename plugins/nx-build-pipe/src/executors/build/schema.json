@@ -96,6 +96,12 @@
         "target": {
           "type": "string"
         },
+        "runAsCmd": {
+          "type": "boolean"
+        },
+        "skipIfNotExist": {
+          "type": "boolean"
+        },
         "options": {
           "type": "object",
           "additionalProperties": true

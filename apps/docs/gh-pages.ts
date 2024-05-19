@@ -1,3 +1,4 @@
+import PATH from 'node:path';
 import type { FromFileDynamicResolver, BuildPipeGroupTask, BuildPipeTasks, BuildPipeRunCommandTask } from '@pebula/nx-build-pipe';
 
 const CONFIG = {
@@ -71,7 +72,7 @@ const createTaskDefinitions: FromFileDynamicResolver = (task, context) => {
       name: "build package",
       type: "runCommand",
       options: {
-        commands: [`npx nx build ${appName} --outputPath=dist/gh-pages/${appName}`],
+        commands: [`npx nx build ${appName} --out-dir=${PATH.join(context.root, 'dist', 'gh-pages', appName)}`],
         parallel: false
       }
     } satisfies BuildPipeRunCommandTask,

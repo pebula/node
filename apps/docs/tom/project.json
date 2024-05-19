@@ -15,46 +15,22 @@
       }
     },
     "start": {
-      "executor": "@pebula/nx-build-pipe:build",
+      "executor": "nx:run-commands",
       "options": {
-        "task": {
-          "type": "group",
-          "composition": "sequence",
-          "pipe": [
-            {
-              "name": "start",
-              "type": "runCommand",
-              "options": {
-                "command": "yarn start",
-                "cwd": "{projectRoot}"
-              }
-            }
-          ]
-        }
+        "command": "yarn start",
+        "cwd": "{projectRoot}"
       }
     },
     "build": {
-      "executor": "@pebula/nx-build-pipe:build",
+      "executor": "nx:run-commands",
       "inputs": [
         "{projectRoot}/docs/*.(md|mdx)",
         "{projectRoot}/docs/**/*.(md|mdx)"
       ],
       "outputs": ["{options.outputPath}"],
       "options": {
-        "task": {
-          "type": "group",
-          "composition": "sequence",
-          "pipe": [
-            {
-              "name": "start",
-              "type": "runCommand",
-              "options": {
-                "command": "yarn build",
-                "cwd": "{projectRoot}"
-              }
-            }
-          ]
-        }
+        "command": "yarn build",
+        "cwd": "{projectRoot}"
       }
     },
     "serve": {
