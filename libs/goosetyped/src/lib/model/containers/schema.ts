@@ -1,7 +1,6 @@
 import M from 'mongoose';
 import { GtSchemaContainer } from '../../store';
-import { Ctor, resolveModelName } from '../../utils';
-import { GT_BASED_ON } from '../constants';
+import { Ctor } from '../../utils';
 
 export class Schema<RawDocType = any,
                     TModelType = M.Model<RawDocType, any, any, any>,
@@ -44,7 +43,6 @@ export class Schema<RawDocType = any,
         configurable: false,
         enumerable: false,
       });
-      schema[GT_BASED_ON] = schemaContainer.localInfo.cls;
     }
 
     clone<T = this>(): T {

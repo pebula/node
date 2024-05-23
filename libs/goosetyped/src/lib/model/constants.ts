@@ -3,4 +3,3 @@ export const CTOR_INVOKED = Symbol('CTOR_INVOKED');
 export const GT_SUB_DOCUMENT = Symbol('GtSubDocument');
 export const GT_DOCUMENT = Symbol('GtDocument');
 export const GT_DISCRIMINATOR_ROOT = Symbol('GtDiscriminatorRoot');
-export const GT_BASED_ON = Symbol('GtBasedOn');
