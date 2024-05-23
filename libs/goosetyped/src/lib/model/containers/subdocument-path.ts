@@ -1,27 +1,63 @@
 import { Schema, Document, Model } from "mongoose";
 import { GtColumnMetadata } from "../../metadata";
 import { GtSchemaContainer } from "../../store";
-import { Ctor, resolveModelName } from "../../utils";
+import { Ctor } from "../../utils";
 import { EmbeddedDocumentStatic, SubdocumentPath } from "../../mongoose.extend";
 import { findSchemaContainerOfChildDiscriminator, hasInstance } from "../utils";
 import { syncModelInstance } from "../sync";
-import { GT_BASED_ON } from "../constants";
 
 const GT_SINGLE_NESTED_EMBEDDED_DOCUMENT = Symbol('GtSingleNestedEmbeddedDocument');
 
-function extendEmbeddedDocument(schema: GtSubdocumentPath, base: EmbeddedDocumentStatic<any>) {
+function extendEmbeddedDocument(schemaContainer: GtSchemaContainer, base: EmbeddedDocumentStatic<any>) {
+    const { localInfo, schema } = schemaContainer;
     return class GtSingleNestedEmbeddedDocument<T = any> extends base {
-        static [GT_BASED_ON] = schema.knownContainer.localInfo.cls;
+        get [GT_SINGLE_NESTED_EMBEDDED_DOCUMENT]() { return localInfo.cls; }
 
         constructor(obj: T, path: string, parent: Document) {
             super(obj, path, parent);
-            const localInfo = findSchemaContainerOfChildDiscriminator(obj, schema.knownContainer.localInfo);
-            syncModelInstance(obj, this, localInfo, true, true);
-            this[GT_SINGLE_NESTED_EMBEDDED_DOCUMENT] = localInfo.cls;
+            if (obj)
+                syncModelInstance(obj, this, localInfo, true, true);
         }
 
         static [Symbol.hasInstance](instance: any): boolean {
-            return hasInstance.call(this, instance) || schema.knownContainer.schema.schemaExtends(instance.$__schema || instance.schema);
+            return hasInstance.call(this, instance) || schema.schemaExtends(instance.$__schema || instance.schema);
+        }
+    };
+}
+
+function extendRootDiscriminatorEmbeddedDocument(schemaContainer: GtSchemaContainer, base: EmbeddedDocumentStatic<any>) {
+    const { localInfo, schema } = schemaContainer;
+    return class GtDiscriminatorRootSingleNestedEmbeddedDocument<T = any> extends base {
+        constructor(obj: T, path: string, parent: Document) {
+            super(obj, path, parent);
+            const childLocalInfo = findSchemaContainerOfChildDiscriminator(obj, localInfo);
+            this[GT_SINGLE_NESTED_EMBEDDED_DOCUMENT] = childLocalInfo.cls;
+            if (obj)
+                syncModelInstance(obj, this, childLocalInfo, true, true);
+        }
+
+        static [Symbol.hasInstance](instance: any): boolean {
+            return hasInstance.call(this, instance) || schema.schemaExtends(instance.$__schema || instance.schema);
+        }
+    };
+}
+
+
+function extendChildDiscriminatorEmbeddedDocument(rootSchemaContainer: GtSchemaContainer, base: EmbeddedDocumentStatic<any>, discriminatorValue: string) {
+    if (rootSchemaContainer.localInfo.discriminator.type !== 'root')
+        throw new Error(`Invalid call for discriminator, ${rootSchemaContainer.getName()} is not a root discriminator`);
+
+    const schemaContainer = rootSchemaContainer.localInfo.discriminator.children.get(discriminatorValue);
+    if (!schemaContainer)
+        throw new Error(`Invalid discriminator request for ${rootSchemaContainer.getName()}, discriminator: ${discriminatorValue}`);
+
+    return class GtDiscriminatorChildSingleNestedEmbeddedDocument<T = any> extends extendEmbeddedDocument(schemaContainer, base) {
+        constructor(obj: T, path: string, parent: Document) {
+            super(obj, path, parent);
+        }
+
+        static [Symbol.hasInstance](instance: any): boolean {
+            return hasInstance.call(this, instance) || schemaContainer.schema.schemaExtends(instance.$__schema || instance.schema);
         }
     };
 }
@@ -47,19 +83,31 @@ export class GtSubdocumentPath extends (Schema.Types.Subdocument as any as Ctor<
             configurable: false,
             enumerable: false,
         });
-        this.caster = extendEmbeddedDocument(this, this.caster);
+        switch (knownContainer.localInfo.discriminator?.type) {
+            case 'root': {
+                this.caster = extendRootDiscriminatorEmbeddedDocument(knownContainer, this.caster);
+                break;
+            }
+            case 'child': {
+                this.caster = extendEmbeddedDocument(knownContainer, this.caster);
+                break;
+            }
+            default: {
+                this.caster = extendEmbeddedDocument(knownContainer, this.caster);
+                break;
+            }
+        }
     }
 
     cast(value: any, doc: Document, init: boolean, prev?: any, options?: any): any {
         if(value[GT_SINGLE_NESTED_EMBEDDED_DOCUMENT] === findSchemaContainerOfChildDiscriminator(value, this.knownContainer.localInfo).cls)
             return value;
 
-        var casted = super.cast(value, doc, init, prev, options);
-        return casted;
+        return super.cast(value, doc, init, prev, options);
     }
     
     discriminator<U extends Document>(name: string, schema: Schema, value?: string): Model<U> {
-        const created = extendEmbeddedDocument(this, super.discriminator(name, schema, value) as any);
+        const created = extendChildDiscriminatorEmbeddedDocument(this.knownContainer, super.discriminator(name, schema, value) as any, name);
         return this.caster.discriminators[name] = created as any;
     }
 

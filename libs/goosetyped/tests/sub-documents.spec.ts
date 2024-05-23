@@ -7,12 +7,36 @@ import {
   Customer,
   CustomerGenderType,
   PhoneComm,
+  BasePaymentMethod,
 } from './domain';
 
 describe('E2E Tests', () => {
   initMongoConnection();
 
   describe('SubDocument support', () => {
+
+    it('should reflect sub documents after save and read', async () => {
+      const orderData: Partial<Order> = { status: OrderStatusType.Pending };
+      const ccPaymentData: Partial<CreditCardPaymentMethod> = {
+        holderName: 'Testing Joe',
+        ccNumber: '1234-5534-4323-4343',
+        expired: new CreditCardPaymentMethodExpire({ month: 12, year: 2025 }),
+      };
+
+      const order = new Order(orderData);
+      const payment = new CreditCardPaymentMethod(ccPaymentData);
+      order.payment = payment;
+
+      await order.save();
+      const dbOrder = await Order.findById(order.id);
+
+      expect(dbOrder.id).toBe(order.id);
+      expect(dbOrder.payment).toBeInstanceOf(BasePaymentMethod);
+      expect(dbOrder.payment).toBeInstanceOf(CreditCardPaymentMethod);
+
+      const ccPayment = dbOrder.payment as CreditCardPaymentMethod;
+      expect(ccPayment.expired).toBeInstanceOf(CreditCardPaymentMethodExpire);
+    });
 
     it('mongoose generated sub document class should reflect the declared class', async () => {
       const ccPaymentData: Partial<CreditCardPaymentMethod> = {
