@@ -1,3 +1,10 @@
+## 1.0.1 (2024-05-23)
+
+
+### 🩹 Fixes
+
+- **goosetyped:** handling of subdocument from query ([28c8547](https://github.com/pebula/node/commit/28c8547))
+
 # 1.0.0 (2024-05-16)
 
 
